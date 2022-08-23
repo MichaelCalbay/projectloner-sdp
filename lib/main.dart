@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'Testing my Branch',
+              'How to commit on my own branch???',
             ),
             Text(
               '$_counter',
