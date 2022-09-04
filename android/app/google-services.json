@@ -29,6 +29,13 @@
             {
               "client_id": "995505866895-qu83ui486c6vk2p6b1t8hr1oio2plpf9.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "995505866895-nlfsj3sjn7b326hv9rvkis2u8uekd2bn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.saintsmc.projectloner"
+              }
             }
           ]
         }
