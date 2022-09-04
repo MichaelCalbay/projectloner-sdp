@@ -13,9 +13,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Sam Was HERE',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
-      home: const MyHomePage(title: 'Bobo talagaaa'),
+      home: const MyHomePage(title: 'Bobo talagaaaaaaaaa'),
     );
   }
 }
