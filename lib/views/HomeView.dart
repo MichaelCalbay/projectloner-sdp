@@ -13,11 +13,34 @@ class HomePageState extends State {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text( 
+          children: [
+            const Text( 
             'Home Page',
             style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
-          )
+            ),
+            ButtonBar(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+
+                  }, 
+                  child: Text("Duo"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+
+                  }, 
+                  child: Text("Team"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+
+                  }, 
+                  child: Text("Coach"),
+                ),
+              ],
+            )
           ]
         ),
       ),
