@@ -47,6 +47,11 @@ class Page2State extends State {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => Page2()));
               },
             ),
+            ListTile(
+              title: const Text("Logout"),
+              onTap: () {
+              },
+            ),
           ],
         ),
       ),
