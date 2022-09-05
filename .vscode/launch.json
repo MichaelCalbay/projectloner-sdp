@@ -7,19 +7,20 @@
         {
             "name": "projectloner-sdp",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "program": "lib/views/RegisterView.dart"
         },
         {
             "name": "projectloner-sdp (profile mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "flutterMode": "profile",
         },
         {
             "name": "projectloner-sdp (release mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "flutterMode": "release",
         }
     ]
 }
