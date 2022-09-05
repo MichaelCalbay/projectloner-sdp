@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
     /*  BUG REPORTING SAM */
     super.initState();
     Instabug.start('204ec6dbacf517d824009b10798d3abd', [InvocationEvent.none]);
-    Instabug.show();
+    Replies.setEnabled(false);
   }
   @override
   Widget build(BuildContext context) {
