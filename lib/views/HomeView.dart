@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
-import 'Page1.dart';
-import 'Page2.dart';
+import 'NavBar.dart';
 
 class HomePage extends StatefulWidget {
+  
+  const HomePage({Key? key}) : super(key: key);
+  
+  @override
   HomePageState createState() => HomePageState();
 }
 
 class HomePageState extends State {
+  
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Home Page")),
+      appBar: AppBar(title: const Text("Home Page")),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -25,59 +30,26 @@ class HomePageState extends State {
                   onPressed: () {
 
                   }, 
-                  child: Text("Duo"),
+                  child: const Text("Duo"),
                 ),
                 ElevatedButton(
                   onPressed: () {
 
                   }, 
-                  child: Text("Team"),
+                  child: const Text("Team"),
                 ),
                 ElevatedButton(
                   onPressed: () {
 
                   }, 
-                  child: Text("Coach"),
+                  child: const Text("Coach"),
                 ),
               ],
             )
           ]
         ),
       ),
-      drawer: Drawer(
-        width: 200,
-        child: ListView(
-          children: [
-            const DrawerHeader(child: Text("Navigation Bar")),
-            ListTile(
-              title: const Text("Home Page"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-              },
-            ),
-            ListTile(
-              title: const Text("Page 1"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Page1()));
-              },
-            ),
-            ListTile(
-              title: const Text("Page 2"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Page2()));
-              },
-            ),
-            ListTile(
-              title: const Text("Logout"),
-              onTap: () {
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: const NavBar(),
     );
   }
 }
