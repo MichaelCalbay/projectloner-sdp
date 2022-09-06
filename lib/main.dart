@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:instabug_flutter/instabug_flutter.dart';
+import 'nav_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,62 +9,43 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Bobo talagaaa'),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  MyHomePage({Key? key}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  @override
+  void initState(){
+    /*  BUG REPORTING SAM */
+    super.initState();
+    Instabug.start('204ec6dbacf517d824009b10798d3abd', [InvocationEvent.none]);
+    Replies.setEnabled(false);
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavBar(), // nav_bar.dart - sam
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("PROJECT LONER"),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              "Button Clicked: ",
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: Center(),
     );
   }
 }
