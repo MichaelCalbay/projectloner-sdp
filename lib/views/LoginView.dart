@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +34,7 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('LoginView'),
+        title: const Text('Login'),
       ),
       body: FutureBuilder(
         future: Firebase.initializeApp(
@@ -71,16 +73,19 @@ class _LoginViewState extends State<LoginView> {
                             .signInWithEmailAndPassword(
                                 email: email, password: password);
 
-                        print(userCred);
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            '/home/', (route) => false);
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'user-not-found') {
                           print("USER DOESN'T EXISTS!");
+                        } else if (e.code == 'invalid-email') {
+                          print("INVALID EMAIL!");
                         } else {
                           print('INCORRECT PASSWORD!');
                         }
                       }
                     },
-                    child: const Text('Login'),
+                    child: const Text('Log In'),
                   ),
                   TextButton(
                       onPressed: () {
