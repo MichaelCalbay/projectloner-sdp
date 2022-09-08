@@ -8,7 +8,7 @@
             "name": "projectloner-sdp",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main.dart"
+            "program": "lib/auth/main.dart"
         },
         {
             "name": "projectloner-sdp (profile mode)",

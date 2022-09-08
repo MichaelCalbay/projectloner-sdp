@@ -17,6 +17,7 @@ class _RegisterViewState extends State<RegisterView> {
   late final TextEditingController _lName;
   late final TextEditingController _email;
   late final TextEditingController _password;
+  late final TextEditingController _conPassword;
   late final TextEditingController _mblNo;
   late final TextEditingController _sex;
   late final TextEditingController _dob;
@@ -27,6 +28,7 @@ class _RegisterViewState extends State<RegisterView> {
     _lName = TextEditingController();
     _email = TextEditingController();
     _password = TextEditingController();
+    _conPassword = TextEditingController();
     _mblNo = TextEditingController();
     _sex = TextEditingController();
     _dob = TextEditingController();
@@ -39,6 +41,7 @@ class _RegisterViewState extends State<RegisterView> {
     _lName.dispose();
     _email.dispose();
     _password.dispose();
+    _conPassword.dispose();
     _mblNo.dispose();
     _sex.dispose();
     _dob.dispose();

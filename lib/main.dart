@@ -2,8 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:projectloner/firebase_options.dart';
 import 'package:projectloner/views/HomePage.dart';
-import 'package:projectloner/views/LoginView.dart';
-import 'package:projectloner/views/RegisterView.dart';
+import 'package:projectloner/views/LoginPage.dart';
+import 'package:projectloner/views/RegisterPage.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
