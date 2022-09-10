@@ -28,17 +28,17 @@ class _LoginPageState extends State<LoginPage> {
       if (e.code == 'user-not-found') {
         Fluttertoast.showToast(
             msg: "User doesn't exists, Please register.",
-            gravity: ToastGravity.TOP,
+            gravity: ToastGravity.BOTTOM,
             textColor: Colors.red);
       } else if (e.code == 'invalid-email') {
         Fluttertoast.showToast(
             msg: "Invalid email.",
-            gravity: ToastGravity.TOP,
+            gravity: ToastGravity.BOTTOM,
             textColor: Colors.red);
       } else {
         Fluttertoast.showToast(
             msg: "Incorrect password.",
-            gravity: ToastGravity.TOP,
+            gravity: ToastGravity.BOTTOM,
             textColor: Colors.red);
       }
     }
