@@ -1,45 +1,24 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:projectloner/firebase_options.dart';
-import 'package:projectloner/views/HomeView.dart';
-import 'package:projectloner/LoginPage.dart';
-import 'package:projectloner/RegisterPage.dart';
+import 'package:projectloner/auth/CheckLogin.dart';
+import 'package:projectloner/auth/LoginPage.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(
-    MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MainPage(),
-      routes: {
-        '/login/': (context) => const LoginView(),
-        '/register/': (context) => const RegisterView(),
-        '/home/': (context) => const HomePage(),
-      },
-    ),
-  );
+  await Firebase.initializeApp();
+  runApp(const MyApp());
 }
 
-class MainPage extends StatelessWidget {
-  const MainPage({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
-      ),
-      builder: (context, snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.done:
-            return const LoginView();
-          default:
-            return const Text('Loading..');
-        }
-      },
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: CheckLogin(),
     );
   }
 }

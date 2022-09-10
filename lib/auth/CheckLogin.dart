@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:projectloner/auth/LoginPage.dart';
+import 'package:projectloner/auth/AuthPage.dart';
 import 'package:projectloner/views/HomeView.dart';
 
 class CheckLogin extends StatelessWidget {
@@ -15,7 +15,7 @@ class CheckLogin extends StatelessWidget {
             if (snapshot.hasData) {
               return HomePage();
             } else {
-              return LoginPage();
+              return AuthPage();
             }
           }),
     );

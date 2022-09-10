@@ -1,33 +1,53 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_print
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class LoginPage extends StatefulWidget {
-  final VoidCallback showRegisterPage;
-  const LoginPage({Key? key, required this.showRegisterPage}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  final VoidCallback showLoginPage;
+  const RegisterPage({Key? key, required this.showLoginPage}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  //Text Controller
+class _RegisterPageState extends State<RegisterPage> {
+  //Text controller
   late final _email = TextEditingController();
   late final _password = TextEditingController();
+  late final _conPassword = TextEditingController();
 
-  Future logIn() async {
+  @override
+  void dispose() {
+    _email.dispose();
+    _password.dispose();
+    _conPassword.dispose();
+    super.dispose();
+  }
+
+  Future signUp() async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _email.text.trim(),
-        password: _password.text.trim(),
-      );
-    } on FirebaseAuthException catch (e) {
-      //Validations
-      if (e.code == 'user-not-found') {
+      if (_password.text.trim() == _conPassword.text.trim()) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _email.text.trim(),
+          password: _password.text.trim(),
+        );
+      } else {
         Fluttertoast.showToast(
-            msg: "User doesn't exists, Please register.",
+            msg: "Passwords don't match.",
+            gravity: ToastGravity.TOP,
+            textColor: Colors.red);
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        Fluttertoast.showToast(
+            msg: "Password is weak.",
+            gravity: ToastGravity.TOP,
+            textColor: Colors.red);
+      } else if (e.code == 'email-already-in-use') {
+        Fluttertoast.showToast(
+            msg: "Email already exists.",
             gravity: ToastGravity.TOP,
             textColor: Colors.red);
       } else if (e.code == 'invalid-email') {
@@ -35,20 +55,8 @@ class _LoginPageState extends State<LoginPage> {
             msg: "Invalid email.",
             gravity: ToastGravity.TOP,
             textColor: Colors.red);
-      } else {
-        Fluttertoast.showToast(
-            msg: "Incorrect password.",
-            gravity: ToastGravity.TOP,
-            textColor: Colors.red);
       }
     }
-  }
-
-  @override
-  void dispose() {
-    _email.dispose();
-    _password.dispose();
-    super.dispose();
   }
 
   @override
@@ -68,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: 50),
                   //Greetings===================================================
                   Text(
-                    'Hi! Welcome Back!',
+                    'Hello There!',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 40,
@@ -76,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    'Please login and be a loner!',
+                    'Ready to be a Loner? Register below!',
                     style: TextStyle(
                       fontSize: 20,
                     ),
@@ -132,11 +140,36 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   SizedBox(height: 10),
-                  //Sign in button==============================================
+                  //Confirm Password textfield==========================================
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        border: Border.all(color: Colors.white),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: TextField(
+                          controller: _conPassword,
+                          obscureText: true,
+                          enableSuggestions: false,
+                          autocorrect: false,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Confirm Password',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  //Register button==============================================
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: GestureDetector(
-                      onTap: logIn,
+                      onTap: signUp,
                       child: Container(
                         padding: EdgeInsets.all(20),
                         decoration: BoxDecoration(
@@ -145,7 +178,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         child: Center(
                           child: Text(
-                            'Log In',
+                            'Register',
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -162,15 +195,15 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Not a loner yet? ',
+                        'Already a loner? ',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       GestureDetector(
-                        onTap: widget.showRegisterPage,
+                        onTap: widget.showLoginPage,
                         child: Text(
-                          'Register now',
+                          'Log in',
                           style: TextStyle(
                             color: Colors.blue,
                             fontWeight: FontWeight.bold,
