@@ -51,6 +51,8 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  bool _obscurePass = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,12 +122,22 @@ class _LoginPageState extends State<LoginPage> {
                         padding: const EdgeInsets.only(left: 20.0),
                         child: TextField(
                           controller: _password,
-                          obscureText: true,
+                          obscureText: _obscurePass,
                           enableSuggestions: false,
                           autocorrect: false,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: 'Password',
+                            suffixIcon: IconButton(
+                              onPressed: () => setState(
+                                (() => _obscurePass = !_obscurePass),
+                              ),
+                              icon: Icon(
+                                  _obscurePass
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: Colors.deepPurple),
+                            ),
                           ),
                         ),
                       ),
