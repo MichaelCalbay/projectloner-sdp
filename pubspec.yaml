@@ -39,6 +39,8 @@ dependencies:
   fluttertoast: ^8.0.9
   cloud_firestore: ^3.4.5
   firebase_analytics: ^9.3.2
+  instabug_flutter:
+
 
 dev_dependencies:
   flutter_test:
