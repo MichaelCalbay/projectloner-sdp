@@ -19,6 +19,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: CheckLogin(),
+      //Calendar colour.
+      theme: ThemeData(primarySwatch: Colors.deepPurple),
     );
   }
 }
