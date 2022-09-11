@@ -36,6 +36,18 @@ class NavBar extends StatelessWidget {
             },
           ),
           ListTile(
+            title: const Text("Report Bugs"),
+            onTap: () {
+              
+            },
+          ),
+          ListTile(
+            title: const Text("Settings"),
+            onTap: () {
+              
+            },
+          ),
+          ListTile(
             title: const Text("Logout"),
             onTap: () {
             },
