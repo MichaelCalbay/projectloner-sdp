@@ -1,8 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:instabug_flutter/instabug_flutter.dart';
-import 'nav_bar.dart';
+// ignore_for_file: prefer_const_constructors
 
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:projectloner/auth/CheckLogin.dart';
+import 'package:projectloner/auth/LoginPage.dart';
+import 'package:instabug_flutter/instabug_flutter.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -14,7 +20,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(),
@@ -23,29 +28,28 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
-  void initState(){
+  void initState() {
     /*  BUG REPORTING SAM */
     super.initState();
     Instabug.start('204ec6dbacf517d824009b10798d3abd', [InvocationEvent.none]);
     Replies.setEnabled(false);
   }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: NavBar(), // nav_bar.dart - sam
-      appBar: AppBar(
-        title: Text("PROJECT LONER"),
-      ),
-      body: Center(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: CheckLogin(),
+      //Theme colour
+      theme: ThemeData(primarySwatch: Colors.deepPurple),
     );
   }
 }
