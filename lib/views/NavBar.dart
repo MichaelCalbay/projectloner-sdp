@@ -1,5 +1,8 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
+import 'package:instabug_flutter/instabug_flutter.dart';
 import 'HomeView.dart';
 // import 'Page1.dart';
 // import 'Page2.dart';
@@ -20,12 +23,22 @@ class _NavBarState extends State<NavBar> {
       child: ListView(
         children: [
           const DrawerHeader(child: Text("Navigation Bar")),
+          UserAccountsDrawerHeader(
+              accountName: Text('Loner') // could be implented later on
+              ,
+              accountEmail: Text('example@gmail.com')),
+          ListTile(
+            /*  BUG ICON  */
+            leading: Icon(Icons.bug_report_rounded),
+            title: Text('Reports'),
+            onTap: () => Instabug.show(),
+          ),
           ListTile(
             title: const Text("Home Page"),
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => HomePage()));
+              // Navigator.push(
+              //     context, MaterialPageRoute(builder: (context) => HomePage()));
             },
           ),
           // ListTile(
