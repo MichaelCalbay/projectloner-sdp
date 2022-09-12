@@ -3,6 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 
 class RegisterPage extends StatefulWidget {
   final VoidCallback showLoginPage;
@@ -19,12 +20,8 @@ class _RegisterPageState extends State<RegisterPage> {
   late final _email = TextEditingController();
   late final _password = TextEditingController();
   late final _conPassword = TextEditingController();
-  // late final _age = TextEditingController();
   late final _mblNo = TextEditingController();
-  // late final _sex = TextEditingController();
-  // late final _dob = TextEditingController();
-  // late final _ageSelected = TextEditingController();
-  // late final _roles = TextEditingController();
+  late final _dob = TextEditingController();
 
   @override
   void dispose() {
@@ -33,10 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
     _conPassword.dispose();
     _fName.dispose();
     _lName.dispose();
-    // _age.dispose();
     _mblNo.dispose();
-    // _sex.dispose();
-    // _dob.dispose();
     super.dispose();
   }
 
@@ -88,7 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
         value: age,
         child: Text(
           age,
-          style: TextStyle(fontSize: 12),
+          style: TextStyle(fontSize: 16),
         ),
       );
 
@@ -96,7 +90,7 @@ class _RegisterPageState extends State<RegisterPage> {
         value: sex,
         child: Text(
           sex,
-          style: TextStyle(fontSize: 12),
+          style: TextStyle(fontSize: 16),
         ),
       );
 
@@ -104,7 +98,7 @@ class _RegisterPageState extends State<RegisterPage> {
         value: server,
         child: Text(
           server,
-          style: TextStyle(fontSize: 12),
+          style: TextStyle(fontSize: 16),
         ),
       );
 
@@ -112,7 +106,7 @@ class _RegisterPageState extends State<RegisterPage> {
         value: roles,
         child: Text(
           roles,
-          style: TextStyle(fontSize: 12),
+          style: TextStyle(fontSize: 16),
         ),
       );
 
@@ -126,11 +120,9 @@ class _RegisterPageState extends State<RegisterPage> {
     if (newDate == null) return;
 
     setState(() {
-      _date = newDate;
+      _dob.text = DateFormat('dd-MM-yyyy').format(newDate);
     });
   }
-
-  DateTime _date = DateTime.now();
 
   Future signUp() async {
     try {
@@ -203,6 +195,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       SizedBox(width: 15),
                       Flexible(
                           child: Container(
+                        height: 56,
                         padding: EdgeInsets.only(left: 20.0),
                         decoration: BoxDecoration(
                           color: Colors.grey[200],
@@ -213,9 +206,12 @@ class _RegisterPageState extends State<RegisterPage> {
                           controller: _fName,
                           enableSuggestions: false,
                           autocorrect: false,
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'First Name',
+                            labelText: 'First Name',
                           ),
                         ),
                       )),
@@ -223,6 +219,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       SizedBox(width: 5),
                       Flexible(
                           child: Container(
+                        height: 56,
                         padding: EdgeInsets.only(left: 20.0),
                         decoration: BoxDecoration(
                           color: Colors.grey[200],
@@ -233,9 +230,12 @@ class _RegisterPageState extends State<RegisterPage> {
                           controller: _lName,
                           enableSuggestions: false,
                           autocorrect: false,
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'Last Name',
+                            labelText: 'Last Name',
                           ),
                         ),
                       )),
@@ -250,7 +250,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       SizedBox(width: 15),
                       Flexible(
                         child: Container(
-                          padding: EdgeInsets.only(left: 10.0),
+                          height: 56,
+                          padding: EdgeInsets.only(left: 20.0),
                           decoration: BoxDecoration(
                             color: Colors.grey[200],
                             border: Border.all(color: Colors.white),
@@ -260,9 +261,16 @@ class _RegisterPageState extends State<RegisterPage> {
                             controller: _mblNo,
                             enableSuggestions: false,
                             autocorrect: false,
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              hintText: 'Mobile Number',
+                              labelText: 'Mobile Number',
+                              icon: Icon(
+                                Icons.phone,
+                                color: Colors.deepPurple,
+                              ),
                             ),
                           ),
                         ),
@@ -271,7 +279,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       SizedBox(width: 5),
                       Flexible(
                         child: Container(
-                          padding: EdgeInsets.only(left: 10.0),
+                          height: 56,
+                          padding: EdgeInsets.only(left: 20.0),
                           decoration: BoxDecoration(
                             color: Colors.grey[200],
                             border: Border.all(color: Colors.white),
@@ -287,7 +296,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               color: Colors.deepPurple,
                             ),
                             decoration: InputDecoration(
-                              hintText: 'Gender',
+                              labelText: 'Gender',
                               border: InputBorder.none,
                             ),
                           ),
@@ -304,7 +313,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       SizedBox(width: 15),
                       Flexible(
                         child: Container(
-                          width: 100,
+                          height: 56,
                           padding: EdgeInsets.only(left: 20.0),
                           decoration: BoxDecoration(
                             color: Colors.grey[200],
@@ -321,48 +330,38 @@ class _RegisterPageState extends State<RegisterPage> {
                               color: Colors.deepPurple,
                             ),
                             decoration: InputDecoration(
-                              hintText: 'Age',
+                              labelText: 'Age',
                               border: InputBorder.none,
                             ),
                           ),
                         ),
                       ),
                       //DOB field===============================================
-                      SizedBox(width: 10),
-                      Container(
-                        padding: EdgeInsets.all(15),
-                        width: 109,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text(
-                          '${_date.day}/${_date.month}/${_date.year}',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ),
                       SizedBox(width: 5),
                       Flexible(
                         child: Container(
+                          height: 56,
+                          padding: EdgeInsets.only(left: 15.0),
                           decoration: BoxDecoration(
-                            color: Colors.deepPurple,
-                            border: Border.all(color: Colors.deepPurple),
+                            color: Colors.grey[200],
+                            border: Border.all(color: Colors.white),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: MaterialButton(
-                            onPressed: _showDatePicker,
-                            child: Text(
-                              'Select a date',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
+                          child: TextField(
+                            controller: _dob,
+                            decoration: InputDecoration(
+                              icon: Icon(
+                                Icons.calendar_today_rounded,
+                                color: Colors.deepPurple,
                               ),
+                              border: InputBorder.none,
+                              labelText: 'Birth Date',
                             ),
+                            onTap: _showDatePicker,
                           ),
                         ),
-                      )
+                      ),
+                      SizedBox(width: 15),
                     ],
                   ),
                   SizedBox(height: 10),
@@ -373,6 +372,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       SizedBox(width: 15),
                       Flexible(
                         child: Container(
+                          height: 56,
                           padding: EdgeInsets.only(left: 20.0),
                           decoration: BoxDecoration(
                             color: Colors.grey[200],
@@ -389,7 +389,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               color: Colors.deepPurple,
                             ),
                             decoration: InputDecoration(
-                              hintText: 'Server',
+                              labelText: 'Server',
                               border: InputBorder.none,
                             ),
                           ),
@@ -399,7 +399,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       SizedBox(width: 5),
                       Flexible(
                         child: Container(
-                          padding: EdgeInsets.only(left: 10.0),
+                          height: 56,
+                          padding: EdgeInsets.only(left: 20.0),
                           decoration: BoxDecoration(
                             color: Colors.grey[200],
                             border: Border.all(color: Colors.white),
@@ -415,7 +416,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               color: Colors.deepPurple,
                             ),
                             decoration: InputDecoration(
-                              hintText: 'Roles',
+                              labelText: 'Roles',
                               border: InputBorder.none,
                             ),
                           ),
@@ -429,6 +430,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: Container(
+                      height: 56,
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
                         border: Border.all(color: Colors.white),
@@ -440,9 +442,16 @@ class _RegisterPageState extends State<RegisterPage> {
                           controller: _email,
                           enableSuggestions: false,
                           autocorrect: false,
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'E-mail',
+                            labelText: 'E-mail',
+                            icon: Icon(
+                              Icons.email_rounded,
+                              color: Colors.deepPurple,
+                            ),
                           ),
                         ),
                       ),
@@ -453,6 +462,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: Container(
+                      height: 56,
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
                         border: Border.all(color: Colors.white),
@@ -465,9 +475,12 @@ class _RegisterPageState extends State<RegisterPage> {
                             obscureText: _obscurePass,
                             enableSuggestions: false,
                             autocorrect: false,
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              hintText: 'Password',
+                              labelText: 'Password',
                               suffixIcon: IconButton(
                                 onPressed: () => setState(
                                   (() => _obscurePass = !_obscurePass),
@@ -487,6 +500,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: Container(
+                      height: 56,
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
                         border: Border.all(color: Colors.white),
@@ -499,9 +513,12 @@ class _RegisterPageState extends State<RegisterPage> {
                           obscureText: _obscureConPass,
                           enableSuggestions: false,
                           autocorrect: false,
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'Confirm Password',
+                            labelText: 'Confirm Password',
                             suffixIcon: IconButton(
                               onPressed: () => setState(
                                 (() => _obscureConPass = !_obscureConPass),
