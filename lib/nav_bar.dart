@@ -4,7 +4,6 @@ import 'package:instabug_flutter/instabug_flutter.dart';
 // NAV BAR CLASS by sam
 
 class NavBar extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -12,12 +11,19 @@ class NavBar extends StatelessWidget {
         children: [
           UserAccountsDrawerHeader(
               accountName: Text('Loner') // could be implented later on
-              , accountEmail: Text('example@gmail.com')),
+,
+              accountEmail: Text('example@gmail.com')),
           ListTile(
             /*  BUG ICON  */
             leading: Icon(Icons.bug_report_rounded),
             title: Text('Reports'),
             onTap: () => Instabug.show(),
+          ),
+          ListTile(
+            /*  BUG ICON  */
+            leading: Icon(Icons.message),
+            title: Text('Send Nudes'),
+            onTap: () => print("Test"),
           ),
         ],
       ),

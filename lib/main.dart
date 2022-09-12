@@ -12,40 +12,39 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Project: Loner',
       theme: ThemeData(
-
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
-  void initState(){
+  void initState() {
     /*  BUG REPORTING SAM */
     super.initState();
     Instabug.start('204ec6dbacf517d824009b10798d3abd', [InvocationEvent.none]);
     Replies.setEnabled(false);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavBar(), // nav_bar.dart - sam
       appBar: AppBar(
-        title: Text("PROJECT LONER"),
+        title: const Text("Project: LONER"),
       ),
-      body: Center(),
+      body: const Center(),
     );
   }
 }
