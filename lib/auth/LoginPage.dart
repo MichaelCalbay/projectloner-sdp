@@ -89,6 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: Container(
+                      height: 56,
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
                         border: Border.all(color: Colors.white),
@@ -100,9 +101,16 @@ class _LoginPageState extends State<LoginPage> {
                           controller: _email,
                           enableSuggestions: false,
                           autocorrect: false,
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'E-mail',
+                            labelText: 'E-mail',
+                            icon: Icon(
+                              Icons.email_rounded,
+                              color: Colors.deepPurple,
+                            ),
                           ),
                         ),
                       ),
@@ -113,6 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: Container(
+                      height: 56,
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
                         border: Border.all(color: Colors.white),
@@ -125,9 +134,12 @@ class _LoginPageState extends State<LoginPage> {
                           obscureText: _obscurePass,
                           enableSuggestions: false,
                           autocorrect: false,
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'Password',
+                            labelText: 'Password',
                             suffixIcon: IconButton(
                               onPressed: () => setState(
                                 (() => _obscurePass = !_obscurePass),
