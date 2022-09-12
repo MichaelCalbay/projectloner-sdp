@@ -42,6 +42,7 @@ dependencies:
   cloud_firestore: ^3.4.5
   firebase_analytics: ^9.3.2
   instabug_flutter:
+  flutter_slidable:
 
 
 dev_dependencies:
