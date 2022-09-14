@@ -22,15 +22,14 @@ class MatchingAppBar extends StatelessWidget with PreferredSizeWidget {
       backgroundColor: Colors.deepPurple,
       elevation: 0,
       title: Row(
-        children: [
-          const Expanded(
+        children: const [
+          Expanded(
             child: Icon(Icons.home),
           ),
           Expanded(
             flex: 2,
             child: Text(
               'Co-Loners',
-              style: Theme.of(context).textTheme.headline2,
             ),
           ),
         ],
