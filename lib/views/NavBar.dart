@@ -29,11 +29,13 @@ class _NavBarState extends State<NavBar> {
               ,
               accountEmail: Text('example@gmail.com')),
           ListTile(
-            title: const Text("Matching"),
-            leading: Icon(Icons.person_add),
-            onTap: () {
-              debugPrint('Matching Clicked!');
-            },
+            leading: Icon(Icons.person),
+            title: Text('Matching'),
+            onTap: () => Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => const MatchMaking(),
+              ),
+            ),
           ),
           ListTile(
             /*  BUG ICON  */
