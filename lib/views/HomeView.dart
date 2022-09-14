@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+
 import 'package:projectloner/views/matchViews/CoachView.dart';
 import 'package:projectloner/views/matchViews/DuoView.dart';
 import 'package:projectloner/views/matchViews/TeamView.dart';
 import 'NavBar.dart';
 
 class HomePage extends StatefulWidget {
-  
   const HomePage({Key? key}) : super(key: key);
-  
+
   @override
   HomePageState createState() => HomePageState();
 }
 
 class HomePageState extends State {
-  
+
   String preferenceText = "Currently looking for duo";
   String matchButtonText = "Match for Duo!";
   bool duo = true;
