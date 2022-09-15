@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:instabug_flutter/instabug_flutter.dart';
 import 'HomeView.dart';
+import 'package:projectloner/auth/AuthPage.dart';
 // import 'Page1.dart';
 // import 'Page2.dart';
 

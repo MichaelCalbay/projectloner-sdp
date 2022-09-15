@@ -26,7 +26,6 @@ class CoachPageState extends State {
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
               },
               child: const Text("Go Back"),
             )

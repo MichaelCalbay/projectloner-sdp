@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:projectloner/views/matchViews/CoachView.dart';
 import 'package:projectloner/views/matchViews/DuoView.dart';
 import 'package:projectloner/views/matchViews/TeamView.dart';
@@ -15,61 +14,25 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State {
 
   String preferenceText = "Currently looking for duo";
-  String matchButtonText = "Match for Duo!";
-  bool duo = true;
-  bool team = false;
-  bool coach = false;
+  String matchButtonText = "Start";
+  final List<bool> _matchPreferences = <bool>[true, false, false];
 
-  void changePreference(String preference) {
+
+  void updatePage() {
     
-    switch(preference) {
-      case "duo":
-        // Duo Matching
-        duo = true;
-        team = false;
-        coach = false;
-        break;
-      case "team":
-        // Team Matching
-        duo = false;
-        team = true;
-        coach = false;
-        break;
-      case "coach":
-        // Coach
-        duo = false;
-        team = false;
-        coach = true;
-        break;
-    }
-    if (coach == true) {
-      setState(() {
-        preferenceText = "Currently a coach";
-        matchButtonText = "Start coaching!";
-      });  
-    } 
-    else {
-      setState(() {
-        preferenceText = "Currently looking for $preference";
-        matchButtonText = "Find your $preference!";
-      });
-    }  
   }
 
-  void startMatching() {
-    if (duo) {
+  void startMatching(List<bool> matchPreferences) {
+    if (matchPreferences[0] == true) {
       print("Duo");
-      Navigator.pop(context);
       Navigator.push(context, MaterialPageRoute(builder: (context) => DuoPage()));
     }
-    else if (team) {
+    else if (matchPreferences[1] == true) {
       print("Team");
-      Navigator.pop(context);
       Navigator.push(context, MaterialPageRoute(builder: (context) => TeamPage()));
     }
-    else if (coach) {
+    else if (matchPreferences[2] == true) {
       print("Coach");
-      Navigator.pop(context);
       Navigator.push(context, MaterialPageRoute(builder: (context) => CoachPage()));
     }
   }
@@ -86,6 +49,8 @@ class HomePageState extends State {
             'Home Page',
             style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
             ),
+            // I am stoopid
+            /*
             ButtonBar(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -108,11 +73,33 @@ class HomePageState extends State {
                   child: const Text("Coach"),
                 ),
               ],
-            ),
-            Text(preferenceText),
+            ),*/
+            ToggleButtons(
+              onPressed: (int index) {
+                setState(() {
+                  for (int i = 0; i < _matchPreferences.length; i++) {
+                    _matchPreferences[i] = i == index;
+                  }
+                });
+              },
+              isSelected: _matchPreferences,
+              borderRadius: const BorderRadius.all(Radius.circular(8)),
+              selectedBorderColor: Colors.deepPurple,
+              selectedColor: Colors.white,
+              fillColor: Colors.deepPurple,
+              constraints: const BoxConstraints(
+                  minHeight: 40.0,
+                  minWidth: 80.0,
+              ),
+              children: const [
+                Text("Duo"),
+                Text("Team"),
+                Text("Coach"),
+              ]),
+            //Text(preferenceText),
             ElevatedButton(
               onPressed: () {
-                startMatching();
+                startMatching(_matchPreferences);
               }, 
               child: Text(matchButtonText))
           ]
