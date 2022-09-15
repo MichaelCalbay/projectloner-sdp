@@ -3,12 +3,20 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:projectloner/auth/CheckLogin.dart';
-import 'package:projectloner/auth/LoginPage.dart';
 import 'package:instabug_flutter/instabug_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() async {
+int? initScreen;
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  /* ONBOARDING TO SHOW ONCE */
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  initScreen = await preferences.getInt('initScreen');
+  await preferences.setInt('initScreen', 1);
+
   runApp(const MyApp());
 }
 
