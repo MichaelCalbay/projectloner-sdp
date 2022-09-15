@@ -8,6 +8,8 @@ import 'package:projectloner/views/HomeView.dart';
 
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../intro/FirstTime.dart';
+
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
 
@@ -79,6 +81,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 )
                 : GestureDetector(
                   onTap: (){
+                    FirstTime().once(1);
                     _controller.nextPage(
                       duration: const Duration(milliseconds: 500), 
                     curve: Curves.easeIn);
