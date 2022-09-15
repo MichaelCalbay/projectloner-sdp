@@ -44,7 +44,8 @@ dependencies:
   instabug_flutter:
   smooth_page_indicator: ^1.0.0+2
   flutter_slidable:
-
+  shared_preferences: ^2.0.15
+ 
 
 dev_dependencies:
   flutter_test:
