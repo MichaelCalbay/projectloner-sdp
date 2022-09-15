@@ -4,18 +4,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:projectloner/auth/CheckLogin.dart';
 import 'package:instabug_flutter/instabug_flutter.dart';
+import 'package:projectloner/views/onboarding_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-int? initScreen;
+int? isviewed;
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  /* ONBOARDING TO SHOW ONCE */
-  SharedPreferences preferences = await SharedPreferences.getInstance();
-  initScreen = await preferences.getInt('initScreen');
-  await preferences.setInt('initScreen', 1);
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  isviewed = prefs.getInt('onBoard');
 
   runApp(const MyApp());
 }
@@ -55,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CheckLogin(),
+      home: isviewed != 0 ? OnboardingScreen() : CheckLogin(),
       //Theme colour
       theme: ThemeData(primarySwatch: Colors.deepPurple),
     );

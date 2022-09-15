@@ -4,11 +4,10 @@ import 'package:projectloner/intro/IntroPage_2.dart';
 import 'package:projectloner/intro/IntroPage_3.dart';
 import 'package:projectloner/intro/IntroPage_4.dart';
 import 'package:projectloner/intro/IntroPage_5.dart';
-import 'package:projectloner/views/HomeView.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '../auth/CheckLogin.dart';
 
-import '../intro/FirstTime.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -23,6 +22,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   
   /* KEEP TRACK OFF LAST PAGE */ 
   bool onLastPage = false;
+
+  _storeOnboardInfo() async {
+    print("Shared pref called");
+    int isViewed = 0;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('onBoard', isViewed);
+    print(prefs.getInt('onBoard'));
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -71,17 +79,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 onLastPage ?
                 GestureDetector(
                   onTap: (){
+                    _storeOnboardInfo();
                     Navigator.push(context, MaterialPageRoute(builder: (context){
                       /* AFTER LAST PAGE RETURN TO HOME PAGE */
-                      return const HomePage();
+                      return const CheckLogin();
                     }),
                     );
                   },
-                  child: const Text('Done'),
+                  child: const Text('Log In'),
                 )
                 : GestureDetector(
                   onTap: (){
-                    FirstTime().once(1);
+                    //FirstTime().once(1);
                     _controller.nextPage(
                       duration: const Duration(milliseconds: 500), 
                     curve: Curves.easeIn);
