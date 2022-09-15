@@ -5,6 +5,7 @@ import 'package:projectloner/intro/IntroPage_3.dart';
 import 'package:projectloner/intro/IntroPage_4.dart';
 import 'package:projectloner/intro/IntroPage_5.dart';
 import 'package:projectloner/views/HomeView.dart';
+
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -43,16 +44,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ],
           ),
           Container(
+            
             alignment: const Alignment(0,0.80),
+            
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
+              children: <Widget>[
+
+                /* IF NOT ON LAST PAGE */
+                onLastPage?
                 GestureDetector(
+                  onTap: (){
+                    _controller.jumpToPage(4);
+                  },
+                  child: const Text(''),
+                ): GestureDetector(
                   onTap: (){
                     _controller.jumpToPage(4);
                   },
                   child: const Text('Skip'),
                 ),
+                  
                 SmoothPageIndicator(controller: _controller, count: 5),
                 onLastPage ?
                 GestureDetector(
