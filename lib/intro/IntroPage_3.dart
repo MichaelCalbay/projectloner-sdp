@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 class PageThree extends StatelessWidget {
   const PageThree({Key? key}) : super(key: key);
 
+  /*======= MESSAGE PAGE ========*/
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -12,8 +14,8 @@ class PageThree extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset('images/mail.png',
-        width: 200,
-        height: 300,
+        width: 150,
+        height: 250,
         ),
         //const SizedBox(height: 150), 
         const Text(

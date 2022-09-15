@@ -73,7 +73,9 @@ flutter:
     - images/bug.png
     - images/gamer.png
     - images/mail.png
+    - images/players.png
     - images/her.png
+    - images/glasses.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
