@@ -3,7 +3,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:instabug_flutter/instabug_flutter.dart';
-import 'HomeView.dart';
+import 'package:projectloner/matching/matching_screen.dart';
+//import 'HomeView.dart';
 // import 'Page1.dart';
 // import 'Page2.dart';
 
@@ -27,6 +28,20 @@ class _NavBarState extends State<NavBar> {
               accountName: Text('Loner') // could be implented later on
               ,
               accountEmail: Text('example@gmail.com')),
+          ListTile(
+            leading: Icon(Icons.person),
+            title: Text('Matching'),
+            onTap: () {
+              //Close the Navigation drawer when back is tapped.
+              Navigator.pop(context);
+
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const MatchMaking(),
+                ),
+              );
+            },
+          ),
           ListTile(
             /*  BUG ICON  */
             leading: Icon(Icons.bug_report_rounded),
