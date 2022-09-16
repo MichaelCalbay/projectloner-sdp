@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: 50),
                   //Greetings===================================================
                   Text(
-                    'Hi! Welcome Back!',
+                    'Hi, Welcome Back!',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 40,
@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    'Please login and be a loner!',
+                    'Login to be a loner.',
                     style: TextStyle(
                       fontSize: 20,
                     ),
@@ -169,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         child: Center(
                           child: Text(
-                            'Log In',
+                            'Login',
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
