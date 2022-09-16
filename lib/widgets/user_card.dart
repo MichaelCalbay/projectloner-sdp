@@ -3,7 +3,7 @@ import 'package:projectloner/models/models.dart';
 import 'package:projectloner/widgets/widgets.dart';
 
 class UserCard extends StatelessWidget {
-  final User user;
+  final UserData user;
 
   const UserCard({
     Key? key,
@@ -25,10 +25,10 @@ class UserCard extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(user.imageUrls[0]),
-                  ),
+                  // image: DecorationImage(
+                  //   fit: BoxFit.cover,
+                  //   // image: NetworkImage(user.imageUrls[0]),
+                  // ),
                   borderRadius: BorderRadius.circular(5.0),
                   boxShadow: [
                     BoxShadow(
@@ -74,9 +74,9 @@ class UserCard extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      SmallUserImage(imageUrl: user.imageUrls[1]),
-                      SmallUserImage(imageUrl: user.imageUrls[2]),
-                      SmallUserImage(imageUrl: user.imageUrls[3]),
+                      // SmallUserImage(imageUrl: user.imageUrls[1]),
+                      // SmallUserImage(imageUrl: user.imageUrls[2]),
+                      // SmallUserImage(imageUrl: user.imageUrls[3]),
                       const SizedBox(width: 10),
                       Container(
                         width: 35,

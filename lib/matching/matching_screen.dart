@@ -11,7 +11,7 @@ class MatchMaking extends StatelessWidget {
       appBar: const MatchingAppBar(),
       body: Column(
         children: [
-          UserCard(user: User.users[0]),
+          UserCard(user: UserData.Users[0]),
           Padding(
             padding: const EdgeInsets.symmetric(
               vertical: 8.0,
