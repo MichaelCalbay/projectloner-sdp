@@ -43,9 +43,8 @@ dependencies:
   firebase_analytics: ^9.3.2
   instabug_flutter:
   smooth_page_indicator: ^1.0.0+2
-  flutter_slidable:
   shared_preferences: ^2.0.15
- 
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:
