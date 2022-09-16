@@ -103,7 +103,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                   Icons.email,
                 ),
                 label: Text(
-                  'Resent E-mail',
+                  'Resend E-mail',
                   style: TextStyle(fontSize: 20),
                 ),
               ),
