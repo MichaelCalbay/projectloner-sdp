@@ -79,6 +79,7 @@ class User extends Equatable {
       firstName: 'Yor',
       lastName: 'Sugoi',
       age: 21,
+
       imageUrls: [
         'https://cdn.oneesports.gg/cdn-data/2022/04/SpyxFamily_YorForgerCosplayKitaroCosCloseUp-1024x576.webp',
         'https://aphrodite.gmanetwork.com/entertainment/articles/900_675_New_MainImage_2021_-20220509111041.jpg',
