@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class UserData extends Equatable {
+class User extends Equatable {
   final String firstName;
   final String lastName;
   final int age;
@@ -9,7 +9,7 @@ class UserData extends Equatable {
   final String server;
   final String role;
 
-  const UserData({
+  const User({
     required this.firstName,
     required this.lastName,
     required this.age,
@@ -75,7 +75,7 @@ class UserData extends Equatable {
       server: 'APAC',
       role: 'Initiator',
     ),
-    const UserData(
+    const User(
       firstName: 'Yor',
       lastName: 'Sugoi',
       age: 21,
