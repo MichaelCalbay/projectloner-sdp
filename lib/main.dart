@@ -70,8 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      //Debugging MatchProfile, will fix back to homepage once done.
-      home: MatchProfile(), //isviewed != 0 ? OnboardingScreen() : CheckLogin(),
+      home: isviewed != 0 ? OnboardingScreen() : CheckLogin(),
       //Theme colour
       theme: ThemeData(primarySwatch: Colors.deepPurple),
     );

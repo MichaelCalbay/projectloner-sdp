@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projectloner/matching/match_profile.dart';
 import 'package:projectloner/models/models.dart';
 import 'package:projectloner/widgets/widgets.dart';
 
@@ -85,10 +86,17 @@ class UserCard extends StatelessWidget {
                           shape: BoxShape.circle,
                           color: Colors.white,
                         ),
-                        child: Icon(
-                          Icons.info_outline,
-                          size: 25,
-                          color: Theme.of(context).primaryColor,
+                        child: InkWell(
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => MatchProfile(user: user),
+                            ),
+                          ),
+                          child: Icon(
+                            Icons.info_outline,
+                            size: 25,
+                            color: Theme.of(context).primaryColor,
+                          ),
                         ),
                       ),
                     ],
