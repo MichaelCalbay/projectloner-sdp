@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:projectloner/models/models.dart';
 import 'package:projectloner/widgets/widgets.dart';
 
@@ -83,12 +81,12 @@ class MatchProfile extends StatelessWidget {
                 ),
                 const SizedBox(height: 15.0),
                 Text(
-                  'About User: ',
+                  'About',
                   style: Theme.of(context).textTheme.headline6,
                 ),
                 Text(
                   'INSERT USER STATS HERE WHEN READY. For now, I am just writing a really long sentence to make it look like an autobiography for the user.',
-                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         height: 2,
                       ),
                 ),
@@ -96,6 +94,10 @@ class MatchProfile extends StatelessWidget {
                 Text(
                   'Interests ',
                   style: Theme.of(context).textTheme.headline6,
+                ),
+                Container(
+                  child: Text(user.interests![0],
+                      style: Theme.of(context).textTheme.headline6!),
                 ),
               ],
             ),
