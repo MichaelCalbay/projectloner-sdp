@@ -1,14 +1,16 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unnecessary_new, must_be_immutable
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:projectloner/models/models.dart';
 import 'package:intl/intl.dart';
 
 class RegisterPage extends StatefulWidget {
+  UserData? user;
   final VoidCallback showLoginPage;
-  const RegisterPage({Key? key, required this.showLoginPage}) : super(key: key);
+  RegisterPage({Key? key, required this.showLoginPage}) : super(key: key);
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -24,6 +26,15 @@ class _RegisterPageState extends State<RegisterPage> {
   late final _mblNo = TextEditingController();
   late final _dob = TextEditingController();
   late final _age = TextEditingController();
+
+  void initializer() {
+    widget.user = new UserData(
+        firstName: _fName.text.trim(),
+        lastName: _lName.text.trim(),
+        age: int.parse(_age.text.trim()),
+        server: valueServer,
+        role: valueRoles);
+  }
 
   @override
   void dispose() {
