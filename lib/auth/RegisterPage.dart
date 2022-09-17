@@ -8,7 +8,7 @@ import 'package:projectloner/models/models.dart';
 import 'package:intl/intl.dart';
 
 class RegisterPage extends StatefulWidget {
-  UserData? user;
+  LonerUser? user;
   final VoidCallback showLoginPage;
   RegisterPage({Key? key, required this.showLoginPage}) : super(key: key);
 

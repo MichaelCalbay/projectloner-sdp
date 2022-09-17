@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class UserData extends Equatable {
+class LonerUser extends Equatable {
   final String firstName;
   final String lastName;
   final int age;
@@ -9,7 +9,7 @@ class UserData extends Equatable {
   final String server;
   final String role;
 
-  const UserData({
+  const LonerUser({
     required this.firstName,
     required this.lastName,
     required this.age,
@@ -30,8 +30,8 @@ class UserData extends Equatable {
         role,
       ];
 
-  static List<UserData> users = [
-    const UserData(
+  static List<LonerUser> users = [
+    const LonerUser(
       firstName: 'Robin',
       lastName: 'Chwuan',
       age: 23,
@@ -54,7 +54,7 @@ class UserData extends Equatable {
       server: 'APAC',
       role: 'Controller',
     ),
-    const UserData(
+    const LonerUser(
       firstName: 'Albedo',
       lastName: 'Chan',
       age: 26,
@@ -75,7 +75,7 @@ class UserData extends Equatable {
       server: 'APAC',
       role: 'Initiator',
     ),
-    const UserData(
+    const LonerUser(
       firstName: 'Yor',
       lastName: 'Sugoi',
       age: 21,
@@ -97,7 +97,7 @@ class UserData extends Equatable {
       server: 'APAC',
       role: 'Duelist',
     ),
-    const UserData(
+    const LonerUser(
       firstName: 'Lin Lin',
       lastName: 'Charlotte',
       age: 62,
@@ -117,7 +117,7 @@ class UserData extends Equatable {
       server: 'APAC',
       role: 'Sentinel',
     ),
-    const UserData(
+    const LonerUser(
       firstName: 'Sporky',
       lastName: 'Taba',
       age: 26,
@@ -137,7 +137,7 @@ class UserData extends Equatable {
       server: 'APAC',
       role: 'Controller',
     ),
-    const UserData(
+    const LonerUser(
       firstName: 'Nami',
       lastName: 'Swan',
       age: 22,

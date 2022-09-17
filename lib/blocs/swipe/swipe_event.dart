@@ -8,7 +8,7 @@ abstract class SwipeEvent extends Equatable {
 }
 
 class LoadUsers extends SwipeEvent {
-  final List<UserData> users;
+  final List<LonerUser> users;
 
   const LoadUsers({required this.users});
 
@@ -17,7 +17,7 @@ class LoadUsers extends SwipeEvent {
 }
 
 class SwipeLeft extends SwipeEvent {
-  final UserData user;
+  final LonerUser user;
 
   const SwipeLeft({required this.user});
 
@@ -26,7 +26,7 @@ class SwipeLeft extends SwipeEvent {
 }
 
 class SwipeRight extends SwipeEvent {
-  final UserData user;
+  final LonerUser user;
 
   const SwipeRight({required this.user});
 

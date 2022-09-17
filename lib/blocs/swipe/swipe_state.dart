@@ -10,7 +10,7 @@ abstract class SwipeState extends Equatable {
 class SwipeLoading extends SwipeState {}
 
 class SwipeLoaded extends SwipeState {
-  final List<UserData> users;
+  final List<LonerUser> users;
 
   const SwipeLoaded({required this.users});
 

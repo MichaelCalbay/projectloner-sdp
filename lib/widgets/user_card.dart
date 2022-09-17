@@ -4,7 +4,7 @@ import 'package:projectloner/models/models.dart';
 import 'package:projectloner/widgets/widgets.dart';
 
 class UserCard extends StatelessWidget {
-  final UserData user;
+  final LonerUser user;
 
   const UserCard({
     Key? key,

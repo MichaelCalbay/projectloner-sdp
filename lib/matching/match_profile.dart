@@ -3,7 +3,7 @@ import 'package:projectloner/models/models.dart';
 import 'package:projectloner/widgets/widgets.dart';
 
 class MatchProfile extends StatelessWidget {
-  final UserData user;
+  final LonerUser user;
 
   const MatchProfile({Key? key, required this.user}) : super(key: key);
   @override
