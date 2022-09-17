@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => SwipeBloc()
             ..add(
-              LoadUsers(users: User.users),
+              LoadUsers(users: UserData.users),
             ),
         ),
       ],
@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: isviewed != 0 ? OnboardingScreen() : CheckLogin(),
+      home: MatchMaking(), //isviewed != 0 ? OnboardingScreen() : CheckLogin(),
       //Theme colour
       theme: ThemeData(primarySwatch: Colors.deepPurple),
     );

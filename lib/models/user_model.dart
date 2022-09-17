@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class User extends Equatable {
+class UserData extends Equatable {
   final String firstName;
   final String lastName;
   final int age;
@@ -9,7 +9,7 @@ class User extends Equatable {
   final String server;
   final String role;
 
-  const User({
+  const UserData({
     required this.firstName,
     required this.lastName,
     required this.age,
@@ -30,8 +30,8 @@ class User extends Equatable {
         role,
       ];
 
-  static List<User> users = [
-    const User(
+  static List<UserData> users = [
+    const UserData(
       firstName: 'Robin',
       lastName: 'Chwuan',
       age: 23,
@@ -54,7 +54,7 @@ class User extends Equatable {
       server: 'APAC',
       role: 'Controller',
     ),
-    const User(
+    const UserData(
       firstName: 'Albedo',
       lastName: 'Chan',
       age: 26,
@@ -75,11 +75,10 @@ class User extends Equatable {
       server: 'APAC',
       role: 'Initiator',
     ),
-    const User(
+    const UserData(
       firstName: 'Yor',
       lastName: 'Sugoi',
       age: 21,
-
       imageUrls: [
         'https://cdn.oneesports.gg/cdn-data/2022/04/SpyxFamily_YorForgerCosplayKitaroCosCloseUp-1024x576.webp',
         'https://aphrodite.gmanetwork.com/entertainment/articles/900_675_New_MainImage_2021_-20220509111041.jpg',
@@ -98,7 +97,7 @@ class User extends Equatable {
       server: 'APAC',
       role: 'Duelist',
     ),
-    const User(
+    const UserData(
       firstName: 'Lin Lin',
       lastName: 'Charlotte',
       age: 62,
@@ -118,7 +117,7 @@ class User extends Equatable {
       server: 'APAC',
       role: 'Sentinel',
     ),
-    const User(
+    const UserData(
       firstName: 'Sporky',
       lastName: 'Taba',
       age: 26,
@@ -138,7 +137,7 @@ class User extends Equatable {
       server: 'APAC',
       role: 'Controller',
     ),
-    const User(
+    const UserData(
       firstName: 'Nami',
       lastName: 'Swan',
       age: 22,
