@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projectloner/auth/CheckLogin.dart';
 import 'package:instabug_flutter/instabug_flutter.dart';
 import 'package:projectloner/blocs/swipe/swipe_bloc.dart';
+import 'package:projectloner/matching/match_profile.dart';
+import 'package:projectloner/matching/matching_screen.dart';
 import 'package:projectloner/views/onboarding_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'models/models.dart';
@@ -68,7 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: isviewed != 0 ? OnboardingScreen() : CheckLogin(),
+      //Debugging MatchProfile, will fix back to homepage once done.
+      home: MatchProfile(), //isviewed != 0 ? OnboardingScreen() : CheckLogin(),
       //Theme colour
       theme: ThemeData(primarySwatch: Colors.deepPurple),
     );
