@@ -81,23 +81,27 @@ class UserCard extends StatelessWidget {
                         SmallUserImage(imageUrl: user.imageUrls[2]),
                         SmallUserImage(imageUrl: user.imageUrls[3]),
                         const SizedBox(width: 10),
-                        Container(
-                          width: 35,
-                          height: 35,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                          ),
-                          child: InkWell(
-                            onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => MatchProfile(user: user),
-                              ),
+                        Material(
+                          color: Colors.transparent,
+                          child: Container(
+                            width: 35,
+                            height: 35,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white,
                             ),
-                            child: Icon(
-                              Icons.info_outline,
-                              size: 25,
-                              color: Theme.of(context).primaryColor,
+                            child: InkWell(
+                              onTap: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      MatchProfile(user: user),
+                                ),
+                              ),
+                              child: Icon(
+                                Icons.info_outline,
+                                size: 25,
+                                color: Theme.of(context).primaryColor,
+                              ),
                             ),
                           ),
                         ),
