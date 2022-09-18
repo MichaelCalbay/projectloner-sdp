@@ -6,8 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projectloner/auth/CheckLogin.dart';
 import 'package:instabug_flutter/instabug_flutter.dart';
 import 'package:projectloner/blocs/swipe/swipe_bloc.dart';
-import 'package:projectloner/matching/match_profile.dart';
-import 'package:projectloner/matching/matching_screen.dart';
 import 'package:projectloner/views/onboarding_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'models/models.dart';
@@ -34,7 +32,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => SwipeBloc()
             ..add(
-              LoadUsers(users: User.users),
+              LoadUsers(users: LonerUser.users),
             ),
         ),
       ],
