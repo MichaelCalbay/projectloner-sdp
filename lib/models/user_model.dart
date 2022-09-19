@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class User extends Equatable {
+class LonerUser extends Equatable {
   final String firstName;
   final String lastName;
   final int age;
@@ -9,7 +9,7 @@ class User extends Equatable {
   final String server;
   final String role;
 
-  const User({
+  const LonerUser({
     required this.firstName,
     required this.lastName,
     required this.age,
@@ -30,8 +30,8 @@ class User extends Equatable {
         role,
       ];
 
-  static List<User> users = [
-    const User(
+  static List<LonerUser> users = [
+    const LonerUser(
       firstName: 'Robin',
       lastName: 'Chwuan',
       age: 23,
@@ -54,7 +54,7 @@ class User extends Equatable {
       server: 'APAC',
       role: 'Controller',
     ),
-    const User(
+    const LonerUser(
       firstName: 'Albedo',
       lastName: 'Chan',
       age: 26,
@@ -75,11 +75,10 @@ class User extends Equatable {
       server: 'APAC',
       role: 'Initiator',
     ),
-    const User(
+    const LonerUser(
       firstName: 'Yor',
       lastName: 'Sugoi',
       age: 21,
-
       imageUrls: [
         'https://cdn.oneesports.gg/cdn-data/2022/04/SpyxFamily_YorForgerCosplayKitaroCosCloseUp-1024x576.webp',
         'https://aphrodite.gmanetwork.com/entertainment/articles/900_675_New_MainImage_2021_-20220509111041.jpg',
@@ -98,7 +97,7 @@ class User extends Equatable {
       server: 'APAC',
       role: 'Duelist',
     ),
-    const User(
+    const LonerUser(
       firstName: 'Lin Lin',
       lastName: 'Charlotte',
       age: 62,
@@ -118,12 +117,12 @@ class User extends Equatable {
       server: 'APAC',
       role: 'Sentinel',
     ),
-    const User(
+    const LonerUser(
       firstName: 'Sporky',
       lastName: 'Taba',
       age: 26,
       imageUrls: [
-        'https://scontent.xx.fbcdn.net/v/t1.15752-9/306609660_1275399656567492_3540750187771009109_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=aee45a&_nc_ohc=RlgMb3TqtP0AX9HrJz-&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AVJzrtYyIoeUVStmyFo0gNANe7cZyKIeoYGR2BpUSC9PXw&oe=63278773',
+        'https://scontent.fhlz2-1.fna.fbcdn.net/v/t1.15752-9/306609660_1275399656567492_3540750187771009109_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=7b7923&_nc_ohc=2R6fV1HBwu8AX85U2K0&_nc_ht=scontent.fhlz2-1.fna&oh=03_AVLB2A9y1c-5XJPWrvu4Bs-MfoTvdFm9fnlOREIEvAf8IQ&oe=634D5273',
         'https://scontent.fakl5-1.fna.fbcdn.net/v/t31.18172-8/823349_565351646816630_660560163_o.jpg?_nc_cat=106&ccb=1-7&_nc_sid=de6eea&_nc_ohc=PAxP614bZt4AX9ZbZVt&_nc_ht=scontent.fakl5-1.fna&oh=00_AT8D7BYmyBzrzFeXrFFhXSQM8MKO5qUZ3GPzrfuOpQ7YVQ&oe=634A2807',
         'https://scontent.fakl5-1.fna.fbcdn.net/v/t1.18169-9/162911_173053356046463_3240373_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=de6eea&_nc_ohc=pEubHctSOrcAX_OGYxb&_nc_ht=scontent.fakl5-1.fna&oh=00_AT-yxc2Z_At8SP_gaTsG5y-8xa4Z10-mauXhdmDUrKzqMQ&oe=6348F08C',
         'https://scontent.fakl5-1.fna.fbcdn.net/v/t31.18172-8/887107_726116480734754_61911895_o.jpg?_nc_cat=107&ccb=1-7&_nc_sid=cdbe9c&_nc_ohc=qSlM9wBcGQEAX_onh8C&_nc_ht=scontent.fakl5-1.fna&oh=00_AT9l-7cnElNwOY9cRBS6_ZXE-soQFQFXbKWqPiRoMdujQg&oe=634A94FA',
@@ -138,7 +137,7 @@ class User extends Equatable {
       server: 'APAC',
       role: 'Controller',
     ),
-    const User(
+    const LonerUser(
       firstName: 'Nami',
       lastName: 'Swan',
       age: 22,

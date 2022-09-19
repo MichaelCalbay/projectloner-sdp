@@ -21,8 +21,14 @@ class MatchMaking extends StatelessWidget {
               children: [
                 Draggable(
                   feedback: UserCard(user: state.users[0]),
-                  childWhenDragging: UserCard(user: state.users[1]),
+                  childWhenDragging:
+                      state.users[0] == state.users[state.users.length - 1]
+                          ? Text('LAST USER ON THE LIST',
+                              style: Theme.of(context).textTheme.headline3)
+                          : UserCard(user: state.users[1]),
                   child: UserCard(user: state.users[0]),
+                  //Gotta figure out fix - IF user is on the last match suggestion.
+                  //Index out of bounds.
                   onDragEnd: (drag) {
                     if (drag.velocity.pixelsPerSecond.dx < 0) {
                       context
