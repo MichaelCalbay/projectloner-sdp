@@ -5,6 +5,7 @@ import "package:flutter/material.dart";
 import 'package:instabug_flutter/instabug_flutter.dart';
 import 'package:projectloner/matching/matching_screen.dart';
 import 'package:projectloner/profile/profile.dart';
+
 //import 'HomeView.dart';
 // import 'Page1.dart';
 // import 'Page2.dart';
@@ -30,6 +31,7 @@ class _NavBarState extends State<NavBar> {
               ,
               accountEmail:
                   Text('${FirebaseAuth.instance.currentUser!.email}')),
+
           ListTile(
             leading: Icon(Icons.person),
             title: Text('Matching'),
@@ -67,6 +69,7 @@ class _NavBarState extends State<NavBar> {
                   MaterialPageRoute(builder: (context) => ProfilePage()));
             },
           ),
+
           // ListTile(
           //   title: const Text("Page 2"),
           //   onTap: () {
