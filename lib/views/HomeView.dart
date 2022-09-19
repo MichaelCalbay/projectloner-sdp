@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projectloner/views/matchViews/CoachView.dart';
 import 'package:projectloner/views/matchViews/DuoView.dart';
 import 'package:projectloner/views/matchViews/TeamView.dart';
+import '../matching/matching_screen.dart';
 import 'NavBar.dart';
 
 class HomePage extends StatefulWidget {
@@ -25,7 +26,11 @@ class HomePageState extends State {
   void startMatching(List<bool> matchPreferences) {
     if (matchPreferences[0] == true) {
       print("Duo");
-      Navigator.push(context, MaterialPageRoute(builder: (context) => DuoPage()));
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const MatchMaking(),
+        ),
+      );
     }
     else if (matchPreferences[1] == true) {
       print("Team");
