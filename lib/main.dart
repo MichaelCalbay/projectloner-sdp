@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projectloner/auth/CheckLogin.dart';
 import 'package:instabug_flutter/instabug_flutter.dart';
 import 'package:projectloner/blocs/swipe/swipe_bloc.dart';
+import 'package:projectloner/matching/matching_screen.dart';
 import 'package:projectloner/views/onboarding_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'models/models.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projectloner/matching/matches_screen.dart';
 
 class MatchingAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
@@ -15,7 +16,7 @@ class MatchingAppBar extends StatelessWidget with PreferredSizeWidget {
       title: Row(
         children: [
           const Expanded(
-            child: Icon(Icons.auto_awesome),
+            child: Icon(Icons.gamepad_rounded),
           ),
           Expanded(
             flex: 2,
@@ -32,6 +33,11 @@ class MatchingAppBar extends StatelessWidget with PreferredSizeWidget {
       actions: [
         IconButton(
           onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const MatchesScreen(),
+              ),
+            );
             debugPrint('Message Icon Pressed!');
           },
           icon: const Icon(Icons.message),
