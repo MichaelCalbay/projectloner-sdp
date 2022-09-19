@@ -28,7 +28,8 @@ class _NavBarState extends State<NavBar> {
           UserAccountsDrawerHeader(
               accountName: Text('Loner') // could be implented later on
               ,
-              accountEmail: Text('example@gmail.com')),
+              accountEmail:
+                  Text('${FirebaseAuth.instance.currentUser!.email}')),
           ListTile(
             leading: Icon(Icons.person),
             title: Text('Matching'),
