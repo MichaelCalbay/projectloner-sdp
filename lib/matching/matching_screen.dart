@@ -9,7 +9,7 @@ class MatchMaking extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MatchingAppBar(),
+      appBar: const MatchingAppBar(title: 'Co-Loners'),
       body: BlocBuilder<SwipeBloc, SwipeState>(
         builder: (context, state) {
           if (state is SwipeLoading) {

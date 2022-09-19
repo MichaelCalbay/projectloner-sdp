@@ -33,6 +33,7 @@ class LonerUser extends Equatable {
         role,
       ];
 
+  //SAMPLE DATA FOR TESTING.
   static List<LonerUser> users = [
     const LonerUser(
       id: 1,
