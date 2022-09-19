@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:instabug_flutter/instabug_flutter.dart';
 import 'package:projectloner/matching/matching_screen.dart';
+import 'package:projectloner/profile/profile.dart';
+
 //import 'HomeView.dart';
 // import 'Page1.dart';
 // import 'Page2.dart';
@@ -27,7 +29,9 @@ class _NavBarState extends State<NavBar> {
           UserAccountsDrawerHeader(
               accountName: Text('Loner') // could be implented later on
               ,
-              accountEmail: Text('example@gmail.com')),
+              accountEmail:
+                  Text('${FirebaseAuth.instance.currentUser!.email}')),
+
           ListTile(
             leading: Icon(Icons.person),
             title: Text('Matching'),
@@ -56,14 +60,16 @@ class _NavBarState extends State<NavBar> {
               //     context, MaterialPageRoute(builder: (context) => HomePage()));
             },
           ),
-          // ListTile(
-          //   title: const Text("Page 1"),
-          //   onTap: () {
-          //     Navigator.pop(context);
-          //     Navigator.push(
-          //         context, MaterialPageRoute(builder: (context) => Page1()));
-          //   },
-          // ),
+          ListTile(
+            leading: Icon(Icons.person),
+            title: const Text("Profile"),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ProfilePage()));
+            },
+          ),
+
           // ListTile(
           //   title: const Text("Page 2"),
           //   onTap: () {
