@@ -3,6 +3,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:instabug_flutter/instabug_flutter.dart';
+import 'HomeView.dart';
+import 'package:projectloner/auth/AuthPage.dart';
 import 'package:projectloner/matching/matching_screen.dart';
 import 'package:projectloner/profile/profile.dart';
 
@@ -25,8 +27,8 @@ class _NavBarState extends State<NavBar> {
       width: 200,
       child: ListView(
         children: [
-          const DrawerHeader(child: Text("Navigation Bar")),
           UserAccountsDrawerHeader(
+
               accountName: Text('Loner') // could be implented later on
               ,
               accountEmail:
