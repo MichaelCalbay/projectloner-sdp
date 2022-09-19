@@ -4,7 +4,6 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:projectloner/auth/LoginPage.dart';
 import 'package:projectloner/views/HomeView.dart';
 
 class VerifyEmailPage extends StatefulWidget {
@@ -77,7 +76,6 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
           ),
           body: Padding(
             padding: EdgeInsets.all(25),
-            // ignore: prefer_const_literals_to_create_immutables
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text(
@@ -103,7 +101,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                   Icons.email,
                 ),
                 label: Text(
-                  'Resent E-mail',
+                  'Resend E-mail',
                   style: TextStyle(fontSize: 20),
                 ),
               ),
