@@ -9,7 +9,7 @@ class MatchMaking extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MatchingAppBar(),
+      appBar: const MatchingAppBar(title: 'Co-Loners'),
       body: BlocBuilder<SwipeBloc, SwipeState>(
         builder: (context, state) {
           if (state is SwipeLoading) {
@@ -20,15 +20,19 @@ class MatchMaking extends StatelessWidget {
             return Column(
               children: [
                 Draggable(
-                  feedback: UserCard(user: state.users[0]),
-                  childWhenDragging:
-                      state.users[0] == state.users[state.users.length - 1]
-                          ? Text('LAST USER ON THE LIST',
-                              style: Theme.of(context).textTheme.headline3)
-                          : UserCard(user: state.users[1]),
-                  child: UserCard(user: state.users[0]),
-                  //Gotta figure out fix - IF user is on the last match suggestion.
-                  //Index out of bounds.
+                  feedback: state.users.isEmpty
+                      ? const Text('NO MORE USERS')
+                      : UserCard(user: state.users[0]),
+                  childWhenDragging: state.users.isEmpty ||
+                          state.users[0] == state.users[state.users.length - 1]
+                      ? Text('LAST USER ON THE LIST',
+                          style: Theme.of(context).textTheme.headline3)
+                      : UserCard(user: state.users[1]),
+                  child: state.users.isEmpty
+                      ? const Text('NO MORE USERS')
+                      : UserCard(user: state.users[0]),
+                  //Make a child screen for last user.
+                  //Make a screen when there are no more users to suggest.
                   onDragEnd: (drag) {
                     if (drag.velocity.pixelsPerSecond.dx < 0) {
                       context
