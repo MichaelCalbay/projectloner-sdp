@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:projectloner/auth/AuthPage.dart';
-import 'package:projectloner/auth/VerifyEmail.dart';
+import 'package:projectloner/auth/auth_page.dart';
+import 'package:projectloner/auth/verify_email.dart';
 
 class CheckLogin extends StatelessWidget {
   const CheckLogin({Key? key}) : super(key: key);
