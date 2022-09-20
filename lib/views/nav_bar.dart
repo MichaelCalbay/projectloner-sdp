@@ -48,13 +48,13 @@ class _NavBarState extends State<NavBar> {
           //     //Close the Navigation drawer when back is tapped.
           //     Navigator.pop(context);
 
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const MatchMaking(),
-                ),
-              );
-            },
-          ),
+          //     Navigator.of(context).push(
+          //       MaterialPageRoute(
+          //         builder: (context) => const MatchMaking(),
+          //       ),
+          //     );
+          //   },
+          // ),
           ListTile(
             /*  BUG ICON  */
             leading: Icon(Icons.bug_report_rounded),
