@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class LonerUser extends Equatable {
+  final int id;
   final String firstName;
   final String lastName;
   final int age;
@@ -10,6 +11,7 @@ class LonerUser extends Equatable {
   final String? role;
 
   const LonerUser({
+    required this.id,
     required this.firstName,
     required this.lastName,
     required this.age,
@@ -21,6 +23,7 @@ class LonerUser extends Equatable {
 
   @override
   List<Object?> get props => [
+        id,
         firstName,
         lastName,
         age,
@@ -30,8 +33,10 @@ class LonerUser extends Equatable {
         role,
       ];
 
+  //SAMPLE DATA FOR TESTING.
   static List<LonerUser> users = [
     const LonerUser(
+      id: 1,
       firstName: 'Robin',
       lastName: 'Chwuan',
       age: 23,
@@ -55,6 +60,7 @@ class LonerUser extends Equatable {
       role: 'Controller',
     ),
     const LonerUser(
+      id: 2,
       firstName: 'Albedo',
       lastName: 'Chan',
       age: 26,
@@ -76,6 +82,7 @@ class LonerUser extends Equatable {
       role: 'Initiator',
     ),
     const LonerUser(
+      id: 3,
       firstName: 'Yor',
       lastName: 'Sugoi',
       age: 21,
@@ -98,6 +105,7 @@ class LonerUser extends Equatable {
       role: 'Duelist',
     ),
     const LonerUser(
+      id: 4,
       firstName: 'Lin Lin',
       lastName: 'Charlotte',
       age: 62,
@@ -118,6 +126,7 @@ class LonerUser extends Equatable {
       role: 'Sentinel',
     ),
     const LonerUser(
+      id: 5,
       firstName: 'Sporky',
       lastName: 'Taba',
       age: 26,
@@ -138,6 +147,7 @@ class LonerUser extends Equatable {
       role: 'Controller',
     ),
     const LonerUser(
+      id: 6,
       firstName: 'Nami',
       lastName: 'Swan',
       age: 22,
