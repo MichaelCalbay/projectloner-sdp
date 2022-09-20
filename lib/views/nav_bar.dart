@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:instabug_flutter/instabug_flutter.dart';
@@ -28,17 +29,24 @@ class _NavBarState extends State<NavBar> {
       child: ListView(
         children: [
           UserAccountsDrawerHeader(
-              accountName: Text('Loner') // could be implented later on
-              ,
-              accountEmail:
-                  Text('${FirebaseAuth.instance.currentUser!.email}')),
+            currentAccountPicture: CircleAvatar(
+              radius: 20,
+              backgroundImage: NetworkImage(
+                //Can be implemented to get current user's image[0]
+                'https://preview.redd.it/du7sbn27xs491.jpg?auto=webp&s=decc60fec16eb5ade184ac10c70520b64a7482e5',
+              ),
+            ),
+            accountName: Text(
+                "${FirebaseFirestore.instance.collection('UserData').doc(FirebaseAuth.instance.currentUser!.uid).collection('First Name')}"), // could be implented later on
+            accountEmail: Text('${FirebaseAuth.instance.currentUser!.email}'),
+          ),
 
-          ListTile(
-            leading: Icon(Icons.person),
-            title: Text('Matching'),
-            onTap: () {
-              //Close the Navigation drawer when back is tapped.
-              Navigator.pop(context);
+          // ListTile(
+          //   leading: Icon(Icons.person),
+          //   title: Text('Matching'),
+          //   onTap: () {
+          //     //Close the Navigation drawer when back is tapped.
+          //     Navigator.pop(context);
 
               Navigator.of(context).push(
                 MaterialPageRoute(
