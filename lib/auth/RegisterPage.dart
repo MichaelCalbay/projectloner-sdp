@@ -196,357 +196,319 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[300],
-        body: SafeArea(
-          child: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.gamepad_rounded,
-                    size: 100,
+      backgroundColor: Colors.grey[300],
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.gamepad_rounded,
+                  size: 100,
+                ),
+                SizedBox(height: 50),
+                //Greetings===================================================
+                Text(
+                  'Hello There!',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 40,
                   ),
-                  SizedBox(height: 50),
-                  //Greetings===================================================
-                  Text(
-                    'Hello There!',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 40,
-                    ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'Ready to be a Loner? Register below!',
+                  style: TextStyle(
+                    fontSize: 20,
                   ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Ready to be a Loner? Register below!',
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                  SizedBox(height: 50),
-                  //Firstname/LastName textfield================================
-                  Row(
-                    children: [
-                      //First name textfield====================================
-                      SizedBox(width: 15),
-                      Flexible(
-                          child: Container(
-                        height: 56,
-                        padding: EdgeInsets.only(left: 20.0),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: TextField(
-                          controller: _fName,
-                          enableSuggestions: false,
-                          autocorrect: false,
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            labelText: 'First Name',
-                          ),
-                        ),
-                      )),
-                      //Last name textfield====================================
-                      SizedBox(width: 5),
-                      Flexible(
-                          child: Container(
-                        height: 56,
-                        padding: EdgeInsets.only(left: 20.0),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: TextField(
-                          controller: _lName,
-                          enableSuggestions: false,
-                          autocorrect: false,
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            labelText: 'Last Name',
-                          ),
-                        ),
-                      )),
-                      SizedBox(width: 15)
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  //Gender & Number fields======================================
-                  Row(
-                    children: [
-                      //Mobile Number field=====================================
-                      SizedBox(width: 15),
-                      Flexible(
+                ),
+                SizedBox(height: 50),
+                //Firstname/LastName textfield================================
+                Row(
+                  children: [
+                    //First name textfield====================================
+                    SizedBox(width: 15),
+                    Flexible(
                         child: Container(
-                          height: 56,
-                          padding: EdgeInsets.only(left: 20.0),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: TextField(
-                            controller: _mblNo,
-                            enableSuggestions: false,
-                            autocorrect: false,
-                            keyboardType: TextInputType.number,
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              labelText: 'Mobile Number',
-                              icon: Icon(
-                                Icons.phone,
-                                color: Colors.deepPurple,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      //Age field===============================================
-                      SizedBox(width: 5),
-                      Flexible(
-                        child: Container(
-                          height: 56,
-                          padding: EdgeInsets.only(left: 20.0),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: TextField(
-                            controller: _age,
-                            enableSuggestions: false,
-                            autocorrect: false,
-                            keyboardType: TextInputType.number,
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              labelText: 'Age',
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 15)
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  //Gender & DOB fields=========================================
-                  Row(
-                    children: [
-                      //Gender field============================================
-                      SizedBox(width: 15),
-                      Flexible(
-                        child: Container(
-                          height: 56,
-                          padding: EdgeInsets.only(left: 20.0),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: DropdownButtonFormField<String>(
-                            value: valueSex,
-                            items: items.map(menuItem).toList(),
-                            onChanged: (value) =>
-                                setState(() => this.valueSex = value),
-                            icon: const Icon(
-                              Icons.arrow_drop_down_circle,
-                              color: Colors.deepPurple,
-                            ),
-                            decoration: InputDecoration(
-                              labelText: 'Gender',
-                              border: InputBorder.none,
-                            ),
-                          ),
-                        ),
-                      ),
-                      //DOB field===============================================
-                      SizedBox(width: 5),
-                      Flexible(
-                        child: Container(
-                          height: 56,
-                          padding: EdgeInsets.only(left: 15.0),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: TextField(
-                            controller: _dob,
-                            decoration: InputDecoration(
-                              icon: Icon(
-                                Icons.calendar_today_rounded,
-                                color: Colors.deepPurple,
-                              ),
-                              border: InputBorder.none,
-                              labelText: 'Birth Date',
-                            ),
-                            onTap: _showDatePicker,
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 15),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  //Server & Roles fields=======================================
-                  Row(
-                    children: [
-                      //Server field============================================
-                      SizedBox(width: 15),
-                      Flexible(
-                        child: Container(
-                          height: 56,
-                          padding: EdgeInsets.only(left: 20.0),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: DropdownButtonFormField<String>(
-                            value: valueServer,
-                            items: server.map(menuItem).toList(),
-                            onChanged: (value) =>
-                                setState(() => this.valueServer = value),
-                            icon: const Icon(
-                              Icons.arrow_drop_down_circle,
-                              color: Colors.deepPurple,
-                            ),
-                            decoration: InputDecoration(
-                              labelText: 'Server',
-                              border: InputBorder.none,
-                            ),
-                          ),
-                        ),
-                      ),
-                      //Roles field=============================================
-                      SizedBox(width: 5),
-                      Flexible(
-                        child: Container(
-                          height: 56,
-                          padding: EdgeInsets.only(left: 20.0),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: DropdownButtonFormField<String>(
-                            value: valueRoles,
-                            items: roles.map(menuItem).toList(),
-                            onChanged: (value) =>
-                                setState(() => this.valueRoles = value),
-                            icon: const Icon(
-                              Icons.arrow_drop_down_circle,
-                              color: Colors.deepPurple,
-                            ),
-                            decoration: InputDecoration(
-                              labelText: 'Roles',
-                              border: InputBorder.none,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 15)
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  //Email textfield=============================================
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                    child: Container(
                       height: 56,
+                      padding: EdgeInsets.only(left: 20.0),
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
                         border: Border.all(color: Colors.white),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20.0),
+                      child: TextField(
+                        controller: _fName,
+                        enableSuggestions: false,
+                        autocorrect: false,
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          labelText: 'First Name',
+                        ),
+                      ),
+                    )),
+                    //Last name textfield====================================
+                    SizedBox(width: 5),
+                    Flexible(
+                        child: Container(
+                      height: 56,
+                      padding: EdgeInsets.only(left: 20.0),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        border: Border.all(color: Colors.white),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: TextField(
+                        controller: _lName,
+                        enableSuggestions: false,
+                        autocorrect: false,
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          labelText: 'Last Name',
+                        ),
+                      ),
+                    )),
+                    SizedBox(width: 15)
+                  ],
+                ),
+                SizedBox(height: 10),
+                //Gender & Number fields======================================
+                Row(
+                  children: [
+                    //Mobile Number field=====================================
+                    SizedBox(width: 15),
+                    Flexible(
+                      child: Container(
+                        height: 56,
+                        padding: EdgeInsets.only(left: 20.0),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          border: Border.all(color: Colors.white),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                         child: TextField(
-                          controller: _email,
+                          controller: _mblNo,
                           enableSuggestions: false,
                           autocorrect: false,
+                          keyboardType: TextInputType.number,
                           style: TextStyle(
                             fontSize: 16,
                           ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            labelText: 'E-mail',
+                            labelText: 'Mobile Number',
                             icon: Icon(
-                              Icons.email_rounded,
+                              Icons.phone,
                               color: Colors.deepPurple,
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 10),
-                  //Password textfield==========================================
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                    child: Container(
-                      height: 56,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20.0),
+                    //Age field===============================================
+                    SizedBox(width: 5),
+                    Flexible(
+                      child: Container(
+                        height: 56,
+                        padding: EdgeInsets.only(left: 20.0),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          border: Border.all(color: Colors.white),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                         child: TextField(
-                            controller: _password,
-                            obscureText: _obscurePass,
-                            enableSuggestions: false,
-                            autocorrect: false,
-                            style: TextStyle(
-                              fontSize: 16,
+                          controller: _age,
+                          enableSuggestions: false,
+                          autocorrect: false,
+                          keyboardType: TextInputType.number,
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            labelText: 'Age',
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 15)
+                  ],
+                ),
+                SizedBox(height: 10),
+                //Gender & DOB fields=========================================
+                Row(
+                  children: [
+                    //Gender field============================================
+                    SizedBox(width: 15),
+                    Flexible(
+                      child: Container(
+                        height: 56,
+                        padding: EdgeInsets.only(left: 20.0),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          border: Border.all(color: Colors.white),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: DropdownButtonFormField<String>(
+                          value: valueSex,
+                          items: items.map(menuItem).toList(),
+                          onChanged: (value) =>
+                              setState(() => valueSex = value),
+                          icon: const Icon(
+                            Icons.arrow_drop_down_circle,
+                            color: Colors.deepPurple,
+                          ),
+                          decoration: InputDecoration(
+                            labelText: 'Gender',
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                    ),
+                    //DOB field===============================================
+                    SizedBox(width: 5),
+                    Flexible(
+                      child: Container(
+                        height: 56,
+                        padding: EdgeInsets.only(left: 15.0),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          border: Border.all(color: Colors.white),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: TextField(
+                          controller: _dob,
+                          decoration: InputDecoration(
+                            icon: Icon(
+                              Icons.calendar_today_rounded,
+                              color: Colors.deepPurple,
                             ),
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              labelText: 'Password',
-                              suffixIcon: IconButton(
-                                onPressed: () => setState(
-                                  (() => _obscurePass = !_obscurePass),
-                                ),
-                                icon: Icon(
-                                    _obscurePass
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
-                                    color: Colors.deepPurple),
-                              ),
-                            )),
+                            border: InputBorder.none,
+                            labelText: 'Birth Date',
+                          ),
+                          onTap: _showDatePicker,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 15),
+                  ],
+                ),
+                SizedBox(height: 10),
+                //Server & Roles fields=======================================
+                Row(
+                  children: [
+                    //Server field============================================
+                    SizedBox(width: 15),
+                    Flexible(
+                      child: Container(
+                        height: 56,
+                        padding: EdgeInsets.only(left: 20.0),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          border: Border.all(color: Colors.white),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: DropdownButtonFormField<String>(
+                          value: valueServer,
+                          items: server.map(menuItem).toList(),
+                          onChanged: (value) =>
+                              setState(() => valueServer = value),
+                          icon: const Icon(
+                            Icons.arrow_drop_down_circle,
+                            color: Colors.deepPurple,
+                          ),
+                          decoration: InputDecoration(
+                            labelText: 'Server',
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                    ),
+                    //Roles field=============================================
+                    SizedBox(width: 5),
+                    Flexible(
+                      child: Container(
+                        height: 56,
+                        padding: EdgeInsets.only(left: 20.0),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          border: Border.all(color: Colors.white),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: DropdownButtonFormField<String>(
+                          value: valueRoles,
+                          items: roles.map(menuItem).toList(),
+                          onChanged: (value) =>
+                              setState(() => valueRoles = value),
+                          icon: const Icon(
+                            Icons.arrow_drop_down_circle,
+                            color: Colors.deepPurple,
+                          ),
+                          decoration: InputDecoration(
+                            labelText: 'Roles',
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 15)
+                  ],
+                ),
+                SizedBox(height: 10),
+                //Email textfield=============================================
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: Container(
+                    height: 56,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: TextField(
+                        controller: _email,
+                        enableSuggestions: false,
+                        autocorrect: false,
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          labelText: 'E-mail',
+                          icon: Icon(
+                            Icons.email_rounded,
+                            color: Colors.deepPurple,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
-                  //Confirm Password textfield==================================
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                    child: Container(
-                      height: 56,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20.0),
-                        child: TextField(
-                          controller: _conPassword,
-                          obscureText: _obscureConPass,
+                ),
+                SizedBox(height: 10),
+                //Password textfield==========================================
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: Container(
+                    height: 56,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: TextField(
+                          controller: _password,
+                          obscureText: _obscurePass,
                           enableSuggestions: false,
                           autocorrect: false,
                           style: TextStyle(
@@ -554,74 +516,118 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            labelText: 'Confirm Password',
+                            labelText: 'Password',
                             suffixIcon: IconButton(
                               onPressed: () => setState(
-                                (() => _obscureConPass = !_obscureConPass),
+                                (() => _obscurePass = !_obscurePass),
                               ),
                               icon: Icon(
-                                  _obscureConPass
+                                  _obscurePass
                                       ? Icons.visibility
                                       : Icons.visibility_off,
                                   color: Colors.deepPurple),
                             ),
-                          ),
-                        ),
-                      ),
+                          )),
                     ),
                   ),
-                  SizedBox(height: 10),
-                  //Register button=============================================
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                    child: GestureDetector(
-                      onTap: signUp,
-                      child: Container(
-                        padding: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Colors.deepPurple,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Register',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ),
-                      ),
+                ),
+                SizedBox(height: 10),
+                //Confirm Password textfield==================================
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: Container(
+                    height: 56,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                  ),
-                  SizedBox(height: 25),
-                  //Login button=============================================
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Already a loner? ',
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: TextField(
+                        controller: _conPassword,
+                        obscureText: _obscureConPass,
+                        enableSuggestions: false,
+                        autocorrect: false,
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          labelText: 'Confirm Password',
+                          suffixIcon: IconButton(
+                            onPressed: () => setState(
+                              (() => _obscureConPass = !_obscureConPass),
+                            ),
+                            icon: Icon(
+                                _obscureConPass
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Colors.deepPurple),
+                          ),
                         ),
                       ),
-                      GestureDetector(
-                        onTap: widget.showLoginPage,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                //Register button=============================================
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: GestureDetector(
+                    onTap: signUp,
+                    child: Container(
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.deepPurple,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(
                         child: Text(
-                          'Log in',
+                          'Register',
                           style: TextStyle(
-                            color: Colors.blue,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 15.0),
+                //Login button=============================================
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Already a loner? ',
+                          style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
+                        GestureDetector(
+                          onTap: widget.showLoginPage,
+                          child: Text(
+                            'Log in',
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 25),
+                  ],
+                ),
+              ],
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
