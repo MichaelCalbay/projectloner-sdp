@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class LonerUser extends Equatable {
-  final int id;
+  final int? id;
   final String firstName;
   final String lastName;
   final int age;
@@ -11,7 +11,7 @@ class LonerUser extends Equatable {
   final String? role;
 
   const LonerUser({
-    required this.id,
+    this.id,
     required this.firstName,
     required this.lastName,
     required this.age,
