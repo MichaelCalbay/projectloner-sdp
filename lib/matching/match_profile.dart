@@ -37,10 +37,10 @@ class MatchProfile extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15.0),
-                              image: DecorationImage(
-                                image: NetworkImage(user.imageUrls[0]),
-                                fit: BoxFit.cover,
-                              ),
+                              // image: DecorationImage(
+                              //   // image: NetworkImage(user.imageUrls[0]),
+                              //   fit: BoxFit.cover,
+                              // ),
                             ),
                           ),
                         ),
@@ -126,33 +126,33 @@ class MatchProfile extends StatelessWidget {
                         'Interests ',
                         style: Theme.of(context).textTheme.headline6,
                       ),
-                      Wrap(
-                        children: user.interests!
-                            .map(
-                              (interest) => Container(
-                                padding: const EdgeInsets.all(5.0),
-                                margin: const EdgeInsets.only(
-                                  top: 5.0,
-                                  right: 5.0,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.deepPurple,
-                                  borderRadius: BorderRadius.circular(5.0),
-                                ),
-                                child: Text(
-                                  interest,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline6!
-                                      .copyWith(
-                                        color: Colors.white,
-                                        fontStyle: FontStyle.italic,
-                                      ),
-                                ),
-                              ),
-                            )
-                            .toList(),
-                      ),
+                      // Wrap(
+                      //   children: user.interests!
+                      //       .map(
+                      //         (interest) => Container(
+                      //           padding: const EdgeInsets.all(5.0),
+                      //           margin: const EdgeInsets.only(
+                      //             top: 5.0,
+                      //             right: 5.0,
+                      //           ),
+                      //           decoration: BoxDecoration(
+                      //             color: Colors.deepPurple,
+                      //             borderRadius: BorderRadius.circular(5.0),
+                      //           ),
+                      //           child: Text(
+                      //             interest,
+                      //             style: Theme.of(context)
+                      //                 .textTheme
+                      //                 .headline6!
+                      //                 .copyWith(
+                      //                   color: Colors.white,
+                      //                   fontStyle: FontStyle.italic,
+                      //                 ),
+                      //           ),
+                      //         ),
+                      //       )
+                      //       .toList(),
+                      // ),
                     ],
                   ),
                 )

@@ -26,22 +26,22 @@ class UserCard extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           child: Stack(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(user.imageUrls[0]),
-                    ),
-                    borderRadius: BorderRadius.circular(5.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 4,
-                        blurRadius: 4,
-                        offset: const Offset(3, 3),
-                      ),
-                    ]),
-              ),
+              // Container(
+              //   decoration: BoxDecoration(
+              //       image: DecorationImage(
+              //         fit: BoxFit.cover,
+              //         image: NetworkImage(user.imageUrls[0]),
+              //       ),
+              //       borderRadius: BorderRadius.circular(5.0),
+              //       boxShadow: [
+              //         BoxShadow(
+              //           color: Colors.grey.withOpacity(0.5),
+              //           spreadRadius: 4,
+              //           blurRadius: 4,
+              //           offset: const Offset(3, 3),
+              //         ),
+              //       ]),
+              // ),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
@@ -77,9 +77,9 @@ class UserCard extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        SmallUserImage(imageUrl: user.imageUrls[1]),
-                        SmallUserImage(imageUrl: user.imageUrls[2]),
-                        SmallUserImage(imageUrl: user.imageUrls[3]),
+                        // SmallUserImage(imageUrl: user.imageUrls[1]),
+                        // SmallUserImage(imageUrl: user.imageUrls[2]),
+                        // SmallUserImage(imageUrl: user.imageUrls[3]),
                         const SizedBox(width: 10),
                         Material(
                           color: Colors.transparent,

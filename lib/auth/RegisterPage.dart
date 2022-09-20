@@ -27,14 +27,14 @@ class _RegisterPageState extends State<RegisterPage> {
   late final _dob = TextEditingController();
   late final _age = TextEditingController();
 
-  // void initializer() {
-  //   widget.user = new UserData(
-  //       firstName: _fName.text.trim(),
-  //       lastName: _lName.text.trim(),
-  //       age: int.parse(_age.text.trim()),
-  //       server: valueServer,
-  //       role: valueRoles);
-  // }
+  void initialiseLonerUsers() {
+    widget.user = new LonerUser(
+        firstName: _fName.text.trim(),
+        lastName: _lName.text.trim(),
+        age: int.parse(_age.text.trim()),
+        server: valueServer,
+        role: valueRoles);
+  }
 
   @override
   void dispose() {
@@ -153,6 +153,9 @@ class _RegisterPageState extends State<RegisterPage> {
             email: _email.text.trim(),
             password: _password.text.trim(),
           );
+
+          //To store LonerData to LonerUser class.
+          initialiseLonerUsers();
 
           //add user data
           addUserData(
@@ -595,7 +598,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 25),
+                  SizedBox(height: 15),
                   //Login button=============================================
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -617,7 +620,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
