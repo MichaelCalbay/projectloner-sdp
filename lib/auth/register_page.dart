@@ -329,7 +329,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           value: valueServer,
                           items: server.map(menuItem).toList(),
                           onChanged: (value) =>
-                              setState(() => this.valueServer = value),
+                              setState(() => valueServer = value),
                           icon: const Icon(
                             Icons.arrow_drop_down_circle,
                             color: Colors.deepPurple,
@@ -356,7 +356,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           value: valueRoles,
                           items: roles.map(menuItem).toList(),
                           onChanged: (value) =>
-                              setState(() => this.valueRoles = value),
+                              setState(() => valueRoles = value),
                           icon: const Icon(
                             Icons.arrow_drop_down_circle,
                             color: Colors.deepPurple,

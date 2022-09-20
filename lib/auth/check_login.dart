@@ -15,7 +15,7 @@ class CheckLogin extends StatelessWidget {
             if (snapshot.hasData) {
               return const VerifyEmailPage();
             } else {
-              return AuthPage();
+              return const AuthPage();
             }
           }),
     );

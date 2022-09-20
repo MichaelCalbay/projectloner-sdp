@@ -3,8 +3,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:instabug_flutter/instabug_flutter.dart';
-import 'home_view.dart';
-import 'package:projectloner/auth/auth_page.dart';
 import 'package:projectloner/matching/matching_screen.dart';
 import 'package:projectloner/profile/profile.dart';
 

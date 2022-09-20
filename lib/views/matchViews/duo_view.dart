@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projectloner/views/home_view.dart';
 import 'package:projectloner/views/nav_bar.dart';
-import 'package:projectloner/views/matchViews/team_view.dart';
 
 class DuoPage extends StatefulWidget {
   const DuoPage({Key? key}) : super(key: key);
@@ -14,7 +12,7 @@ class DuoPageState extends State {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Duo Matching")),
+      appBar: AppBar(title: const Text("Duo Matching")),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           const Text(
