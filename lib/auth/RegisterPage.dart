@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectloner/models/models.dart';
-import 'package:intl/intl.dart';
 
 class RegisterPage extends StatefulWidget {
   LonerUser? user;
@@ -23,8 +22,6 @@ class _RegisterPageState extends State<RegisterPage> {
   late final _email = TextEditingController();
   late final _password = TextEditingController();
   late final _conPassword = TextEditingController();
-  late final _mblNo = TextEditingController();
-  late final _dob = TextEditingController();
   late final _age = TextEditingController();
 
   void initialiseLonerUsers() {
@@ -43,7 +40,6 @@ class _RegisterPageState extends State<RegisterPage> {
     _conPassword.dispose();
     _fName.dispose();
     _lName.dispose();
-    _mblNo.dispose();
     _age.dispose();
     super.dispose();
   }
@@ -83,27 +79,11 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       );
 
-  void _showDatePicker() async {
-    DateTime? newDate = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(1972),
-        lastDate: DateTime.now());
-
-    if (newDate == null) return;
-
-    setState(() {
-      _dob.text = DateFormat('dd-MM-yyyy').format(newDate);
-    });
-  }
-
   Future addUserData(
     String fName,
     String lName,
-    String mblNo,
     String? items,
     String? age,
-    String bDate,
     String? server,
     String? roles,
     String email,
@@ -111,10 +91,8 @@ class _RegisterPageState extends State<RegisterPage> {
     await FirebaseFirestore.instance.collection('UserData').add({
       'First Name': fName,
       'Last Name': lName,
-      'Mobile Number': mblNo,
       'Gender': items,
       'Age': age,
-      'Birth Date': bDate,
       'Server': server,
       'Roles': roles,
       'Email': email,
@@ -126,19 +104,12 @@ class _RegisterPageState extends State<RegisterPage> {
       //Input validations
       if (_fName.text.trim() == '' ||
           _lName.text.trim() == '' ||
-          _mblNo.text.trim() == '' ||
           _age.text.trim() == '' ||
-          _dob.text.trim() == '' ||
           valueSex == null ||
           valueServer == null ||
           valueRoles == null) {
         Fluttertoast.showToast(
             msg: "A field can't be empty.",
-            gravity: ToastGravity.BOTTOM,
-            textColor: Colors.red);
-      } else if (_mblNo.text.trim().length < 10) {
-        Fluttertoast.showToast(
-            msg: "Mobile Number is too short.",
             gravity: ToastGravity.BOTTOM,
             textColor: Colors.red);
       } else if (int.parse(_age.text.trim()) < 18) {
@@ -161,10 +132,8 @@ class _RegisterPageState extends State<RegisterPage> {
           addUserData(
             _fName.text.trim(),
             _lName.text.trim(),
-            _mblNo.text.trim(),
             valueSex,
             _age.text.trim(),
-            _dob.text.trim(),
             valueServer,
             valueRoles,
             _email.text.trim(),
@@ -296,21 +265,18 @@ class _RegisterPageState extends State<RegisterPage> {
                             border: Border.all(color: Colors.white),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: TextField(
-                            controller: _mblNo,
-                            enableSuggestions: false,
-                            autocorrect: false,
-                            keyboardType: TextInputType.number,
-                            style: TextStyle(
-                              fontSize: 16,
+                          child: DropdownButtonFormField<String>(
+                            value: valueSex,
+                            items: items.map(menuItem).toList(),
+                            onChanged: (value) =>
+                                setState(() => valueSex = value),
+                            icon: const Icon(
+                              Icons.arrow_drop_down_circle,
+                              color: Colors.deepPurple,
                             ),
                             decoration: InputDecoration(
+                              labelText: 'Gender',
                               border: InputBorder.none,
-                              labelText: 'Mobile Number',
-                              icon: Icon(
-                                Icons.phone,
-                                color: Colors.deepPurple,
-                              ),
                             ),
                           ),
                         ),
@@ -342,65 +308,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ),
                       SizedBox(width: 15)
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  //Gender & DOB fields=========================================
-                  Row(
-                    children: [
-                      //Gender field============================================
-                      SizedBox(width: 15),
-                      Flexible(
-                        child: Container(
-                          height: 56,
-                          padding: EdgeInsets.only(left: 20.0),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: DropdownButtonFormField<String>(
-                            value: valueSex,
-                            items: items.map(menuItem).toList(),
-                            onChanged: (value) =>
-                                setState(() => this.valueSex = value),
-                            icon: const Icon(
-                              Icons.arrow_drop_down_circle,
-                              color: Colors.deepPurple,
-                            ),
-                            decoration: InputDecoration(
-                              labelText: 'Gender',
-                              border: InputBorder.none,
-                            ),
-                          ),
-                        ),
-                      ),
-                      //DOB field===============================================
-                      SizedBox(width: 5),
-                      Flexible(
-                        child: Container(
-                          height: 56,
-                          padding: EdgeInsets.only(left: 15.0),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: TextField(
-                            controller: _dob,
-                            decoration: InputDecoration(
-                              icon: Icon(
-                                Icons.calendar_today_rounded,
-                                color: Colors.deepPurple,
-                              ),
-                              border: InputBorder.none,
-                              labelText: 'Birth Date',
-                            ),
-                            onTap: _showDatePicker,
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 15),
                     ],
                   ),
                   SizedBox(height: 10),
@@ -461,7 +368,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 15)
+                      SizedBox(width: 15),
                     ],
                   ),
                   SizedBox(height: 10),

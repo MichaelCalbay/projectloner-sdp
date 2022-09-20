@@ -19,10 +19,10 @@ class ProfilePage extends StatelessWidget {
       body: ListView(
         physics: BouncingScrollPhysics(),
         children: [
-          ProfileWidget(
-            imagePath: cUser.imageUrls[0],
-            onClicked: () async {},
-          ),
+          // ProfileWidget(
+          //   imagePath: cUser.imageUrls[0],
+          //   onClicked: () async {},
+          // ),
           const SizedBox(
             height: 24,
           ),
