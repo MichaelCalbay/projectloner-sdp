@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:projectloner/models/models.dart';
 import 'package:projectloner/models/user_model.dart';
 
-import '../views/NavBar.dart';
+import '../views/nav_bar.dart';
 import '../widgets/profile_app_bar.dart';
 import '../widgets/profile_widget.dart';
 
@@ -19,10 +19,10 @@ class ProfilePage extends StatelessWidget {
       body: ListView(
         physics: BouncingScrollPhysics(),
         children: [
-          ProfileWidget(
-            imagePath: cUser.imageUrls[0],
-            onClicked: () async {},
-          ),
+          // ProfileWidget(
+          //   imagePath: cUser.imageUrls[0],
+          //   onClicked: () async {},
+          // ),
           const SizedBox(
             height: 24,
           ),
