@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projectloner/models/models.dart';
@@ -34,8 +35,10 @@ class ProfilePage extends StatelessWidget {
   }
 
   Widget buildName(LonerUser cUser) => Column(children: [
-        Text("${FirebaseAuth.instance.currentUser!.displayName}",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
-        Text("${FirebaseAuth.instance.currentUser!.email}"),
+        // Text("${FirebaseAuth.instance.currentUser!.displayName}",
+        //     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
+        Text(
+            "${FirebaseFirestore.instance.collection('UserData').snapshots()}"),
+        Text("${FirebaseAuth.instance.currentUser!}"),
       ]);
 }

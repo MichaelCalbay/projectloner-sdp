@@ -88,9 +88,9 @@ class _RegisterPageState extends State<RegisterPage> {
     String? roles,
     String email,
   ) async {
-    await FirebaseFirestore.instance.collection('UserData').add({
-      'First Name': fName,
-      'Last Name': lName,
+    await FirebaseFirestore.instance.collection('LonerUser').add({
+      'Firstname': fName,
+      'Lastname': lName,
       'Gender': items,
       'Age': age,
       'Server': server,
@@ -219,7 +219,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          labelText: 'First Name',
+                          labelText: 'Firstname',
                         ),
                       ),
                     )),
@@ -243,7 +243,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          labelText: 'Last Name',
+                          labelText: 'Lastname',
                         ),
                       ),
                     )),
@@ -329,7 +329,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           value: valueServer,
                           items: server.map(menuItem).toList(),
                           onChanged: (value) =>
-                              setState(() => this.valueServer = value),
+                              setState(() => valueServer = value),
                           icon: const Icon(
                             Icons.arrow_drop_down_circle,
                             color: Colors.deepPurple,
@@ -356,7 +356,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           value: valueRoles,
                           items: roles.map(menuItem).toList(),
                           onChanged: (value) =>
-                              setState(() => this.valueRoles = value),
+                              setState(() => valueRoles = value),
                           icon: const Icon(
                             Icons.arrow_drop_down_circle,
                             color: Colors.deepPurple,
