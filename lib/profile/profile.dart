@@ -37,8 +37,7 @@ class ProfilePage extends StatelessWidget {
   Widget buildName(LonerUser cUser) => Column(children: [
         // Text("${FirebaseAuth.instance.currentUser!.displayName}",
         //     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
-        Text(
-            "${FirebaseFirestore.instance.collection('UserData').snapshots()}"),
+        Text("${FirebaseFirestore.instance.collection('LonerUser')}"),
         Text("${FirebaseAuth.instance.currentUser!}"),
       ]);
 }

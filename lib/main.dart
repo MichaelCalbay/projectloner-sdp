@@ -2,12 +2,10 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'views/home_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projectloner/auth/check_login.dart';
 import 'package:instabug_flutter/instabug_flutter.dart';
 import 'package:projectloner/blocs/swipe/swipe_bloc.dart';
-import 'package:projectloner/matching/matching_screen.dart';
 import 'package:projectloner/views/onboarding_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'models/models.dart';
@@ -70,7 +68,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: isviewed != 0 ? OnboardingScreen() : CheckLogin(),
+      home:
+          RegistrationPage(), //isviewed != 0 ? OnboardingScreen() : CheckLogin(),
 
       //Theme colour
       theme: ThemeData(primarySwatch: Colors.deepPurple),
