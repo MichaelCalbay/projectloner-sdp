@@ -45,9 +45,8 @@ class GenderAgeScreen extends StatelessWidget {
                 text: "How Old Are You?",
               ),
               const SizedBox(height: 5.0),
-              CustomTextField(
+              const CustomTextField(
                 isPassword: false,
-                controller: controller,
                 hint: 'Age here...',
               ),
             ],

@@ -6,8 +6,9 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class EmailScreen extends StatelessWidget {
   final TabController tabController;
+  final confPwController = TextEditingController();
 
-  const EmailScreen({
+  EmailScreen({
     Key? key,
     required this.tabController,
   }) : super(key: key);
@@ -57,9 +58,19 @@ class EmailScreen extends StatelessWidget {
                     text: "Confirm Password",
                   ),
                   const SizedBox(height: 5),
-                  const CustomTextField(
+                  CustomTextField(
+                    confPwController: confPwController,
                     isPassword: true,
                     hint: 'Confirm here..',
+                    // onChanged: (value) {
+                    //   debugPrint('CONFIRM PASS VAR: ${confPwController.text}');
+                    //   debugPrint(
+                    //       'PASSWORD VAR: ${context.read<SignupCubit>().userPass}');
+                    //   if (context.read<SignupCubit>().userPass ==
+                    //       confPwController.text) {
+                    //     debugPrint('passwordMatched');
+                    //   }
+                    // },
                   ),
                 ],
               ),

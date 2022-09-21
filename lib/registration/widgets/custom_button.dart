@@ -6,13 +6,10 @@ class CustomButton extends StatelessWidget {
   final TabController tabController;
   final String buttonText;
 
-  final TextEditingController? confPwController;
-
   const CustomButton({
     Key? key,
     required this.tabController,
     required this.buttonText,
-    this.confPwController,
   }) : super(key: key);
 
   @override

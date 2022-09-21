@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  final TextEditingController? controller;
+  final TextEditingController? confPwController;
   final String hint;
   final bool isPassword;
   final Function(String)? onChanged;
 
   const CustomTextField({
     Key? key,
-    this.controller,
+    this.confPwController,
     this.onChanged,
     required this.hint,
     required this.isPassword,
@@ -25,6 +25,7 @@ class CustomTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: TextField(
+        controller: confPwController,
         obscureText: isPassword,
         enableSuggestions: false,
         autocorrect: false,
