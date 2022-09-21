@@ -19,11 +19,11 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        debugPrint('Index: ${tabController.index}');
+        print('Index: ${tabController.index}');
         tabController.animateTo(tabController.index + 1);
         if (tabController.index == 2) {
           context.read<SignupCubit>().signupWithCredentials();
-          debugPrint('User Created!');
+          print('User Created!');
         }
       },
       // ignore: sized_box_for_whitespace
