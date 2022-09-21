@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:projectloner/repositories/registration/base_auth_repo.dart';
+import 'package:flutter/material.dart';
 
 class AuthRepository extends BaseAuthRepository {
   final auth.FirebaseAuth _firebaseAuth;
@@ -8,7 +9,6 @@ class AuthRepository extends BaseAuthRepository {
       : _firebaseAuth = firebaseAuth ?? auth.FirebaseAuth.instance;
 
   @override
-  // ignore: body_might_complete_normally_nullable
   Future<auth.User?> signUp({
     required String email,
     required String password,

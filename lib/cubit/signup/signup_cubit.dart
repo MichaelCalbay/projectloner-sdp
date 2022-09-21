@@ -1,11 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:projectloner/repositories/registration/auth_repo.dart';
 
 part 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {
   final AuthRepository _authRepository;
+
   SignupCubit({required AuthRepository authRepository})
       : _authRepository = authRepository,
         super(SignupState.initial());
