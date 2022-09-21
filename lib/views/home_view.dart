@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:projectloner/views/matchViews/coach_view.dart';
-import 'package:projectloner/views/matchViews/duo_view.dart';
 import 'package:projectloner/views/matchViews/team_view.dart';
 import '../matching/matching_screen.dart';
 import 'nav_bar.dart';
@@ -30,11 +29,11 @@ class HomePageState extends State {
     } else if (matchPreferences[1] == true) {
       print("Team");
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => TeamPage()));
+          context, MaterialPageRoute(builder: (context) => const TeamPage()));
     } else if (matchPreferences[2] == true) {
       print("Coach");
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => CoachPage()));
+          context, MaterialPageRoute(builder: (context) => const CoachPage()));
     }
   }
 
