@@ -83,7 +83,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      //How do I build signup cubit JUST for registration page????
       onGenerateRoute: (settings) => RegistrationPage.route(),
       initialRoute: RegistrationPage.routeName,
       // home: isviewed != 0 ? OnboardingScreen() : CheckLogin(),

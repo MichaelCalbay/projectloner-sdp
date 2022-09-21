@@ -6,6 +6,7 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class EmailScreen extends StatelessWidget {
   final TabController tabController;
+
   const EmailScreen({
     Key? key,
     required this.tabController,
@@ -13,8 +14,6 @@ class EmailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final confPwController = TextEditingController();
-
     return BlocBuilder<SignupCubit, SignupState>(
       builder: (context, state) {
         return Padding(
@@ -27,8 +26,7 @@ class EmailScreen extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  CustomTextHeader(
-                    tabController: tabController,
+                  const CustomTextHeader(
                     text: "What's your Email Address?",
                   ),
                   const SizedBox(height: 5),
@@ -41,8 +39,7 @@ class EmailScreen extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 10),
-                  CustomTextHeader(
-                    tabController: tabController,
+                  const CustomTextHeader(
                     text: "Password?",
                   ),
                   const SizedBox(height: 5),
@@ -60,10 +57,9 @@ class EmailScreen extends StatelessWidget {
                     text: "Confirm Password",
                   ),
                   const SizedBox(height: 5),
-                  CustomTextField(
+                  const CustomTextField(
                     isPassword: true,
                     hint: 'Confirm here..',
-                    controller: confPwController,
                   ),
                 ],
               ),
@@ -77,7 +73,6 @@ class EmailScreen extends StatelessWidget {
                   CustomButton(
                     buttonText: 'NEXT',
                     tabController: tabController,
-                    confPwController: confPwController,
                   ),
                 ],
               ),

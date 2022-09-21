@@ -35,6 +35,7 @@ class CustomTextField extends StatelessWidget {
           border: InputBorder.none,
           labelText: hint,
         ),
+        onChanged: onChanged,
       ),
     );
     // return TextField(
