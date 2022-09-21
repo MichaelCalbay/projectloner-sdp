@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:projectloner/repositories/storage/base_storage_repo.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -14,6 +15,7 @@ class StorageRepo extends BaseStorageRepo {
       await storage.ref('user_test/${image.name}').putFile(
             File(image.path),
           );
+      debugPrint('IMAGE UPDLOADED...');
     } catch (_) {}
   }
 }
