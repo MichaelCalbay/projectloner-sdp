@@ -108,7 +108,7 @@ class _RegisterPageState extends State<RegisterPage> {
     String? roles,
     String email,
   ) async {
-    await FirebaseFirestore.instance.collection('UserData').add({
+    await FirebaseFirestore.instance.collection('LonerUser').add({
       'First Name': fName,
       'Last Name': lName,
       'Mobile Number': mblNo,
