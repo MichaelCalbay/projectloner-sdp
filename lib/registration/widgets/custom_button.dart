@@ -18,7 +18,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () async {
+      onPressed: () {
         tabController.animateTo(tabController.index + 1);
         if (tabController.index == 2) {
           context.read<SignupCubit>().signupWithCredentials();

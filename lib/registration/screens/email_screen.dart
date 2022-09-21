@@ -77,7 +77,6 @@ class EmailScreen extends StatelessWidget {
                   CustomButton(
                     buttonText: 'NEXT',
                     tabController: tabController,
-                    confPwController: confPwController,
                   ),
                 ],
               ),
