@@ -16,6 +16,8 @@ class StorageRepo extends BaseStorageRepo {
             File(image.path),
           );
       debugPrint('IMAGE UPDLOADED...');
-    } catch (_) {}
+    } catch (_) {
+      debugPrint('EXCEPTION CAUGHT');
+    }
   }
 }

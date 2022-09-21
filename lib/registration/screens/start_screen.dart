@@ -54,29 +54,7 @@ class Start extends StatelessWidget {
           ),
           Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Already a Loner? '),
-                  GestureDetector(
-                    child: const Text(
-                      'Login.',
-                      style: TextStyle(
-                        color: Colors.blue,
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.pop(context);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginPage(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
+              const AlreadyLoner(),
               const SizedBox(height: 5),
               const StepProgressIndicator(
                 totalSteps: 5,
