@@ -18,7 +18,6 @@ class AuthRepository extends BaseAuthRepository {
         email: email,
         password: password,
       );
-
       final user = credential.user;
       return user;
     } catch (_) {}
