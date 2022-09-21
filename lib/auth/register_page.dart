@@ -124,7 +124,7 @@ class _RegisterPageState extends State<RegisterPage> {
             email: _email.text.trim(),
             password: _password.text.trim(),
           );
-
+          debugPrint(_fName.text);
           //To store LonerData to LonerUser class.
           initialiseLonerUsers();
 
@@ -219,7 +219,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          labelText: 'First Name',
+                          labelText: 'Firstname',
                         ),
                       ),
                     )),
@@ -243,7 +243,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          labelText: 'Last Name',
+                          labelText: 'Lastname',
                         ),
                       ),
                     )),
