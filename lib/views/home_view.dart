@@ -54,31 +54,6 @@ class HomePageState extends State {
             'Home Page',
             style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
             ),
-            // I am stoopid
-            /*
-            ButtonBar(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ElevatedButton(
-                  onPressed: duo ? null : () {
-                    changePreference("duo");
-                  }, 
-                  child: const Text("Duo"),
-                ),
-                ElevatedButton(
-                  onPressed: team ? null : () {
-                    changePreference("team");
-                  }, 
-                  child: const Text("Team"),
-                ),
-                ElevatedButton(
-                  onPressed: coach ? null : () {
-                    changePreference("coach");
-                  }, 
-                  child: const Text("Coach"),
-                ),
-              ],
-            ),*/
             ToggleButtons(
               onPressed: (int index) {
                 setState(() {

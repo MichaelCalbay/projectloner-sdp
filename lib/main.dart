@@ -2,7 +2,7 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'views/HomeView.dart';
+import 'views/home_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projectloner/auth/CheckLogin.dart';
 import 'package:instabug_flutter/instabug_flutter.dart';

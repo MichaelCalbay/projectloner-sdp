@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projectloner/views/NavBar.dart';
-import '../HomeView.dart';
+import '../home_view.dart';
 
 class CoachPage extends StatefulWidget {
   

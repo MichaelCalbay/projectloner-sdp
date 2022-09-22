@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projectloner/views/HomeView.dart';
+import 'package:projectloner/views/home_view.dart';
 import 'package:projectloner/views/NavBar.dart';
 import 'package:projectloner/views/matchViews/TeamView.dart';
 
@@ -22,7 +22,7 @@ class DuoPageState extends State {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text( 
-              'Duo matchmaking here',
+              'Coming Soon!',
               style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
             ),
             ElevatedButton(
