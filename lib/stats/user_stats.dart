@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
-class user_stats {
+class UserStats {
   final baseUrl = "https://api.henrikdev.xyz";
 
   Future<List<dynamic>> getUserStats(

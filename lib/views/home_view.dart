@@ -1,7 +1,7 @@
 // ignore: file_names
+
 import 'package:flutter/material.dart';
 import 'package:projectloner/views/matchViews/coach_view.dart';
-import 'package:projectloner/views/matchViews/duo_view.dart';
 import 'package:projectloner/views/matchViews/team_view.dart';
 import '../matching/matching_screen.dart';
 import 'nav_bar.dart';
@@ -14,10 +14,10 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State {
-
   String preferenceText = "Currently looking for duo";
   String matchButtonText = "Start";
   final List<bool> _matchPreferences = <bool>[true, false, false];
+
 
   void startMatching(List<bool> matchPreferences) {
     if (matchPreferences[0] == true) {

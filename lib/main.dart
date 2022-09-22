@@ -2,11 +2,13 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'views/home_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projectloner/auth/check_login.dart';
 import 'package:instabug_flutter/instabug_flutter.dart';
+import 'package:projectloner/blocs/auth/auth_bloc.dart';
 import 'package:projectloner/blocs/swipe/swipe_bloc.dart';
+import 'package:projectloner/registration/registration_page.dart';
+import 'package:projectloner/repositories/registration/auth_repo.dart';
 import 'package:projectloner/views/onboarding_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'models/models.dart';
@@ -27,23 +29,35 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {  
-    return MultiBlocProvider(
+  Widget build(BuildContext context) {
+    return MultiRepositoryProvider(
       providers: [
-        BlocProvider(
-          create: (context) => SwipeBloc()
-            ..add(
-              LoadUsers(users: LonerUser.users),
-            ),
+        RepositoryProvider(
+          create: (_) => AuthRepository(),
         ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Project: Loner',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (_) => AuthBloc(
+              authRepository: context.read<AuthRepository>(),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => SwipeBloc()
+              ..add(
+                LoadUsers(users: LonerUser.users),
+              ),
+          ),
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Project: Loner',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: MyHomePage(),
         ),
-        home: MyHomePage(),
       ),
     );
   }
@@ -69,7 +83,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: isviewed != 0 ? OnboardingScreen() : CheckLogin(),
+      onGenerateRoute: (settings) => RegistrationPage.route(),
+      initialRoute: RegistrationPage.routeName,
+      // home: isviewed != 0 ? OnboardingScreen() : CheckLogin(),
       //Theme colour
       theme: ThemeData(primarySwatch: Colors.deepPurple),
     );

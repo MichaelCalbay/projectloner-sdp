@@ -8,7 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../auth/check_login.dart';
 
-
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
 
@@ -17,10 +16,9 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-
   final PageController _controller = PageController();
-  
-  /* KEEP TRACK OFF LAST PAGE */ 
+
+  /* KEEP TRACK OFF LAST PAGE */
   bool onLastPage = false;
 
   _storeOnboardInfo() async {
@@ -31,7 +29,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     print(prefs.getInt('onBoard'));
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +36,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         children: [
           PageView(
             controller: _controller,
-            onPageChanged: (index){
+            onPageChanged: (index) {
               setState(() {
                 onLastPage = (index == 4);
               });
@@ -54,54 +51,53 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ],
           ),
           Container(
-            
-            alignment: const Alignment(0,0.80),
-            
+            alignment: const Alignment(0, 0.80),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-
                 /* IF NOT ON LAST PAGE */
-                onLastPage?
-                GestureDetector(
-                  onTap: (){
-                    _controller.jumpToPage(4);
-                  },
-                  child: const Text(''),
-                ): GestureDetector(
-                  onTap: (){
-                    _controller.jumpToPage(4);
-                  },
-                  child: const Text('Skip'),
-                ),
-                  
+                onLastPage
+                    ? GestureDetector(
+                        onTap: () {
+                          _controller.jumpToPage(4);
+                        },
+                        child: const Text(''),
+                      )
+                    : GestureDetector(
+                        onTap: () {
+                          _controller.jumpToPage(4);
+                        },
+                        child: const Text('Skip'),
+                      ),
                 SmoothPageIndicator(controller: _controller, count: 5),
-                onLastPage ?
-                GestureDetector(
-                  onTap: (){
-                    _storeOnboardInfo();
-                    Navigator.push(context, MaterialPageRoute(builder: (context){
-                      /* AFTER LAST PAGE RETURN TO HOME PAGE */
-                      return const CheckLogin();
-                    }),
-                    );
-                  },
-                  child: const Text('Log In'),
-                )
-                : GestureDetector(
-                  onTap: (){
-                    //FirstTime().once(1);
-                    _controller.nextPage(
-                      duration: const Duration(milliseconds: 500), 
-                    curve: Curves.easeIn);
-                  },
-                  child: const Text('Next'),
-                ),
+                onLastPage
+                    ? GestureDetector(
+                        onTap: () {
+                          _storeOnboardInfo();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              /* AFTER LAST PAGE RETURN TO HOME PAGE */
+                              return const CheckLogin();
+                            }),
+                          );
+                        },
+                        child: const Text('Log In'),
+                      )
+                    : GestureDetector(
+                        onTap: () {
+                          //FirstTime().once(1);
+                          _controller.nextPage(
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.easeIn);
+                        },
+                        child: const Text('Next'),
+                      ),
               ],
             ),
           ),
         ],
       ),
-    ); 
+    );
   }
 }
