@@ -45,9 +45,13 @@ seen in apps such as discord, tinder and tracker.gg.
     - [ ] Team
     - [ ] Coach
 
-### Development Team
+## Development Team
 
-
+- dzh7278
+- NelsonPalaganas07
+- jamjamin
+- ShayneMuir
+- MichaelCalbay
 
 
 
