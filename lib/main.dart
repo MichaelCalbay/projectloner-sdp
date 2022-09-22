@@ -70,7 +70,6 @@ class _MyHomePageState extends State<MyHomePage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: isviewed != 0 ? OnboardingScreen() : CheckLogin(),
-
       //Theme colour
       theme: ThemeData(primarySwatch: Colors.deepPurple),
     );
