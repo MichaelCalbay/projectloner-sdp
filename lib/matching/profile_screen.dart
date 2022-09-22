@@ -8,7 +8,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final LonerUser currentUser = LonerUser.users[2];
+    final LonerUser currentUser = LonerUser.users[0];
     return Scaffold(
       appBar: const MatchingAppBar(title: 'Profile'),
       body: Column(

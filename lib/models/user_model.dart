@@ -6,8 +6,8 @@ class LonerUser extends Equatable {
   final String firstName;
   final String lastName;
   final int age;
-  // final List<dynamic>? imageUrls;
-  // final List<dynamic>? interests;
+  final List<dynamic>? imageUrls;
+  final List<dynamic>? interests;
   final String? server;
   final String? role;
 
@@ -16,8 +16,8 @@ class LonerUser extends Equatable {
     required this.firstName,
     required this.lastName,
     required this.age,
-    // this.imageUrls,
-    // this.interests,
+    this.imageUrls,
+    this.interests,
     required this.server,
     required this.role,
   });
@@ -28,8 +28,8 @@ class LonerUser extends Equatable {
         firstName,
         lastName,
         age,
-        // imageUrls,
-        // interests,
+        imageUrls,
+        interests,
         server,
         role,
       ];
