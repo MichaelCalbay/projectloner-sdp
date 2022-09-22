@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:projectloner/views/NavBar.dart';
+import 'package:projectloner/views/nav_bar.dart';
 
-class Page2 extends StatefulWidget {
+class Page1 extends StatefulWidget {
   
-  const Page2({Key? key}) : super(key: key);
+  const Page1({Key? key}) : super(key: key);
 
   @override
-  Page2State createState() => Page2State();
+  Page1State createState() => Page1State();
 }
 
-class Page2State extends State {
+class Page1State extends State {
   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Page 2")),
+      appBar: AppBar(title: Text("Page 1")),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Text( 
-            'Page 2',
+            'Page 1',
             style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
           )
           ]

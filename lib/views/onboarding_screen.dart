@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:projectloner/intro/IntroPage_1.dart';
-import 'package:projectloner/intro/IntroPage_2.dart';
-import 'package:projectloner/intro/IntroPage_3.dart';
-import 'package:projectloner/intro/IntroPage_4.dart';
-import 'package:projectloner/intro/IntroPage_5.dart';
+import 'package:projectloner/intro/intro_page_1.dart';
+import 'package:projectloner/intro/intro_page_2.dart';
+import 'package:projectloner/intro/intro_page_3.dart';
+import 'package:projectloner/intro/intro_page_4.dart';
+import 'package:projectloner/intro/intro_page_5.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '../auth/CheckLogin.dart';
+import '../auth/check_login.dart';
 
 
 class OnboardingScreen extends StatefulWidget {

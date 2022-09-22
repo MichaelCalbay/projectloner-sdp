@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:projectloner/views/NavBar.dart';
+import 'package:projectloner/views/home_view.dart';
+import 'package:projectloner/views/nav_bar.dart';
+import 'package:projectloner/views/matchViews/team_view.dart';
 
-import '../home_view.dart';
-
-class TeamPage extends StatefulWidget {
+class DuoPage extends StatefulWidget {
   
-  const TeamPage({Key? key}) : super(key: key);
+  const DuoPage({Key? key}) : super(key: key);
 
   @override
-  TeamPageState createState() => TeamPageState();
+  DuoPageState createState() => DuoPageState();
 }
 
-class TeamPageState extends State {
+class DuoPageState extends State {
   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Team Matching")),
+      appBar: AppBar(title: Text("Duo Matching")),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text( 
-            'Team matchmaking here',
-            style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+              'Coming Soon!',
+              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
             ),
             ElevatedButton(
               onPressed: () {

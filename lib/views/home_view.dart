@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:projectloner/views/matchViews/CoachView.dart';
-import 'package:projectloner/views/matchViews/DuoView.dart';
-import 'package:projectloner/views/matchViews/TeamView.dart';
+import 'package:projectloner/views/matchViews/coach_view.dart';
+import 'package:projectloner/views/matchViews/duo_view.dart';
+import 'package:projectloner/views/matchViews/team_view.dart';
 import '../matching/matching_screen.dart';
-import 'NavBar.dart';
+import 'nav_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

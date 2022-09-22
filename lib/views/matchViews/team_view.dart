@@ -1,34 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:projectloner/views/NavBar.dart';
+import 'package:projectloner/views/nav_bar.dart';
+
 import '../home_view.dart';
 
-class CoachPage extends StatefulWidget {
+class TeamPage extends StatefulWidget {
   
-  const CoachPage({Key? key}) : super(key: key);
+  const TeamPage({Key? key}) : super(key: key);
 
   @override
-  CoachPageState createState() => CoachPageState();
+  TeamPageState createState() => TeamPageState();
 }
 
-class CoachPageState extends State {
+class TeamPageState extends State {
   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Coaching Page")),
+      appBar: AppBar(title: Text("Team Matching")),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children:[
+          children: [
             const Text( 
-              'This feature is coming soon!',
-              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold)),
+            'Team matchmaking here',
+            style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+            ),
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
-              },
+              }, 
               child: const Text("Go Back"),
-            )
+            ),
           ]
         ),
       ),
