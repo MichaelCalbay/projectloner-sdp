@@ -105,7 +105,7 @@ class MatchProfile extends StatelessWidget {
                         style: Theme.of(context).textTheme.headline5,
                       ),
                       Text(
-                        '${user.server} - ${user.role}',
+                        '${user.server} - ${user.roles}',
                         style: Theme.of(context).textTheme.headline6!.copyWith(
                               fontWeight: FontWeight.normal,
                             ),

@@ -9,7 +9,7 @@ class LonerUser extends Equatable {
   final List<dynamic>? imageUrls;
   final List<dynamic>? interests;
   final String? server;
-  final String? role;
+  final List<dynamic> roles;
 
   const LonerUser({
     this.id,
@@ -19,7 +19,7 @@ class LonerUser extends Equatable {
     this.imageUrls,
     this.interests,
     required this.server,
-    required this.role,
+    required this.roles,
   });
 
   @override
@@ -31,7 +31,7 @@ class LonerUser extends Equatable {
         imageUrls,
         interests,
         server,
-        role,
+        roles,
       ];
 
   static LonerUser fromSnapshot(DocumentSnapshot snap) {
@@ -40,8 +40,10 @@ class LonerUser extends Equatable {
       firstName: snap['firstName'],
       lastName: snap['lastName'],
       age: snap['age'],
+      imageUrls: snap['imageUrls'],
+      interests: snap['interests'],
       server: snap['server'],
-      role: snap['role'],
+      roles: snap['roles'],
     );
 
     return user;
@@ -53,7 +55,7 @@ class LonerUser extends Equatable {
       'lastName': lastName,
       'age': age,
       'server': server,
-      'role': role,
+      'roles': roles,
     };
   }
 
@@ -81,7 +83,7 @@ class LonerUser extends Equatable {
       //   'ANIME',
       // ],
       server: 'APAC',
-      role: 'Controller',
+      roles: ['Controller'],
     ),
   ];
   //   const LonerUser(

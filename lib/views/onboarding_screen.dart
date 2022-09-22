@@ -74,13 +74,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ? GestureDetector(
                         onTap: () {
                           _storeOnboardInfo();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) {
-                              /* AFTER LAST PAGE RETURN TO HOME PAGE */
-                              return const CheckLogin();
-                            }),
-                          );
+                          Navigator.pushNamed(context, '/registration');
                         },
                         child: const Text('Log In'),
                       )
