@@ -85,7 +85,8 @@ class _MyHomePageState extends State<MyHomePage> {
       debugShowCheckedModeBanner: false,
       onGenerateRoute: (settings) => RegistrationPage.route(),
       initialRoute: RegistrationPage.routeName,
-      // home: isviewed != 0 ? OnboardingScreen() : CheckLogin(),
+      // home: ProfileScreen(),
+      // isviewed != 0 ? OnboardingScreen() : CheckLogin(),
       //Theme colour
       theme: ThemeData(primarySwatch: Colors.deepPurple),
     );
