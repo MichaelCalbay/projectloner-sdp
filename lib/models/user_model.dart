@@ -6,20 +6,22 @@ class LonerUser extends Equatable {
   final String firstName;
   final String lastName;
   final int age;
+  final String gender;
   final List<dynamic> imageUrls;
   final List<dynamic>? interests;
   final String? server;
-  final List<dynamic> roles;
+  final String mainRole;
 
   const LonerUser({
     this.id,
     required this.firstName,
     required this.lastName,
     required this.age,
+    required this.gender,
     required this.imageUrls,
     this.interests,
     required this.server,
-    required this.roles,
+    required this.mainRole,
   });
 
   @override
@@ -28,10 +30,11 @@ class LonerUser extends Equatable {
         firstName,
         lastName,
         age,
+        gender,
         imageUrls,
         interests,
         server,
-        roles,
+        mainRole,
       ];
 
   static LonerUser fromSnapshot(DocumentSnapshot snap) {
@@ -40,10 +43,11 @@ class LonerUser extends Equatable {
       firstName: snap['firstName'],
       lastName: snap['lastName'],
       age: snap['age'],
+      gender: snap['gender'],
       imageUrls: snap['imageUrls'],
       interests: snap['interests'],
       server: snap['server'],
-      roles: snap['roles'],
+      mainRole: snap['mainRole'],
     );
 
     return user;
@@ -54,10 +58,11 @@ class LonerUser extends Equatable {
       'firstName': firstName,
       'lastName': lastName,
       'age': age,
+      'gender': gender,
       'imageUrls': imageUrls,
       'interests': interests,
       'server': server,
-      'roles': roles,
+      'mainRole': mainRole,
     };
   }
 
@@ -66,20 +71,22 @@ class LonerUser extends Equatable {
     String? firstName,
     String? lastName,
     int? age,
+    String? gender,
     List<dynamic>? imageUrls,
     List<dynamic>? interests,
     String? server,
-    List<dynamic>? roles,
+    String? mainRole,
   }) {
     return LonerUser(
       id: id ?? this.id,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
       age: age ?? this.age,
+      gender: gender ?? this.gender,
       imageUrls: imageUrls ?? this.imageUrls,
       interests: interests ?? this.interests,
       server: server ?? this.server,
-      roles: roles ?? this.roles,
+      mainRole: mainRole ?? this.mainRole,
     );
   }
 
@@ -90,6 +97,7 @@ class LonerUser extends Equatable {
       firstName: 'Robin',
       lastName: 'Chwuan',
       age: 23,
+      gender: 'Female',
       imageUrls: [
         'https://preview.redd.it/du7sbn27xs491.jpg?auto=webp&s=decc60fec16eb5ade184ac10c70520b64a7482e5',
         'https://cdn.worldcosplay.net/760194/rhwvvffvohquiewsbgrjaeeigkasdcvzfuwwadyd-740.jpg',
@@ -107,7 +115,7 @@ class LonerUser extends Equatable {
         'ANIME',
       ],
       server: 'APAC',
-      roles: ['Controller'],
+      mainRole: 'Controller',
     ),
   ];
   //   const LonerUser(

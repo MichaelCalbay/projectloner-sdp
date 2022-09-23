@@ -24,12 +24,7 @@ class CustomTextField extends StatelessWidget {
         border: Border.all(color: Colors.white),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: TextFormField(
-        validator: (value) {
-          if (value!.isEmpty || RegExp(r'^[a-z A-Z]$').hasMatch(value)) {
-            return 'Wrong Input!';
-          }
-        },
+      child: TextField(
         controller: confPwController,
         obscureText: isPassword,
         enableSuggestions: false,

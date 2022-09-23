@@ -54,7 +54,6 @@ class EmailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   CustomTextHeader(
-                    tabController: tabController,
                     text: "Confirm Password",
                   ),
                   const SizedBox(height: 5),

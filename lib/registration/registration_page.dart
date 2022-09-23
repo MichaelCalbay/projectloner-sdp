@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projectloner/blocs/onboarding/onboarding_bloc.dart';
 import 'package:projectloner/cubit/signup/signup_cubit.dart';
 import 'package:projectloner/registration/screens/screens.dart';
+import 'package:projectloner/repositories/database/database_repo.dart';
 import 'package:projectloner/repositories/registration/auth_repo.dart';
+import 'package:projectloner/repositories/storage/storage_repo.dart';
 
 class RegistrationPage extends StatelessWidget {
   static const String routeName = '/registration';
@@ -12,9 +15,19 @@ class RegistrationPage extends StatelessWidget {
   static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (context) => BlocProvider(
-        create: (_) =>
-            SignupCubit(authRepository: context.read<AuthRepository>()),
+      builder: (context) => MultiBlocProvider(
+        providers: [
+          BlocProvider<SignupCubit>(
+            create: (_) =>
+                SignupCubit(authRepository: context.read<AuthRepository>()),
+          ),
+          BlocProvider<OnboardingBloc>(
+            create: (_) => OnboardingBloc(
+              databaseRepository: DatabaseRepository(),
+              storageRepo: StorageRepo(),
+            )..add(StartOnboarding()),
+          ),
+        ],
         child: const RegistrationPage(),
       ),
     );
