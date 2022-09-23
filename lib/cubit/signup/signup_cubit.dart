@@ -6,6 +6,7 @@ part 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {
   final AuthRepository _authRepository;
+  String? userPass;
 
   SignupCubit({required AuthRepository authRepository})
       : _authRepository = authRepository,
@@ -17,6 +18,7 @@ class SignupCubit extends Cubit<SignupState> {
 
   void passwordChanged(String value) {
     emit(state.copyWith(password: value, status: SignupStatus.initial));
+    userPass = value;
   }
 
   void signupWithCredentials() async {
