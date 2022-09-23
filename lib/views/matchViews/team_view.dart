@@ -16,7 +16,7 @@ class TeamPageState extends State {
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           const Text(
-            'Team matchmaking here',
+            'Team matching coming soon!',
             style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
           ),
           ElevatedButton(

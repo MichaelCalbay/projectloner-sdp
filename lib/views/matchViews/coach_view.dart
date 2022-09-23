@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projectloner/views/nav_bar.dart';
+import '../home_view.dart';
+
 
 class CoachPage extends StatefulWidget {
   const CoachPage({Key? key}) : super(key: key);
@@ -29,3 +31,4 @@ class CoachPageState extends State {
     );
   }
 }
+
