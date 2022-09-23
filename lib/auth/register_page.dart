@@ -126,7 +126,8 @@ class _RegisterPageState extends State<RegisterPage> {
             password: _password.text.trim(),
           );
                    
-          debugPrint(_fName.text);
+          //debugPrint(_fName.text);
+
           //To store LonerData to LonerUser class.
           initialiseLonerUsers();
 
