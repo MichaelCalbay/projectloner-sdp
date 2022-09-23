@@ -3,9 +3,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:projectloner/repositories/storage/storage_repo.dart';
 
 class CustomImageCont extends StatelessWidget {
-  final TabController tabController;
-  const CustomImageCont({Key? key, required this.tabController})
-      : super(key: key);
+  final String? imageUrl;
+  const CustomImageCont({Key? key, this.imageUrl}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,28 +25,33 @@ class CustomImageCont extends StatelessWidget {
             right: BorderSide(color: Colors.deepPurple, width: 1),
           ),
         ),
-        child: Align(
-          alignment: Alignment.bottomRight,
-          child: IconButton(
-            icon: const Icon(Icons.add_circle, color: Colors.deepPurple),
-            onPressed: () async {
-              ImagePicker picker = ImagePicker();
-              final XFile? image =
-                  await picker.pickImage(source: ImageSource.gallery);
-              if (image == null) {
-                // ignore: use_build_context_synchronously
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('No Image Selected'),
-                  ),
-                );
-              } else {
-                debugPrint('Uploading image...');
-                StorageRepo().uploadImage(image);
-              }
-            },
-          ),
-        ),
+        child: imageUrl == null
+            ? Align(
+                alignment: Alignment.bottomRight,
+                child: IconButton(
+                  icon: const Icon(Icons.add_circle, color: Colors.deepPurple),
+                  onPressed: () async {
+                    ImagePicker picker = ImagePicker();
+                    final XFile? image =
+                        await picker.pickImage(source: ImageSource.gallery);
+                    if (image == null) {
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('No Image Selected'),
+                        ),
+                      );
+                    } else {
+                      debugPrint('Uploading image...');
+                      StorageRepo().uploadImage(image);
+                    }
+                  },
+                ),
+              )
+            : Image.network(
+                imageUrl!,
+                fit: BoxFit.cover,
+              ),
       ),
     );
   }

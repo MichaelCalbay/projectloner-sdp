@@ -33,16 +33,48 @@ class Pictures extends StatelessWidget {
                     return const Center(child: CircularProgressIndicator());
                   }
                   if (state is ImagesLoaded) {
-                    return Wrap(
-                      children: [
-                        CustomImageCont(tabController: tabController),
-                        CustomImageCont(tabController: tabController),
-                        CustomImageCont(tabController: tabController),
-                        CustomImageCont(tabController: tabController),
-                        CustomImageCont(tabController: tabController),
-                        CustomImageCont(tabController: tabController),
-                      ],
+                    int count = state.imageUrls.length;
+
+                    return SizedBox(
+                      height: 350,
+                      //Returning 6 Containers
+                      child: GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3, childAspectRatio: 0.66),
+                          itemCount: 6,
+                          itemBuilder: (BuildContext context, int index) {
+                            return (count > index)
+                                //Will return a container with an image if count > index.
+                                ? CustomImageCont(
+                                    imageUrl: state.imageUrls[index])
+                                //else, it will return an empty container.
+                                : const CustomImageCont();
+                          }),
                     );
+
+                    // return Wrap(
+                    //   children: [
+                    //     (count > 0)
+                    //         ? CustomImageCont(imageUrl: state.imageUrls[0])
+                    //         : const CustomImageCont(),
+                    //     (count > 1)
+                    //         ? CustomImageCont(imageUrl: state.imageUrls[1])
+                    //         : const CustomImageCont(),
+                    //     (count > 2)
+                    //         ? CustomImageCont(imageUrl: state.imageUrls[2])
+                    //         : const CustomImageCont(),
+                    //     (count > 3)
+                    //         ? CustomImageCont(imageUrl: state.imageUrls[3])
+                    //         : const CustomImageCont(),
+                    //     (count > 4)
+                    //         ? CustomImageCont(imageUrl: state.imageUrls[4])
+                    //         : const CustomImageCont(),
+                    //     (count > 5)
+                    //         ? CustomImageCont(imageUrl: state.imageUrls[5])
+                    //         : const CustomImageCont(),
+                    //   ],
+                    // );
                   } else {
                     return const Text('Oops, something went wrong!');
                   }
