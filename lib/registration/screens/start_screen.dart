@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projectloner/auth/login_page.dart';
 import 'package:projectloner/registration/widgets/registration_widgets.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
@@ -55,6 +56,7 @@ class Start extends StatelessWidget {
             children: [
               const AlreadyLoner(),
               const SizedBox(height: 10),
+
               const StepProgressIndicator(
                 totalSteps: 5,
                 currentStep: 1,
