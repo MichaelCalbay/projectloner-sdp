@@ -32,8 +32,8 @@ class ServerRole extends StatelessWidget {
                     ),
                     CustomDropdown(tabController: tabController),
                     const SizedBox(height: 25),
-                    CustomTextHeader(
-                      text: 'What Roles Do You Play?',
+                    const CustomTextHeader(
+                      text: "What's your best role?",
                     ),
                     const SizedBox(height: 5),
                     CustomCheckbox(
@@ -42,8 +42,7 @@ class ServerRole extends StatelessWidget {
                       onChanged: (bool? newValue) {
                         context.read<OnboardingBloc>().add(
                               UpdateUser(
-                                user:
-                                    state.user.copyWith(mainRole: 'Controller'),
+                                user: state.user.copyWith(mainRole: 'Duelist'),
                               ),
                             );
                       },
