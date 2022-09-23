@@ -16,9 +16,18 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        tabController.animateTo(tabController.index + 1);
+        //NEED TO WORK ON VALIDATION
         if (tabController.index == 2) {
-          context.read<SignupCubit>().signupWithCredentials();
+          if (context.read<SignupState>().isValid) {
+            context.read<SignupCubit>().signupWithCredentials();
+            if (context.read<SignupCubit>().exceptionCaught) {
+              debugPrint("Exception Caught!");
+            } else {
+              tabController.animateTo(tabController.index + 1);
+            }
+          }
+        } else {
+          tabController.animateTo(tabController.index + 1);
         }
       },
       // ignore: sized_box_for_whitespace

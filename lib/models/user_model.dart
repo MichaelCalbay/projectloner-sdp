@@ -6,7 +6,7 @@ class LonerUser extends Equatable {
   final String firstName;
   final String lastName;
   final int age;
-  final List<dynamic>? imageUrls;
+  final List<dynamic> imageUrls;
   final List<dynamic>? interests;
   final String? server;
   final List<dynamic> roles;
@@ -16,7 +16,7 @@ class LonerUser extends Equatable {
     required this.firstName,
     required this.lastName,
     required this.age,
-    this.imageUrls,
+    required this.imageUrls,
     this.interests,
     required this.server,
     required this.roles,
@@ -54,9 +54,33 @@ class LonerUser extends Equatable {
       'firstName': firstName,
       'lastName': lastName,
       'age': age,
+      'imageUrls': imageUrls,
+      'interests': interests,
       'server': server,
       'roles': roles,
     };
+  }
+
+  LonerUser copyWith({
+    String? id,
+    String? firstName,
+    String? lastName,
+    int? age,
+    List<dynamic>? imageUrls,
+    List<dynamic>? interests,
+    String? server,
+    List<dynamic>? roles,
+  }) {
+    return LonerUser(
+      id: id ?? this.id,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      age: age ?? this.age,
+      imageUrls: imageUrls ?? this.imageUrls,
+      interests: interests ?? this.interests,
+      server: server ?? this.server,
+      roles: roles ?? this.roles,
+    );
   }
 
   //SAMPLE DATA FOR TESTING.
@@ -66,22 +90,22 @@ class LonerUser extends Equatable {
       firstName: 'Robin',
       lastName: 'Chwuan',
       age: 23,
-      // imageUrls: [
-      //   'https://preview.redd.it/du7sbn27xs491.jpg?auto=webp&s=decc60fec16eb5ade184ac10c70520b64a7482e5',
-      //   'https://cdn.worldcosplay.net/760194/rhwvvffvohquiewsbgrjaeeigkasdcvzfuwwadyd-740.jpg',
-      //   'https://img-9gag-fun.9cache.com/photo/a2ZmVQZ_460s.jpg',
-      //   'https://pbs.twimg.com/media/DeetJ5VXUAA5-5V.jpg',
-      // ],
-      // interests: [
-      //   'MUSIC',
-      //   'BOOKS',
-      //   'SPORTS',
-      //   'MOVIES',
-      //   'FLAMINGOS',
-      //   'COFFEE',
-      //   'FOOD',
-      //   'ANIME',
-      // ],
+      imageUrls: [
+        'https://preview.redd.it/du7sbn27xs491.jpg?auto=webp&s=decc60fec16eb5ade184ac10c70520b64a7482e5',
+        'https://cdn.worldcosplay.net/760194/rhwvvffvohquiewsbgrjaeeigkasdcvzfuwwadyd-740.jpg',
+        'https://img-9gag-fun.9cache.com/photo/a2ZmVQZ_460s.jpg',
+        'https://pbs.twimg.com/media/DeetJ5VXUAA5-5V.jpg',
+      ],
+      interests: [
+        'MUSIC',
+        'BOOKS',
+        'SPORTS',
+        'MOVIES',
+        'FLAMINGOS',
+        'COFFEE',
+        'FOOD',
+        'ANIME',
+      ],
       server: 'APAC',
       roles: ['Controller'],
     ),

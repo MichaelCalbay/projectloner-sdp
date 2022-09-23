@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:projectloner/repositories/registration/base_auth_repo.dart';
-import 'package:flutter/material.dart';
 
 class AuthRepository extends BaseAuthRepository {
   final auth.FirebaseAuth _firebaseAuth;
@@ -18,6 +17,7 @@ class AuthRepository extends BaseAuthRepository {
         email: email,
         password: password,
       );
+
       final user = credential.user;
       return user;
     } catch (_) {}
@@ -25,4 +25,8 @@ class AuthRepository extends BaseAuthRepository {
 
   @override
   Stream<auth.User?> get user => _firebaseAuth.userChanges();
+
+  auth.FirebaseAuth getAuth() {
+    return _firebaseAuth;
+  }
 }
