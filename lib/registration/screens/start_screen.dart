@@ -55,7 +55,8 @@ class Start extends StatelessWidget {
           Column(
             children: [
               const AlreadyLoner(),
-              const SizedBox(height: 5),
+              const SizedBox(height: 10),
+
               const StepProgressIndicator(
                 totalSteps: 5,
                 currentStep: 1,

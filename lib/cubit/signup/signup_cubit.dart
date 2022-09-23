@@ -8,10 +8,12 @@ part 'signup_state.dart';
 class SignupCubit extends Cubit<SignupState> {
   final AuthRepository _authRepository;
   String? userPass;
+
   SignupCubit({
     required AuthRepository authRepository,
     this.userPass,
   })  : _authRepository = authRepository,
+
         super(SignupState.initial());
 
   void emailChanged(String value) {

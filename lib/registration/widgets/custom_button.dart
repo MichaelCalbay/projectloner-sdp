@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:projectloner/cubit/signup/signup_cubit.dart';
+import 'package:projectloner/repositories/registration/auth_repo.dart';
 import 'package:projectloner/blocs/onboarding/onboarding_bloc.dart';
 import 'package:projectloner/cubit/signup/signup_cubit.dart';
 import 'package:projectloner/models/user_model.dart';
 import 'package:projectloner/views/home_view.dart';
 
+
 class CustomButton extends StatelessWidget {
   final TabController tabController;
   final String buttonText;
+  final TextEditingController? confPwdController;
+
 
   const CustomButton({
     Key? key,
     required this.tabController,
     required this.buttonText,
+    this.confPwdController,
+
   }) : super(key: key);
 
   @override
@@ -28,8 +36,16 @@ class CustomButton extends StatelessWidget {
               builder: (context) => const HomePage(),
             ),
           );
-        } else {
+        } else if (!context.read<SignupCubit>().userPass ==
+            confPwdController?.text.trim())
+        {
+        Fluttertoast.showToast(
+              msg: "Passwords don't match.",
+              gravity: ToastGravity.BOTTOM,
+              textColor: Colors.red);
           tabController.animateTo(tabController.index + 1);
+        } else {
+                  tabController.animateTo(tabController.index + 1);
         }
         if (tabController.index == 2) {
           await context.read<SignupCubit>().signupWithCredentials();

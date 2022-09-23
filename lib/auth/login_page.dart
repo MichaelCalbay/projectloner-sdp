@@ -3,11 +3,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:projectloner/auth/check_login.dart';
 import 'package:projectloner/auth/forgot_password.dart';
 
 class LoginPage extends StatefulWidget {
-  final VoidCallback? showRegisterPage;
-  const LoginPage({Key? key, this.showRegisterPage}) : super(key: key);
+
+  const LoginPage({Key? key}) : super(key: key);
+
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -18,12 +20,23 @@ class _LoginPageState extends State<LoginPage> {
   late final _email = TextEditingController();
   late final _password = TextEditingController();
 
+  void showcheckLoginPage() {
+    Navigator.pop(context);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const CheckLogin(),
+        ));
+  }
+
   Future logIn() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _email.text.trim(),
         password: _password.text.trim(),
       );
+
+      showcheckLoginPage();
     } on FirebaseAuthException catch (e) {
       //Validations
       if (e.code == 'user-not-found') {
@@ -66,6 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   Icon(
                     Icons.gamepad_rounded,
+                    color: Colors.deepPurple,
                     size: 100,
                   ),
                   SizedBox(height: 50),

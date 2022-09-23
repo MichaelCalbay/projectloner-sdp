@@ -11,23 +11,22 @@ class AlreadyLoner extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text('Already a Loner? '),
+        const Text(
+          'Already a Loner? ',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         GestureDetector(
-          child: const Text(
-            'Login.',
-            style: TextStyle(
-              color: Colors.blue,
-            ),
-          ),
           onTap: () {
             Navigator.pop(context);
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => const LoginPage(),
-              ),
+              MaterialPageRoute(builder: (context) => const LoginPage()),
             );
           },
+          child: const Text(
+            'Login',
+            style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+          ),
         ),
       ],
     );

@@ -6,7 +6,6 @@ import 'package:projectloner/models/user_model.dart';
 
 import '../views/nav_bar.dart';
 import '../widgets/profile_app_bar.dart';
-import '../widgets/profile_widget.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -16,9 +15,9 @@ class ProfilePage extends StatelessWidget {
     final cUser = LonerUser.users[1];
 
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: const BuildAppBar(),
       body: ListView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         children: [
           // ProfileWidget(
           //   imagePath: cUser.imageUrls[0],

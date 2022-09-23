@@ -22,9 +22,10 @@
 //   @override
 //   Widget build(BuildContext context) {
 //     if (showLoginPage) {
-//       return LoginPage(showRegisterPage: toggleScreens);
+//       return const LoginPage();
 //     } else {
-//       return RegisterPage(showLoginPage: toggleScreens);
+//       return const ;
+
 //     }
 //   }
 // }

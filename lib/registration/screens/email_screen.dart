@@ -6,7 +6,9 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class EmailScreen extends StatelessWidget {
   final TabController tabController;
-  final confPwController = TextEditingController();
+
+  final confPwdController = TextEditingController();
+
 
   EmailScreen({
     Key? key,
@@ -58,7 +60,8 @@ class EmailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   CustomTextField(
-                    confPwController: confPwController,
+                    confPwdController: confPwdController,
+
                     isPassword: true,
                     hint: 'Confirm here..',
                     // onChanged: (value) {
@@ -75,12 +78,15 @@ class EmailScreen extends StatelessWidget {
               ),
               Column(
                 children: [
+                  const AlreadyLoner(),
+                  const SizedBox(height: 10),
                   const StepProgressIndicator(
                     totalSteps: 5,
                     currentStep: 2,
                     selectedColor: Colors.deepPurple,
                   ),
                   CustomButton(
+                    confPwdController: confPwdController,
                     buttonText: 'NEXT',
                     tabController: tabController,
                   ),

@@ -13,6 +13,12 @@ class CustomCheckbox extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<CustomCheckbox> createState() => _CustomCheckboxState();
+}
+
+class _CustomCheckboxState extends State<CustomCheckbox> {
+  bool? value = false;
+  @override
   Widget build(BuildContext context) {
     return Row(
       children: [
@@ -21,7 +27,7 @@ class CustomCheckbox extends StatelessWidget {
           onChanged: onChanged,
         ),
         Text(
-          text,
+          widget.text,
           style: const TextStyle(
               fontSize: 12,
               fontStyle: FontStyle.italic,
@@ -31,3 +37,32 @@ class CustomCheckbox extends StatelessWidget {
     );
   }
 }
+
+// class CustomCheckbox extends StatelessWidget {
+//   final TabController tabController;
+//   final String text;
+//   const CustomCheckbox({
+//     Key? key,
+//     required this.tabController,
+//     required this.text,
+//   }) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       children: [
+//         Checkbox(
+//           value: false,
+//           onChanged: (bool? newValue) {},
+//         ),
+//         Text(
+//           text,
+//           style: const TextStyle(
+//               fontSize: 12,
+//               fontStyle: FontStyle.italic,
+//               fontWeight: FontWeight.bold),
+//         ),
+//       ],
+//     );
+//   }
+// }

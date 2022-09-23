@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projectloner/auth/login_page.dart';
 import 'package:projectloner/intro/intro_page_1.dart';
 import 'package:projectloner/intro/intro_page_2.dart';
 import 'package:projectloner/intro/intro_page_3.dart';
@@ -6,7 +7,6 @@ import 'package:projectloner/intro/intro_page_4.dart';
 import 'package:projectloner/intro/intro_page_5.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '../auth/check_login.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -74,7 +74,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ? GestureDetector(
                         onTap: () {
                           _storeOnboardInfo();
-                          Navigator.pushNamed(context, '/registration');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              /* AFTER LAST PAGE RETURN TO HOME PAGE */
+                              return const LoginPage();
+                            }),
+                          );
+
                         },
                         child: const Text('Log In'),
                       )

@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectloner/repositories/registration/base_auth_repo.dart';
 
 class AuthRepository extends BaseAuthRepository {
   final auth.FirebaseAuth _firebaseAuth;
+  bool isValid = false;
 
-  AuthRepository({auth.FirebaseAuth? firebaseAuth})
+  AuthRepository({isValid, auth.FirebaseAuth? firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? auth.FirebaseAuth.instance;
 
   @override
@@ -13,14 +15,33 @@ class AuthRepository extends BaseAuthRepository {
     required String password,
   }) async {
     try {
-      final credential = await _firebaseAuth.createUserWithEmailAndPassword(
+      isValid == true;
+      final credential =
+          await auth.FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
       final user = credential.user;
       return user;
-    } catch (_) {}
+    } on auth.FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        Fluttertoast.showToast(
+            msg: "Password is weak.",
+            gravity: ToastGravity.BOTTOM,
+            textColor: Colors.red);
+      } else if (e.code == 'email-already-in-use') {
+        Fluttertoast.showToast(
+            msg: "Email already exists.",
+            gravity: ToastGravity.BOTTOM,
+            textColor: Colors.red);
+      } else if (e.code == 'invalid-email') {
+        Fluttertoast.showToast(
+            msg: "Invalid email.",
+            gravity: ToastGravity.BOTTOM,
+            textColor: Colors.red);
+      }
+    }
   }
 
   @override
