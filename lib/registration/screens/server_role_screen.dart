@@ -30,7 +30,7 @@ class ServerRole extends StatelessWidget {
                     CustomTextHeader(
                       text: 'What Server Do You Play On?',
                     ),
-                    CustomDropdown(tabController: tabController),
+                    CustomDropdown(),
                     const SizedBox(height: 25),
                     const CustomTextHeader(
                       text: "What's your best role?",

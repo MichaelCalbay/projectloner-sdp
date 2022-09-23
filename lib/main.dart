@@ -3,14 +3,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:projectloner/auth/check_login.dart';
 import 'package:instabug_flutter/instabug_flutter.dart';
 import 'package:projectloner/blocs/auth/auth_bloc.dart';
 import 'package:projectloner/blocs/swipe/swipe_bloc.dart';
 import 'package:projectloner/registration/registration_page.dart';
-import 'package:projectloner/repositories/database/database_repo.dart';
 import 'package:projectloner/repositories/registration/auth_repo.dart';
-import 'package:projectloner/views/onboarding_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'models/models.dart';
 

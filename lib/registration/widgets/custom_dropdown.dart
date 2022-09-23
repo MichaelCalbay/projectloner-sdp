@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class CustomDropdown extends StatelessWidget {
-  final TabController tabController;
+  final Function(String)? onChanged;
+
   final server = [
     'APAC',
     'EU',
@@ -18,7 +19,7 @@ class CustomDropdown extends StatelessWidget {
         ),
       );
 
-  CustomDropdown({Key? key, required this.tabController}) : super(key: key);
+  CustomDropdown({Key? key, this.onChanged}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
