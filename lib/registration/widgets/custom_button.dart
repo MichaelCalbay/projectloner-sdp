@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projectloner/blocs/onboarding/onboarding_bloc.dart';
 import 'package:projectloner/cubit/signup/signup_cubit.dart';
+import 'package:projectloner/models/user_model.dart';
+import 'package:projectloner/views/home_view.dart';
 
 class CustomButton extends StatelessWidget {
   final TabController tabController;
@@ -15,11 +18,33 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
+      onPressed: () async {
         //NEED TO WORK ON VALIDATION
-        tabController.animateTo(tabController.index + 1);
+        debugPrint('${tabController.index}');
+        if (tabController.index == 4) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomePage(),
+            ),
+          );
+        } else {
+          tabController.animateTo(tabController.index + 1);
+        }
         if (tabController.index == 2) {
-          context.read<SignupCubit>().signupWithCredentials();
+          await context.read<SignupCubit>().signupWithCredentials();
+
+          LonerUser user = LonerUser(
+            id: context.read<SignupCubit>().state.user!.uid,
+            firstName: '',
+            lastName: '',
+            age: 0,
+            gender: '',
+            imageUrls: [],
+            server: '',
+            mainRole: '',
+          );
+          context.read<OnboardingBloc>().add(StartOnboarding(user: user));
         }
       },
       // ignore: sized_box_for_whitespace

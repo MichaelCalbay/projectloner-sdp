@@ -55,6 +55,7 @@ class LonerUser extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'firstName': firstName,
       'lastName': lastName,
       'age': age,

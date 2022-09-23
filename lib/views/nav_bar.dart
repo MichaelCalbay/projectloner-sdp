@@ -3,7 +3,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instabug_flutter/instabug_flutter.dart';
+import 'package:projectloner/auth/login_page.dart';
+import 'package:projectloner/repositories/registration/auth_repo.dart';
 import 'home_view.dart';
 import 'package:projectloner/auth/auth_page.dart';
 import 'package:projectloner/matching/matching_screen.dart';
@@ -90,7 +93,17 @@ class _NavBarState extends State<NavBar> {
           ListTile(
             title: const Text("Logout"),
             onTap: () {
+              RepositoryProvider.of<AuthRepository>(context).signOut();
               FirebaseAuth.instance.signOut();
+
+              Navigator.pop(context);
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: ((context) => LoginPage()),
+                ),
+              );
             },
             tileColor: Colors.deepPurple,
             textColor: Colors.white,
