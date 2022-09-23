@@ -52,7 +52,7 @@ class Pictures extends StatelessWidget {
                                 : const CustomImageCont();
                           }),
                     );
-
+                    //Old hard coded 6 containers
                     // return Wrap(
                     //   children: [
                     //     (count > 0)
