@@ -6,20 +6,22 @@ class LonerUser extends Equatable {
   final String firstName;
   final String lastName;
   final int age;
-  // final List<dynamic>? imageUrls;
-  // final List<dynamic>? interests;
+  final String gender;
+  final List<dynamic> imageUrls;
+  final List<dynamic>? interests;
   final String? server;
-  final String? role;
+  final String mainRole;
 
   const LonerUser({
     this.id,
     required this.firstName,
     required this.lastName,
     required this.age,
-    // this.imageUrls,
-    // this.interests,
+    required this.gender,
+    required this.imageUrls,
+    this.interests,
     required this.server,
-    required this.role,
+    required this.mainRole,
   });
 
   @override
@@ -28,10 +30,11 @@ class LonerUser extends Equatable {
         firstName,
         lastName,
         age,
-        // imageUrls,
-        // interests,
+        gender,
+        imageUrls,
+        interests,
         server,
-        role,
+        mainRole,
       ];
 
   static LonerUser fromSnapshot(DocumentSnapshot snap) {
@@ -40,8 +43,11 @@ class LonerUser extends Equatable {
       firstName: snap['firstName'],
       lastName: snap['lastName'],
       age: snap['age'],
+      gender: snap['gender'],
+      imageUrls: snap['imageUrls'],
+      interests: snap['interests'],
       server: snap['server'],
-      role: snap['role'],
+      mainRole: snap['mainRole'],
     );
 
     return user;
@@ -49,12 +55,40 @@ class LonerUser extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'firstName': firstName,
       'lastName': lastName,
       'age': age,
+      'gender': gender,
+      'imageUrls': imageUrls,
+      'interests': interests,
       'server': server,
-      'role': role,
+      'mainRole': mainRole,
     };
+  }
+
+  LonerUser copyWith({
+    String? id,
+    String? firstName,
+    String? lastName,
+    int? age,
+    String? gender,
+    List<dynamic>? imageUrls,
+    List<dynamic>? interests,
+    String? server,
+    String? mainRole,
+  }) {
+    return LonerUser(
+      id: id ?? this.id,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      age: age ?? this.age,
+      gender: gender ?? this.gender,
+      imageUrls: imageUrls ?? this.imageUrls,
+      interests: interests ?? this.interests,
+      server: server ?? this.server,
+      mainRole: mainRole ?? this.mainRole,
+    );
   }
 
   //SAMPLE DATA FOR TESTING.
@@ -64,24 +98,25 @@ class LonerUser extends Equatable {
       firstName: 'Robin',
       lastName: 'Chwuan',
       age: 23,
-      // imageUrls: [
-      //   'https://preview.redd.it/du7sbn27xs491.jpg?auto=webp&s=decc60fec16eb5ade184ac10c70520b64a7482e5',
-      //   'https://cdn.worldcosplay.net/760194/rhwvvffvohquiewsbgrjaeeigkasdcvzfuwwadyd-740.jpg',
-      //   'https://img-9gag-fun.9cache.com/photo/a2ZmVQZ_460s.jpg',
-      //   'https://pbs.twimg.com/media/DeetJ5VXUAA5-5V.jpg',
-      // ],
-      // interests: [
-      //   'MUSIC',
-      //   'BOOKS',
-      //   'SPORTS',
-      //   'MOVIES',
-      //   'FLAMINGOS',
-      //   'COFFEE',
-      //   'FOOD',
-      //   'ANIME',
-      // ],
+      gender: 'Female',
+      imageUrls: [
+        'https://preview.redd.it/du7sbn27xs491.jpg?auto=webp&s=decc60fec16eb5ade184ac10c70520b64a7482e5',
+        'https://cdn.worldcosplay.net/760194/rhwvvffvohquiewsbgrjaeeigkasdcvzfuwwadyd-740.jpg',
+        'https://img-9gag-fun.9cache.com/photo/a2ZmVQZ_460s.jpg',
+        'https://pbs.twimg.com/media/DeetJ5VXUAA5-5V.jpg',
+      ],
+      interests: [
+        'MUSIC',
+        'BOOKS',
+        'SPORTS',
+        'MOVIES',
+        'FLAMINGOS',
+        'COFFEE',
+        'FOOD',
+        'ANIME',
+      ],
       server: 'APAC',
-      role: 'Controller',
+      mainRole: 'Controller',
     ),
   ];
   //   const LonerUser(

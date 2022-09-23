@@ -81,6 +81,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               return const LoginPage();
                             }),
                           );
+
                         },
                         child: const Text('Log In'),
                       )

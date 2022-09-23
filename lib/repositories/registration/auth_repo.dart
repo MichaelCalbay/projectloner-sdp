@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectloner/repositories/registration/base_auth_repo.dart';
-import 'package:flutter/material.dart';
 
 class AuthRepository extends BaseAuthRepository {
   final auth.FirebaseAuth _firebaseAuth;
@@ -46,5 +45,14 @@ class AuthRepository extends BaseAuthRepository {
   }
 
   @override
+  Future<void> signOut() async {
+    await _firebaseAuth.signOut();
+  }
+
+  @override
   Stream<auth.User?> get user => _firebaseAuth.userChanges();
+
+  auth.FirebaseAuth getAuth() {
+    return _firebaseAuth;
+  }
 }
