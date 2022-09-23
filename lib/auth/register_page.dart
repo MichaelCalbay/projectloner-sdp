@@ -88,6 +88,7 @@ class _RegisterPageState extends State<RegisterPage> {
     String? roles,
     String email,
   ) async {
+
     await FirebaseFirestore.instance.collection('LonerUser').add({
       'Firstname': fName,
       'Lastname': lName,
@@ -124,8 +125,12 @@ class _RegisterPageState extends State<RegisterPage> {
             email: _email.text.trim(),
             password: _password.text.trim(),
           );
+                   
+          //debugPrint(_fName.text);
+
           //To store LonerData to LonerUser class.
           initialiseLonerUsers();
+
 
           //add user data
           addUserData(
