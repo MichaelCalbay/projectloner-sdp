@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectloner/cubit/signup/signup_cubit.dart';
-import 'package:projectloner/repositories/registration/auth_repo.dart';
 import 'package:projectloner/blocs/onboarding/onboarding_bloc.dart';
-import 'package:projectloner/cubit/signup/signup_cubit.dart';
 import 'package:projectloner/models/user_model.dart';
 import 'package:projectloner/views/home_view.dart';
 
@@ -53,7 +51,8 @@ class CustomButton extends StatelessWidget {
               lastName: '',
               age: 0,
               gender: '',
-              imageUrls: [],
+              imageUrls: const [],
+              interests: const [],
               server: '',
               mainRole: '',
             );

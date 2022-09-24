@@ -27,7 +27,7 @@ class ServerRole extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const SizedBox(height: 10),
-                    CustomTextHeader(
+                    const CustomTextHeader(
                       text: 'What Server Do You Play On?',
                     ),
                     CustomDropdown(),
