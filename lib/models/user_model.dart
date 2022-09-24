@@ -24,6 +24,10 @@ class LonerUser extends Equatable {
     required this.mainRole,
   });
 
+  // bool isDataEmpty(){
+  //   if(this.firstName == '' || this.lastName == '' || this.age == 0 || )
+  // }
+
   @override
   List<Object?> get props => [
         id,

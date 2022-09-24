@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projectloner/blocs/onboarding/onboarding_bloc.dart';
 import 'package:projectloner/cubit/signup/signup_cubit.dart';
 import 'package:projectloner/registration/widgets/registration_widgets.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
@@ -8,7 +9,6 @@ class EmailScreen extends StatelessWidget {
   final TabController tabController;
 
   final confPwdController = TextEditingController();
-
 
   EmailScreen({
     Key? key,
@@ -24,75 +24,78 @@ class EmailScreen extends StatelessWidget {
             horizontal: 30,
             vertical: 10,
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  const CustomTextHeader(
-                    text: "What's your Email Address?",
-                  ),
-                  const SizedBox(height: 5),
-                  CustomTextField(
-                    isPassword: false,
-                    hint: 'Enter your email...',
-                    onChanged: (value) {
-                      context.read<SignupCubit>().emailChanged(value);
-                      debugPrint(state.email);
-                    },
-                  ),
-                  const SizedBox(height: 10),
-                  const CustomTextHeader(
-                    text: "Password?",
-                  ),
-                  const SizedBox(height: 5),
-                  CustomTextField(
-                    isPassword: true,
-                    hint: 'Enter password...',
-                    onChanged: (value) {
-                      context.read<SignupCubit>().passwordChanged(value);
-                      debugPrint(state.password);
-                    },
-                  ),
-                  const SizedBox(height: 10),
-                  CustomTextHeader(
-                    text: "Confirm Password",
-                  ),
-                  const SizedBox(height: 5),
-                  CustomTextField(
-                    confPwdController: confPwdController,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    const CustomTextHeader(
+                      text: "What's your Email Address?",
+                    ),
+                    const SizedBox(height: 5),
+                    CustomTextField(
+                      isPassword: false,
+                      hint: 'Enter your email...',
+                      onChanged: (value) {
+                        context.read<SignupCubit>().emailChanged(value);
+                        debugPrint(state.email);
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                    const CustomTextHeader(
+                      text: "Password?",
+                    ),
+                    const SizedBox(height: 5),
+                    CustomObsTextField(
+                      isPassword: true,
+                      hint: 'Enter password...',
+                      onChanged: (value) {
+                        context.read<SignupCubit>().passwordChanged(value);
+                        debugPrint(state.password);
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                    const CustomTextHeader(
+                      text: "Confirm Password",
+                    ),
+                    const SizedBox(height: 5),
+                    CustomObsTextField(
+                      confPwdController: confPwdController,
 
-                    isPassword: true,
-                    hint: 'Confirm here..',
-                    // onChanged: (value) {
-                    //   debugPrint('CONFIRM PASS VAR: ${confPwController.text}');
-                    //   debugPrint(
-                    //       'PASSWORD VAR: ${context.read<SignupCubit>().userPass}');
-                    //   if (context.read<SignupCubit>().userPass ==
-                    //       confPwController.text) {
-                    //     debugPrint('passwordMatched');
-                    //   }
-                    // },
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  const AlreadyLoner(),
-                  const SizedBox(height: 10),
-                  const StepProgressIndicator(
-                    totalSteps: 5,
-                    currentStep: 2,
-                    selectedColor: Colors.deepPurple,
-                  ),
-                  CustomButton(
-                    confPwdController: confPwdController,
-                    buttonText: 'NEXT',
-                    tabController: tabController,
-                  ),
-                ],
-              ),
-            ],
+                      isPassword: true,
+                      hint: 'Confirm here..',
+                      // onChanged: (value) {
+                      //   debugPrint('CONFIRM PASS VAR: ${confPwController.text}');
+                      //   debugPrint(
+                      //       'PASSWORD VAR: ${context.read<SignupCubit>().userPass}');
+                      //   if (context.read<SignupCubit>().userPass ==
+                      //       confPwController.text) {
+                      //     debugPrint('passwordMatched');
+                      //   }
+                      // },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 370),
+                Column(
+                  children: [
+                    const AlreadyLoner(),
+                    const SizedBox(height: 10),
+                    const StepProgressIndicator(
+                      totalSteps: 5,
+                      currentStep: 2,
+                      selectedColor: Colors.deepPurple,
+                    ),
+                    CustomButton(
+                      confPwdController: confPwdController,
+                      buttonText: 'NEXT',
+                      tabController: tabController,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },
