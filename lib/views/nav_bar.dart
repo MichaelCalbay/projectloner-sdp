@@ -4,8 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:instabug_flutter/instabug_flutter.dart';
-import 'home_view.dart';
-import 'package:projectloner/auth/auth_page.dart';
 import 'package:projectloner/matching/matching_screen.dart';
 import 'package:projectloner/profile/profile.dart';
 
@@ -36,7 +34,8 @@ class _NavBarState extends State<NavBar> {
                 'https://preview.redd.it/du7sbn27xs491.jpg?auto=webp&s=decc60fec16eb5ade184ac10c70520b64a7482e5',
               ),
             ),
-            accountName: Text(""), // could be implented later on
+            accountName: Text(
+                "${FirebaseFirestore.instance.collection('UserData').doc(FirebaseAuth.instance.currentUser!.uid).collection('First Name')}"), // could be implented later on
             accountEmail: Text('${FirebaseAuth.instance.currentUser!.email}'),
           ),
 
