@@ -104,10 +104,10 @@ class LonerUser extends Equatable {
         // 'https://cdn.worldcosplay.net/760194/rhwvvffvohquiewsbgrjaeeigkasdcvzfuwwadyd-740.jpg',
         // 'https://img-9gag-fun.9cache.com/photo/a2ZmVQZ_460s.jpg',
         // 'https://pbs.twimg.com/media/DeetJ5VXUAA5-5V.jpg',
+        'https://www.gamelivestory.com/images/article/one-piece-10-hilarious-nico-robin-memes-main.webp',
         'https://cdna.artstation.com/p/assets/images/images/039/297/588/large/awn-arts-1625496152134.jpg?1625509976',
         'https://wallpaper.dog/large/20519916.jpg',
         'https://cdna.artstation.com/p/assets/images/images/003/099/812/medium/andrea-villa-sanchez-nico-robin-one-piece-by-andreakiissu-d9aa53m.jpg?1469661018',
-        'https://www.gamelivestory.com/images/article/one-piece-10-hilarious-nico-robin-memes-main.webp',
       ],
       interests: [
         'MUSIC',
@@ -166,6 +166,28 @@ class LonerUser extends Equatable {
       ],
       server: 'APAC',
       mainRole: 'Controller',
+    ),
+    const LonerUser(
+      id: '4',
+      firstName: 'Lin Lin',
+      lastName: 'Charlotte',
+      age: 62,
+      imageUrls: [
+        'https://cdn.worldcosplay.net/146450/nfutledcmvzfuvusednbkongkoxilnzjgdtrwevw-740.jpg',
+        'https://pm1.narvii.com/6456/6a3d42231eaa868021336ede1ff87551cc87eef9_hq.jpg',
+        'https://preview.redd.it/7bivfmtyeaa21.jpg?auto=webp&s=d4cc4a57ab415b1ac12f890c766ef38decbd9659',
+        'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/21e32f5c-5edb-4656-946b-1c0936ff4284/dbvbj6q-63cd15c5-54b3-4d88-9537-aa800fbe174f.jpg/v1/fill/w_1024,h_683,q_75,strp/big_mom_and_her_little_friends_by_loveless_thing_dbvbj6q-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjgzIiwicGF0aCI6IlwvZlwvMjFlMzJmNWMtNWVkYi00NjU2LTk0NmItMWMwOTM2ZmY0Mjg0XC9kYnZiajZxLTYzY2QxNWM1LTU0YjMtNGQ4OC05NTM3LWFhODAwZmJlMTc0Zi5qcGciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.L0Rl5WvghYvZ8nrFXOGh-97Um1D42zNuDVE8l5xhCB0',
+      ],
+      gender: 'Female',
+      interests: [
+        'FOOD',
+        'FAMILY',
+        'CAKES',
+        'ICE CREAM',
+        'CHOCOLATES',
+      ],
+      server: 'APAC',
+      mainRole: 'Sentinel',
     ),
   ];
   //   const LonerUser(
