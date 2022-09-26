@@ -7,9 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instabug_flutter/instabug_flutter.dart';
 import 'package:projectloner/auth/login_page.dart';
 import 'package:projectloner/repositories/registration/auth_repo.dart';
-import 'home_view.dart';
-import 'package:projectloner/auth/auth_page.dart';
-import 'package:projectloner/matching/matching_screen.dart';
 import 'package:projectloner/profile/profile.dart';
 
 //import 'HomeView.dart';

@@ -9,7 +9,6 @@ class EmailScreen extends StatelessWidget {
 
   final confPwdController = TextEditingController();
 
-
   EmailScreen({
     Key? key,
     required this.tabController,
@@ -55,7 +54,7 @@ class EmailScreen extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 10),
-                  CustomTextHeader(
+                  const CustomTextHeader(
                     text: "Confirm Password",
                   ),
                   const SizedBox(height: 5),
