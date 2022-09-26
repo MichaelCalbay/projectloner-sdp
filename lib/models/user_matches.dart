@@ -28,17 +28,17 @@ class UserMatch extends Equatable {
     UserMatch(
       id: 1,
       userId: 1,
-      matchedUser: LonerUser.users[1],
+      matchedUser: LonerUser.users[0],
       chat: Chat.chats
-          .where((chat) => chat.userId == 1 && chat.matchedUserId == 2)
+          .where((chat) => chat.userId == 1 && chat.matchedUserId == 1)
           .toList(),
     ),
     UserMatch(
       id: 2,
       userId: 1,
-      matchedUser: LonerUser.users[5],
+      matchedUser: LonerUser.users[1],
       chat: Chat.chats
-          .where((chat) => chat.userId == 1 && chat.matchedUserId == 6)
+          .where((chat) => chat.userId == 1 && chat.matchedUserId == 2)
           .toList(),
     ),
     UserMatch(
@@ -47,22 +47,6 @@ class UserMatch extends Equatable {
       matchedUser: LonerUser.users[2],
       chat: Chat.chats
           .where((chat) => chat.userId == 1 && chat.matchedUserId == 3)
-          .toList(),
-    ),
-    UserMatch(
-      id: 4,
-      userId: 1,
-      matchedUser: LonerUser.users[3],
-      chat: Chat.chats
-          .where((chat) => chat.userId == 1 && chat.matchedUserId == 4)
-          .toList(),
-    ),
-    UserMatch(
-      id: 5,
-      userId: 1,
-      matchedUser: LonerUser.users[4],
-      chat: Chat.chats
-          .where((chat) => chat.userId == 1 && chat.matchedUserId == 5)
           .toList(),
     ),
   ];

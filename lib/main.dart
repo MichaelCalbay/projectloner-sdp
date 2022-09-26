@@ -9,6 +9,7 @@ import 'package:projectloner/blocs/auth/auth_bloc.dart';
 import 'package:projectloner/blocs/onboarding/onboarding_bloc.dart';
 import 'package:projectloner/blocs/swipe/swipe_bloc.dart';
 import 'package:projectloner/cubit/signup/signup_cubit.dart';
+import 'package:projectloner/matching/matching_screen.dart';
 import 'package:projectloner/registration/registration_page.dart';
 import 'package:projectloner/repositories/registration/auth_repo.dart';
 import 'package:projectloner/views/onboarding_screen.dart';
@@ -99,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
       debugShowCheckedModeBanner: false,
       onGenerateRoute: (settings) => RegistrationPage.route(),
       // initialRoute: RegistrationPage.routeName,
-      home: isviewed != 0 ? OnboardingScreen() : LoginPage(),
+      home: MatchMaking(), //isviewed != 0 ? OnboardingScreen() : LoginPage(),
       //Theme colour
       theme: ThemeData(primarySwatch: Colors.deepPurple),
     );
