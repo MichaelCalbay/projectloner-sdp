@@ -7,7 +7,8 @@ import 'package:projectloner/auth/check_login.dart';
 import 'package:projectloner/auth/forgot_password.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  final bool? isEmailVerified;
+  const LoginPage({Key? key, this.isEmailVerified}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -23,7 +24,9 @@ class _LoginPageState extends State<LoginPage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const CheckLogin(),
+          builder: (context) => CheckLogin(
+            isEmailVerified: widget.isEmailVerified,
+          ),
         ));
   }
 

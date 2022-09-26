@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomObsTextField extends StatefulWidget {
   final TextEditingController? confPwdController;
 
   final String hint;
-  final bool isPassword;
+  bool isPassword;
   final Function(String)? onChanged;
-
-  const CustomTextField({
+  CustomObsTextField({
     Key? key,
     this.confPwdController,
-
     this.onChanged,
     required this.hint,
     required this.isPassword,
   }) : super(key: key);
 
+  @override
+  State<CustomObsTextField> createState() => _CustomObsTextFieldState();
+}
+
+class _CustomObsTextFieldState extends State<CustomObsTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,9 +30,8 @@ class CustomTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: TextField(
-        controller: confPwdController,
-
-        obscureText: isPassword,
+        controller: widget.confPwdController,
+        obscureText: widget.isPassword,
         enableSuggestions: false,
         autocorrect: false,
         style: const TextStyle(
@@ -37,27 +39,18 @@ class CustomTextField extends StatelessWidget {
         ),
         decoration: InputDecoration(
           border: InputBorder.none,
-          labelText: hint,
+          labelText: widget.hint,
+          suffixIcon: IconButton(
+            onPressed: () => setState(
+              (() => widget.isPassword = !widget.isPassword),
+            ),
+            icon: Icon(
+                widget.isPassword ? Icons.visibility : Icons.visibility_off,
+                color: Colors.deepPurple),
+          ),
         ),
-        onChanged: onChanged,
+        onChanged: widget.onChanged,
       ),
     );
-    // return TextField(
-    //   decoration: InputDecoration(
-    //     filled: true,
-    //     fillColor: Colors.transparent,
-    //     hintText: hint,
-    //     contentPadding: const EdgeInsets.only(
-    //       bottom: 5.0,
-    //       top: 12.5,
-    //     ),
-    //     // focusedBorder: const OutlineInputBorder(
-    //     //   borderSide: BorderSide(color: Colors.transparent),
-    //     // ),
-    //     enabledBorder: const UnderlineInputBorder(
-    //       borderSide: BorderSide(color: Colors.transparent),
-    //     ),
-    //   ),
-    // );
   }
 }

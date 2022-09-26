@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextNumberField extends StatelessWidget {
   final TextEditingController? confPwdController;
 
   final String hint;
   final bool isPassword;
   final Function(String)? onChanged;
 
-  const CustomTextField({
+  const CustomTextNumberField({
     Key? key,
     this.confPwdController,
 
@@ -32,6 +32,7 @@ class CustomTextField extends StatelessWidget {
         obscureText: isPassword,
         enableSuggestions: false,
         autocorrect: false,
+        keyboardType: TextInputType.number,
         style: const TextStyle(
           fontSize: 16,
         ),
@@ -42,22 +43,5 @@ class CustomTextField extends StatelessWidget {
         onChanged: onChanged,
       ),
     );
-    // return TextField(
-    //   decoration: InputDecoration(
-    //     filled: true,
-    //     fillColor: Colors.transparent,
-    //     hintText: hint,
-    //     contentPadding: const EdgeInsets.only(
-    //       bottom: 5.0,
-    //       top: 12.5,
-    //     ),
-    //     // focusedBorder: const OutlineInputBorder(
-    //     //   borderSide: BorderSide(color: Colors.transparent),
-    //     // ),
-    //     enabledBorder: const UnderlineInputBorder(
-    //       borderSide: BorderSide(color: Colors.transparent),
-    //     ),
-    //   ),
-    // );
   }
 }

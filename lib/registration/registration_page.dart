@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:projectloner/cubit/signup/signup_cubit.dart';
 import 'package:projectloner/registration/screens/screens.dart';
-import 'package:projectloner/repositories/registration/auth_repo.dart';
 
 class RegistrationPage extends StatelessWidget {
   static const String routeName = '/registration';
@@ -12,11 +9,7 @@ class RegistrationPage extends StatelessWidget {
   static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (context) => BlocProvider(
-        create: (_) =>
-            SignupCubit(authRepository: context.read<AuthRepository>()),
-        child: const RegistrationPage(),
-      ),
+      builder: (context) => const RegistrationPage(),
     );
   }
 
@@ -33,9 +26,7 @@ class RegistrationPage extends StatelessWidget {
       length: tabs.length,
       child: Builder(builder: (BuildContext context) {
         final TabController tabController = DefaultTabController.of(context)!;
-        tabController.addListener(() {
-          if (!tabController.indexIsChanging) {}
-        });
+
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
