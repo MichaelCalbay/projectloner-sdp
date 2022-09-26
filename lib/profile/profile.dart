@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projectloner/models/models.dart';
@@ -5,7 +6,6 @@ import 'package:projectloner/models/user_model.dart';
 
 import '../views/nav_bar.dart';
 import '../widgets/profile_app_bar.dart';
-import '../widgets/profile_widget.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -15,9 +15,9 @@ class ProfilePage extends StatelessWidget {
     final cUser = LonerUser.users[1];
 
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: const BuildAppBar(),
       body: ListView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         children: [
           // ProfileWidget(
           //   imagePath: cUser.imageUrls[0],
@@ -34,8 +34,9 @@ class ProfilePage extends StatelessWidget {
   }
 
   Widget buildName(LonerUser cUser) => Column(children: [
-        Text("${FirebaseAuth.instance.currentUser!.displayName}",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
-        Text("${FirebaseAuth.instance.currentUser!.email}"),
+        // Text("${FirebaseAuth.instance.currentUser!.displayName}",
+        //     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
+        Text("${FirebaseFirestore.instance.collection('LonerUser')}"),
+        Text("${FirebaseAuth.instance.currentUser!}"),
       ]);
 }

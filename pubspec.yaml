@@ -45,9 +45,12 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   shared_preferences: ^2.0.15
   equatable: ^2.0.5
-  bloc: ^8.1.0
+  # bloc: ^8.1.0
   flutter_bloc: ^8.1.1
   http: ^0.13.5
+  step_progress_indicator: ^1.0.2
+  image_picker: ^0.8.5+3
+  firebase_storage: ^10.3.8
 
 
 dev_dependencies:
@@ -80,6 +83,7 @@ flutter:
     - images/players.png
     - images/her.png
     - images/glasses.png
+    - images/gamepad.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

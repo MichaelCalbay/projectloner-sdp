@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projectloner/matching/match_profile.dart';
 import 'package:projectloner/models/models.dart';
-import 'package:projectloner/widgets/widgets.dart';
 
 class UserCard extends StatelessWidget {
   final LonerUser user;
@@ -69,7 +68,7 @@ class UserCard extends StatelessWidget {
                           .copyWith(color: Colors.white),
                     ),
                     Text(
-                      '${user.server} - ${user.role}',
+                      '${user.server} - ${user.mainRole}',
                       style: Theme.of(context).textTheme.headline6!.copyWith(
                             color: Colors.white,
                             fontWeight: FontWeight.normal,
