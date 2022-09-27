@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectloner/auth/verify_email.dart';
 import 'package:projectloner/cubit/signup/signup_cubit.dart';
-import 'package:projectloner/repositories/registration/auth_repo.dart';
 import 'package:projectloner/blocs/onboarding/onboarding_bloc.dart';
-import 'package:projectloner/cubit/signup/signup_cubit.dart';
 import 'package:projectloner/models/user_model.dart';
 
 class CustomButton extends StatelessWidget {
@@ -61,31 +59,28 @@ class CustomButton extends StatelessWidget {
                     textColor: Colors.red);
               } else {
                 await context.read<SignupCubit>().signupWithCredentials();
-
-                LonerUser user = LonerUser(
-                  id: context.read<SignupCubit>().state.user!.uid,
-                  firstName: '',
-                  lastName: '',
-                  age: 0,
-                  gender: '',
-                  imageUrls: [],
-                  server: '',
-                  mainRole: '',
-                );
-                context.read<OnboardingBloc>().add(StartOnboarding(user: user));
-              }
-            }
-          },
-          // ignore: sized_box_for_whitespace
-          child: Container(
-            width: double.infinity,
-            child: Center(
-              child: Text(
-                buttonText,
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
-            ),
+            LonerUser user = LonerUser(
+              id: context.read<SignupCubit>().state.user!.uid,
+              firstName: '',
+              lastName: '',
+              age: 0,
+              gender: '',
+              imageUrls: const [],
+              interests: const [],
+              server: '',
+              mainRole: '',
+            );
+            context.read<OnboardingBloc>().add(StartOnboarding(user: user));
+          }
+        }
+      },
+      // ignore: sized_box_for_whitespace
+      child: Container(
+        width: double.infinity,
+        child: Center(
+          child: Text(
+            buttonText,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
         );
       },
