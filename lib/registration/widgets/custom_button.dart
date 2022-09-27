@@ -59,28 +59,32 @@ class CustomButton extends StatelessWidget {
                     textColor: Colors.red);
               } else {
                 await context.read<SignupCubit>().signupWithCredentials();
-            LonerUser user = LonerUser(
-              id: context.read<SignupCubit>().state.user!.uid,
-              firstName: '',
-              lastName: '',
-              age: 0,
-              gender: '',
-              imageUrls: const [],
-              interests: const [],
-              server: '',
-              mainRole: '',
-            );
-            context.read<OnboardingBloc>().add(StartOnboarding(user: user));
-          }
-        }
-      },
-      // ignore: sized_box_for_whitespace
-      child: Container(
-        width: double.infinity,
-        child: Center(
-          child: Text(
-            buttonText,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                LonerUser user = LonerUser(
+                  id: context.read<SignupCubit>().state.user!.uid,
+                  firstName: '',
+                  lastName: '',
+                  age: 0,
+                  gender: '',
+                  imageUrls: const [],
+                  interests: const [],
+                  server: '',
+                  mainRole: '',
+                );
+                context.read<OnboardingBloc>().add(StartOnboarding(user: user));
+              }
+            }
+          },
+
+          // ignore: sized_box_for_whitespace
+          child: Container(
+            width: double.infinity,
+            child: Center(
+              child: Text(
+                buttonText,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+            ),
           ),
         );
       },
