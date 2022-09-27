@@ -27,10 +27,10 @@ class HomePageState extends State {
       );
     } else if (matchPreferences[1] == true) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const TeamPage()));
+          context, MaterialPageRoute(builder: (context) => TeamPage()));
     } else if (matchPreferences[2] == true) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const CoachPage()));
+          context, MaterialPageRoute(builder: (context) => CoachPage()));
     }
   }
 
@@ -47,6 +47,7 @@ class HomePageState extends State {
             height: 150,
           ),
           const Text(
+
             'Hello *User*!',
             style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
           ),

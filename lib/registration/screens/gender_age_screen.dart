@@ -23,82 +23,123 @@ class GenderAgeScreen extends StatelessWidget {
               horizontal: 30.0,
               vertical: 10.0,
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    const CustomTextHeader(
-                      text: "What's Your Gender?",
-                    ),
-                    const SizedBox(height: 10),
-                    CustomCheckbox(
-                      text: 'MALE',
-                      value: state.user.gender == 'Male',
-                      onChanged: (bool? newValue) {
-                        context.read<OnboardingBloc>().add(
-                              UpdateUser(
-                                user: state.user.copyWith(gender: 'Male'),
-                              ),
-                            );
-                      },
-                    ),
-                    CustomCheckbox(
-                      text: 'FEMALE',
-                      value: state.user.gender == 'Female',
-                      onChanged: (bool? newValue) {
-                        context.read<OnboardingBloc>().add(
-                              UpdateUser(
-                                user: state.user.copyWith(gender: 'Female'),
-                              ),
-                            );
-                      },
-                    ),
-                    CustomCheckbox(
-                      text: 'OTHER',
-                      value: state.user.gender == 'Other',
-                      onChanged: (bool? newValue) {
-                        context.read<OnboardingBloc>().add(
-                              UpdateUser(
-                                user: state.user.copyWith(gender: 'Other'),
-                              ),
-                            );
-                      },
-                    ),
-                    const SizedBox(height: 50),
-                    const CustomTextHeader(
-                      text: "How Old Are You?",
-                    ),
-                    const SizedBox(height: 5.0),
-                    CustomTextField(
-                      isPassword: false,
-                      hint: 'Age here...',
-                      onChanged: (value) {
-                        context.read<OnboardingBloc>().add(
-                              UpdateUser(
-                                user: state.user.copyWith(
-                                  age: int.parse(value),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      const CustomTextHeader(
+                        text: "What's your Firstname?",
+                      ),
+                      const SizedBox(height: 5),
+                      CustomTextField(
+                        isPassword: false,
+                        hint: 'Enter your firstname...',
+                        onChanged: (value) {
+                          context.read<OnboardingBloc>().add(
+                                UpdateUser(
+                                  user: state.user.copyWith(
+                                    firstName: value,
+                                  ),
                                 ),
-                              ),
-                            );
-                      },
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    const StepProgressIndicator(
-                      totalSteps: 5,
-                      currentStep: 3,
-                      selectedColor: Colors.deepPurple,
-                    ),
-                    CustomButton(
-                      buttonText: 'NEXT',
-                      tabController: tabController,
-                    ),
-                  ],
-                ),
-              ],
+                              );
+                          //debugPrint(state.email);
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      const CustomTextHeader(
+                        text: "What's your Lastname?",
+                      ),
+                      const SizedBox(height: 5),
+                      CustomTextField(
+                        isPassword: false,
+                        hint: 'Enter your lastname...',
+                        onChanged: (value) {
+                          context.read<OnboardingBloc>().add(
+                                UpdateUser(
+                                  user: state.user.copyWith(lastName: value),
+                                ),
+                              );
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      const CustomTextHeader(
+                        text: "What's Your Gender?",
+                      ),
+                      const SizedBox(height: 10),
+                      CustomCheckbox(
+                        text: 'MALE',
+                        value: state.user.gender == 'Male',
+                        onChanged: (bool? newValue) {
+                          context.read<OnboardingBloc>().add(
+                                UpdateUser(
+                                  user: state.user.copyWith(gender: 'Male'),
+                                ),
+                              );
+                        },
+                      ),
+                      CustomCheckbox(
+                        text: 'FEMALE',
+                        value: state.user.gender == 'Female',
+                        onChanged: (bool? newValue) {
+                          context.read<OnboardingBloc>().add(
+                                UpdateUser(
+                                  user: state.user.copyWith(gender: 'Female'),
+                                ),
+                              );
+                        },
+                      ),
+                      CustomCheckbox(
+                        text: 'OTHER',
+                        value: state.user.gender == 'Other',
+                        onChanged: (bool? newValue) {
+                          context.read<OnboardingBloc>().add(
+                                UpdateUser(
+                                  user: state.user.copyWith(gender: 'Other'),
+                                ),
+                              );
+                        },
+                      ),
+                      const SizedBox(height: 50),
+                      const CustomTextHeader(
+                        text: "How Old Are You?",
+                      ),
+                      const SizedBox(height: 5.0),
+                      CustomTextNumberField(
+                        isPassword: false,
+                        hint: 'Age here...',
+                        onChanged: (value) {
+                          context.read<OnboardingBloc>().add(
+                                UpdateUser(
+                                  user: state.user.copyWith(
+                                    age: int.parse(value),
+                                  ),
+                                ),
+                              );
+                        },
+                      ),
+                      const SizedBox(height: 140),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      const AlreadyLoner(),
+                      const SizedBox(height: 10),
+                      const StepProgressIndicator(
+                        totalSteps: 5,
+                        currentStep: 3,
+                        selectedColor: Colors.deepPurple,
+                      ),
+                      CustomButton(
+                        user: state.user,
+                        buttonText: 'NEXT',
+                        tabController: tabController,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           );
         } else {

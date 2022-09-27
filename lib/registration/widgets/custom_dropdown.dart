@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class CustomDropdown extends StatelessWidget {
-  final Function(String)? onChanged;
+  final Function(String?)? onChanged;
 
   final server = [
     'APAC',
@@ -10,7 +10,7 @@ class CustomDropdown extends StatelessWidget {
     'NA',
     'LATAM',
   ];
-  String? valueServer;
+  static String? valueServer;
   DropdownMenuItem<String> menuItem(String items) => DropdownMenuItem(
         value: items,
         child: Text(
@@ -34,9 +34,7 @@ class CustomDropdown extends StatelessWidget {
       child: DropdownButtonFormField<String>(
         value: valueServer,
         items: server.map(menuItem).toList(),
-        onChanged: (value) {
-          valueServer = value;
-        },
+        onChanged: onChanged,
         icon: const Icon(
           Icons.arrow_drop_down_circle,
           color: Colors.deepPurple,

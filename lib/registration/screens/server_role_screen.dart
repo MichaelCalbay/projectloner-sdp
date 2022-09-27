@@ -30,7 +30,15 @@ class ServerRole extends StatelessWidget {
                     const CustomTextHeader(
                       text: 'What Server Do You Play On?',
                     ),
-                    CustomDropdown(),
+                    CustomDropdown(
+                      onChanged: (value) {
+                        context.read<OnboardingBloc>().add(
+                              UpdateUser(
+                                user: state.user.copyWith(server: value),
+                              ),
+                            );
+                      },
+                    ),
                     const SizedBox(height: 25),
                     const CustomTextHeader(
                       text: "What's your best role?",
@@ -92,6 +100,7 @@ class ServerRole extends StatelessWidget {
                       selectedColor: Colors.deepPurple,
                     ),
                     CustomButton(
+                      user: state.user,
                       buttonText: 'FINISH',
                       tabController: tabController,
                     ),

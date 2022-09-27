@@ -31,10 +31,10 @@ class _NavBarState extends State<NavBar> {
           UserAccountsDrawerHeader(
             currentAccountPicture: CircleAvatar(
               radius: 20,
-              backgroundImage: NetworkImage(
-                //Can be implemented to get current user's image[0]
-                'https://preview.redd.it/du7sbn27xs491.jpg?auto=webp&s=decc60fec16eb5ade184ac10c70520b64a7482e5',
-              ),
+              // backgroundImage: NetworkImage(
+              //   //Can be implemented to get current user's image[0]
+              //   'https://preview.redd.it/du7sbn27xs491.jpg?auto=webp&s=decc60fec16eb5ade184ac10c70520b64a7482e5',
+              // ),
             ),
             accountName: Text(
                 "${FirebaseFirestore.instance.collection('UserData').doc(FirebaseAuth.instance.currentUser!.uid).collection('First Name')}"), // could be implented later on

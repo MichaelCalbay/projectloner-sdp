@@ -4,7 +4,12 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:projectloner/repositories/registration/auth_repo.dart';
 import 'package:projectloner/views/home_view.dart';
+
+import 'login_page.dart';
 
 class VerifyEmailPage extends StatefulWidget {
   const VerifyEmailPage({Key? key}) : super(key: key);
@@ -34,6 +39,13 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
     }
   }
 
+  void printMessage() {
+    Fluttertoast.showToast(
+        msg: "Verification has been sent.",
+        gravity: ToastGravity.BOTTOM,
+        textColor: Colors.red);
+  }
+
   @override
   void dispose() {
     timer?.cancel();
@@ -56,6 +68,8 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
   Future sendVerificationEmail() async {
     final user = FirebaseAuth.instance.currentUser;
     await user?.sendEmailVerification();
+
+    printMessage();
 
     //Resend email every 5 seconds when user can actually resend it.
     setState(() {
@@ -106,7 +120,21 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                 ),
               ),
               TextButton(
-                onPressed: () => FirebaseAuth.instance.signOut(),
+                onPressed: () {
+                  RepositoryProvider.of<AuthRepository>(context).signOut();
+                  FirebaseAuth.instance.signOut();
+
+                  Navigator.pop(context);
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: ((context) => LoginPage(
+                            isEmailVerified: isEmailVerified,
+                          )),
+                    ),
+                  );
+                },
                 child: Text(
                   'Cancel',
                   style: TextStyle(fontSize: 20),
