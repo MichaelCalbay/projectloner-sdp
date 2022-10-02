@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -11,6 +12,7 @@ class CustomButton extends StatelessWidget {
   final String buttonText;
   final TextEditingController? confPwdController;
   final LonerUser? user;
+  // final AuthRepository? authRepository;
 
   const CustomButton({
     Key? key,
@@ -18,6 +20,7 @@ class CustomButton extends StatelessWidget {
     required this.buttonText,
     this.confPwdController,
     this.user,
+    // this.authRepository,
   }) : super(key: key);
 
   @override
@@ -46,12 +49,15 @@ class CustomButton extends StatelessWidget {
                   ),
                 );
               }
-            } else {
-              tabController.animateTo(tabController.index + 1);
-            }
-
-            if (tabController.index == 2) {
-              if (!(context.read<SignupCubit>().userPass ==
+            } else if (tabController.index == 1) {
+              if (context.read<SignupCubit>().userPass == null ||
+                  confPwdController?.text.trim() == '' ||
+                  context.read<SignupCubit>().userEmail == null) {
+                Fluttertoast.showToast(
+                    msg: "Fields can't be empty.",
+                    gravity: ToastGravity.BOTTOM,
+                    textColor: Colors.red);
+              } else if (!(context.read<SignupCubit>().userPass ==
                   confPwdController?.text.trim())) {
                 Fluttertoast.showToast(
                     msg: "Passwords don't match.",

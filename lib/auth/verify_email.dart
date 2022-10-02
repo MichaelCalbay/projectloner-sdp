@@ -33,7 +33,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
       sendVerificationEmail();
 
       timer = Timer.periodic(
-        Duration(seconds: 3),
+        Duration(seconds: 1),
         (_) => checkEmailVerified(),
       );
     }
@@ -43,7 +43,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
     Fluttertoast.showToast(
         msg: "Verification has been sent.",
         gravity: ToastGravity.BOTTOM,
-        textColor: Colors.red);
+        textColor: Colors.green);
   }
 
   @override
