@@ -38,7 +38,7 @@ class CustomButton extends StatelessWidget {
                   user?.server == '' ||
                   user?.mainRole == '') {
                 Fluttertoast.showToast(
-                    msg: "Fields cannot be empty.",
+                    msg: "You've missed a field.",
                     gravity: ToastGravity.BOTTOM,
                     textColor: Colors.red);
               } else {
@@ -64,6 +64,7 @@ class CustomButton extends StatelessWidget {
                     gravity: ToastGravity.BOTTOM,
                     textColor: Colors.red);
               } else {
+                tabController.animateTo(tabController.index + 1);
                 await context.read<SignupCubit>().signupWithCredentials();
                 LonerUser user = LonerUser(
                   id: context.read<SignupCubit>().state.user!.uid,
@@ -78,6 +79,8 @@ class CustomButton extends StatelessWidget {
                 );
                 context.read<OnboardingBloc>().add(StartOnboarding(user: user));
               }
+            } else {
+              tabController.animateTo(tabController.index + 1);
             }
           },
           // ignore: sized_box_for_whitespace
