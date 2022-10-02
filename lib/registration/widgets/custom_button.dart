@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -13,6 +14,7 @@ class CustomButton extends StatelessWidget {
   final String buttonText;
   final TextEditingController? confPwdController;
   final LonerUser? user;
+  // final AuthRepository? authRepository;
 
   const CustomButton({
     Key? key,
@@ -20,6 +22,7 @@ class CustomButton extends StatelessWidget {
     required this.buttonText,
     this.confPwdController,
     this.user,
+    // this.authRepository,
   }) : super(key: key);
 
   @override
@@ -48,32 +51,53 @@ class CustomButton extends StatelessWidget {
                   ),
                 );
               }
-            } else {
-              tabController.animateTo(tabController.index + 1);
-            }
-
-            if (tabController.index == 2) {
-              if (!(context.read<SignupCubit>().userPass ==
+            } else if (tabController.index == 1) {
+              if (context.read<SignupCubit>().userPass == null ||
+                  confPwdController?.text.trim() == '' ||
+                  context.read<SignupCubit>().userEmail == null) {
+                Fluttertoast.showToast(
+                    msg: "Fields can't be empty.",
+                    gravity: ToastGravity.BOTTOM,
+                    textColor: Colors.red);
+              } else if (!(context.read<SignupCubit>().userPass ==
                   confPwdController?.text.trim())) {
                 Fluttertoast.showToast(
                     msg: "Passwords don't match.",
                     gravity: ToastGravity.BOTTOM,
                     textColor: Colors.red);
               } else {
-                await context.read<SignupCubit>().signupWithCredentials();
-
-                LonerUser user = LonerUser(
-                  id: context.read<SignupCubit>().state.user!.uid,
-                  firstName: '',
-                  lastName: '',
-                  age: 0,
-                  gender: '',
-                  imageUrls: [],
-                  server: '',
-                  mainRole: '',
-                );
-                context.read<OnboardingBloc>().add(StartOnboarding(user: user));
+                tabController.animateTo(tabController.index + 1);
               }
+              //======VALIDATIONS ON AUTH EXCEPTION BUT CANT FIGURE OUT=========
+              // tabController.animateTo(tabController.index + 1);
+              // debugPrint('true $context.read<AuthRepository>().isValid');
+              // if (AuthRepository.isValid == true &&
+              //     (context.read<SignupCubit>().userPass ==
+              //         confPwdController?.text.trim())) {
+              //   tabController.animateTo(tabController.index + 1);
+              // } else {
+              //   debugPrint('${AuthRepository.isValid}');
+
+              // }
+            } else {
+              tabController.animateTo(tabController.index + 1);
+            }
+
+            if (context.read<SignupCubit>().userPass ==
+                confPwdController?.text) {
+              await context.read<SignupCubit>().signupWithCredentials();
+
+              LonerUser user = LonerUser(
+                id: context.read<SignupCubit>().state.user!.uid,
+                firstName: '',
+                lastName: '',
+                age: 0,
+                gender: '',
+                imageUrls: [],
+                server: '',
+                mainRole: '',
+              );
+              context.read<OnboardingBloc>().add(StartOnboarding(user: user));
             }
           },
           // ignore: sized_box_for_whitespace
