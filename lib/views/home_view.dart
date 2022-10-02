@@ -47,7 +47,8 @@ class HomePageState extends State {
             height: 150,
           ),
           const Text(
-            'Hello Loner',
+
+            'Hello *User*!',
             style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
           ),
           const SizedBox(
