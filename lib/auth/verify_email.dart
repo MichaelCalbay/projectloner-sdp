@@ -43,7 +43,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
     Fluttertoast.showToast(
         msg: "Verification has been sent.",
         gravity: ToastGravity.BOTTOM,
-        textColor: Colors.red);
+        textColor: Colors.green);
   }
 
   @override
