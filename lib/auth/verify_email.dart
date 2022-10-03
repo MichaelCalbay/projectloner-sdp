@@ -33,7 +33,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
       sendVerificationEmail();
 
       timer = Timer.periodic(
-        Duration(seconds: 3),
+        Duration(seconds: 1),
         (_) => checkEmailVerified(),
       );
     }
