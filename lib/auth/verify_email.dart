@@ -93,11 +93,12 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text(
-                'A verification email has been sent to your E-mail.',
+                'A verification email has been \n sent to your E-mail.\n'
+                'Please allow 2-5 minutes for the email to come through.',
                 style: TextStyle(fontSize: 20),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 5),
+              SizedBox(height: 30),
               Text(
                 'Note: check your spam e-mail.',
                 style: TextStyle(
@@ -106,7 +107,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 5),
               ElevatedButton.icon(
                 onPressed: canResendEmail
                     ? sendVerificationEmail
