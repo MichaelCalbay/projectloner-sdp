@@ -37,12 +37,12 @@ class MatchesScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return Column(
                         children: [
-                          // SmallUserImage(
-                          //   height: 70,
-                          //   width: 70,
-                          //   imageUrl:
-                          //       inactiveMatches[index].matchedUser.imageUrls[0],
-                          // ),
+                          SmallUserImage(
+                            height: 70,
+                            width: 70,
+                            imageUrl:
+                                inactiveMatches[index].matchedUser.imageUrls[0],
+                          ),
                           Text(
                             inactiveMatches[index].matchedUser.firstName,
                             style: Theme.of(context).textTheme.bodyLarge,
@@ -72,12 +72,12 @@ class MatchesScreen extends StatelessWidget {
                       },
                       child: Row(
                         children: [
-                          // SmallUserImage(
-                          //     height: 70,
-                          //     width: 70,
-                          //     imageUrl: activeMatches[index]
-                          //         .matchedUser
-                          //         .imageUrls[0]),
+                          SmallUserImage(
+                              height: 70,
+                              width: 70,
+                              imageUrl: activeMatches[index]
+                                  .matchedUser
+                                  .imageUrls[0]),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
