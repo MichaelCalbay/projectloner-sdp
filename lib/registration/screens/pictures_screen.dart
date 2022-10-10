@@ -30,7 +30,7 @@ class Pictures extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const SizedBox(height: 10),
-                    CustomTextHeader(
+                    const CustomTextHeader(
                       text: 'Add 2 or More Pictures',
                     ),
                     const SizedBox(height: 15),

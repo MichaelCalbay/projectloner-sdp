@@ -64,15 +64,6 @@ class EmailScreen extends StatelessWidget {
                       confPwdController: confPwdController,
                       isPassword: true,
                       hint: 'Confirm here..',
-                      // onChanged: (value) {
-                      //   debugPrint('CONFIRM PASS VAR: ${confPwController.text}');
-                      //   debugPrint(
-                      //       'PASSWORD VAR: ${context.read<SignupCubit>().userPass}');
-                      //   if (context.read<SignupCubit>().userPass ==
-                      //       confPwController.text) {
-                      //     debugPrint('passwordMatched');
-                      //   }
-                      // },
                     ),
                   ],
                 ),
