@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:projectloner/views/matchViews/coach_view.dart';
 import 'package:projectloner/views/matchViews/team_view.dart';
 import '../matching/matching_screen.dart';
+import 'formus_view.dart';
 import 'nav_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,6 +32,9 @@ class HomePageState extends State {
     } else if (matchPreferences[2] == true) {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => CoachPage()));
+    }else if (matchPreferences[3] == true) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => ForumsPage()));
     }
   }
 
@@ -86,6 +90,7 @@ class HomePageState extends State {
                 children: const [
                   Text("Duo"),
                   Text("Team"),
+                  Text("Coach"),
                   Text("Coach"),
                 ],
               ),
