@@ -8,16 +8,17 @@ part 'signup_state.dart';
 class SignupCubit extends Cubit<SignupState> {
   final AuthRepository _authRepository;
   String? userPass;
+  String? userEmail;
 
   SignupCubit({
     required AuthRepository authRepository,
     this.userPass,
   })  : _authRepository = authRepository,
-
         super(SignupState.initial());
 
   void emailChanged(String value) {
     emit(state.copyWith(email: value, status: SignupStatus.initial));
+    userEmail = value;
   }
 
   void passwordChanged(String value) {

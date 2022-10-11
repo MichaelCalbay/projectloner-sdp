@@ -38,7 +38,7 @@ seen in apps such as discord, tinder and tracker.gg.
 - [x] Add Onboarding Feature
 - [x] Add Bug Reporting
 - [x] Add Navigations page
-- [ ] Add Direct messaging 
+- [x] Add Direct messaging 
 - [ ] Add User stats
 - [ ] Add Match making
     - [ ] Duo

@@ -19,12 +19,12 @@ class ChatScreen extends StatelessWidget {
           padding: const EdgeInsets.only(right: 20.0),
           child: Row(
             children: [
-              // CircleAvatar(
-              //   radius: 20,
-              //   backgroundImage: NetworkImage(
-              //     userMatch.matchedUser.imageUrls[0],
-              //   ),
-              // ),
+              CircleAvatar(
+                radius: 20,
+                backgroundImage: NetworkImage(
+                  userMatch.matchedUser.imageUrls[0],
+                ),
+              ),
               const SizedBox(width: 5),
               Text(
                 userMatch.matchedUser.firstName,
@@ -76,13 +76,13 @@ class ChatScreen extends StatelessWidget {
                                       alignment: Alignment.topLeft,
                                       child: Row(
                                         children: [
-                                          // CircleAvatar(
-                                          //   radius: 20,
-                                          //   backgroundImage: NetworkImage(
-                                          //     userMatch
-                                          //         .matchedUser.imageUrls[0],
-                                          //   ),
-                                          // ),
+                                          CircleAvatar(
+                                            radius: 20,
+                                            backgroundImage: NetworkImage(
+                                              userMatch
+                                                  .matchedUser.imageUrls[0],
+                                            ),
+                                          ),
                                           const SizedBox(width: 8.0),
                                           Container(
                                             padding: const EdgeInsets.all(8.0),
