@@ -62,7 +62,6 @@ class EmailScreen extends StatelessWidget {
                     const SizedBox(height: 5),
                     CustomObsTextField(
                       confPwdController: confPwdController,
-
                       isPassword: true,
                       hint: 'Confirm here..',
                       // onChanged: (value) {

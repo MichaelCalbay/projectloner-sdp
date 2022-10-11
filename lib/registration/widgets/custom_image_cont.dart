@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:projectloner/blocs/onboarding/onboarding_bloc.dart';
-import 'package:projectloner/repositories/storage/storage_repo.dart';
 
 class CustomImageCont extends StatelessWidget {
   final String? imageUrl;

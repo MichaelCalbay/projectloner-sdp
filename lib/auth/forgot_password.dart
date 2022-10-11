@@ -29,7 +29,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       Fluttertoast.showToast(
           msg: "Reset link has been sent.",
           gravity: ToastGravity.BOTTOM,
-          textColor: Colors.red);
+          textColor: Colors.green);
     } on FirebaseAuthException catch (e) {
       //Validations
       if (e.code == 'user-not-found') {

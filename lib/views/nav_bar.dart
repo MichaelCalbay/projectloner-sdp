@@ -7,9 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instabug_flutter/instabug_flutter.dart';
 import 'package:projectloner/auth/login_page.dart';
 import 'package:projectloner/repositories/registration/auth_repo.dart';
-import 'home_view.dart';
-import 'package:projectloner/auth/auth_page.dart';
-import 'package:projectloner/matching/matching_screen.dart';
 import 'package:projectloner/profile/profile.dart';
 
 //import 'HomeView.dart';
@@ -34,10 +31,10 @@ class _NavBarState extends State<NavBar> {
           UserAccountsDrawerHeader(
             currentAccountPicture: CircleAvatar(
               radius: 20,
-              backgroundImage: NetworkImage(
-                //Can be implemented to get current user's image[0]
-                'https://preview.redd.it/du7sbn27xs491.jpg?auto=webp&s=decc60fec16eb5ade184ac10c70520b64a7482e5',
-              ),
+              // backgroundImage: NetworkImage(
+              //   //Can be implemented to get current user's image[0]
+              //   'https://preview.redd.it/du7sbn27xs491.jpg?auto=webp&s=decc60fec16eb5ade184ac10c70520b64a7482e5',
+              // ),
             ),
             accountName: Text(
                 "${FirebaseFirestore.instance.collection('UserData').doc(FirebaseAuth.instance.currentUser!.uid).collection('First Name')}"), // could be implented later on
