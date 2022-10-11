@@ -43,7 +43,7 @@ class RegistrationPage extends StatelessWidget {
               GenderAgeScreen(tabController: tabController),
               Pictures(tabController: tabController),
               ServerRole(tabController: tabController),
-              InterestScreen(tabController: tabController),
+              InterestScreen(), //tabController: tabController),
             ],
           ),
         );
