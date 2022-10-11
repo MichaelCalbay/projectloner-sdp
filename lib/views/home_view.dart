@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:projectloner/views/matchViews/coach_view.dart';
 import 'package:projectloner/views/matchViews/team_view.dart';
+import '../forum/add_post.dart';
 import '../matching/matching_screen.dart';
+import 'forum_view.dart';
 import 'nav_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -30,7 +32,8 @@ class HomePageState extends State {
           context, MaterialPageRoute(builder: (context) => TeamPage()));
     } else if (matchPreferences[2] == true) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => CoachPage()));
+        //forum page view 'FOR NOW' -sam
+          context, MaterialPageRoute(builder: (context) => ForumScreen()));
     }
   }
 
@@ -47,7 +50,6 @@ class HomePageState extends State {
             height: 150,
           ),
           const Text(
-
             'Hello *User*!',
             style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
           ),
@@ -81,12 +83,12 @@ class HomePageState extends State {
                 fillColor: Colors.deepPurple,
                 constraints: const BoxConstraints(
                   minHeight: 40.0,
-                  minWidth: 80.0,
+                  minWidth: 100.0,
                 ),
                 children: const [
                   Text("Duo"),
                   Text("Team"),
-                  Text("Coach"),
+                  Text("Formus"),
                 ],
               ),
             ],

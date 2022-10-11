@@ -30,26 +30,9 @@ class CustomButton extends StatelessWidget {
         return ElevatedButton(
           onPressed: () async {
             debugPrint('${tabController.index}');
-            if (tabController.index == 4) {
-              if (user?.firstName == '' ||
-                  user?.lastName == '' ||
-                  user?.age == 0 ||
-                  user?.gender == '' ||
-                  user?.server == '' ||
-                  user?.mainRole == '') {
-                Fluttertoast.showToast(
-                    msg: "You've missed a field.",
-                    gravity: ToastGravity.BOTTOM,
-                    textColor: Colors.red);
-              } else {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const VerifyEmailPage(),
-                  ),
-                );
-              }
-            } else if (tabController.index == 1) {
+            //This validates the email_screen
+            if (tabController.index == 1) {
+              //If fields are empty show the message.
               if (context.read<SignupCubit>().userPass == null ||
                   confPwdController?.text.trim() == '' ||
                   context.read<SignupCubit>().userEmail == null) {
@@ -64,6 +47,7 @@ class CustomButton extends StatelessWidget {
                     gravity: ToastGravity.BOTTOM,
                     textColor: Colors.red);
               } else {
+                //Otherwise, create empty fields into firestore database.
                 tabController.animateTo(tabController.index + 1);
                 await context.read<SignupCubit>().signupWithCredentials();
                 LonerUser user = LonerUser(
@@ -79,6 +63,39 @@ class CustomButton extends StatelessWidget {
                 );
                 context.read<OnboardingBloc>().add(StartOnboarding(user: user));
               }
+              //Validates the gender age screen.
+            } else if (tabController.index == 2) {
+              //If fields are empty show a message.
+              if (user?.firstName == '' ||
+                  user?.lastName == '' ||
+                  user?.gender == '' ||
+                  user?.age == 0) {
+                Fluttertoast.showToast(
+                    msg: "You've missed a field.",
+                    gravity: ToastGravity.BOTTOM,
+                    textColor: Colors.red);
+              } else {
+                //Otherwise, toggle to the next page.
+                tabController.animateTo(tabController.index + 1);
+              }
+              //Validates the last page.
+            } else if (tabController.index == 4) {
+              //If fields are empty, show a message.
+              if (user?.server == '' || user?.mainRole == '') {
+                Fluttertoast.showToast(
+                    msg: "You've missed a field.",
+                    gravity: ToastGravity.BOTTOM,
+                    textColor: Colors.red);
+              } else {
+                //Otherwise, navigate to email verification.
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const VerifyEmailPage(),
+                  ),
+                );
+              }
+              //It goes here if not in the first page or 4th page.
             } else {
               tabController.animateTo(tabController.index + 1);
             }

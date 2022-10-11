@@ -37,6 +37,7 @@ class RegistrationPage extends StatelessWidget {
             ),
           ),
           body: TabBarView(
+            physics: const NeverScrollableScrollPhysics(),
             children: [
               Start(tabController: tabController),
               EmailScreen(tabController: tabController),
