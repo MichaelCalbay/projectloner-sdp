@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../forums/forums_data.dart';
+import '../forums/utils.dart';
 import '../forums/write_post.dart';
 import '../widgets/matching_app_bar.dart';
 
@@ -115,7 +116,7 @@ class _ForumsPage extends State<ForumsPage>{
                       Text(data['userName'],style: const TextStyle(fontSize: 20),),
                       Padding(
                         padding: const EdgeInsets.all(2.0),
-                        //child: Text(readTimestamp(data['postTimeStamp']),style: const TextStyle(fontSize: 15, color: Colors.indigo),),
+                        child: Text(readTimestamp(data['postTimeStamp']),style: const TextStyle(fontSize: 15, color: Colors.indigo),),
                       ),
                     ],
                   ),
