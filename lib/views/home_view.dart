@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:projectloner/views/matchViews/coach_view.dart';
 import 'package:projectloner/views/matchViews/team_view.dart';
-import '../forum/add_post.dart';
 import '../matching/matching_screen.dart';
 import 'forum_view.dart';
+import 'forums_view.dart';
 import 'nav_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,7 +33,7 @@ class HomePageState extends State {
     } else if (matchPreferences[2] == true) {
       Navigator.push(
         //forum page view 'FOR NOW' -sam
-          context, MaterialPageRoute(builder: (context) => ForumScreen()));
+          context, MaterialPageRoute(builder: (context) => ForumsPage()));
     }
   }
 
@@ -88,7 +88,7 @@ class HomePageState extends State {
                 children: const [
                   Text("Duo"),
                   Text("Team"),
-                  Text("Formus"),
+                  Text("Forums"),
                 ],
               ),
             ],
