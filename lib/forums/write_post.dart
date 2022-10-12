@@ -109,7 +109,7 @@ class _WritePostState extends State<WritePost> {
           title: Text('Writing Post'),
           centerTitle: true,
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               onPressed: () => sentPostInFireBase(writingTextController.text)
               ,
               child: Text('post',

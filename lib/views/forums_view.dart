@@ -47,7 +47,7 @@ class _ForumsPage extends State<ForumsPage>{
         actionButtons: false,
       ),
       body: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance.collection('Forums').snapshots(),
+          stream: FirebaseFirestore.instance.collection('Forums').orderBy('postTimeStamp', descending: true).snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot){
             if(!snapshot.hasData) return LinearProgressIndicator();
             return Stack(
