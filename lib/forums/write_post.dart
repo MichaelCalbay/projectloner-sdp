@@ -51,26 +51,26 @@ class _WritePostState extends State<WritePost> {
                   ),
                 );
               },
-                  (node){
-                return GestureDetector(
-                  onTap: (){
-                    // print('Close view');
-                    // Navigator.pop(context);
-                    // node.unfocus();
-                  },
-                  child: Container(
-                    color: Colors.grey[200],
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      "Done",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                );
-              },
+              //     (node){
+              //   return GestureDetector(
+              //     onTap: (){
+              //       // print('Close view');
+              //       // Navigator.pop(context);
+              //       // node.unfocus();
+              //     },
+              //     // child: Container(
+              //     //   color: Colors.grey[200],
+              //     //   padding: EdgeInsets.all(8.0),
+              //     //   child: Text(
+              //     //     "Done",
+              //     //     style: TextStyle(
+              //     //         color: Colors.black,
+              //     //         fontSize: 18,
+              //     //         fontWeight: FontWeight.bold),
+              //     //   ),
+              //     // ),
+              //   );
+              // },
             ],
           ),
         ]

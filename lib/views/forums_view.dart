@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../forums/forums_data.dart';
 import '../forums/write_post.dart';
+import '../widgets/matching_app_bar.dart';
 
 class ForumsPage extends StatefulWidget{
   const ForumsPage({Key? key}) : super(key: key);
@@ -12,63 +13,6 @@ class ForumsPage extends StatefulWidget{
 }
 
 class _ForumsPage extends State<ForumsPage>{
-
-  late List<ForumsPostData> dummyData = [
-    ForumsPostData(
-        userName: "Sam",
-        userThumbnail: "userThumbnail",
-        postTimeStamp: DateTime.now().subtract(const Duration(seconds: 10)).millisecondsSinceEpoch,
-        postContent: "This is a test postContent 1",
-        postImage: "postImage",
-        postLikeCounter: 99,
-        postCommentCounter: 5),
-
-    ForumsPostData(
-        userName: "Nelson",
-        userThumbnail: "userThumbnail",
-        postTimeStamp: DateTime.now().subtract(const Duration(hours: 3)).millisecondsSinceEpoch,
-        postContent: "Just finshed fluking me exam",
-        postImage: "postImage",
-        postLikeCounter: 99,
-        postCommentCounter: 5),
-
-    ForumsPostData(
-        userName: "Gianne",
-        userThumbnail: "userThumbnail",
-        postTimeStamp: DateTime.now().subtract(const Duration(days: 2)).millisecondsSinceEpoch,
-        postContent: "Nice to meet you"
-            "Nice to meet you"
-            "Nice to meet you"
-            "Nice to meet you"
-            "Nice to meet you",
-        postImage: "postImage",
-        postLikeCounter: 99,
-        postCommentCounter: 5),
-    ForumsPostData(
-        userName: "Ben",
-        userThumbnail: "userThumbnail",
-        postTimeStamp: DateTime.now().subtract(const Duration(days: 2)).millisecondsSinceEpoch,
-        postContent: "Nice to meet you"
-            "Nice to meet you"
-            "Nice to meet you"
-            "Nice to meet you"
-            "Nice to meet you",
-        postImage: "postImage",
-        postLikeCounter: 99,
-        postCommentCounter: 5),
-    ForumsPostData(
-        userName: "Nifa",
-        userThumbnail: "userThumbnail",
-        postTimeStamp: DateTime.now().subtract(const Duration(days: 2)).millisecondsSinceEpoch,
-        postContent: "Nice to meet you"
-            "Nice to meet you"
-            "Nice to meet you"
-            "Nice to meet you"
-            "Nice to meet you",
-        postImage: "postImage",
-        postLikeCounter: 99,
-        postCommentCounter: 5)
-  ];
 
   bool _isLoading = false;
 
@@ -97,8 +41,9 @@ class _ForumsPage extends State<ForumsPage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Forum'),
+      appBar: const MatchingAppBar(
+        title: 'Forums',
+        actionButtons: false,
       ),
       body: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance.collection('Forums').snapshots(),
