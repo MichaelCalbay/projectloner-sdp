@@ -11,13 +11,12 @@ class WritePost extends StatefulWidget {
 }
 
 class _WritePostState extends State<WritePost> {
-
   final FocusNode _nodeText1 = FocusNode();
   FocusNode writingTextFocus = FocusNode();
   TextEditingController writingTextController = TextEditingController();
   bool _isLoading = false;
 
-  KeyboardActionsConfig buildConfig(BuildContext context){
+  KeyboardActionsConfig buildConfig(BuildContext context) {
     return KeyboardActionsConfig(
         keyboardActionsPlatform: KeyboardActionsPlatform.ALL,
         keyboardBarColor: Colors.grey[200],
@@ -31,17 +30,17 @@ class _WritePostState extends State<WritePost> {
             displayArrows: false,
             focusNode: writingTextFocus,
             toolbarButtons: [
-                  (node){
+              (node) {
                 return GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     print('Close view');
                     Navigator.pop(context);
                     node.unfocus();
                   },
                   child: Container(
                     color: Colors.grey[200],
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
+                    padding: const EdgeInsets.all(8.0),
+                    child: const Text(
                       "Image",
                       style: TextStyle(
                           color: Colors.black,
@@ -73,12 +72,10 @@ class _WritePostState extends State<WritePost> {
               // },
             ],
           ),
-        ]
-    );
+        ]);
   }
 
-  Future<void> sentPostInFireBase(String postContent) async{
-
+  Future<void> sentPostInFireBase(String postContent) async {
     setState(() {
       _isLoading = true;
     });
@@ -87,48 +84,47 @@ class _WritePostState extends State<WritePost> {
       'userName': 'Sam',
       'userThumbnail': '',
       'postTimeStamp': DateTime.now().millisecondsSinceEpoch,
-      'postContent':postContent,
-      'postImage':'testUserName',
+      'postContent': postContent,
+      'postImage': 'testUserName',
       'postLikeCounter': 0,
       'postCommentCounter': 0
-
     });
     setState(() {
       _isLoading = false;
     });
     Navigator.pop(context);
-
   }
 
   @override
   Widget build(BuildContext context) {
-
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Writing Post'),
+          title: const Text('Writing Post'),
           centerTitle: true,
           actions: <Widget>[
-            FlatButton(
-              onPressed: () => sentPostInFireBase(writingTextController.text)
-              ,
-              child: Text('post',
-                style: TextStyle(fontSize:  20,
+            TextButton(
+              onPressed: () => sentPostInFireBase(writingTextController.text),
+              child: const Text(
+                'post',
+                style: TextStyle(
+                    fontSize: 20,
                     color: Colors.white,
-                    fontWeight: FontWeight.bold
-                ),
+                    fontWeight: FontWeight.bold),
               ),
             )
           ],
         ),
-        body:  KeyboardActions(
+        body: KeyboardActions(
           config: buildConfig(context),
           child: Stack(
             children: [
               Column(
                 children: <Widget>[
-                  SizedBox(height: 10,),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Container(
                     child: Card(
                       color: Colors.white,
@@ -138,31 +134,41 @@ class _WritePostState extends State<WritePost> {
                       ),
                       child: Container(
                         width: size.width,
-                        height: size.height -MediaQuery.of(context).viewInsets.bottom - 80,
+                        height: size.height -
+                            MediaQuery.of(context).viewInsets.bottom -
+                            80,
                         child: Padding(
-                          padding: const EdgeInsets.only(right: 14.0, left:10.0),
+                          padding:
+                              const EdgeInsets.only(right: 14.0, left: 10.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
+                                children: const <Widget>[
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Icon(Icons.book, size:20,),
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Icon(
+                                      Icons.book,
+                                      size: 20,
+                                    ),
                                   ),
-                                  Text('Sam', style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold
-                                  ),
+                                  Text(
+                                    'Sam',
+                                    style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold),
                                   )
                                 ],
                               ),
-                              Divider(height:1, color: Colors.black,),
+                              const Divider(
+                                height: 1,
+                                color: Colors.black,
+                              ),
                               TextFormField(
                                 autofocus: true,
                                 focusNode: writingTextFocus,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   border: InputBorder.none,
                                   hintText: 'Start writing...',
                                   hintMaxLines: 4,
@@ -179,19 +185,18 @@ class _WritePostState extends State<WritePost> {
                   )
                 ],
               ),
-              _isLoading ? Positioned(
-                child: Container(
-                  child: const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  color: Colors.white.withOpacity(0.8),
-                ),
-              ) : Container()
+              _isLoading
+                  ? Positioned(
+                      child: Container(
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        color: Colors.white.withOpacity(0.8),
+                      ),
+                    )
+                  : Container()
             ],
           ),
-        )
-    );
+        ));
   }
 }
-
-
