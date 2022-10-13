@@ -16,6 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State {
+  int currentIndex = 0;
   String preferenceText = "Currently looking for duo";
   String matchButtonText = "Start";
   final List<bool> _matchPreferences = <bool>[true, false, false];
@@ -40,7 +41,10 @@ class HomePageState extends State {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Home Page")),
+      appBar: AppBar(
+        title: const Text("Home Page"),
+        backgroundColor: Colors.deepPurple,
+      ),
       body: Center(
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
@@ -61,6 +65,7 @@ class HomePageState extends State {
               textAlign: TextAlign.center,
             ),
           ),
+          ///*
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -97,10 +102,41 @@ class HomePageState extends State {
               onPressed: () {
                 startMatching(_matchPreferences);
               },
-              child: Text(matchButtonText))
-        ]),
+              child: Text(matchButtonText)
+            )//*/
+          ]
+        ),
       ),
       drawer: const NavBar(),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0,
+        onTap: (int newIndex) {
+          switch(newIndex) {
+              case 0:
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const MatchMaking(),
+                  )
+                );
+                break;
+              case 1:
+                Navigator.push(
+                  //forum page view 'FOR NOW' -sam
+                  context, MaterialPageRoute(builder: (context) => ForumScreen()
+                  )
+                );
+                break;
+            }
+        },
+        items: const [
+          BottomNavigationBarItem(
+            label: "Duo", 
+            icon: Icon(Icons.person)),
+          BottomNavigationBarItem(
+            label: "Forums", 
+            icon: Icon(Icons.forum)),
+        ],
+      ),
     );
   }
 }

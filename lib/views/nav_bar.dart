@@ -8,7 +8,9 @@ import 'package:instabug_flutter/instabug_flutter.dart';
 import 'package:projectloner/auth/login_page.dart';
 import 'package:projectloner/repositories/registration/auth_repo.dart';
 import 'package:projectloner/profile/profile.dart';
-
+import 'package:projectloner/theme/theme_provider.dart';
+import 'package:provider/provider.dart';
+import 'home_view.dart';
 //import 'HomeView.dart';
 // import 'Page1.dart';
 // import 'Page2.dart';
@@ -18,6 +20,21 @@ class NavBar extends StatefulWidget {
 
   @override
   State<NavBar> createState() => _NavBarState();
+}
+
+class ChangeThemeWidget extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    final themeProvider = Provider.of<LonerThemeProvider>(context);
+    return Switch.adaptive(
+      value: themeProvider.isDarkMode, 
+      onChanged: (value) {
+        final provider = Provider.of<LonerThemeProvider>(context, listen: false);
+        provider.toggleTheme(value);
+      },
+    );
+  }
 }
 
 class _NavBarState extends State<NavBar> {
@@ -35,26 +52,22 @@ class _NavBarState extends State<NavBar> {
               //   //Can be implemented to get current user's image[0]
               //   'https://preview.redd.it/du7sbn27xs491.jpg?auto=webp&s=decc60fec16eb5ade184ac10c70520b64a7482e5',
               // ),
+              backgroundColor: Colors.black87,
             ),
             accountName: Text(
                 "${FirebaseFirestore.instance.collection('UserData').doc(FirebaseAuth.instance.currentUser!.uid).collection('First Name')}"), // could be implented later on
             accountEmail: Text('${FirebaseAuth.instance.currentUser!.email}'),
+            decoration: BoxDecoration(
+              color: Colors.deepPurple,
+            )
           ),
-
-          // ListTile(
-          //   leading: Icon(Icons.person),
-          //   title: Text('Matching'),
-          //   onTap: () {
-          //     //Close the Navigation drawer when back is tapped.
-          //     Navigator.pop(context);
-
-          //     Navigator.of(context).push(
-          //       MaterialPageRoute(
-          //         builder: (context) => const MatchMaking(),
-          //       ),
-          //     );
-          //   },
-          // ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text("Dark Mode"),
+              ChangeThemeWidget(),
+            ],
+          ),
           ListTile(
             /*  BUG ICON  */
             leading: Icon(Icons.bug_report_rounded),
@@ -62,11 +75,12 @@ class _NavBarState extends State<NavBar> {
             onTap: () => Instabug.show(),
           ),
           ListTile(
+            leading: Icon(Icons.home),
             title: const Text("Home Page"),
             onTap: () {
               Navigator.pop(context);
-              // Navigator.push(
-              //     context, MaterialPageRoute(builder: (context) => HomePage()));
+              Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HomePage()));
             },
           ),
           ListTile(
@@ -78,16 +92,8 @@ class _NavBarState extends State<NavBar> {
                   MaterialPageRoute(builder: (context) => ProfilePage()));
             },
           ),
-
-          // ListTile(
-          //   title: const Text("Page 2"),
-          //   onTap: () {
-          //     Navigator.pop(context);
-          //     Navigator.push(
-          //         context, MaterialPageRoute(builder: (context) => Page2()));
-          //   },
-          // ),
           ListTile(
+            leading: Icon(Icons.logout_sharp),
             title: const Text("Logout"),
             onTap: () {
               RepositoryProvider.of<AuthRepository>(context).signOut();
