@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instabug_flutter/instabug_flutter.dart';
-import 'package:projectloner/auth/login_page.dart';
+import 'package:projectloner/login/screens/login_screen.dart';
 import 'package:projectloner/repositories/registration/auth_repo.dart';
 import 'package:projectloner/profile/profile.dart';
 import 'package:projectloner/theme/theme_provider.dart';
@@ -23,14 +23,14 @@ class NavBar extends StatefulWidget {
 }
 
 class ChangeThemeWidget extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<LonerThemeProvider>(context);
     return Switch.adaptive(
-      value: themeProvider.isDarkMode, 
+      value: LonerThemeProvider.isDarkMode,
       onChanged: (value) {
-        final provider = Provider.of<LonerThemeProvider>(context, listen: false);
+        final provider =
+            Provider.of<LonerThemeProvider>(context, listen: false);
         provider.toggleTheme(value);
       },
     );
@@ -46,21 +46,20 @@ class _NavBarState extends State<NavBar> {
       child: ListView(
         children: [
           UserAccountsDrawerHeader(
-            currentAccountPicture: CircleAvatar(
-              radius: 20,
-              // backgroundImage: NetworkImage(
-              //   //Can be implemented to get current user's image[0]
-              //   'https://preview.redd.it/du7sbn27xs491.jpg?auto=webp&s=decc60fec16eb5ade184ac10c70520b64a7482e5',
-              // ),
-              backgroundColor: Colors.black87,
-            ),
-            accountName: Text(
-                "${FirebaseFirestore.instance.collection('UserData').doc(FirebaseAuth.instance.currentUser!.uid).collection('First Name')}"), // could be implented later on
-            accountEmail: Text('${FirebaseAuth.instance.currentUser!.email}'),
-            decoration: BoxDecoration(
-              color: Colors.deepPurple,
-            )
-          ),
+              currentAccountPicture: CircleAvatar(
+                radius: 20,
+                // backgroundImage: NetworkImage(
+                //   //Can be implemented to get current user's image[0]
+                //   'https://preview.redd.it/du7sbn27xs491.jpg?auto=webp&s=decc60fec16eb5ade184ac10c70520b64a7482e5',
+                // ),
+                backgroundColor: Colors.black87,
+              ),
+              accountName: Text(
+                  "${FirebaseFirestore.instance.collection('UserData').doc(FirebaseAuth.instance.currentUser!.uid).collection('First Name')}"), // could be implented later on
+              accountEmail: Text('${FirebaseAuth.instance.currentUser!.email}'),
+              decoration: BoxDecoration(
+                color: Colors.deepPurple,
+              )),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -80,7 +79,7 @@ class _NavBarState extends State<NavBar> {
             onTap: () {
               Navigator.pop(context);
               Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HomePage()));
+                  context, MaterialPageRoute(builder: (context) => HomePage()));
             },
           ),
           ListTile(
@@ -104,7 +103,7 @@ class _NavBarState extends State<NavBar> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: ((context) => LoginPage()),
+                  builder: ((context) => LoginScreen()),
                 ),
               );
             },
