@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:projectloner/blocs/swipe/swipe_bloc.dart';
 
 class LonerUser extends Equatable {
   final String? id;
@@ -11,6 +12,9 @@ class LonerUser extends Equatable {
   final List<dynamic>? interests;
   final String? server;
   final String mainRole;
+  final List<String>? swipedLeft;
+  final List<String>? swipedRight;
+  final List<String>? matches;
 
   const LonerUser({
     this.id,
@@ -22,6 +26,9 @@ class LonerUser extends Equatable {
     this.interests,
     required this.server,
     required this.mainRole,
+    this.swipedLeft,
+    this.swipedRight,
+    this.matches,
   });
 
   // bool isDataEmpty(){
@@ -39,6 +46,9 @@ class LonerUser extends Equatable {
         interests,
         server,
         mainRole,
+        swipedLeft,
+        swipedRight,
+        matches,
       ];
 
   static LonerUser fromSnapshot(DocumentSnapshot snap) {
@@ -52,6 +62,15 @@ class LonerUser extends Equatable {
       interests: snap['interests'],
       server: snap['server'],
       mainRole: snap['mainRole'],
+      swipedLeft: (snap['swipedLeft'] as List)
+          .map((swipedLeft) => swipedLeft as String)
+          .toList(),
+      swipedRight: (snap['swipedRight'] as List)
+          .map((swipedRight) => swipedRight as String)
+          .toList(),
+      matches: (snap['matches'] as List)
+          .map((matches) => matches as String)
+          .toList(),
     );
 
     return user;
@@ -68,6 +87,9 @@ class LonerUser extends Equatable {
       'interests': interests,
       'server': server,
       'mainRole': mainRole,
+      'swipedLeft': swipedLeft,
+      'swipedRight': swipedRight,
+      'matches': matches,
     };
   }
 
@@ -81,6 +103,9 @@ class LonerUser extends Equatable {
     List<dynamic>? interests,
     String? server,
     String? mainRole,
+    List<String>? swipedLeft,
+    List<String>? swipedRight,
+    List<String>? matches,
   }) {
     return LonerUser(
       id: id ?? this.id,
@@ -92,6 +117,9 @@ class LonerUser extends Equatable {
       interests: interests ?? this.interests,
       server: server ?? this.server,
       mainRole: mainRole ?? this.mainRole,
+      swipedLeft: swipedLeft ?? this.swipedLeft,
+      swipedRight: swipedRight ?? this.swipedRight,
+      matches: matches ?? this.matches,
     );
   }
 

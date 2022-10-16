@@ -101,8 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
       debugShowCheckedModeBanner: false,
       onGenerateRoute: (settings) => RegistrationPage.route(),
       // initialRoute: RegistrationPage.routeName,
-      home:
-          RegistrationPage(), //isviewed != 0 ? OnboardingScreen() : LoginPage(),
+      home: isviewed != 0 ? OnboardingScreen() : LoginPage(),
       //Theme colour
       theme: ThemeData(primarySwatch: Colors.deepPurple),
     );
