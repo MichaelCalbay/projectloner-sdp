@@ -17,7 +17,7 @@ class MatchesScreen extends StatelessWidget {
         .toList();
 
     return Scaffold(
-      appBar: const MatchingAppBar(
+      appBar: const CustomAppBar(
         title: 'Matches',
         actionButtons: true,
       ),

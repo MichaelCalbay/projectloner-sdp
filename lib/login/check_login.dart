@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:projectloner/auth/login_page.dart';
-import 'package:projectloner/auth/verify_email.dart';
+import 'package:projectloner/login/screens/login_screen.dart';
+import 'package:projectloner/login/verify_email.dart';
 import 'package:projectloner/views/home_view.dart';
 
 class CheckLogin extends StatelessWidget {
@@ -21,7 +21,7 @@ class CheckLogin extends StatelessWidget {
                 return const VerifyEmailPage();
               }
             } else {
-              return const LoginPage();
+              return const LoginScreen();
             }
           }),
     );
