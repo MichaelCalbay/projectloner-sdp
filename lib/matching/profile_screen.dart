@@ -10,7 +10,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final LonerUser currentUser = LonerUser.users[0];
     return Scaffold(
-      appBar: const MatchingAppBar(title: 'Profile'),
+      appBar: const CustomAppBar(title: 'Profile'),
       body: Column(
         children: [
           Stack(
