@@ -12,7 +12,9 @@ import 'package:projectloner/cubit/signup/signup_cubit.dart';
 import 'package:projectloner/matching/matching_screen.dart';
 import 'package:projectloner/registration/registration_page.dart';
 import 'package:projectloner/repositories/registration/auth_repo.dart';
+import 'package:projectloner/theme/theme_provider.dart';
 import 'package:projectloner/views/onboarding_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'models/models.dart';
 import 'repositories/database/database_repo.dart';
@@ -95,14 +97,21 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: (settings) => RegistrationPage.route(),
-      // initialRoute: RegistrationPage.routeName,
-      home: isviewed != 0 ? OnboardingScreen() : LoginPage(),
-      //Theme colour
-      theme: ThemeData(primarySwatch: Colors.deepPurple),
-    );
-  }
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+    create: (context) => LonerThemeProvider(),
+    builder: (context, _) {
+      final themeProvider = Provider.of<LonerThemeProvider>(context);
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: (settings) => RegistrationPage.route(),
+        // initialRoute: RegistrationPage.routeName,
+        home: isviewed != 0 ? OnboardingScreen() : LoginPage(),
+        //Theme colour
+        themeMode: themeProvider.themeMode,
+        theme: LonerTheme.lightMode,
+        darkTheme: LonerTheme.darkMode,
+        //theme: ThemeData(primarySwatch: Colors.deepPurple),
+      );
+    }
+  );
 }
