@@ -1,11 +1,3 @@
-<<<<<<< Updated upstream
-import 'package:http/http.dart' as http;
-import 'dart:async';
-import 'dart:convert';
-
-class user_stats {
-  final baseUrl = "https://api.henrikdev.xyz";
-=======
 class UserStats {
   int? status;
   Data? data;
@@ -16,7 +8,6 @@ class UserStats {
     status = json['status'];
     data = json['data'] != null ? new Data.fromJson(json['data']) : null;
   }
->>>>>>> Stashed changes
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();

@@ -1,23 +1,14 @@
-<<<<<<< Updated upstream
-import 'dart:convert';
-=======
 import 'dart:async';
 import 'dart:convert';
 import 'dart:core';
->>>>>>> Stashed changes
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-<<<<<<< Updated upstream
-import 'package:projectloner/profile/profile_widget.dart';
-import 'package:http/http.dart' as http;
-=======
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import '../widgets/profile_widget.dart';
 import 'package:projectloner/stats/user_stats.dart';
->>>>>>> Stashed changes
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -27,23 +18,11 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   String userfName = '';
   String userlName = '';
-<<<<<<< Updated upstream
-
-  Future _getDataFromDataBase() async {
-    await FirebaseFirestore.instance
-        .collection('LonerUser')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get()
-        .then((snapshot) async {
-      if (snapshot.exists) {
-        setState(() {
-          userfName = snapshot.data()!["firstName"];
-          userlName = snapshot.data()!["lastName"];
-        });
-      }
-    });
-=======
   int? elo = 0;
+  String? rank = '';
+  String ign = 'nismistrigis';
+  String tag = 'oce';
+  String server = 'ap';
 
   Future getDataFromDataBase() async {
     await FirebaseFirestore.instance
@@ -60,26 +39,22 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
-  Future getStats() async {
+  Future getStats(String tag, String ign, String server) async {
     http.Response response = await http.get(Uri.parse(
-        "https://api.henrikdev.xyz/valorant/v1/mmr/ap/nismistrigis/oce"));
+        "https://api.henrikdev.xyz/valorant/v1/mmr/$server/$ign/$tag"));
     if (response.statusCode == 200) {
       setState(() {});
       UserStats userStats = UserStats.fromJson(jsonDecode(response.body));
       elo = userStats.data!.elo;
+      rank = userStats.data!.currenttierpatched;
     }
->>>>>>> Stashed changes
   }
 
   @override
   void initState() {
     super.initState();
-<<<<<<< Updated upstream
-    _getDataFromDataBase();
-=======
     getDataFromDataBase();
-    getStats();
->>>>>>> Stashed changes
+    getStats(server, ign, tag);
   }
 
   @override
@@ -111,12 +86,8 @@ class _ProfilePageState extends State<ProfilePage> {
           Text(
             FirebaseAuth.instance.currentUser!.email!,
             style: TextStyle(color: Colors.grey),
-<<<<<<< Updated upstream
-          )
-=======
           ),
-          Text(elo.toString()),
->>>>>>> Stashed changes
+          Text(elo.toString() + rank!),
         ],
       );
 }
