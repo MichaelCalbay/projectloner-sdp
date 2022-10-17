@@ -44,7 +44,6 @@ class GenderAgeScreen extends StatelessWidget {
                                   ),
                                 ),
                               );
-                          //debugPrint(state.email);
                         },
                       ),
                       const SizedBox(height: 10),

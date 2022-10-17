@@ -4,16 +4,25 @@ abstract class SwipeEvent extends Equatable {
   const SwipeEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class LoadUsers extends SwipeEvent {
-  final List<LonerUser> users;
+  final String userId;
 
-  const LoadUsers({required this.users});
+  const LoadUsers({required this.userId});
 
   @override
-  List<Object> get props => [users];
+  List<Object?> get props => [userId];
+}
+
+class UpdateMatching extends SwipeEvent {
+  final List<LonerUser>? users;
+
+  const UpdateMatching({required this.users});
+
+  @override
+  List<Object?> get props => [users];
 }
 
 class SwipeLeft extends SwipeEvent {
@@ -22,7 +31,7 @@ class SwipeLeft extends SwipeEvent {
   const SwipeLeft({required this.user});
 
   @override
-  List<Object> get props => [user];
+  List<Object?> get props => [user];
 }
 
 class SwipeRight extends SwipeEvent {
@@ -31,5 +40,5 @@ class SwipeRight extends SwipeEvent {
   const SwipeRight({required this.user});
 
   @override
-  List<Object> get props => [user];
+  List<Object?> get props => [user];
 }

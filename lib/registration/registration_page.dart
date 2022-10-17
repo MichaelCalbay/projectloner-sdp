@@ -19,6 +19,7 @@ class RegistrationPage extends StatelessWidget {
     Tab(text: 'GenderAge'),
     Tab(text: 'Pictures'),
     Tab(text: 'ServerRole'),
+    Tab(text: 'Interests'),
   ];
   @override
   Widget build(BuildContext context) {
@@ -36,12 +37,14 @@ class RegistrationPage extends StatelessWidget {
             ),
           ),
           body: TabBarView(
+            physics: const NeverScrollableScrollPhysics(),
             children: [
               Start(tabController: tabController),
               EmailScreen(tabController: tabController),
               GenderAgeScreen(tabController: tabController),
               Pictures(tabController: tabController),
               ServerRole(tabController: tabController),
+              InterestScreen(tabController: tabController),
             ],
           ),
         );

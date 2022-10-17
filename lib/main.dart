@@ -1,20 +1,19 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instabug_flutter/instabug_flutter.dart';
-import 'package:projectloner/auth/login_page.dart';
+import 'package:projectloner/login/screens/login_screen.dart';
 import 'package:projectloner/blocs/auth/auth_bloc.dart';
 import 'package:projectloner/blocs/onboarding/onboarding_bloc.dart';
 import 'package:projectloner/blocs/swipe/swipe_bloc.dart';
 import 'package:projectloner/cubit/signup/signup_cubit.dart';
-import 'package:projectloner/matching/matching_screen.dart';
 import 'package:projectloner/registration/registration_page.dart';
 import 'package:projectloner/repositories/registration/auth_repo.dart';
+import 'package:projectloner/theme/theme_provider.dart';
 import 'package:projectloner/views/onboarding_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'models/models.dart';
 import 'repositories/database/database_repo.dart';
 import 'repositories/storage/storage_repo.dart';
 
@@ -40,6 +39,12 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(
           create: (context) => AuthRepository(),
         ),
+        RepositoryProvider(
+          create: (context) => StorageRepo(),
+        ),
+        RepositoryProvider(
+          create: (context) => DatabaseRepository(),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -48,20 +53,20 @@ class MyApp extends StatelessWidget {
               authRepository: context.read<AuthRepository>(),
             ),
           ),
-          BlocProvider(
-            create: (context) => SwipeBloc()
-              ..add(
-                LoadUsers(users: LonerUser.users),
-              ),
-          ),
           BlocProvider<SignupCubit>(
             create: (context) =>
                 SignupCubit(authRepository: context.read<AuthRepository>()),
           ),
           BlocProvider<OnboardingBloc>(
             create: (context) => OnboardingBloc(
-              databaseRepository: DatabaseRepository(),
-              storageRepo: StorageRepo(),
+              databaseRepository: context.read<DatabaseRepository>(),
+              storageRepo: context.read<StorageRepo>(),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => SwipeBloc(
+              databaseRepository: context.read<DatabaseRepository>(),
+              authBloc: context.read<AuthBloc>(),
             ),
           ),
         ],
@@ -95,14 +100,20 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: (settings) => RegistrationPage.route(),
-      // initialRoute: RegistrationPage.routeName,
-      home: isviewed != 0 ? OnboardingScreen() : LoginPage(),
-      //Theme colour
-      theme: ThemeData(primarySwatch: Colors.deepPurple),
-    );
-  }
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+      create: (context) => LonerThemeProvider(),
+      builder: (context, _) {
+        final themeProvider = Provider.of<LonerThemeProvider>(context);
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          onGenerateRoute: (settings) => RegistrationPage.route(),
+          // initialRoute: RegistrationPage.routeName,
+          home: isviewed != 0 ? OnboardingScreen() : LoginScreen(),
+          //Theme colour
+          themeMode: LonerThemeProvider.themeMode,
+          theme: LonerTheme.lightMode,
+          darkTheme: LonerTheme.darkMode,
+          //theme: ThemeData(primarySwatch: Colors.deepPurple),
+        );
+      });
 }

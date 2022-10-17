@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projectloner/theme/theme_provider.dart';
 
 class CustomTextNumberField extends StatelessWidget {
   final TextEditingController? confPwdController;
@@ -10,7 +11,6 @@ class CustomTextNumberField extends StatelessWidget {
   const CustomTextNumberField({
     Key? key,
     this.confPwdController,
-
     this.onChanged,
     required this.hint,
     required this.isPassword,
@@ -18,6 +18,34 @@ class CustomTextNumberField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //If app is in dark mode.
+    if (LonerThemeProvider.isDarkMode) {
+      return Container(
+        height: 56,
+        padding: const EdgeInsets.only(left: 20.0),
+        decoration: BoxDecoration(
+          color: Colors.black,
+          border: Border.all(color: Colors.white),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: TextField(
+          controller: confPwdController,
+          obscureText: isPassword,
+          enableSuggestions: false,
+          autocorrect: false,
+          keyboardType: TextInputType.number,
+          style: const TextStyle(
+            fontSize: 16,
+          ),
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            labelText: hint,
+          ),
+          onChanged: onChanged,
+        ),
+      );
+    }
+    //Otherwise,
     return Container(
       height: 56,
       padding: const EdgeInsets.only(left: 20.0),
@@ -28,7 +56,6 @@ class CustomTextNumberField extends StatelessWidget {
       ),
       child: TextField(
         controller: confPwdController,
-
         obscureText: isPassword,
         enableSuggestions: false,
         autocorrect: false,

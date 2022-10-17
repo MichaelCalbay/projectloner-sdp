@@ -56,7 +56,7 @@ class Start extends StatelessWidget {
               const AlreadyLoner(),
               const SizedBox(height: 10),
               const StepProgressIndicator(
-                totalSteps: 5,
+                totalSteps: 6,
                 currentStep: 1,
                 selectedColor: Colors.deepPurple,
               ),
