@@ -1,11 +1,11 @@
 // ignore: file_names
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projectloner/views/matchViews/coach_view.dart';
 import 'package:projectloner/views/matchViews/team_view.dart';
 import '../matching/matching_screen.dart';
+import 'forum_view.dart';
+import '../forums/forums_view.dart';
 import 'nav_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,10 +16,10 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State {
+  int currentIndex = 0;
   String preferenceText = "Currently looking for duo";
   String matchButtonText = "Start";
   final List<bool> _matchPreferences = <bool>[true, false, false];
-  String userName = '';
 
   void startMatching(List<bool> matchPreferences) {
     if (matchPreferences[0] == true) {
@@ -33,34 +33,19 @@ class HomePageState extends State {
           context, MaterialPageRoute(builder: (context) => TeamPage()));
     } else if (matchPreferences[2] == true) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => CoachPage()));
+          //forum page view 'FOR NOW' -sam
+          context,
+          MaterialPageRoute(builder: (context) => ForumsPage()));
     }
-  }
-
-  Future _getDataFromDataBase() async {
-    await FirebaseFirestore.instance
-        .collection('LonerUser')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get()
-        .then((snapshot) async {
-      if (snapshot.exists) {
-        setState(() {
-          userName = snapshot.data()!["firstName"];
-        });
-      }
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _getDataFromDataBase();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Home Page")),
+      appBar: AppBar(
+        title: const Text("Home Page"),
+        backgroundColor: Colors.deepPurple,
+      ),
       body: Center(
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
@@ -69,8 +54,8 @@ class HomePageState extends State {
             width: 100,
             height: 150,
           ),
-          Text(
-            'Hello, $userName' '!',
+          const Text(
+            'Hello *User*!',
             style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
           ),
           const SizedBox(
@@ -81,6 +66,8 @@ class HomePageState extends State {
               textAlign: TextAlign.center,
             ),
           ),
+
+          ///*
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -103,12 +90,12 @@ class HomePageState extends State {
                 fillColor: Colors.deepPurple,
                 constraints: const BoxConstraints(
                   minHeight: 40.0,
-                  minWidth: 80.0,
+                  minWidth: 100.0,
                 ),
                 children: const [
                   Text("Duo"),
                   Text("Team"),
-                  Text("Coach"),
+                  Text("Forums"),
                 ],
               ),
             ],
@@ -117,10 +104,32 @@ class HomePageState extends State {
               onPressed: () {
                 startMatching(_matchPreferences);
               },
-              child: Text(matchButtonText))
+              child: Text(matchButtonText)) //*/
         ]),
       ),
       drawer: const NavBar(),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0,
+        onTap: (int newIndex) {
+          switch (newIndex) {
+            case 0:
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const MatchMaking(),
+              ));
+              break;
+            case 1:
+              Navigator.push(
+                  //forum page view 'FOR NOW' -sam
+                  context,
+                  MaterialPageRoute(builder: (context) => const ForumsPage()));
+              break;
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(label: "Duo", icon: Icon(Icons.person)),
+          BottomNavigationBarItem(label: "Forums", icon: Icon(Icons.forum)),
+        ],
+      ),
     );
   }
 }

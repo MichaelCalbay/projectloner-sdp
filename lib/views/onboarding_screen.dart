@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projectloner/auth/login_page.dart';
+import 'package:projectloner/login/screens/login_screen.dart';
 import 'package:projectloner/intro/intro_page_1.dart';
 import 'package:projectloner/intro/intro_page_2.dart';
 import 'package:projectloner/intro/intro_page_3.dart';
@@ -78,7 +78,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             context,
                             MaterialPageRoute(builder: (context) {
                               /* AFTER LAST PAGE RETURN TO HOME PAGE */
-                              return const LoginPage();
+                              return const LoginScreen();
                             }),
                           );
                         },

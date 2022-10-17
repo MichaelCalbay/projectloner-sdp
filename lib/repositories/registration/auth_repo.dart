@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectloner/repositories/registration/base_auth_repo.dart';
-import 'package:flutter/material.dart';
 
 class AuthRepository extends BaseAuthRepository {
   final auth.FirebaseAuth _firebaseAuth;
-  bool isValid = false;
+  static bool isValid = true;
 
   AuthRepository({isValid, auth.FirebaseAuth? firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? auth.FirebaseAuth.instance;
@@ -16,16 +16,18 @@ class AuthRepository extends BaseAuthRepository {
     required String password,
   }) async {
     try {
-      isValid == true;
       final credential =
           await auth.FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-
       final user = credential.user;
+      isValid = true;
+      // debugPrint('$isValid');
       return user;
     } on auth.FirebaseAuthException catch (e) {
+      isValid = false;
+      // debugPrint('$isValid');
       if (e.code == 'weak-password') {
         Fluttertoast.showToast(
             msg: "Password is weak.",
@@ -46,5 +48,14 @@ class AuthRepository extends BaseAuthRepository {
   }
 
   @override
+  Future<void> signOut() async {
+    await _firebaseAuth.signOut();
+  }
+
+  @override
   Stream<auth.User?> get user => _firebaseAuth.userChanges();
+
+  auth.FirebaseAuth getAuth() {
+    return _firebaseAuth;
+  }
 }

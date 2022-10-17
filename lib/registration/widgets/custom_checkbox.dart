@@ -1,34 +1,27 @@
 import 'package:flutter/material.dart';
 
-class CustomCheckbox extends StatefulWidget {
-  final TabController tabController;
+class CustomCheckbox extends StatelessWidget {
   final String text;
+  final bool value;
+  final Function(bool?)? onChanged;
+
   const CustomCheckbox({
     Key? key,
-    required this.tabController,
     required this.text,
+    required this.value,
+    required this.onChanged,
   }) : super(key: key);
 
-  @override
-  State<CustomCheckbox> createState() => _CustomCheckboxState();
-}
-
-class _CustomCheckboxState extends State<CustomCheckbox> {
-  bool? value = false;
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Checkbox(
           value: value,
-          onChanged: (value) {
-            setState(() {
-              this.value = value;
-            });
-          },
+          onChanged: onChanged,
         ),
         Text(
-          widget.text,
+          text,
           style: const TextStyle(
               fontSize: 12,
               fontStyle: FontStyle.italic,

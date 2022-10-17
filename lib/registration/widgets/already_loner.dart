@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projectloner/auth/login_page.dart';
+import 'package:projectloner/login/screens/login_screen.dart';
 
 class AlreadyLoner extends StatelessWidget {
   const AlreadyLoner({
@@ -20,7 +20,7 @@ class AlreadyLoner extends StatelessWidget {
             Navigator.pop(context);
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const LoginPage()),
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
             );
           },
           child: const Text(

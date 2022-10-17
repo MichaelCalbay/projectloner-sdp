@@ -68,7 +68,7 @@ class UserCard extends StatelessWidget {
                           .copyWith(color: Colors.white),
                     ),
                     Text(
-                      '${user.server} - ${user.role}',
+                      '${user.server} - ${user.mainRole}',
                       style: Theme.of(context).textTheme.headline6!.copyWith(
                             color: Colors.white,
                             fontWeight: FontWeight.normal,

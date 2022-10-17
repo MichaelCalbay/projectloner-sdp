@@ -2,7 +2,8 @@ class UserStats {
   int? status;
   Data? data;
 
-  UserStats({this.status, this.data});
+class UserStats {
+  final baseUrl = "https://api.henrikdev.xyz";
 
   UserStats.fromJson(Map<String, dynamic> json) {
     status = json['status'];

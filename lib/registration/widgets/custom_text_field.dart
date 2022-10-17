@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:projectloner/theme/theme_provider.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController? confPwdController;
+
   final String hint;
   final bool isPassword;
   final Function(String)? onChanged;
@@ -16,6 +18,33 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //If app is in dark mode.
+    if (LonerThemeProvider.isDarkMode) {
+      return Container(
+        height: 56,
+        padding: const EdgeInsets.only(left: 20.0),
+        decoration: BoxDecoration(
+          color: Colors.black,
+          border: Border.all(color: Colors.white),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: TextField(
+          controller: confPwdController,
+          obscureText: isPassword,
+          enableSuggestions: false,
+          autocorrect: false,
+          style: const TextStyle(
+            fontSize: 16,
+          ),
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            labelText: hint,
+          ),
+          onChanged: onChanged,
+        ),
+      );
+    }
+    //Otherwise,
     return Container(
       height: 56,
       padding: const EdgeInsets.only(left: 20.0),
@@ -39,22 +68,5 @@ class CustomTextField extends StatelessWidget {
         onChanged: onChanged,
       ),
     );
-    // return TextField(
-    //   decoration: InputDecoration(
-    //     filled: true,
-    //     fillColor: Colors.transparent,
-    //     hintText: hint,
-    //     contentPadding: const EdgeInsets.only(
-    //       bottom: 5.0,
-    //       top: 12.5,
-    //     ),
-    //     // focusedBorder: const OutlineInputBorder(
-    //     //   borderSide: BorderSide(color: Colors.transparent),
-    //     // ),
-    //     enabledBorder: const UnderlineInputBorder(
-    //       borderSide: BorderSide(color: Colors.transparent),
-    //     ),
-    //   ),
-    // );
   }
 }
