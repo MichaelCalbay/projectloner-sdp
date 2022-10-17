@@ -6,10 +6,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:projectloner/login/screens/login_screen.dart';
 import 'package:projectloner/repositories/registration/auth_repo.dart';
 import 'package:projectloner/views/home_view.dart';
-
-import 'login_page.dart';
 
 class VerifyEmailPage extends StatefulWidget {
   const VerifyEmailPage({Key? key}) : super(key: key);
@@ -90,58 +89,60 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
           ),
           body: Padding(
             padding: EdgeInsets.all(25),
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Text(
-                'A verification email has been \n sent to your E-mail.\n'
-                'Please allow 2-5 minutes for the email to come through.',
-                style: TextStyle(fontSize: 20),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 30),
-              Text(
-                'Note: check your spam e-mail.',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.redAccent,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 5),
-              ElevatedButton.icon(
-                onPressed: canResendEmail
-                    ? sendVerificationEmail
-                    : () => sendVerificationEmail(),
-                icon: Icon(
-                  Icons.email,
-                ),
-                label: Text(
-                  'Resend E-mail',
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'A verification email has been \n sent to your E-mail.\n'
+                  'Please allow 2-5 minutes for the email to come through.',
                   style: TextStyle(fontSize: 20),
+                  textAlign: TextAlign.center,
                 ),
-              ),
-              TextButton(
-                onPressed: () {
-                  RepositoryProvider.of<AuthRepository>(context).signOut();
-                  FirebaseAuth.instance.signOut();
-
-                  Navigator.pop(context);
-
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: ((context) => LoginPage(
-                            isEmailVerified: isEmailVerified,
-                          )),
-                    ),
-                  );
-                },
-                child: Text(
-                  'Cancel',
-                  style: TextStyle(fontSize: 20),
+                SizedBox(height: 30),
+                Text(
+                  'Note: check your spam e-mail.',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.redAccent,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-              )
-            ]),
+                SizedBox(height: 5),
+                ElevatedButton.icon(
+                  onPressed: canResendEmail
+                      ? sendVerificationEmail
+                      : () => sendVerificationEmail(),
+                  icon: Icon(
+                    Icons.email,
+                  ),
+                  label: Text(
+                    'Resend E-mail',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    RepositoryProvider.of<AuthRepository>(context).signOut();
+                    FirebaseAuth.instance.signOut();
+
+                    Navigator.pop(context);
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: ((context) => LoginScreen(
+                              isEmailVerified: isEmailVerified,
+                            )),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                )
+              ],
+            ),
           ),
         );
 }
