@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
+import 'dart:io';
 
 class WritePost extends StatefulWidget {
   const WritePost({Key? key}) : super(key: key);
@@ -14,6 +16,7 @@ class _WritePostState extends State<WritePost> {
   FocusNode writingTextFocus = FocusNode();
   TextEditingController writingTextController = TextEditingController();
   bool _isLoading = false;
+  XFile? postImageFIle;
 
   KeyboardActionsConfig buildConfig(BuildContext context) {
     return KeyboardActionsConfig(
@@ -33,8 +36,7 @@ class _WritePostState extends State<WritePost> {
                 return GestureDetector(
                   onTap: () {
                     print('Close view');
-                    Navigator.pop(context);
-                    node.unfocus();
+                    getImage();
                   },
                   child: Container(
                     color: Colors.grey[200],
@@ -160,10 +162,10 @@ class _WritePostState extends State<WritePost> {
                                   )
                                 ],
                               ),
-                              const Divider(
-                                height: 1,
-                                color: Colors.black,
-                              ),
+
+                              Divider(height:1, color: Colors.black,),
+                              postImageFIle != null ? Image.file(File(postImageFIle!.path)) :
+                                  Container(),
                               TextFormField(
                                 autofocus: true,
                                 focusNode: writingTextFocus,
@@ -197,5 +199,14 @@ class _WritePostState extends State<WritePost> {
             ],
           ),
         ));
+  }
+
+  Future<void> getImage() async{
+    XFile? imageFileFromGAllery = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if(imageFileFromGAllery != null){
+      setState(() {
+        postImageFIle = imageFileFromGAllery;
+      });
+    }
   }
 }
