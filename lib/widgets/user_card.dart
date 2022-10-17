@@ -26,22 +26,7 @@ class UserCard extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           child: Stack(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(user.imageUrls[0]),
-                    ),
-                    borderRadius: BorderRadius.circular(5.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 4,
-                        blurRadius: 4,
-                        offset: const Offset(3, 3),
-                      ),
-                    ]),
-              ),
+              CustomUserImage.large(url: user.imageUrls[0]),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
@@ -69,44 +54,84 @@ class UserCard extends StatelessWidget {
                           .copyWith(color: Colors.white),
                     ),
                     Text(
-                      '${user.server} - ${user.mainRole}',
+                      '${user.mainRole} - ${user.server}',
                       style: Theme.of(context).textTheme.headline6!.copyWith(
                             color: Colors.white,
                             fontWeight: FontWeight.normal,
                           ),
                     ),
-                    Row(
-                      children: [
-                        SmallUserImage(imageUrl: user.imageUrls[1]),
-                        SmallUserImage(imageUrl: user.imageUrls[2]),
-                        SmallUserImage(imageUrl: user.imageUrls[3]),
-                        const SizedBox(width: 10),
-                        Material(
-                          color: Colors.transparent,
-                          child: Container(
-                            width: 35,
-                            height: 35,
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.white,
-                            ),
-                            child: InkWell(
-                              onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      MatchProfile(user: user),
-                                ),
-                              ),
-                              child: Icon(
-                                Icons.info_outline,
-                                size: 25,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            ),
-                          ),
+                    SizedBox(
+                        height: 70,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: user.imageUrls.length + 1,
+                          itemBuilder: (builder, index) {
+                            return (index < user.imageUrls.length)
+                                ? CustomUserImage.small(
+                                    url: user.imageUrls[index],
+                                    margin: const EdgeInsets.only(
+                                        top: 8.0, right: 8.0),
+                                  )
+                                : Material(
+                                    color: Colors.transparent,
+                                    child: Container(
+                                      width: 35,
+                                      height: 35,
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.white,
+                                      ),
+                                      child: InkWell(
+                                        onTap: () => Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                MatchProfile(user: user),
+                                          ),
+                                        ),
+                                        child: Icon(
+                                          Icons.info_outline,
+                                          size: 25,
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                          },
+                        )
+                        // Row(
+                        //   children: [
+                        //     SmallUserImage(imageUrl: user.imageUrls[1]),
+                        //     SmallUserImage(imageUrl: user.imageUrls[2]),
+                        //     SmallUserImage(imageUrl: user.imageUrls[3]),
+                        //     const SizedBox(width: 10),
+                        //     Material(
+                        //       color: Colors.transparent,
+                        //       child: Container(
+                        //         width: 35,
+                        //         height: 35,
+                        //         decoration: const BoxDecoration(
+                        //           shape: BoxShape.circle,
+                        //           color: Colors.white,
+                        //         ),
+                        //         child: InkWell(
+                        //           onTap: () => Navigator.of(context).push(
+                        //             MaterialPageRoute(
+                        //               builder: (context) =>
+                        //                   MatchProfile(user: user),
+                        //             ),
+                        //           ),
+                        //           child: Icon(
+                        //             Icons.info_outline,
+                        //             size: 25,
+                        //             color: Theme.of(context).primaryColor,
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ],
                         ),
-                      ],
-                    ),
                   ],
                 ),
               ),

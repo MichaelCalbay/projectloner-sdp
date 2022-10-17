@@ -17,22 +17,20 @@ class MatchMaking extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else if (state is SwipeLoaded) {
+            var userCount = state.users.length;
             return Column(
               children: [
                 Draggable(
-                  feedback: state.users.isEmpty
-                      ? const Text('NO MORE USERS')
+                  data: state.users[0],
+                  feedback: (userCount <= 0)
+                      ? Container()
                       : UserCard(user: state.users[0]),
-                  childWhenDragging: state.users.isEmpty ||
-                          state.users[0] == state.users[state.users.length - 1]
-                      ? Text('LAST USER ON THE LIST',
-                          style: Theme.of(context).textTheme.headline3)
-                      : UserCard(user: state.users[1]),
-                  child: state.users.isEmpty
-                      ? const Text('NO MORE USERS')
+                  childWhenDragging: (userCount > 1)
+                      ? UserCard(user: state.users[1])
+                      : Container(),
+                  child: (userCount <= 0)
+                      ? Container()
                       : UserCard(user: state.users[0]),
-                  //Make a child screen for last user.
-                  //Make a screen when there are no more users to suggest.
                   onDragEnd: (drag) {
                     if (drag.velocity.pixelsPerSecond.dx < 0) {
                       context
@@ -96,6 +94,14 @@ class MatchMaking extends StatelessWidget {
                   ),
                 ),
               ],
+            );
+          }
+          if (state is SwipeError) {
+            return Center(
+              child: Text(
+                'There are no more users!',
+                style: Theme.of(context).textTheme.headline5,
+              ),
             );
           } else {
             return const Text('Oops.. Something went wrong!');
