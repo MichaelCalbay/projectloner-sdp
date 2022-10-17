@@ -41,4 +41,15 @@ class DatabaseRepository extends BaseDatabaseRepository {
         .update(user.toMap())
         .then((value) => debugPrint('User Updated!'));
   }
+
+  @override
+  Stream<List<LonerUser>> getUsers(String userId, String gender) {
+    return _firebaseFirestore
+        .collection('LonerUser')
+        .where('gender', isNotEqualTo: gender)
+        .snapshots()
+        .map((snap) {
+      return snap.docs.map((doc) => LonerUser.fromSnapshot(doc)).toList();
+    });
+  }
 }
