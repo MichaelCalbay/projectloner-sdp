@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:projectloner/matching/matches_screen.dart';
 
-class MatchingAppBar extends StatelessWidget with PreferredSizeWidget {
+class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
   final bool actionButtons;
   final IconData icon;
 
-  const MatchingAppBar({
+  const CustomAppBar({
     Key? key,
     required this.title,
     this.actionButtons = true,

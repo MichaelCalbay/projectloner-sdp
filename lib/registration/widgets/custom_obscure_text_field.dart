@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projectloner/theme/theme_provider.dart';
 
 class CustomObsTextField extends StatefulWidget {
   final TextEditingController? confPwdController;
@@ -21,6 +22,39 @@ class CustomObsTextField extends StatefulWidget {
 class _CustomObsTextFieldState extends State<CustomObsTextField> {
   @override
   Widget build(BuildContext context) {
+    if (LonerThemeProvider.isDarkMode) {
+      return Container(
+        height: 56,
+        padding: const EdgeInsets.only(left: 20.0),
+        decoration: BoxDecoration(
+          color: Colors.black,
+          border: Border.all(color: Colors.white),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: TextField(
+          controller: widget.confPwdController,
+          obscureText: widget.isPassword,
+          enableSuggestions: false,
+          autocorrect: false,
+          style: const TextStyle(
+            fontSize: 16,
+          ),
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            labelText: widget.hint,
+            suffixIcon: IconButton(
+              onPressed: () => setState(
+                (() => widget.isPassword = !widget.isPassword),
+              ),
+              icon: Icon(
+                  widget.isPassword ? Icons.visibility : Icons.visibility_off,
+                  color: Colors.deepPurple),
+            ),
+          ),
+          onChanged: widget.onChanged,
+        ),
+      );
+    }
     return Container(
       height: 56,
       padding: const EdgeInsets.only(left: 20.0),

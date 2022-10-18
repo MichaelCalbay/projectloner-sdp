@@ -15,7 +15,7 @@ class StorageRepo extends BaseStorageRepo {
   Future<void> uploadImage(LonerUser user, XFile image) async {
     try {
       await storage
-          .ref('${user.id}/${image.name}')
+          .ref('${user.firstName}-${user.id}/${image.name}')
           .putFile(
             File(image.path),
           )
@@ -33,8 +33,9 @@ class StorageRepo extends BaseStorageRepo {
 
   @override
   Future<String> getDownloadUrl(LonerUser user, String imageName) async {
-    String downloadUrl =
-        await storage.ref('${user.id}/$imageName').getDownloadURL();
+    String downloadUrl = await storage
+        .ref('${user.firstName}-${user.id}/$imageName')
+        .getDownloadURL();
 
     return downloadUrl;
   }

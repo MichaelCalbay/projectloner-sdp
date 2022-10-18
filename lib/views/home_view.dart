@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:projectloner/views/matchViews/coach_view.dart';
 import 'package:projectloner/views/matchViews/team_view.dart';
-import '../forum/add_post.dart';
 import '../matching/matching_screen.dart';
 import 'forum_view.dart';
+import '../forums/forums_view.dart';
 import 'nav_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,8 +33,9 @@ class HomePageState extends State {
           context, MaterialPageRoute(builder: (context) => TeamPage()));
     } else if (matchPreferences[2] == true) {
       Navigator.push(
-        //forum page view 'FOR NOW' -sam
-          context, MaterialPageRoute(builder: (context) => ForumScreen()));
+          //forum page view 'FOR NOW' -sam
+          context,
+          MaterialPageRoute(builder: (context) => ForumsPage()));
     }
   }
 
@@ -65,6 +66,7 @@ class HomePageState extends State {
               textAlign: TextAlign.center,
             ),
           ),
+
           ///*
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -93,7 +95,7 @@ class HomePageState extends State {
                 children: const [
                   Text("Duo"),
                   Text("Team"),
-                  Text("Formus"),
+                  Text("Forums"),
                 ],
               ),
             ],
@@ -102,39 +104,30 @@ class HomePageState extends State {
               onPressed: () {
                 startMatching(_matchPreferences);
               },
-              child: Text(matchButtonText)
-            )//*/
-          ]
-        ),
+              child: Text(matchButtonText)) //*/
+        ]),
       ),
       drawer: const NavBar(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,
         onTap: (int newIndex) {
-          switch(newIndex) {
-              case 0:
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const MatchMaking(),
-                  )
-                );
-                break;
-              case 1:
-                Navigator.push(
+          switch (newIndex) {
+            case 0:
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const MatchMaking(),
+              ));
+              break;
+            case 1:
+              Navigator.push(
                   //forum page view 'FOR NOW' -sam
-                  context, MaterialPageRoute(builder: (context) => ForumScreen()
-                  )
-                );
-                break;
-            }
+                  context,
+                  MaterialPageRoute(builder: (context) => const ForumsPage()));
+              break;
+          }
         },
         items: const [
-          BottomNavigationBarItem(
-            label: "Duo", 
-            icon: Icon(Icons.person)),
-          BottomNavigationBarItem(
-            label: "Forums", 
-            icon: Icon(Icons.forum)),
+          BottomNavigationBarItem(label: "Duo", icon: Icon(Icons.person)),
+          BottomNavigationBarItem(label: "Forums", icon: Icon(Icons.forum)),
         ],
       ),
     );

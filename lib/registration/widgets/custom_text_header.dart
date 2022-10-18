@@ -16,7 +16,6 @@ class CustomTextHeader extends StatelessWidget {
         fontWeight: FontWeight.bold,
         fontSize: 24,
         fontStyle: FontStyle.italic,
-        color: Colors.black54,
       ),
     );
   }
