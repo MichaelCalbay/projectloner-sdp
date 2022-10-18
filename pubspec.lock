@@ -491,13 +491,7 @@ packages:
       name: path
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< Updated upstream
-    version: "1.8.2"
-<<<<<<< Updated upstream
-=======
-=======
     version: "1.8.1"
->>>>>>> Stashed changes
   path_provider:
     dependency: transitive
     description:
@@ -519,10 +513,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.11"
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
   path_provider_linux:
     dependency: transitive
     description:
@@ -681,13 +671,7 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< Updated upstream
-    version: "1.9.0"
-<<<<<<< Updated upstream
-=======
-=======
     version: "1.8.2"
->>>>>>> Stashed changes
   sqflite:
     dependency: transitive
     description:
@@ -702,10 +686,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.3.0"
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
   stack_trace:
     dependency: transitive
     description:
@@ -733,13 +713,7 @@ packages:
       name: string_scanner
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< Updated upstream
-    version: "1.1.1"
-<<<<<<< Updated upstream
-=======
-=======
     version: "1.1.0"
->>>>>>> Stashed changes
   synchronized:
     dependency: transitive
     description:
@@ -747,10 +721,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0+3"
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
   term_glyph:
     dependency: transitive
     description:
@@ -764,13 +734,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< Updated upstream
-    version: "0.4.12"
-<<<<<<< Updated upstream
-=======
-=======
     version: "0.4.9"
->>>>>>> Stashed changes
   timezone:
     dependency: transitive
     description:
@@ -778,10 +742,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.9.0"
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
   typed_data:
     dependency: transitive
     description:

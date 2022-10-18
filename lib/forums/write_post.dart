@@ -189,10 +189,10 @@ class _WritePostState extends State<WritePost> {
               _isLoading
                   ? Positioned(
                       child: Container(
+                        color: Colors.white.withOpacity(0.8),
                         child: const Center(
                           child: CircularProgressIndicator(),
                         ),
-                        color: Colors.white.withOpacity(0.8),
                       ),
                     )
                   : Container()
