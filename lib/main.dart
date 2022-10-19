@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,13 +9,13 @@ import 'package:projectloner/blocs/auth/auth_bloc.dart';
 import 'package:projectloner/blocs/onboarding/onboarding_bloc.dart';
 import 'package:projectloner/blocs/swipe/swipe_bloc.dart';
 import 'package:projectloner/cubit/signup/signup_cubit.dart';
+import 'package:projectloner/matching/profile_screen.dart';
 import 'package:projectloner/registration/registration_page.dart';
 import 'package:projectloner/repositories/registration/auth_repo.dart';
 import 'package:projectloner/theme/theme_provider.dart';
 import 'package:projectloner/views/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'models/models.dart';
 import 'repositories/database/database_repo.dart';
 import 'repositories/storage/storage_repo.dart';
 
@@ -42,19 +41,20 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(
           create: (context) => AuthRepository(),
         ),
+        RepositoryProvider(
+          create: (context) => StorageRepo(),
+        ),
+        RepositoryProvider(
+          create: (context) => DatabaseRepository(),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
             create: (context) => AuthBloc(
+              databaseRepository: context.read<DatabaseRepository>(),
               authRepository: context.read<AuthRepository>(),
             ),
-          ),
-          BlocProvider(
-            create: (context) => SwipeBloc()
-              ..add(
-                LoadUsers(users: LonerUser.users),
-              ),
           ),
           BlocProvider<SignupCubit>(
             create: (context) =>
@@ -62,9 +62,21 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<OnboardingBloc>(
             create: (context) => OnboardingBloc(
-              databaseRepository: DatabaseRepository(),
-              storageRepo: StorageRepo(),
+              databaseRepository: context.read<DatabaseRepository>(),
+              storageRepo: context.read<StorageRepo>(),
             ),
+          ),
+          BlocProvider(
+            create: (context) => SwipeBloc(
+              databaseRepository: context.read<DatabaseRepository>(),
+              authBloc: context.read<AuthBloc>(),
+            ),
+          ),
+          BlocProvider(
+            create: ((context) => ProfileBloc(
+                  authBloc: context.read<AuthBloc>(),
+                  databaseRepository: context.read<DatabaseRepository>(),
+                )),
           ),
         ],
         child: MaterialApp(

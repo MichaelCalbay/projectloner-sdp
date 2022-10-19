@@ -25,7 +25,6 @@ class CustomDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LonerThemeProvider themeProvider = LonerThemeProvider();
-
     return Container(
       height: 60,
       padding: const EdgeInsets.only(left: 20.0),

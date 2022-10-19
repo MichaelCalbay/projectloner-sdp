@@ -41,4 +41,49 @@ class DatabaseRepository extends BaseDatabaseRepository {
         .update(user.toMap())
         .then((value) => debugPrint('User Updated!'));
   }
+
+  @override
+  Stream<List<LonerUser>> getUsers(LonerUser user) {
+    List<String> userFilters = List.from(user.swipedLeft!)
+      ..addAll(user.swipedRight!)
+      ..add(user.id!);
+    return _firebaseFirestore
+        .collection('LonerUser')
+        .where('gender', isEqualTo: 'Female')
+        .where(FieldPath.documentId, whereNotIn: userFilters)
+        .snapshots()
+        .map((snap) {
+      return snap.docs.map((doc) => LonerUser.fromSnapshot(doc)).toList();
+    });
+  }
+
+  @override
+  Future<void> updateUserSwipes(
+    String userId,
+    String matchId,
+    bool isSwipedRight,
+  ) async {
+    if (isSwipedRight) {
+      await _firebaseFirestore.collection('LonerUser').doc(userId).update({
+        'swipedRight': FieldValue.arrayUnion([matchId])
+      });
+    } else {
+      await _firebaseFirestore.collection('LonerUser').doc(userId).update({
+        'swipedLeft': FieldValue.arrayUnion([matchId])
+      });
+    }
+  }
+
+  @override
+  Future<void> updateUserMatches(String userId, String matchId) async {
+    //This will update the currently logged in user's matches.
+    await _firebaseFirestore.collection('LonerUser').doc(userId).update({
+      'matches': FieldValue.arrayUnion([matchId])
+    });
+
+    //This will update the other user's match on their end as well.
+    await _firebaseFirestore.collection('LonerUser').doc(matchId).update({
+      'matches': FieldValue.arrayUnion([userId])
+    });
+  }
 }

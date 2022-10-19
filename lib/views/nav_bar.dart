@@ -6,6 +6,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instabug_flutter/instabug_flutter.dart';
 import 'package:projectloner/login/screens/login_screen.dart';
+import 'package:projectloner/matching/profile_screen.dart';
 import 'package:projectloner/repositories/registration/auth_repo.dart';
 import 'package:projectloner/profile/profile.dart';
 import 'package:projectloner/theme/theme_provider.dart';
@@ -68,12 +69,6 @@ class _NavBarState extends State<NavBar> {
             ],
           ),
           ListTile(
-            /*  BUG ICON  */
-            leading: Icon(Icons.bug_report_rounded),
-            title: Text('Reports'),
-            onTap: () => Instabug.show(),
-          ),
-          ListTile(
             leading: Icon(Icons.home),
             title: const Text("Home Page"),
             onTap: () {
@@ -90,6 +85,12 @@ class _NavBarState extends State<NavBar> {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ProfilePage()));
             },
+          ),
+          ListTile(
+            /*  BUG ICON  */
+            leading: Icon(Icons.bug_report_rounded),
+            title: Text('Reports'),
+            onTap: () => Instabug.show(),
           ),
           ListTile(
             leading: Icon(Icons.logout_sharp),

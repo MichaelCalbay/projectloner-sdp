@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:projectloner/views/matchViews/coach_view.dart';
 import 'package:projectloner/views/matchViews/team_view.dart';
 import '../matching/matching_screen.dart';
+import '../theme/theme_provider.dart';
 import 'forum_view.dart';
 import '../forums/forums_view.dart';
 import 'nav_bar.dart';
@@ -42,6 +43,8 @@ class HomePageState extends State {
 
   @override
   Widget build(BuildContext context) {
+    LonerThemeProvider themeProvider = LonerThemeProvider();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Home Page"),
@@ -54,6 +57,7 @@ class HomePageState extends State {
             'images/gamepad.png',
             width: 100,
             height: 150,
+            color: (themeProvider.isDarkMode) ? Colors.white : Colors.black,
           ),
           const Text(
             'Hello *User*!',
