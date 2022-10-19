@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:projectloner/forums/screens/comment_screen.dart';
+import 'package:projectloner/forums/Database/comment_data.dart';
+import 'package:projectloner/forums/screens/post_comment_screen.dart';
 import 'package:projectloner/forums/widgets/forum_widgets.dart';
 import 'forums_data.dart';
 import 'utils.dart';
@@ -23,7 +24,7 @@ class _ForumsPage extends State<ForumsPage> {
     super.initState();
   }
 
-  Future<void> _takeUserDataFromFireBase() async {
+  Future<void> takeUserDataFromFireBase() async {
     setState(() {
       _isLoading = true;
     });
@@ -31,7 +32,7 @@ class _ForumsPage extends State<ForumsPage> {
 
   void _incrementCounter() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => WritePost()));
+        context, MaterialPageRoute(builder: (context) => const WritePost()));
   }
 
   @override
@@ -42,54 +43,54 @@ class _ForumsPage extends State<ForumsPage> {
         actionButtons: false,
       ),
       body: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance
-              .collection('Forums')
-              .orderBy('postTimeStamp', descending: true)
-              .snapshots(),
-          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (!snapshot.hasData) return LinearProgressIndicator();
-            return Stack(
-              children: <Widget>[
-                snapshot.data!.docs.length > 0
-                    ? ListView(
-                        shrinkWrap: true,
-                        children: snapshot.data!.docs.map(listTile).toList(),
-                      )
-                    : Container(
-                        child: Center(
-                            child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(
-                              Icons.error,
-                              color: Colors.grey[700],
-                              size: 64,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(14.0),
-                              child: Text(
-                                'There is no posts',
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.grey[700]),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ],
-                        )),
-                      ),
-                _isLoading
-                    ? Positioned(
-                        child: Container(
-                          child: const Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                          color: Colors.white.withOpacity(0.8),
+        stream: FirebaseFirestore.instance
+            .collection('Forums')
+            .orderBy('postTimeStamp', descending: true)
+            .snapshots(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData) return const LinearProgressIndicator();
+          return Stack(
+            children: <Widget>[
+              snapshot.data!.docs.isNotEmpty
+                  ? ListView(
+                      shrinkWrap: true,
+                      children: snapshot.data!.docs.map(listTile).toList(),
+                    )
+                  : Center(
+                      child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.error,
+                          color: Colors.grey[700],
+                          size: 64,
                         ),
-                      )
-                    : Container()
-              ],
-            );
-          }),
+                        Padding(
+                          padding: const EdgeInsets.all(14.0),
+                          child: Text(
+                            'There is no posts',
+                            style: TextStyle(
+                                fontSize: 16, color: Colors.grey[700]),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    )),
+              _isLoading
+                  ? Positioned(
+                      child: Container(
+                        // ignore: sort_child_properties_last
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        color: Colors.white.withOpacity(0.8),
+                      ),
+                    )
+                  : Container()
+            ],
+          );
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
@@ -107,6 +108,10 @@ class _ForumsPage extends State<ForumsPage> {
         ),
       ),
     );
+  }
+
+  void _updateLikeCount(DocumentSnapshot data) async {
+    await CommentData.updatePostLikeCount(data);
   }
 
   Widget listTile(DocumentSnapshot data) {
@@ -164,7 +169,10 @@ class _ForumsPage extends State<ForumsPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    LikeButton(data: data),
+                    GestureDetector(
+                      onTap: () => _updateLikeCount(data),
+                      child: LikeButton(data: data),
+                    ),
                     GestureDetector(
                       onTap: () => _moveToComment(data),
                       child: CommentButton(data: data),
