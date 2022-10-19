@@ -27,7 +27,7 @@ class ChangeThemeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<LonerThemeProvider>(context);
     return Switch.adaptive(
-      value: LonerThemeProvider.isDarkMode,
+      value: themeProvider.isDarkMode,
       onChanged: (value) {
         final provider =
             Provider.of<LonerThemeProvider>(context, listen: false);

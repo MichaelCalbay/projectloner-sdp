@@ -24,37 +24,13 @@ class CustomDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //If app is in dark mode.
-    if (LonerThemeProvider.isDarkMode) {
-      return Container(
-        height: 60,
-        padding: const EdgeInsets.only(left: 20.0),
-        decoration: BoxDecoration(
-          color: Colors.black,
-          border: Border.all(color: Colors.white),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: DropdownButtonFormField<String>(
-          value: valueServer,
-          items: server.map(menuItem).toList(),
-          onChanged: onChanged,
-          icon: const Icon(
-            Icons.arrow_drop_down_circle,
-            color: Colors.deepPurple,
-          ),
-          decoration: const InputDecoration(
-            labelText: 'Server',
-            border: InputBorder.none,
-          ),
-        ),
-      );
-    }
-    //Otherwise,
+    LonerThemeProvider themeProvider = LonerThemeProvider();
+
     return Container(
       height: 60,
       padding: const EdgeInsets.only(left: 20.0),
       decoration: BoxDecoration(
-        color: Colors.grey[200],
+        color: (themeProvider.isDarkMode) ? Colors.black : Colors.grey[200],
         border: Border.all(color: Colors.white),
         borderRadius: BorderRadius.circular(12),
       ),
