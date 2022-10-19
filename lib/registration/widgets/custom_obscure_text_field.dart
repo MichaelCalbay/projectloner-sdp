@@ -22,7 +22,9 @@ class CustomObsTextField extends StatefulWidget {
 class _CustomObsTextFieldState extends State<CustomObsTextField> {
   @override
   Widget build(BuildContext context) {
-    if (LonerThemeProvider.isDarkMode) {
+    LonerThemeProvider themeProvider = LonerThemeProvider();
+
+    if (themeProvider.isDarkMode) {
       return Container(
         height: 56,
         padding: const EdgeInsets.only(left: 20.0),

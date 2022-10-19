@@ -3,11 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projectloner/blocs/swipe/swipe_bloc.dart';
 import 'package:projectloner/widgets/widgets.dart';
 
+import '../theme/theme_provider.dart';
+
 class MatchMaking extends StatelessWidget {
   const MatchMaking({super.key});
 
   @override
   Widget build(BuildContext context) {
+    LonerThemeProvider themeProvider = LonerThemeProvider();
+
     return Scaffold(
       appBar: const CustomAppBar(title: 'Co-Loners'),
       body: BlocBuilder<SwipeBloc, SwipeState>(
@@ -21,7 +25,7 @@ class MatchMaking extends StatelessWidget {
             return Column(
               children: [
                 Draggable(
-                  data: state.users[0],
+                  data: (userCount <= 0) ? Container() : state.users[0],
                   feedback: (userCount <= 0)
                       ? Container()
                       : UserCard(user: state.users[0]),
@@ -79,15 +83,17 @@ class MatchMaking extends StatelessWidget {
                           width: 80,
                           height: 80,
                           size: 30,
-                          colour: Theme.of(context).colorScheme.secondary,
+                          colour: Theme.of(context).colorScheme.primary,
                           icon: Icons.favorite,
                         ),
                       ),
-                      const ChoiceButton(
+                      ChoiceButton(
                         width: 60,
                         height: 60,
                         size: 25,
-                        colour: Colors.black54,
+                        colour: (themeProvider.isDarkMode)
+                            ? Colors.white
+                            : Colors.black54,
                         icon: Icons.watch_later,
                       ),
                     ],

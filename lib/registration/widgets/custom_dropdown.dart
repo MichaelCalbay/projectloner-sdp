@@ -24,8 +24,10 @@ class CustomDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    LonerThemeProvider themeProvider = LonerThemeProvider();
+
     //If app is in dark mode.
-    if (LonerThemeProvider.isDarkMode) {
+    if (themeProvider.isDarkMode) {
       return Container(
         height: 60,
         padding: const EdgeInsets.only(left: 20.0),
