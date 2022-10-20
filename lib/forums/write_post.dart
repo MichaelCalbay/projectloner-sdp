@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,15 +80,16 @@ class _WritePostState extends State<WritePost> {
         ]);
   }
 
-  Future<void> sentPostInFireBase(String postContent, String postID) async {
+  Future<void> sentPostInFireBase(
+      String postContent, String postID, String userName) async {
     setState(() {
       _isLoading = true;
     });
 
     FirebaseFirestore.instance.collection('Forums').doc(postID).set({
       'postID': postID,
-      'userName': 'Nelson',
-      'userThumbnail': '',
+      'postUserName': userName,
+      'postUserThumbnail': '',
       'postTimeStamp': DateTime.now().millisecondsSinceEpoch,
       'postContent': postContent,
       'postImage': 'testUserName',
@@ -106,14 +109,21 @@ class _WritePostState extends State<WritePost> {
 
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
-        return Scaffold(
+        if (state is ProfileLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state is ProfileLoaded) {
+          return Scaffold(
             appBar: AppBar(
               title: const Text('Writing Post'),
               centerTitle: true,
               actions: <Widget>[
                 TextButton(
-                  onPressed: () =>
-                      sentPostInFireBase(writingTextController.text, fID),
+                  onPressed: () => sentPostInFireBase(
+                      writingTextController.text,
+                      fID,
+                      '${state.user.firstName} ${state.user.lastName}'),
                   child: const Text(
                     'post',
                     style: TextStyle(
@@ -154,7 +164,7 @@ class _WritePostState extends State<WritePost> {
                                   Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
-                                    children: const <Widget>[
+                                    children: <Widget>[
                                       Padding(
                                         padding: EdgeInsets.all(8.0),
                                         child: Icon(
@@ -163,7 +173,7 @@ class _WritePostState extends State<WritePost> {
                                         ),
                                       ),
                                       Text(
-                                        'Sam',
+                                        '${state.user.firstName} ${state.user.lastName}',
                                         style: TextStyle(
                                             fontSize: 22,
                                             fontWeight: FontWeight.bold),
@@ -206,7 +216,15 @@ class _WritePostState extends State<WritePost> {
                       : Container()
                 ],
               ),
-            ));
+            ),
+          );
+        } else {
+          const Center(
+            child: Text('Something went wrong...'),
+          );
+        }
+
+        return Container();
       },
     );
   }

@@ -1,18 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class CommentData {
-  static Future commentToPost(String postID, String commentContent) async {
+class ForumsStore {
+  static Future commentToPost(
+      String postID, String commentContent, String userName) async {
     await FirebaseFirestore.instance
         .collection('Forums')
         .doc(postID)
-        .collection('Comment')
+        .collection('Comments')
         .doc()
         .set({
       'postID': postID,
-      'Name': 'Nelson',
+      'commentUserName': userName,
       'commentTimeStamp': DateTime.now().microsecondsSinceEpoch,
       'commentContent': commentContent,
       'commentLikeCount': 0,
+    });
+  }
+
+  static Future likeToPost(String postID, String userName) async {
+    await FirebaseFirestore.instance
+        .collection('Forums')
+        .doc(postID)
+        .collection('Likes')
+        .doc(userName)
+        .set({
+      'postID': postID,
+      'commentUserName': userName,
     });
   }
 

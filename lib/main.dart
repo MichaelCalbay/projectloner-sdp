@@ -78,6 +78,12 @@ class MyApp extends StatelessWidget {
                   databaseRepository: context.read<DatabaseRepository>(),
                 )),
           ),
+          BlocProvider(
+            create: ((context) => ProfileBloc(
+                  authBloc: context.read<AuthBloc>(),
+                  databaseRepository: context.read<DatabaseRepository>(),
+                )),
+          ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

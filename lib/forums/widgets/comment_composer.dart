@@ -1,13 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:projectloner/forums/Database/comment_data.dart';
+import 'package:projectloner/forums/Database/forums_firestore.dart';
 
 class CommentComposer extends StatelessWidget {
   final TextEditingController _msgController = TextEditingController();
   final DocumentSnapshot data;
+  final String userName;
   CommentComposer({
     super.key,
     required this.data,
+    required this.userName,
   });
 
   @override
@@ -46,8 +48,9 @@ class CommentComposer extends StatelessWidget {
 
   Future _handleSubmitted(String text) async {
     try {
-      await CommentData.commentToPost(data['postID'], _msgController.text);
-      await CommentData.updatePostCommentCount(data);
+      await ForumsStore.commentToPost(
+          data['postID'], _msgController.text, userName);
+      await ForumsStore.updatePostCommentCount(data);
     } catch (e) {}
   }
 }
