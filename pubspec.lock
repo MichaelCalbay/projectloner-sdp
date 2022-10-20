@@ -664,7 +664,6 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
-
     version: "1.9.0"
   sqflite:
     dependency: transitive
@@ -707,9 +706,7 @@ packages:
       name: string_scanner
       url: "https://pub.dartlang.org"
     source: hosted
-
     version: "1.1.1"
-
   synchronized:
     dependency: transitive
     description:
@@ -730,7 +727,6 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-
     version: "0.4.12"
   timezone:
     dependency: transitive
