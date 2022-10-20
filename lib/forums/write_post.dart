@@ -2,8 +2,10 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
+import 'dart:io';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projectloner/blocs/profile/profile_bloc.dart';
 
 class WritePost extends StatefulWidget {
@@ -20,6 +22,7 @@ class _WritePostState extends State<WritePost> {
   FocusNode writingTextFocus = FocusNode();
   TextEditingController writingTextController = TextEditingController();
   bool _isLoading = false;
+  XFile? postImageFIle;
 
   KeyboardActionsConfig buildConfig(BuildContext context) {
     return KeyboardActionsConfig(
@@ -39,8 +42,7 @@ class _WritePostState extends State<WritePost> {
                 return GestureDetector(
                   onTap: () {
                     print('Close view');
-                    Navigator.pop(context);
-                    node.unfocus();
+                    getImage();
                   },
                   child: Container(
                     color: Colors.grey[200],
@@ -198,6 +200,22 @@ class _WritePostState extends State<WritePost> {
                                   )
                                 ],
                               ),
+                              Divider(height:1, color: Colors.black,),
+                              postImageFIle != null ? Image.file(File(postImageFIle!.path)) :
+                                  Container(),
+                              TextFormField(
+                                autofocus: true,
+                                focusNode: writingTextFocus,
+                                decoration: const InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Start writing...',
+                                  hintMaxLines: 4,
+                                ),
+                                controller: writingTextController,
+                                keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                              )
+                            ],
                             ),
                           ),
                         ),
@@ -216,6 +234,20 @@ class _WritePostState extends State<WritePost> {
                       : Container()
                 ],
               ),
+              _isLoading
+                  ? Positioned(
+                      child: Container(
+                        color: Colors.white.withOpacity(0.8),
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                    )
+                  : Container()
+            ],
+          ),
+        ),
+        );
             ),
           );
         } else {
@@ -227,5 +259,14 @@ class _WritePostState extends State<WritePost> {
         return Container();
       },
     );
+  }
+
+  Future<void> getImage() async{
+    XFile? imageFileFromGAllery = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if(imageFileFromGAllery != null){
+      setState(() {
+        postImageFIle = imageFileFromGAllery;
+      });
+    }
   }
 }

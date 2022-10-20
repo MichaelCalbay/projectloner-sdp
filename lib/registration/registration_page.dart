@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projectloner/registration/screens/screens.dart';
+import 'package:projectloner/theme/icon_button.dart';
 
 class RegistrationPage extends StatelessWidget {
   static const String routeName = '/registration';
@@ -31,6 +32,9 @@ class RegistrationPage extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
+            actions: [
+              ThemeIconButton(),
+            ],
             title: const Text(
               'REGISTRATION',
               style: TextStyle(fontWeight: FontWeight.bold),
