@@ -11,7 +11,7 @@ class ForumsStore {
         .set({
       'postID': postID,
       'commentUserName': userName,
-      'commentTimeStamp': DateTime.now().microsecondsSinceEpoch,
+      'commentTimeStamp': DateTime.now().millisecondsSinceEpoch,
       'commentContent': commentContent,
       'commentLikeCount': 0,
     });

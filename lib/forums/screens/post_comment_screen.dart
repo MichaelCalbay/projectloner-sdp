@@ -95,29 +95,28 @@ class _PostCommentPageState extends State<PostCommentPage> {
                                         style: const TextStyle(fontSize: 15),
                                       ),
                                     ),
-                                    const Divider(
-                                      height: 5,
-                                      color: Colors.grey,
-                                    ), // black lines going across
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 5.0, bottom: 5.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          LikeButton(data: widget.data),
-                                          CommentButton(data: widget.data),
-                                        ],
-                                      ),
-                                    ),
+                                    // const Divider(
+                                    //   height: 5,
+                                    //   color: Colors.grey,
+                                    // ), // black lines going across
+                                    // Padding(
+                                    //   padding: const EdgeInsets.only(
+                                    //       top: 5.0, bottom: 5.0),
+                                    //   child: Row(
+                                    //     mainAxisAlignment:
+                                    //         MainAxisAlignment.spaceEvenly,
+                                    //     children: [
+                                    //       LikeButton(data: widget.data),
+                                    //       CommentButton(data: widget.data),
+                                    //     ],
+                                    //   ),
+                                    // ),
                                   ],
                                 ),
                               ),
                             ),
                             snapshot.data!.docs.isNotEmpty
-                                ? ListView(
-                                    shrinkWrap: true,
+                                ? Column(
                                     children: snapshot.data!.docs.map(
                                       (document) {
                                         return CommentList(data: document);

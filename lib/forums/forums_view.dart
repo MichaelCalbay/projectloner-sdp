@@ -13,12 +13,12 @@ import 'write_post.dart';
 import '../widgets/custom_app_bar.dart';
 
 class ForumsPage extends StatefulWidget {
-  final MyProfileData? profileData;
-  final ValueChanged<MyProfileData>? updateProfData;
+  // final MyProfileData? profileData;
+  // final ValueChanged<MyProfileData>? updateProfData;
   const ForumsPage({
     Key? key,
-    this.profileData,
-    this.updateProfData,
+    // this.profileData,
+    // this.updateProfData,
   }) : super(key: key);
 
   @override
@@ -108,9 +108,13 @@ class _ForumsPage extends State<ForumsPage> {
             },
           ),
           floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.deepPurple,
             onPressed: _incrementCounter,
             tooltip: 'Increment',
-            child: const Icon(Icons.create),
+            child: const Icon(
+              Icons.create,
+              color: Colors.black,
+            ),
           ), // This trailing comma makes auto-formatting nicer for build methods.
         );
       },
