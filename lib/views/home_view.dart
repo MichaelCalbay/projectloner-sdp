@@ -1,7 +1,9 @@
 // ignore: file_names
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../matching/matching_screen.dart';
+import '../theme/theme_provider.dart';
 import 'forum_view.dart';
 import '../forums/forums_view.dart';
 import 'nav_bar.dart';
@@ -17,6 +19,8 @@ class HomePageState extends State {
   
   @override
   Widget build(BuildContext context) {
+    LonerThemeProvider themeProvider = LonerThemeProvider();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Home Page"),
@@ -33,6 +37,18 @@ class HomePageState extends State {
               image: AssetImage("images/valo_bg.png"),
               fit: BoxFit.cover,
             ),*/
+      body: Center(
+        child:
+            Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          Image.asset(
+            'images/gamepad.png',
+            width: 100,
+            height: 150,
+            color: (themeProvider.isDarkMode) ? Colors.white : Colors.black,
+          ),
+          const Text(
+            'Hello *User*!',
+            style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
           ),
           child: SingleChildScrollView(
             child: Center(

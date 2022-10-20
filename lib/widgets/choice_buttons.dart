@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../theme/theme_provider.dart';
+
 class ChoiceButton extends StatelessWidget {
   final double width;
   final double height;
@@ -18,12 +20,14 @@ class ChoiceButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    LonerThemeProvider themeProvider = LonerThemeProvider();
+
     return Container(
       width: width,
       height: height,
       decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: Colors.white,
+          color: (themeProvider.isDarkMode) ? Colors.black54 : Colors.white,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withAlpha(50),
