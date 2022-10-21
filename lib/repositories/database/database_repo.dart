@@ -49,7 +49,7 @@ class DatabaseRepository extends BaseDatabaseRepository {
       ..add(user.id!);
     return _firebaseFirestore
         .collection('LonerUser')
-        .where('gender', isEqualTo: 'Female')
+        // .where('gender', isEqualTo: 'Female')
         .where(FieldPath.documentId, whereNotIn: userFilters)
         .snapshots()
         .map((snap) {
