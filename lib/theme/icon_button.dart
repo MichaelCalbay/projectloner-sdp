@@ -16,6 +16,7 @@ class ThemeMaterialButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<LonerThemeProvider>(context);
     return RawMaterialButton(
+      key: Key("toggleButtonTheme"),
       shape: const CircleBorder(),
       elevation: 2.0,
       fillColor: themeProvider.isDarkMode ? Colors.grey[700] : Colors.grey[200],
@@ -36,9 +37,11 @@ class ThemeIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<LonerThemeProvider>(context);
     return IconButton(
-        onPressed: () {
-          themeProvider.toggleTheme(themeProvider.isDarkMode ? false : true);
-        },
-        icon: Icon(themeProvider.isDarkMode ? data.iconDark : data.iconLight));
+      key: Key("toggleIconTheme"),
+      onPressed: () {
+        themeProvider.toggleTheme(LonerThemeProvider.isDarkMode ? false : true);
+      },
+      icon: Icon(LonerThemeProvider.isDarkMode ? data.iconDark : data.iconLight)
+    );
   }
 }
