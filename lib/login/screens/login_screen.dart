@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectloner/login/check_login.dart';
 import 'package:projectloner/login/forgot_password.dart';
 import 'package:projectloner/login/widgets/login_widget.dart';
+import 'package:projectloner/widgets/custom_app_bar.dart';
 
 class LoginScreen extends StatefulWidget {
   final bool? isEmailVerified;
@@ -74,13 +75,10 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   title: const Text(
-      //     'LOGIN',
-      //     style: TextStyle(fontWeight: FontWeight.bold),
-      //   ),
-      // ),
+      appBar: CustomAppBar(
+        title: 'LOGIN',
+        actionButtons: false,
+      ),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
