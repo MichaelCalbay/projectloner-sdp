@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class LonerThemeProvider extends ChangeNotifier {
   static ThemeMode themeMode = ThemeMode.light;
 
-  static bool get isDarkMode => themeMode == ThemeMode.dark;
+  bool get isDarkMode => themeMode == ThemeMode.dark;
 
   void toggleTheme(bool isOn) {
     themeMode = isOn ? ThemeMode.dark : ThemeMode.light;

@@ -1,5 +1,4 @@
-class ForumsPostData{
-
+class ForumsPostData {
   late final String userName;
   late final String userThumbnail;
   late final int postTimeStamp;
@@ -9,12 +8,11 @@ class ForumsPostData{
   late final int postCommentCounter;
 
   ForumsPostData(
-      { required this.userName,
-        required this.userThumbnail,
-        required this.postTimeStamp,
-        required this.postContent,
-        required this.postImage,
-        required this.postLikeCounter,
-        required this.postCommentCounter
-      });
+      {required this.userName,
+      required this.userThumbnail,
+      required this.postTimeStamp,
+      required this.postContent,
+      required this.postImage,
+      required this.postLikeCounter,
+      required this.postCommentCounter});
 }

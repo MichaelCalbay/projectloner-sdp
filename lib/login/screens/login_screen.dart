@@ -7,6 +7,8 @@ import 'package:projectloner/login/check_login.dart';
 import 'package:projectloner/login/forgot_password.dart';
 import 'package:projectloner/login/widgets/login_widget.dart';
 import 'package:projectloner/theme/icon_button.dart';
+import 'package:projectloner/views/nav_bar.dart';
+import 'package:projectloner/widgets/custom_app_bar.dart';
 
 class LoginScreen extends StatefulWidget {
   final bool? isEmailVerified;
@@ -75,6 +77,10 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(
+        title: 'LOGIN',
+        actionButtons: false,
+      ),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(

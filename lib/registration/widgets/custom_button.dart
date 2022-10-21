@@ -59,6 +59,9 @@ class CustomButton extends StatelessWidget {
                   interests: const [],
                   server: '',
                   mainRole: '',
+                  swipedLeft: const [],
+                  swipedRight: const [],
+                  matches: const [],
                 );
                 context.read<OnboardingBloc>().add(StartOnboarding(user: user));
               }

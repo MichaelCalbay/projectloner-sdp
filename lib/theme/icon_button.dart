@@ -8,7 +8,6 @@ class ThemeIconData {
 }
 
 class ThemeMaterialButton extends StatelessWidget {
-  
   ThemeIconData data = ThemeIconData();
 
   ThemeMaterialButton({Key? key}) : super(key: key);
@@ -20,11 +19,11 @@ class ThemeMaterialButton extends StatelessWidget {
       key: Key("toggleButtonTheme"),
       shape: const CircleBorder(),
       elevation: 2.0,
-      fillColor: LonerThemeProvider.isDarkMode ? Colors.grey[700] : Colors.grey[200],
+      fillColor: themeProvider.isDarkMode ? Colors.grey[700] : Colors.grey[200],
       onPressed: () {
-        themeProvider.toggleTheme(LonerThemeProvider.isDarkMode ? false : true);
+        themeProvider.toggleTheme(themeProvider.isDarkMode ? false : true);
       },
-      child: Icon(LonerThemeProvider.isDarkMode ? data.iconDark : data.iconLight),
+      child: Icon(themeProvider.isDarkMode ? data.iconDark : data.iconLight),
     );
   }
 }
@@ -33,7 +32,7 @@ class ThemeIconButton extends StatelessWidget {
   ThemeIconData data = ThemeIconData();
 
   ThemeIconButton({Key? key}) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<LonerThemeProvider>(context);
