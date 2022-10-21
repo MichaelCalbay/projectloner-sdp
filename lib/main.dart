@@ -9,7 +9,6 @@ import 'package:projectloner/blocs/auth/auth_bloc.dart';
 import 'package:projectloner/blocs/onboarding/onboarding_bloc.dart';
 import 'package:projectloner/blocs/swipe/swipe_bloc.dart';
 import 'package:projectloner/cubit/signup/signup_cubit.dart';
-import 'package:projectloner/matching/profile_screen.dart';
 import 'package:projectloner/registration/registration_page.dart';
 import 'package:projectloner/repositories/registration/auth_repo.dart';
 import 'package:projectloner/theme/theme_provider.dart';
@@ -71,12 +70,6 @@ class MyApp extends StatelessWidget {
               databaseRepository: context.read<DatabaseRepository>(),
               authBloc: context.read<AuthBloc>(),
             ),
-          ),
-          BlocProvider(
-            create: ((context) => ProfileBloc(
-                  authBloc: context.read<AuthBloc>(),
-                  databaseRepository: context.read<DatabaseRepository>(),
-                )),
           ),
           BlocProvider(
             create: ((context) => ProfileBloc(

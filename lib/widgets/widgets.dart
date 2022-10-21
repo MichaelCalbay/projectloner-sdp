@@ -7,3 +7,5 @@ export 'custom_user_image.dart';
 export 'custom_elevated_button.dart';
 export 'swiping_state_screen.dart';
 export 'matched_notif_screen.dart';
+export 'active_list.dart';
+export 'inactive_list.dart';
