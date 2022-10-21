@@ -37,7 +37,7 @@ class SwipeBloc extends Bloc<SwipeEvent, SwipeState> {
     LoadUsers event,
     Emitter<SwipeState> emit,
   ) {
-    _databaseRepository.getUsers(event.user).listen((users) {
+    _databaseRepository.getUsersToMatch(event.user).listen((users) {
       debugPrint('$users');
       add(UpdateMatching(users: users));
     });
