@@ -4,3 +4,6 @@ export 'user_card.dart';
 export 'choice_buttons.dart';
 export 'header_with_icon.dart';
 export 'custom_user_image.dart';
+export 'custom_elevated_button.dart';
+export 'swiping_state_screen.dart';
+export 'matched_notif_screen.dart';
