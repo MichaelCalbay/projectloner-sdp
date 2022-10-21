@@ -37,11 +37,10 @@ class ThemeIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<LonerThemeProvider>(context);
     return IconButton(
-      key: Key("toggleIconTheme"),
-      onPressed: () {
-        themeProvider.toggleTheme(LonerThemeProvider.isDarkMode ? false : true);
-      },
-      icon: Icon(LonerThemeProvider.isDarkMode ? data.iconDark : data.iconLight)
-    );
+        key: Key("toggleIconTheme"),
+        onPressed: () {
+          themeProvider.toggleTheme(themeProvider.isDarkMode ? false : true);
+        },
+        icon: Icon(themeProvider.isDarkMode ? data.iconDark : data.iconLight));
   }
 }
