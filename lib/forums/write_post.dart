@@ -1,11 +1,16 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
-import 'dart:io';
+import 'package:projectloner/blocs/profile/profile_bloc.dart';
 
 class WritePost extends StatefulWidget {
-  const WritePost({Key? key}) : super(key: key);
+  const WritePost({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<WritePost> createState() => _WritePostState();
@@ -36,7 +41,8 @@ class _WritePostState extends State<WritePost> {
                 return GestureDetector(
                   onTap: () {
                     print('Close view');
-                    getImage();
+                    Navigator.pop(context);
+                    node.unfocus();
                   },
                   child: Container(
                     color: Colors.grey[200],
@@ -76,14 +82,16 @@ class _WritePostState extends State<WritePost> {
         ]);
   }
 
-  Future<void> sentPostInFireBase(String postContent) async {
+  Future<void> sentPostInFireBase(
+      String postContent, String postID, String userName) async {
     setState(() {
       _isLoading = true;
     });
 
-    FirebaseFirestore.instance.collection('Forums').doc().set({
-      'userName': 'Sam',
-      'userThumbnail': '',
+    FirebaseFirestore.instance.collection('Forums').doc(postID).set({
+      'postID': postID,
+      'postUserName': userName,
+      'postUserThumbnail': '',
       'postTimeStamp': DateTime.now().millisecondsSinceEpoch,
       'postContent': postContent,
       'postImage': 'testUserName',
@@ -98,112 +106,135 @@ class _WritePostState extends State<WritePost> {
 
   @override
   Widget build(BuildContext context) {
+    String fID = FirebaseFirestore.instance.collection('Forums').doc().id;
     final size = MediaQuery.of(context).size;
 
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Writing Post'),
-          centerTitle: true,
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => sentPostInFireBase(writingTextController.text),
-              child: const Text(
-                'post',
-                style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              ),
-            )
-          ],
-        ),
-        body: KeyboardActions(
-          config: buildConfig(context),
-          child: Stack(
-            children: [
-              Column(
-                children: <Widget>[
-                  const SizedBox(
-                    height: 10,
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      builder: (context, state) {
+        if (state is ProfileLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state is ProfileLoaded) {
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Writing Post'),
+              centerTitle: true,
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => sentPostInFireBase(
+                      writingTextController.text,
+                      fID,
+                      '${state.user.firstName} ${state.user.lastName}'),
+                  child: const Text(
+                    'post',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
                   ),
-                  Container(
-                    child: Card(
-                      color: Colors.white,
-                      elevation: 4.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
+                )
+              ],
+            ),
+            body: KeyboardActions(
+              config: buildConfig(context),
+              child: Stack(
+                children: [
+                  Column(
+                    children: <Widget>[
+                      const SizedBox(
+                        height: 10,
                       ),
-                      child: Container(
-                        width: size.width,
-                        height: size.height -
-                            MediaQuery.of(context).viewInsets.bottom -
-                            80,
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.only(right: 14.0, left: 10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: const <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.book,
-                                      size: 20,
-                                    ),
+                      Container(
+                        child: Card(
+                          color: Colors.white,
+                          elevation: 4.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          child: Container(
+                            width: size.width,
+                            height: size.height -
+                                MediaQuery.of(context).viewInsets.bottom -
+                                80,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 14.0, left: 10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Icon(
+                                          Icons.book,
+                                          size: 20,
+                                        ),
+                                      ),
+                                      Text(
+                                        '${state.user.firstName} ${state.user.lastName}',
+                                        style: TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold),
+                                      )
+                                    ],
                                   ),
-                                  Text(
-                                    'Sam',
-                                    style: TextStyle(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold),
+                                  const Divider(
+                                    height: 1,
+                                    color: Colors.black,
+                                  ),
+                                  TextFormField(
+                                    autofocus: true,
+                                    focusNode: writingTextFocus,
+                                    decoration: const InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: 'Start writing...',
+                                      hintMaxLines: 4,
+                                    ),
+                                    controller: writingTextController,
+                                    keyboardType: TextInputType.multiline,
+                                    maxLines: null,
                                   )
                                 ],
                               ),
-
-                              Divider(height:1, color: Colors.black,),
-                              postImageFIle != null ? Image.file(File(postImageFIle!.path)) :
-                                  Container(),
-                              TextFormField(
-                                autofocus: true,
-                                focusNode: writingTextFocus,
-                                decoration: const InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'Start writing...',
-                                  hintMaxLines: 4,
-                                ),
-                                controller: writingTextController,
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                              )
-                            ],
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  )
+                      )
+                    ],
+                  ),
+                  _isLoading
+                      ? Positioned(
+                          child: Container(
+                            color: Colors.white.withOpacity(0.8),
+                            child: const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
+                        )
+                      : Container()
                 ],
               ),
-              _isLoading
-                  ? Positioned(
-                      child: Container(
-                        child: const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                        color: Colors.white.withOpacity(0.8),
-                      ),
-                    )
-                  : Container()
-            ],
-          ),
-        ));
+            ),
+          );
+        } else {
+          const Center(
+            child: Text('Something went wrong...'),
+          );
+        }
+
+        return Container();
+      },
+    );
   }
 
-  Future<void> getImage() async{
-    XFile? imageFileFromGAllery = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if(imageFileFromGAllery != null){
+  Future<void> getImage() async {
+    XFile? imageFileFromGAllery =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (imageFileFromGAllery != null) {
       setState(() {
         postImageFIle = imageFileFromGAllery;
       });
