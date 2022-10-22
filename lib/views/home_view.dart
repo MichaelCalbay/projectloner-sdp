@@ -22,6 +22,7 @@ class HomePageState extends State {
 
     return Scaffold(
       appBar: AppBar(
+        key: const Key("sideBar"),
         title: const Text("Home Page"),
         backgroundColor: Colors.deepPurple,
       ),
