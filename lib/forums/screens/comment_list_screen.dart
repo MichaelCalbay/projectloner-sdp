@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projectloner/blocs/profile/profile_bloc.dart';
 import 'package:projectloner/forums/utils.dart';
+import '../../theme/theme_provider.dart';
 
 class CommentList extends StatefulWidget {
   final DocumentSnapshot data;
@@ -18,6 +19,8 @@ class CommentList extends StatefulWidget {
 }
 
 class _CommentListState extends State<CommentList> {
+  final themeProvider = LonerThemeProvider();
+  
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileBloc, ProfileState>(
@@ -44,7 +47,7 @@ class _CommentListState extends State<CommentList> {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                              color: Colors.grey[300],
+                              color: themeProvider.isDarkMode ? Colors.grey[850] : Colors.grey[300],
                               borderRadius: const BorderRadius.all(
                                 Radius.circular(25.0),
                               ),
@@ -110,14 +113,14 @@ class _CommentListState extends State<CommentList> {
                                 'Like',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.grey[700],
+                                  color: themeProvider.isDarkMode ? Colors.grey[300] : Colors.grey[700],
                                 ),
                               ),
                               Text(
                                 'Reply',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.grey[700],
+                                  color: themeProvider.isDarkMode ? Colors.grey[300] : Colors.grey[700],
                                 ),
                               ),
                             ],
