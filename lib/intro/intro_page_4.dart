@@ -25,13 +25,19 @@ class PageFour extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const Text(
-            "Talk one-on-one with people on loner.\n"
-                "Message coaches or players that suite your interest\n",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.grey,
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.grey[800],
+              borderRadius: BorderRadius.all(Radius.circular(150)),
+            ),
+            child: const Text(
+              "\nTalk one-on-one with people on loner.\n"
+                  "  Match with players that suite your interest     \n",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.white,
+              ),
             ),
           ),
         ],
