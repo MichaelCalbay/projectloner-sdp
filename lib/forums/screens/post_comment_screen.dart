@@ -95,6 +95,8 @@ class _PostCommentPageState extends State<PostCommentPage> {
                                         style: const TextStyle(fontSize: 15),
                                       ),
                                     ),
+                                    widget.data['postImage'] != 'NONE' ? Utils.cacheNetworkImageWithEvent(context, widget.data['postImage'], 0,0)  :
+                                    Container(),
                                     // const Divider(
                                     //   height: 5,
                                     //   color: Colors.grey,
