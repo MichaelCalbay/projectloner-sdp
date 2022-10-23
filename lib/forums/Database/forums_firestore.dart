@@ -1,4 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:io';
+
+import 'package:image_picker/image_picker.dart';
+
 
 class ForumsStore {
   static Future commentToPost(
@@ -27,6 +32,20 @@ class ForumsStore {
       'postID': postID,
       'commentUserName': userName,
     });
+  }
+
+  static Future<String> uploadPostImages({required String postID,required File postImageFile}) async {
+    try {
+      //FirebaseStorage storage = FirebaseStorage.instance;
+      String fileName = 'images/$postID/postImage';
+      Reference reference = FirebaseStorage.instance.ref().child(fileName);
+      UploadTask uploadTask = reference.putFile(postImageFile);
+      TaskSnapshot storageTaskSnapshot = await uploadTask;
+      String postImageURL = await storageTaskSnapshot.ref.getDownloadURL();
+      return postImageURL;
+    }catch(e) {
+      return 'error';
+    }
   }
 
   static Future updatePostCommentCount(DocumentSnapshot data) async {

@@ -77,7 +77,7 @@ class _PostCommentPageState extends State<PostCommentPage> {
                                               padding:
                                                   const EdgeInsets.all(2.0),
                                               child: Text(
-                                                readTimestamp(widget
+                                                Utils.readTimestamp(widget
                                                     .data['postTimeStamp']),
                                                 style: const TextStyle(
                                                     fontSize: 15,

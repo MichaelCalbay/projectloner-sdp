@@ -102,7 +102,7 @@ class _CommentListState extends State<CommentList> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Text(
-                                readTimestamp(widget.data['commentTimeStamp']),
+                                Utils.readTimestamp(widget.data['commentTimeStamp']),
                                 style: const TextStyle(
                                     fontSize: 15, color: Colors.deepPurple),
                               ),
