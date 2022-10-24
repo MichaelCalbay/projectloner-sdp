@@ -91,11 +91,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    ThemeMaterialButton(),
+                    ThemeMaterialButton(
+                      key: Key("toggleSwitchTheme")
+                    ),
                   ],
                 ),
                 Icon(
                   Icons.gamepad_rounded,
+                  key: Key("gamepadIcon"),
                   color: Colors.deepPurple,
                   size: 100,
                 ),
@@ -191,6 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     GestureDetector(
+                      key: Key("registerNow"),
                       onTap: () {
                         Navigator.pop(context);
                         Navigator.pushNamed(context, '/registration');

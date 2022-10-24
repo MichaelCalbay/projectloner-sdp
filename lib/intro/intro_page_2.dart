@@ -25,14 +25,20 @@ class PageTwo extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const Text(
-            "Thankyou for helping us improve our app.\n"
-                "Give feedback on any bug reports\n"
-                "whether the issue is small or big.",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.white,
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.grey[800],
+              borderRadius: BorderRadius.all(Radius.circular(50)),
+            ),
+            child: const Text(
+              "\n  Thankyou for helping us improve our   \n"
+                  "  app.Give feedback on any bug reports   \n"
+                  "  whether the issue is small or big.   \n",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.white,
+              ),
             ),
           ),
         ],

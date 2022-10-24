@@ -2,10 +2,13 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:projectloner/blocs/profile/profile_bloc.dart';
+import 'dart:io';
+import 'Database/forums_firestore.dart';
 
 class WritePost extends StatefulWidget {
   const WritePost({
@@ -21,7 +24,7 @@ class _WritePostState extends State<WritePost> {
   FocusNode writingTextFocus = FocusNode();
   TextEditingController writingTextController = TextEditingController();
   bool _isLoading = false;
-  XFile? postImageFIle;
+  XFile? postImageFile1;
 
   KeyboardActionsConfig buildConfig(BuildContext context) {
     return KeyboardActionsConfig(
@@ -40,9 +43,7 @@ class _WritePostState extends State<WritePost> {
               (node) {
                 return GestureDetector(
                   onTap: () {
-                    print('Close view');
-                    Navigator.pop(context);
-                    node.unfocus();
+                   getImage();
                   },
                   child: Container(
                     color: Colors.grey[200],
@@ -57,33 +58,16 @@ class _WritePostState extends State<WritePost> {
                   ),
                 );
               },
-              //     (node){
-              //   return GestureDetector(
-              //     onTap: (){
-              //       // print('Close view');
-              //       // Navigator.pop(context);
-              //       // node.unfocus();
-              //     },
-              //     // child: Container(
-              //     //   color: Colors.grey[200],
-              //     //   padding: EdgeInsets.all(8.0),
-              //     //   child: Text(
-              //     //     "Done",
-              //     //     style: TextStyle(
-              //     //         color: Colors.black,
-              //     //         fontSize: 18,
-              //     //         fontWeight: FontWeight.bold),
-              //     //   ),
-              //     // ),
-              //   );
-              // },
             ],
           ),
         ]);
   }
 
-  Future<void> sentPostInFireBase(
-      String postContent, String postID, String userName) async {
+  Future<void> sentPostInFireBase(String postContent, String postID, String userName) async {
+    String? postImage;
+    if(postImageFile1 != null){
+      postImage = await ForumsStore.uploadPostImages(postID: postID, postImageFile: File(postImageFile1!.path));
+    }
     setState(() {
       _isLoading = true;
     });
@@ -94,19 +78,21 @@ class _WritePostState extends State<WritePost> {
       'postUserThumbnail': '',
       'postTimeStamp': DateTime.now().millisecondsSinceEpoch,
       'postContent': postContent,
-      'postImage': 'testUserName',
+      'postImage': postImage ?? 'NONE',
       'postLikeCounter': 0,
       'postCommentCounter': 0
     });
     setState(() {
-      _isLoading = false;
+      _isLoading = true;
     });
+    if (!mounted) return;
     Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
     String fID = FirebaseFirestore.instance.collection('Forums').doc().id;
+    
     final size = MediaQuery.of(context).size;
 
     return BlocBuilder<ProfileBloc, ProfileState>(
@@ -186,6 +172,8 @@ class _WritePostState extends State<WritePost> {
                                     height: 1,
                                     color: Colors.black,
                                   ),
+                                  postImageFile1 != null ? Image.file(File(postImageFile1!.path),fit: BoxFit.fill,) :
+                                  Container(),
                                   TextFormField(
                                     autofocus: true,
                                     focusNode: writingTextFocus,
@@ -225,19 +213,23 @@ class _WritePostState extends State<WritePost> {
             child: Text('Something went wrong...'),
           );
         }
-
         return Container();
       },
     );
   }
 
-  Future<void> getImage() async {
-    XFile? imageFileFromGAllery =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (imageFileFromGAllery != null) {
+  Future<void>  getImage() async {
+    XFile? imageFileFromGallery = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (imageFileFromGallery != null) {
       setState(() {
-        postImageFIle = imageFileFromGAllery;
+        postImageFile1 = imageFileFromGallery;
       });
     }
   }
+
+
+
+
+
+
 }

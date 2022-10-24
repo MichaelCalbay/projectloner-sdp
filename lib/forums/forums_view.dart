@@ -172,7 +172,7 @@ class _ForumsPage extends State<ForumsPage> {
                         Padding(
                           padding: const EdgeInsets.all(2.0),
                           child: Text(
-                            readTimestamp(data['postTimeStamp']),
+                            Utils.readTimestamp(data['postTimeStamp']),
                             style: const TextStyle(
                                 fontSize: 15, color: Colors.indigo),
                           ),
@@ -187,12 +187,11 @@ class _ForumsPage extends State<ForumsPage> {
                 onTap: () => _moveToComment(data),
                 child: Padding(
                   padding: const EdgeInsets.all(6.0),
-                  child: Text(
-                    data['postContent'],
-                    style: const TextStyle(fontSize: 15),
-                  ),
+                  child: Text(data['postContent'], style: const TextStyle(fontSize: 15),),
                 ),
               ),
+              data['postImage'] != 'NONE' ? Utils.cacheNetworkImageWithEvent(context, data['postImage'], 0,0)  :
+              Container(),
               //const Divider(height: 5, color: Colors.black,), // black lines going across
               Padding(
                 padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),

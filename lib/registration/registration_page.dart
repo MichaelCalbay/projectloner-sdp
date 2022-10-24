@@ -28,12 +28,14 @@ class RegistrationPage extends StatelessWidget {
       length: tabs.length,
       child: Builder(builder: (BuildContext context) {
         final TabController tabController = DefaultTabController.of(context)!;
-
         return Scaffold(
+          key: Key("scaffold"),
           appBar: AppBar(
             centerTitle: true,
             actions: [
-              ThemeIconButton(),
+              ThemeIconButton(
+                key: Key("toggleIconTheme"),
+              ),
             ],
             title: const Text(
               'REGISTRATION',
