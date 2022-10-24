@@ -26,26 +26,29 @@ class _CommentListState extends State<CommentList> {
   static String userName = '';
 
   void likeComment(DocumentSnapshot data) async {
-    if (!await CommentStore.checkIfLiked(data['postID'], data['commentID'], userName)) {
+    if (!await CommentStore.checkIfLiked(
+        data['postID'], data['commentID'], userName)) {
       _incrementCommentLikeCount(data);
-    }
-    else {
+    } else {
       _decrementCommentLikeCount(data);
     }
   }
 
   static Future<bool> _checkIfLiked(DocumentSnapshot data) async {
-    return await CommentStore.checkIfLiked(data['postID'], data['commentID'], userName);
+    return await CommentStore.checkIfLiked(
+        data['postID'], data['commentID'], userName);
   }
-  
+
   void _incrementCommentLikeCount(DocumentSnapshot data) async {
     await CommentStore.incrementCommentLikeCount(data);
-    await CommentStore.likeToComment(data['postID'], data['commentID'], userName);
+    await CommentStore.likeToComment(
+        data['postID'], data['commentID'], userName);
   }
 
   void _decrementCommentLikeCount(DocumentSnapshot data) async {
     await CommentStore.decrementCommentLikeCount(data);
-    await CommentStore.unlikeToComment(data['postID'], data['commentID'], userName);
+    await CommentStore.unlikeToComment(
+        data['postID'], data['commentID'], userName);
   }
 
   @override
@@ -75,7 +78,9 @@ class _CommentListState extends State<CommentList> {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                              color: themeProvider.isDarkMode ? Colors.grey[850] : Colors.grey[300],
+                              color: themeProvider.isDarkMode
+                                  ? Colors.grey[850]
+                                  : Colors.grey[300],
                               borderRadius: const BorderRadius.all(
                                 Radius.circular(25.0),
                               ),
@@ -128,12 +133,13 @@ class _CommentListState extends State<CommentList> {
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0, top: 4.0),
                         child: SizedBox(
-                          width: 130,
+                          width: 100,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Text(
-                                Utils.readTimestamp(widget.data['commentTimeStamp']),
+                                Utils.readTimestamp(
+                                    widget.data['commentTimeStamp']),
                                 style: const TextStyle(
                                     fontSize: 15, color: Colors.deepPurple),
                               ),
@@ -141,33 +147,28 @@ class _CommentListState extends State<CommentList> {
                                 onTap: () => likeComment(widget.data),
                                 child: FutureBuilder<bool>(
                                   future: _checkIfLiked(widget.data),
-                                  builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                                  builder: (BuildContext context,
+                                      AsyncSnapshot<bool> snapshot) {
                                     if (snapshot.data == false) {
+                                      return Text('Like',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: themeProvider.isDarkMode
+                                                ? Colors.grey[300]
+                                                : Colors.grey[700],
+                                          ));
+                                    } else {
                                       return Text(
-                                        'Like',
+                                        'Unlike',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          color: themeProvider.isDarkMode ? Colors.grey[300] : Colors.grey[700],
-                                        )
-                                      );
-                                    }
-                                    else {
-                                      return Text(
-                                        'Unlike', 
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: themeProvider.isDarkMode ? Colors.grey[300] : Colors.grey[700],
+                                          color: themeProvider.isDarkMode
+                                              ? Colors.grey[300]
+                                              : Colors.grey[700],
                                         ),
                                       );
                                     }
-                                  }
-                                ),
-                              ),
-                              Text(
-                                'Reply',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: themeProvider.isDarkMode ? Colors.grey[300] : Colors.grey[700],
+                                  },
                                 ),
                               ),
                             ],
