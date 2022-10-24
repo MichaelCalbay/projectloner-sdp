@@ -13,12 +13,8 @@ import 'write_post.dart';
 import '../widgets/custom_app_bar.dart';
 
 class ForumsPage extends StatefulWidget {
-  // final MyProfileData? profileData;
-  // final ValueChanged<MyProfileData>? updateProfData;
   const ForumsPage({
     Key? key,
-    // this.profileData,
-    // this.updateProfData,
   }) : super(key: key);
 
   @override
@@ -27,7 +23,7 @@ class ForumsPage extends StatefulWidget {
 
 class _ForumsPage extends State<ForumsPage> {
   bool _isLoading = false;
-  String userName = '';
+  static String userName = '';
 
   @override
   void initState() {
@@ -133,15 +129,32 @@ class _ForumsPage extends State<ForumsPage> {
     );
   }
 
-  void _updateLikeCount(DocumentSnapshot data) async {
-    await ForumsStore.updatePostLikeCount(data);
+  void likePost(DocumentSnapshot data) async {
+    if (!await ForumsStore.checkIfPostLiked(data['postID'], userName)) {
+      _incrementPostLikeCount(data);
+    } else {
+      _decrementPostLikeCount(data);
+    }
+  }
+
+  static Future<bool> _checkIfPostLiked(DocumentSnapshot data) async {
+    return await ForumsStore.checkIfPostLiked(
+      data['postID'],
+      userName,
+    );
+  }
+
+  void _incrementPostLikeCount(DocumentSnapshot data) async {
+    await ForumsStore.incrementPostLikeCount(data);
     await ForumsStore.likeToPost(data['postID'], userName);
-    // List<String> newLikeList = await LocalDB.saveLikeList(
-    //     data['postID'], widget.profileData?.myLikeList);
-    // MyProfileData myProfileData = MyProfileData(
-    //   myLikeList: newLikeList,
-    // );
-    // widget.updateProfData!(myProfileData);
+  }
+
+  void _decrementPostLikeCount(DocumentSnapshot data) async {
+    await ForumsStore.decrementPostLikeCount(data);
+    await ForumsStore.unlikeToPost(
+      data['postID'],
+      userName,
+    );
   }
 
   Widget listTile(DocumentSnapshot data) {
@@ -187,11 +200,16 @@ class _ForumsPage extends State<ForumsPage> {
                 onTap: () => _moveToComment(data),
                 child: Padding(
                   padding: const EdgeInsets.all(6.0),
-                  child: Text(data['postContent'], style: const TextStyle(fontSize: 15),),
+                  child: Text(
+                    data['postContent'],
+                    style: const TextStyle(fontSize: 15),
+                  ),
                 ),
               ),
-              data['postImage'] != 'NONE' ? Utils.cacheNetworkImageWithEvent(context, data['postImage'], 0,0)  :
-              Container(),
+              data['postImage'] != 'NONE'
+                  ? Utils.cacheNetworkImageWithEvent(
+                      context, data['postImage'], 0, 0)
+                  : Container(),
               //const Divider(height: 5, color: Colors.black,), // black lines going across
               Padding(
                 padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
@@ -199,8 +217,11 @@ class _ForumsPage extends State<ForumsPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     GestureDetector(
-                      onTap: () => _updateLikeCount(data),
-                      child: LikeButton(data: data),
+                      onTap: () => likePost(data),
+                      child: LikeButton(
+                        data: data,
+                        isPostLiked: _checkIfPostLiked(data),
+                      ),
                     ),
                     GestureDetector(
                       onTap: () => _moveToComment(data),
