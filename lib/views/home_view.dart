@@ -26,6 +26,7 @@ class HomePageState extends State {
         title: const Text("Home Page"),
         backgroundColor: Colors.deepPurple,
       ),
+
        body: Scrollbar(
          child: DecoratedBox(
            decoration: const BoxDecoration(
