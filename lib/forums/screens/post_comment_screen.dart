@@ -77,7 +77,7 @@ class _PostCommentPageState extends State<PostCommentPage> {
                                               padding:
                                                   const EdgeInsets.all(2.0),
                                               child: Text(
-                                                readTimestamp(widget
+                                                Utils.readTimestamp(widget
                                                     .data['postTimeStamp']),
                                                 style: const TextStyle(
                                                     fontSize: 15,
@@ -95,6 +95,8 @@ class _PostCommentPageState extends State<PostCommentPage> {
                                         style: const TextStyle(fontSize: 15),
                                       ),
                                     ),
+                                    widget.data['postImage'] != 'NONE' ? Utils.cacheNetworkImageWithEvent(context, widget.data['postImage'], 0,0)  :
+                                    Container(),
                                     // const Divider(
                                     //   height: 5,
                                     //   color: Colors.grey,

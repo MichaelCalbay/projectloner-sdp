@@ -8,6 +8,8 @@ import 'package:projectloner/intro/intro_page_5.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../intro/intro_page_6.dart';
+
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
 
@@ -38,7 +40,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             controller: _controller,
             onPageChanged: (index) {
               setState(() {
-                onLastPage = (index == 4);
+                onLastPage = (index == 5);
               });
             },
             children: const [
@@ -48,6 +50,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               PageThree(),
               PageFour(),
               PageFive(),
+              PageSix(),
             ],
           ),
           Container(
@@ -59,17 +62,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 onLastPage
                     ? GestureDetector(
                         onTap: () {
-                          _controller.jumpToPage(4);
+                          _controller.jumpToPage(5);
                         },
                         child: const Text(''),
                       )
                     : GestureDetector(
                         onTap: () {
-                          _controller.jumpToPage(4);
+                          _controller.jumpToPage(5);
                         },
                         child: const Text('Skip'),
                       ),
-                SmoothPageIndicator(controller: _controller, count: 5),
+                SmoothPageIndicator(controller: _controller, count: 6),
                 onLastPage
                     ? GestureDetector(
                         onTap: () {
