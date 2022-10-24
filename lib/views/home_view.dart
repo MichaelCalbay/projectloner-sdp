@@ -40,16 +40,6 @@ class HomePageState extends State {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Image.asset(
-              'images/gamepad.png',
-              width: 100,
-              height: 150,
-              color: (themeProvider.isDarkMode) ? Colors.white : Colors.black,
-            ),
-            const Text(
-              'Hello *User*!',
-              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
-            ),
             SingleChildScrollView(
               child: Center(
                 child: Column(

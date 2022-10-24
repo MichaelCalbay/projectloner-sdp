@@ -8,13 +8,13 @@ void main() {
 
     themeProvider.toggleTheme(true);
     // Wat happened?
-    //expect(themeProvider.isDarkMode, true);
+    expect(themeProvider.isDarkMode, true);
   });
   test('Testing dark mode disabled', () {
     LonerThemeProvider themeProvider = LonerThemeProvider();
 
     themeProvider.toggleTheme(false);
 
-    //expect(themeProvider.isDarkMode, false);
+    expect(themeProvider.isDarkMode, false);
   });
 }
