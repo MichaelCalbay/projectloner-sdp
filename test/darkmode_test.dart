@@ -32,7 +32,7 @@ void main() {
 
       themeProvider.toggleTheme(true);
 
-      expect(LonerThemeProvider.isDarkMode, true);
+      expect(themeProvider.isDarkMode, true);
       expect(LonerThemeProvider.themeMode, ThemeMode.dark);
     });
     test('Testing dark mode disabled', () {
@@ -40,7 +40,7 @@ void main() {
 
       themeProvider.toggleTheme(false);
 
-      expect(LonerThemeProvider.isDarkMode, false);
+      expect(themeProvider.isDarkMode, false);
       expect(LonerThemeProvider.themeMode, ThemeMode.light);
     });
   });
