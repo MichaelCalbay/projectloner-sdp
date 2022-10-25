@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 
 class Utils{
-  static String readTimestamp(int timestamp) {
+  static String readTimestamp(DateTime timestamp) {
     var now = DateTime.now();
-    var date = DateTime.fromMillisecondsSinceEpoch(timestamp);
-    var diff = now.difference(date);
+    // var date = DateTime.fromMillisecondsSinceEpoch(timestamp);
+    var diff = now.difference(timestamp);
     var time = '';
 
     if (diff.inSeconds <= 0 ||
@@ -34,7 +34,7 @@ class Utils{
     } else if (diff.inDays > 29) {
       time = '${(diff.inDays / 30).floor()} months';
     } else if (diff.inDays > 365) {
-      time = '${date.month} ${date.day}, ${date.year}';
+      time = '${timestamp.month} ${timestamp.day}, ${timestamp.year}';
     }
     return time;
   }
