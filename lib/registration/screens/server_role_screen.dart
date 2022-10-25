@@ -15,112 +15,137 @@ class ServerRole extends StatelessWidget {
         if (state is OnboardingLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is OnboardingLoaded) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 30.0,
-              vertical: 10.0,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 10),
-                    const CustomTextHeader(
-                      text: 'What Server Do You Play On?',
-                    ),
-                    CustomDropdown(
-                      onChanged: (value) {
-                        context.read<OnboardingBloc>().add(
-                              UpdateUser(
-                                user: state.user.copyWith(server: value),
-                              ),
-                            );
-                      },
-                    ),
-                    const SizedBox(height: 25),
-                    const CustomTextHeader(
-                      text: "What's your best role?",
-                    ),
-                    const SizedBox(height: 5),
-                    CustomCheckbox(
-                      text: 'DUELIST',
-                      value: state.user.mainRole == 'Duelist',
-                      onChanged: (bool? newValue) {
-                        context.read<OnboardingBloc>().add(
-                              UpdateUser(
-                                user: state.user.copyWith(mainRole: 'Duelist'),
-                              ),
-                            );
-                      },
-                    ),
-                    CustomCheckbox(
-                      text: 'CONTROLLER',
-                      value: state.user.mainRole == 'Controller',
-                      onChanged: (bool? newValue) {
-                        context.read<OnboardingBloc>().add(
-                              UpdateUser(
-                                user:
-                                    state.user.copyWith(mainRole: 'Controller'),
-                              ),
-                            );
-                      },
-                    ),
-                    CustomCheckbox(
-                      text: 'INITIATOR',
-                      value: state.user.mainRole == 'Initiator',
-                      onChanged: (bool? newValue) {
-                        context.read<OnboardingBloc>().add(
-                              UpdateUser(
-                                user:
-                                    state.user.copyWith(mainRole: 'Initiator'),
-                              ),
-                            );
-                      },
-                    ),
-                    CustomCheckbox(
-                      text: 'SUPPORT',
-                      value: state.user.mainRole == 'Support',
-                      onChanged: (bool? newValue) {
-                        context.read<OnboardingBloc>().add(
-                              UpdateUser(
-                                user: state.user.copyWith(mainRole: 'Support'),
-                              ),
-                            );
-                      },
-                    ),
-                    const SizedBox(height: 10),
-                    const CustomTextHeader(text: "What's your IGN?"),
-                    const SizedBox(height: 5),
-                    const CustomTextField(
-                      hint: 'Enter your IGN...',
-                      isPassword: false,
-                    ),
-                    const SizedBox(height: 10),
-                    const CustomTextHeader(text: "What's your tag?"),
-                    const SizedBox(height: 5),
-                    const CustomTextField(
-                      hint: 'Enter your tag...',
-                      isPassword: false,
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    const StepProgressIndicator(
-                      totalSteps: 5,
-                      currentStep: 5,
-                      selectedColor: Colors.deepPurple,
-                    ),
-                    CustomButton(
-                      user: state.user,
-                      buttonText: 'FINISH',
-                      tabController: tabController,
-                    ),
-                  ],
-                ),
-              ],
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 30.0,
+                vertical: 10.0,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 10),
+                      const CustomTextHeader(
+                        text: 'What Server Do You Play On?',
+                      ),
+                      CustomDropdown(
+                        onChanged: (value) {
+                          context.read<OnboardingBloc>().add(
+                                UpdateUser(
+                                  user: state.user.copyWith(server: value),
+                                ),
+                              );
+                        },
+                      ),
+                      const SizedBox(height: 25),
+                      const CustomTextHeader(
+                        text: "What's your best role?",
+                      ),
+                      const SizedBox(height: 5),
+                      CustomCheckbox(
+                        text: 'DUELIST',
+                        value: state.user.mainRole == 'Duelist',
+                        onChanged: (bool? newValue) {
+                          context.read<OnboardingBloc>().add(
+                                UpdateUser(
+                                  user:
+                                      state.user.copyWith(mainRole: 'Duelist'),
+                                ),
+                              );
+                        },
+                      ),
+                      CustomCheckbox(
+                        text: 'CONTROLLER',
+                        value: state.user.mainRole == 'Controller',
+                        onChanged: (bool? newValue) {
+                          context.read<OnboardingBloc>().add(
+                                UpdateUser(
+                                  user: state.user
+                                      .copyWith(mainRole: 'Controller'),
+                                ),
+                              );
+                        },
+                      ),
+                      CustomCheckbox(
+                        text: 'INITIATOR',
+                        value: state.user.mainRole == 'Initiator',
+                        onChanged: (bool? newValue) {
+                          context.read<OnboardingBloc>().add(
+                                UpdateUser(
+                                  user: state.user
+                                      .copyWith(mainRole: 'Initiator'),
+                                ),
+                              );
+                        },
+                      ),
+                      CustomCheckbox(
+                        text: 'SUPPORT',
+                        value: state.user.mainRole == 'Support',
+                        onChanged: (bool? newValue) {
+                          context.read<OnboardingBloc>().add(
+                                UpdateUser(
+                                  user:
+                                      state.user.copyWith(mainRole: 'Support'),
+                                ),
+                              );
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      const CustomTextHeader(text: "What's your IGN?"),
+                      const SizedBox(height: 5),
+                      CustomTextField(
+                        hint: 'Enter your IGN...',
+                        isTextOnly: false,
+                        onChanged: (value) {
+                          context.read<OnboardingBloc>().add(
+                                UpdateUser(
+                                  user: state.user.copyWith(
+                                    ign: value,
+                                  ),
+                                ),
+                              );
+                        },
+                        isPassword: false,
+                      ),
+                      const SizedBox(height: 10),
+                      const CustomTextHeader(text: "What's your tag?"),
+                      const SizedBox(height: 5),
+                      CustomTextField(
+                        hint: 'Enter your tag...',
+                        isTextOnly: true,
+                        onChanged: (value) {
+                          context.read<OnboardingBloc>().add(
+                                UpdateUser(
+                                  user: state.user.copyWith(
+                                    valTag: value,
+                                  ),
+                                ),
+                              );
+                        },
+                        isPassword: false,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 130),
+                  Column(
+                    children: [
+                      const StepProgressIndicator(
+                        totalSteps: 5,
+                        currentStep: 5,
+                        selectedColor: Colors.deepPurple,
+                      ),
+                      CustomButton(
+                        user: state.user,
+                        buttonText: 'FINISH',
+                        tabController: tabController,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           );
         } else {

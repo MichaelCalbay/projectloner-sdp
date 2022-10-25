@@ -34,6 +34,7 @@ class GenderAgeScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 5),
                       CustomTextField(
+                        isTextOnly: false,
                         isPassword: false,
                         hint: 'Enter your firstname...',
                         onChanged: (value) {
@@ -52,6 +53,7 @@ class GenderAgeScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 5),
                       CustomTextField(
+                        isTextOnly: false,
                         isPassword: false,
                         hint: 'Enter your lastname...',
                         onChanged: (value) {
