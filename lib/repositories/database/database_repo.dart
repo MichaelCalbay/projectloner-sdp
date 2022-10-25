@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:projectloner/models/user_matches.dart';
 import 'package:projectloner/models/user_model.dart';
 import 'package:projectloner/repositories/database/base_database_repo.dart';
 import 'package:projectloner/repositories/storage/storage_repo.dart';
+import 'package:rxdart/rxdart.dart';
 
 class DatabaseRepository extends BaseDatabaseRepository {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
@@ -44,13 +46,10 @@ class DatabaseRepository extends BaseDatabaseRepository {
 
   @override
   Stream<List<LonerUser>> getUsers(LonerUser user) {
-    List<String> userFilters = List.from(user.swipedLeft!)
-      ..addAll(user.swipedRight!)
-      ..add(user.id!);
     return _firebaseFirestore
         .collection('LonerUser')
-        .where('gender', isEqualTo: 'Female')
-        .where(FieldPath.documentId, whereNotIn: userFilters)
+        // .where('gender', isEqualTo: 'Female')
+        .where('server', isEqualTo: user.server)
         .snapshots()
         .map((snap) {
       return snap.docs.map((doc) => LonerUser.fromSnapshot(doc)).toList();
@@ -84,6 +83,45 @@ class DatabaseRepository extends BaseDatabaseRepository {
     //This will update the other user's match on their end as well.
     await _firebaseFirestore.collection('LonerUser').doc(matchId).update({
       'matches': FieldValue.arrayUnion([userId])
+    });
+  }
+
+  @override
+  Stream<List<UserMatch>> getMatches(LonerUser user) {
+    return Rx.combineLatest2(
+      getUser(user.id!),
+      getUsers(user),
+      (
+        LonerUser currentUser,
+        List<LonerUser> users,
+      ) {
+        return users
+            .where((user) => currentUser.matches!.contains(user.id))
+            .map((user) => UserMatch(userId: user.id!, matchedUser: user))
+            .toList();
+      },
+    );
+  }
+
+  @override
+  Stream<List<LonerUser>> getUsersToMatch(LonerUser user) {
+    return Rx.combineLatest2(getUser(user.id!), getUsers(user), (
+      LonerUser currentUser,
+      List<LonerUser> users,
+    ) {
+      return users.where((user) {
+        if (currentUser.swipedLeft!.contains(user.id)) {
+          return false;
+        } else if (currentUser.swipedRight!.contains(user.id)) {
+          return false;
+        } else if (currentUser.matches!.contains(user.id)) {
+          return false;
+        } else if (currentUser.id == user.id) {
+          return false;
+        } else {
+          return true;
+        }
+      }).toList();
     });
   }
 }

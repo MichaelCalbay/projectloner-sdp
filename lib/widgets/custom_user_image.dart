@@ -52,7 +52,9 @@ class CustomUserImage extends StatelessWidget {
         image: DecorationImage(
           fit: BoxFit.cover,
           image: (url == null)
-              ? const NetworkImage('https://unsplash.com/photos/fhrWAh2HMnM')
+              ? const NetworkImage(
+                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZxub6hsCPpJFn6jmQvDl5CDJLroGdg-yLXJV1KcCHMjKpuwd8E6zJ7X6U3TUEjlS59ig&usqp=CAU',
+                )
               : NetworkImage(url!),
         ),
         borderRadius: const BorderRadius.all(Radius.circular(8.0)),
