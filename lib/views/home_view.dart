@@ -36,7 +36,6 @@ class HomePageState extends State {
                image: AssetImage("images/valo_bg.png"),
                fit: BoxFit.cover,
              ),*/
-              ),
           child: SingleChildScrollView(
             child: Center(
               child: Column(
@@ -137,6 +136,7 @@ class HomePageState extends State {
       ),
       drawer: const NavBar(),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: themeProvider.isDarkMode ? Colors.grey[850] : Colors.grey[200],
         currentIndex: 0,
         onTap: (int newIndex) {
           switch (newIndex) {

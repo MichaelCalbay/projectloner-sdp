@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:projectloner/blocs/profile/profile_bloc.dart';
 import 'dart:io';
+import '../theme/theme_provider.dart';
 import 'Database/forums_firestore.dart';
 
 class WritePost extends StatefulWidget {
@@ -26,6 +27,7 @@ class _WritePostState extends State<WritePost> {
   XFile? postImageFile1;
 
   KeyboardActionsConfig buildConfig(BuildContext context) {
+    
     return KeyboardActionsConfig(
         keyboardActionsPlatform: KeyboardActionsPlatform.ALL,
         keyboardBarColor: Colors.grey[200],
@@ -45,7 +47,7 @@ class _WritePostState extends State<WritePost> {
                     getImage();
                   },
                   child: Container(
-                    color: Colors.grey[200],
+                    color:Colors.grey[200],
                     padding: const EdgeInsets.all(8.0),
                     child: const Text(
                       "Image",
@@ -95,6 +97,7 @@ class _WritePostState extends State<WritePost> {
     String fID = FirebaseFirestore.instance.collection('Forums').doc().id;
 
     final size = MediaQuery.of(context).size;
+    final themeProvider = LonerThemeProvider();
 
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
@@ -107,17 +110,21 @@ class _WritePostState extends State<WritePost> {
             appBar: AppBar(
               title: const Text('Writing Post'),
               centerTitle: true,
+              backgroundColor: Colors.deepPurple,
               actions: <Widget>[
                 TextButton(
-                  onPressed: () => sentPostInFireBase(
-                      writingTextController.text,
+                  onPressed: () { 
+                    if (writingTextController.text != '' || postImageFile1 != null) {
+                    sentPostInFireBase(writingTextController.text,
                       fID,
-                      '${state.user.firstName} ${state.user.lastName}'),
+                      '${state.user.firstName} ${state.user.lastName}');
+                    }
+                  },
                   child: const Text(
                     'post',
                     style: TextStyle(
                         fontSize: 20,
-                        color: Colors.white,
+                        color:Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
                 )
@@ -134,7 +141,7 @@ class _WritePostState extends State<WritePost> {
                       ),
                       Container(
                         child: Card(
-                          color: Colors.white,
+                          color: themeProvider.isDarkMode ? Colors.grey[800] : Colors.white,
                           elevation: 4.0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),

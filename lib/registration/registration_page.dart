@@ -31,6 +31,7 @@ class RegistrationPage extends StatelessWidget {
         return Scaffold(
           key: Key("scaffold"),
           appBar: AppBar(
+            backgroundColor: Colors.deepPurple,
             centerTitle: true,
             actions: [
               ThemeIconButton(
