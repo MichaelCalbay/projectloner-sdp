@@ -46,10 +46,14 @@ class _ForumsPage extends State<ForumsPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
-        if (state is ProfileLoaded) {
-          userName = '${state.user.firstName} ${state.user.lastName}';
+        if (state is ProfileLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         }
-        return Scaffold(
+        else if (state is ProfileLoaded) {
+          userName = '${state.user.firstName} ${state.user.lastName}';
+          return Scaffold(
           appBar: const CustomAppBar(
             title: 'Forums',
             actionButtons: false,
@@ -114,6 +118,14 @@ class _ForumsPage extends State<ForumsPage> {
             ),
           ), // This trailing comma makes auto-formatting nicer for build methods.
         );
+        }
+        else {
+          const Center(
+            child: Text('Something went wrong...'),
+          );
+        }
+
+        return Container();
       },
     );
   }

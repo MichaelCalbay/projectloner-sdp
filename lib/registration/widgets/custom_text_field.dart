@@ -18,7 +18,7 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LonerThemeProvider themeProvider = LonerThemeProvider();
+    final themeProvider = LonerThemeProvider();
     return Container(
       height: 56,
       padding: const EdgeInsets.only(left: 20.0),
