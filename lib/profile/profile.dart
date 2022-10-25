@@ -12,7 +12,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cUser = LonerUser.users[1];
+    // final cUser = LonerUser.users[1];
 
     return Scaffold(
       appBar: const BuildAppBar(),
@@ -26,7 +26,7 @@ class ProfilePage extends StatelessWidget {
           const SizedBox(
             height: 24,
           ),
-          buildName(LonerUser.users[1]),
+          // buildName(LonerUser.users[1]),
         ],
       ),
       drawer: const NavBar(),
