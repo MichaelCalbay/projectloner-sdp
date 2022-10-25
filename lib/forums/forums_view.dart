@@ -216,16 +216,23 @@ class _ForumsPage extends State<ForumsPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    GestureDetector(
-                      onTap: () => likePost(data),
-                      child: LikeButton(
-                        data: data,
-                        isPostLiked: _checkIfPostLiked(data),
+                    const SizedBox(
+                      width: 50,
+                    ),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () => likePost(data),
+                        child: LikeButton(
+                          data: data,
+                          isPostLiked: _checkIfPostLiked(data),
+                        ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () => _moveToComment(data),
-                      child: CommentButton(data: data),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () => _moveToComment(data),
+                        child: CommentButton(data: data),
+                      ),
                     ),
                   ],
                 ),
