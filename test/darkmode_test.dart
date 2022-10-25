@@ -19,54 +19,52 @@ import 'package:projectloner/views/onboarding_screen.dart';
 import 'package:projectloner/theme/icon_button.dart';
 import 'package:provider/provider.dart';
 
-/// 
+///
 /// Dark Mode Testing
-/// 
+///
 /// - Ben Rodenas 20121725
-/// 
+///
 
 void main() {
-  group('Unit Tests?', (){
+  group('Unit Tests?', () {
     test('Testing dark mode enabled', () {
       final themeProvider = LonerThemeProvider();
 
       themeProvider.toggleTheme(true);
 
-      expect(LonerThemeProvider.isDarkMode, true);
+      expect(themeProvider.isDarkMode, true);
       expect(LonerThemeProvider.themeMode, ThemeMode.dark);
     });
     test('Testing dark mode disabled', () {
-      final themeProvider = LonerThemeProvider(); 
+      final themeProvider = LonerThemeProvider();
 
       themeProvider.toggleTheme(false);
 
-      expect(LonerThemeProvider.isDarkMode, false);
+      expect(themeProvider.isDarkMode, false);
       expect(LonerThemeProvider.themeMode, ThemeMode.light);
     });
   });
 
-  group('Widget Tests', (){
-    testWidgets('Login Page Toggle Dark/Light Mode', (WidgetTester tester) async {
-      
+  group('Widget Tests', () {
+    testWidgets('Login Page Toggle Dark/Light Mode',
+        (WidgetTester tester) async {
       final toggleButtonTheme = find.byKey(ValueKey("toggleButtonTheme"));
-      final themeProvider = LonerThemeProvider(); 
+      final themeProvider = LonerThemeProvider();
 
-      await tester.pumpWidget(
-        ChangeNotifierProvider(
-        create: (context) => LonerThemeProvider(),
-        builder: (context, _) {
-          final themeProvider = Provider.of<LonerThemeProvider>(context);
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            onGenerateRoute: (settings) => RegistrationPage.route(),
-            home: const LoginScreen(),
-            themeMode: LonerThemeProvider.themeMode,
-            theme: LonerTheme.lightMode,
-            darkTheme: LonerTheme.darkMode,
-          );
-        })
-      );
-      
+      await tester.pumpWidget(ChangeNotifierProvider(
+          create: (context) => LonerThemeProvider(),
+          builder: (context, _) {
+            final themeProvider = Provider.of<LonerThemeProvider>(context);
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              onGenerateRoute: (settings) => RegistrationPage.route(),
+              home: const LoginScreen(),
+              themeMode: LonerThemeProvider.themeMode,
+              theme: LonerTheme.lightMode,
+              darkTheme: LonerTheme.darkMode,
+            );
+          }));
+
       expect(toggleButtonTheme, findsOneWidget);
       expect(LonerThemeProvider.themeMode, ThemeMode.light);
 

@@ -47,10 +47,12 @@ class CommentComposer extends StatelessWidget {
   }
 
   Future _handleSubmitted(String text) async {
-    try {
-      await ForumsStore.commentToPost(
-          data['postID'], _msgController.text, userName);
-      await ForumsStore.updatePostCommentCount(data);
-    } catch (e) {}
+    if (text != '') {
+      try {
+        await ForumsStore.commentToPost(
+            data['postID'], _msgController.text, userName);
+        await ForumsStore.updatePostCommentCount(data);
+      } catch (e) {}
+    }
   }
 }

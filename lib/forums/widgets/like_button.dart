@@ -3,24 +3,56 @@ import 'package:flutter/material.dart';
 
 class LikeButton extends StatelessWidget {
   final DocumentSnapshot data;
+  final Future<bool> isPostLiked;
   const LikeButton({
     required this.data,
+    required this.isPostLiked,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        const Icon(Icons.thumb_up),
-        Padding(
-          padding: const EdgeInsets.only(left: 8.0),
-          child: Text(
-            'Like(${data['postLikeCounter']})',
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-        ),
-      ],
+    return FutureBuilder<bool>(
+      future: isPostLiked,
+      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+        if (snapshot.data != null) {
+          return Row(
+            children: [
+              snapshot.data!
+                  ? const Icon(
+                      Icons.thumb_up,
+                      color: Colors.deepPurple,
+                    )
+                  : const Icon(
+                      Icons.thumb_up,
+                    ),
+              snapshot.data!
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Text(
+                        'Unlike(${data['postLikeCounter']})',
+                        style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.deepPurple),
+                      ),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Text(
+                        'Like(${data['postLikeCounter']})',
+                        style: const TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    )
+            ],
+          );
+        } else {
+          return const Center(
+            child: Text('Something went wrong...'),
+          );
+        }
+      },
     );
   }
 }
