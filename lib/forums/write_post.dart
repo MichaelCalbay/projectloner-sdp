@@ -27,7 +27,6 @@ class _WritePostState extends State<WritePost> {
   XFile? postImageFile1;
 
   KeyboardActionsConfig buildConfig(BuildContext context) {
-    
     return KeyboardActionsConfig(
         keyboardActionsPlatform: KeyboardActionsPlatform.ALL,
         keyboardBarColor: Colors.grey[200],
@@ -47,7 +46,7 @@ class _WritePostState extends State<WritePost> {
                     getImage();
                   },
                   child: Container(
-                    color:Colors.grey[200],
+                    color: Colors.grey[200],
                     padding: const EdgeInsets.all(8.0),
                     child: const Text(
                       "Image",
@@ -113,18 +112,18 @@ class _WritePostState extends State<WritePost> {
               backgroundColor: Colors.deepPurple,
               actions: <Widget>[
                 TextButton(
-                  onPressed: () { 
-                    if (writingTextController.text != '' || postImageFile1 != null) {
-                    sentPostInFireBase(writingTextController.text,
-                      fID,
-                      '${state.user.firstName} ${state.user.lastName}');
+                  onPressed: () {
+                    if (writingTextController.text != '' ||
+                        postImageFile1 != null) {
+                      sentPostInFireBase(writingTextController.text, fID,
+                          '${state.user.firstName} ${state.user.lastName}');
                     }
                   },
                   child: const Text(
-                    'post',
+                    'Post',
                     style: TextStyle(
                         fontSize: 20,
-                        color:Colors.white,
+                        color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
                 )
@@ -141,7 +140,9 @@ class _WritePostState extends State<WritePost> {
                       ),
                       Container(
                         child: Card(
-                          color: themeProvider.isDarkMode ? Colors.grey[800] : Colors.white,
+                          color: themeProvider.isDarkMode
+                              ? Colors.grey[800]
+                              : Colors.white,
                           elevation: 4.0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
