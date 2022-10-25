@@ -35,6 +35,7 @@ class EmailScreen extends StatelessWidget {
                     const SizedBox(height: 5),
                     CustomTextField(
                       isPassword: false,
+                      isTextOnly: false,
                       hint: 'Enter your email...',
                       onChanged: (value) {
                         context.read<SignupCubit>().emailChanged(value);
