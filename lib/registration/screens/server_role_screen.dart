@@ -90,6 +90,20 @@ class ServerRole extends StatelessWidget {
                             );
                       },
                     ),
+                    const SizedBox(height: 10),
+                    const CustomTextHeader(text: "What's your IGN?"),
+                    const SizedBox(height: 5),
+                    const CustomTextField(
+                      hint: 'Enter your IGN...',
+                      isPassword: false,
+                    ),
+                    const SizedBox(height: 10),
+                    const CustomTextHeader(text: "What's your tag?"),
+                    const SizedBox(height: 5),
+                    const CustomTextField(
+                      hint: 'Enter your tag...',
+                      isPassword: false,
+                    ),
                   ],
                 ),
                 Column(
