@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projectloner/matching/chat_screen.dart';
 import 'package:projectloner/models/user_matches.dart';
+import 'package:projectloner/registration/registration_page.dart';
 
 class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {
@@ -9,6 +10,8 @@ class AppRouter {
     switch (settings.name) {
       case ChatScreen.routeName:
         return ChatScreen.route(match: settings.arguments as UserMatch);
+      case RegistrationPage.routeName:
+        return RegistrationPage.route();
 
       default:
         return _errorRoute();
