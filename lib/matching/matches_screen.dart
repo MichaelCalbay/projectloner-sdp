@@ -23,10 +23,10 @@ class MatchesScreen extends StatelessWidget {
           }
           if (state is MatchLoaded) {
             final inactiveMatches = state.matchedUsers
-                .where((match) => match.chat == null)
+                .where((match) => match.chat.messages.isEmpty)
                 .toList();
             final activeMatches = state.matchedUsers
-                .where((match) => match.chat != null)
+                .where((match) => match.chat.messages.isNotEmpty)
                 .toList();
             return SingleChildScrollView(
               child: Padding(
@@ -38,7 +38,12 @@ class MatchesScreen extends StatelessWidget {
                       'Your Faves',
                       style: Theme.of(context).textTheme.headline6,
                     ),
-                    InactiveList(inactiveMatches: inactiveMatches),
+                    inactiveMatches.isEmpty
+                        ? const Padding(
+                            padding: EdgeInsets.all(20.0),
+                            child: Text('Non-Existent!'),
+                          )
+                        : InactiveList(inactiveMatches: inactiveMatches),
                     const SizedBox(height: 10),
                     Text(
                       'Chats',

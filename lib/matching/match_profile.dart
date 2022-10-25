@@ -121,38 +121,37 @@ class MatchProfile extends StatelessWidget {
                               height: 2,
                             ),
                       ),
-                      const SizedBox(height: 15.0),
-                      Text(
-                        'Interests ',
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                      Wrap(
-                        children: user.interests!
-                            .map(
-                              (interest) => Container(
-                                padding: const EdgeInsets.all(5.0),
-                                margin: const EdgeInsets.only(
-                                  top: 5.0,
-                                  right: 5.0,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.deepPurple,
-                                  borderRadius: BorderRadius.circular(5.0),
-                                ),
-                                child: Text(
-                                  interest,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline6!
-                                      .copyWith(
-                                        color: Colors.white,
-                                        fontStyle: FontStyle.italic,
-                                      ),
-                                ),
-                              ),
-                            )
-                            .toList(),
-                      ),
+
+                      //Interest no longer implemented as decided by the team
+                      //As our main focus is gaming, it would be too similar to
+                      //Tinder if we included interest filter.
+                      // Wrap(
+                      //   children: user.interests!
+                      //       .map(
+                      //         (interest) => Container(
+                      //           padding: const EdgeInsets.all(5.0),
+                      //           margin: const EdgeInsets.only(
+                      //             top: 5.0,
+                      //             right: 5.0,
+                      //           ),
+                      //           decoration: BoxDecoration(
+                      //             color: Colors.deepPurple,
+                      //             borderRadius: BorderRadius.circular(5.0),
+                      //           ),
+                      //           child: Text(
+                      //             interest,
+                      //             style: Theme.of(context)
+                      //                 .textTheme
+                      //                 .headline6!
+                      //                 .copyWith(
+                      //                   color: Colors.white,
+                      //                   fontStyle: FontStyle.italic,
+                      //                 ),
+                      //           ),
+                      //         ),
+                      //       )
+                      //       .toList(),
+                      // ),
                     ],
                   ),
                 )
