@@ -49,6 +49,7 @@ class HomePageState extends State {
                 'images/gamepad.png',
                 width: 100,
                 height: 150,
+                color: themeProvider.isDarkMode ? Colors.white : Colors.black,
               ),
               const SizedBox(height: 60),
               const Text(
@@ -145,6 +146,7 @@ class HomePageState extends State {
        ),
       drawer: const NavBar(),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: themeProvider.isDarkMode ? Colors.grey[850] : Colors.grey[200],
         currentIndex: 0,
         onTap: (int newIndex) {
           switch (newIndex) {

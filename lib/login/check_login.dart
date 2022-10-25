@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projectloner/login/screens/login_screen.dart';
@@ -16,12 +18,12 @@ class CheckLogin extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               if (isEmailVerified == true) {
-                return const HomePage();
+                return HomePage();
               } else {
-                return const VerifyEmailPage();
+                return VerifyEmailPage();
               }
             } else {
-              return const LoginScreen();
+              return LoginScreen();
             }
           }),
     );
