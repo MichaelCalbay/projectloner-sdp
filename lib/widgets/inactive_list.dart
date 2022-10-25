@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projectloner/widgets/widgets.dart';
 
+import '../matching/chat_screen.dart';
 import '../models/models.dart';
 
 class InactiveList extends StatelessWidget {
@@ -20,18 +21,30 @@ class InactiveList extends StatelessWidget {
           shrinkWrap: true,
           itemCount: inactiveMatches.length,
           itemBuilder: (context, index) {
-            return Column(
-              children: [
-                SmallUserImage(
-                  height: 70,
-                  width: 70,
-                  imageUrl: inactiveMatches[index].matchedUser.imageUrls[0],
+            return InkWell(
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  ChatScreen.routeName,
+                  arguments: inactiveMatches[index],
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(top: 5.0, right: 10.0),
+                child: Column(
+                  children: [
+                    SmallUserImage(
+                      height: 70,
+                      width: 70,
+                      imageUrl: inactiveMatches[index].matchedUser.imageUrls[0],
+                    ),
+                    Text(
+                      inactiveMatches[index].matchedUser.firstName,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ],
                 ),
-                Text(
-                  inactiveMatches[index].matchedUser.firstName,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-              ],
+              ),
             );
           }),
     );
