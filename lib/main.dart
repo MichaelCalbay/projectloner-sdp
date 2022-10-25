@@ -103,6 +103,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     /*  BUG REPORTING SAM */
     super.initState();
+
+    Instabug.setPrimaryColor(Colors.deepPurple);
+    Instabug.setValueForStringWithKey("Report a User", CustomTextPlaceHolderKey.reportQuestion);
+    Instabug.setValueForStringWithKey("Add screenshot, user name and provide context", CustomTextPlaceHolderKey.commentFieldHintForQuestion);
+    Instabug.setValueForStringWithKey("Inappropriate or offensive context receive goes against"
+        " Loner code of conducts ", CustomTextPlaceHolderKey.reportQuestionDescription);
     Instabug.start('204ec6dbacf517d824009b10798d3abd', [InvocationEvent.none]);
     Replies.setEnabled(false);
   }
