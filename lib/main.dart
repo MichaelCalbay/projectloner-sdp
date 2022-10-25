@@ -3,7 +3,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instabug_flutter/instabug_flutter.dart';
+import 'package:projectloner/blocs/chat/chat_bloc.dart';
 import 'package:projectloner/blocs/profile/profile_bloc.dart';
+import 'package:projectloner/config/app_router.dart';
 import 'package:projectloner/login/screens/login_screen.dart';
 import 'package:projectloner/blocs/auth/auth_bloc.dart';
 import 'package:projectloner/blocs/onboarding/onboarding_bloc.dart';
@@ -114,8 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
         final themeProvider = Provider.of<LonerThemeProvider>(context);
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          onGenerateRoute: (settings) => RegistrationPage.route(),
-          // initialRoute: RegistrationPage.routeName,
+          onGenerateRoute: AppRouter.onGenerateRoute,
           home: isviewed != 0 ? OnboardingScreen() : LoginScreen(),
           //Theme colour
           themeMode: LonerThemeProvider.themeMode,
