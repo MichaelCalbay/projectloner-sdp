@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectloner/login/check_login.dart';
 import 'package:projectloner/login/forgot_password.dart';
 import 'package:projectloner/login/widgets/login_widget.dart';
+import 'package:projectloner/registration/registration_page.dart';
 import 'package:projectloner/theme/icon_button.dart';
 import 'package:projectloner/views/nav_bar.dart';
 import 'package:projectloner/widgets/custom_app_bar.dart';
@@ -91,9 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    ThemeMaterialButton(
-                      key: Key("toggleSwitchTheme")
-                    ),
+                    ThemeMaterialButton(key: Key("toggleSwitchTheme")),
                   ],
                 ),
                 Icon(
@@ -197,7 +196,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       key: Key("registerNow"),
                       onTap: () {
                         Navigator.pop(context);
-                        Navigator.pushNamed(context, '/registration');
+                        Navigator.pushNamed(
+                            context, RegistrationPage.routeName);
                       },
                       child: Text(
                         'Register now',
