@@ -2,11 +2,8 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:projectloner/views/matchViews/coach_view.dart';
-import 'package:projectloner/views/matchViews/team_view.dart';
 import '../matching/matching_screen.dart';
 import '../theme/theme_provider.dart';
-import 'forum_view.dart';
 import '../forums/forums_view.dart';
 import 'nav_bar.dart';
 
@@ -18,99 +15,125 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State {
-  int currentIndex = 0;
-  String preferenceText = "Currently looking for duo";
-  String matchButtonText = "Start";
-  final List<bool> _matchPreferences = <bool>[true, false, false];
-
-  void startMatching(List<bool> matchPreferences) {
-    if (matchPreferences[0] == true) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => const MatchMaking(),
-        ),
-      );
-    } else if (matchPreferences[1] == true) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => TeamPage()));
-    } else if (matchPreferences[2] == true) {
-      Navigator.push(
-          //forum page view 'FOR NOW' -sam
-          context,
-          MaterialPageRoute(builder: (context) => ForumsPage()));
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     LonerThemeProvider themeProvider = LonerThemeProvider();
 
     return Scaffold(
       appBar: AppBar(
+        key: const Key("sideBar"),
         title: const Text("Home Page"),
         backgroundColor: Colors.deepPurple,
       ),
-      body: Center(
-        child:
-            Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          Image.asset(
-            'images/gamepad.png',
-            width: 100,
-            height: 150,
-            color: (themeProvider.isDarkMode) ? Colors.white : Colors.black,
-          ),
-          const Text(
-            'Hello *User*!',
-            style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(
-            width: 275,
-            child: Text(
-              'Find your ideal duo or team to play with! Who knows? It could be the start of your love story!',
-              style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.normal),
-              textAlign: TextAlign.center,
-            ),
-          ),
-
-          ///*
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                "Choose your preference",
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+      body: Scrollbar(
+        child: DecoratedBox(
+          decoration: const BoxDecoration(
+              // This area was for background image but I decided to leave it out for now
+              // cause quality is kinda wierd.
+              // - Ben
+              /*
+             image: DecorationImage(
+               image: AssetImage("images/valo_bg.png"),
+               fit: BoxFit.cover,
+             ),*/
               ),
-              ToggleButtons(
-                onPressed: (int index) {
-                  setState(() {
-                    for (int i = 0; i < _matchPreferences.length; i++) {
-                      _matchPreferences[i] = i == index;
-                    }
-                  });
-                },
-                isSelected: _matchPreferences,
-                borderRadius: const BorderRadius.all(Radius.circular(8)),
-                selectedBorderColor: Colors.deepPurple,
-                selectedColor: Colors.white,
-                fillColor: Colors.deepPurple,
-                constraints: const BoxConstraints(
-                  minHeight: 40.0,
-                  minWidth: 100.0,
-                ),
-                children: const [
-                  Text("Duo"),
-                  Text("Team"),
-                  Text("Forums"),
+          child: SingleChildScrollView(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  const SizedBox(height: 60),
+                  Image.asset(
+                    'images/gamepad.png',
+                    width: 100,
+                    height: 150,
+                  ),
+                  const SizedBox(height: 60),
+                  const Text(
+                    'Hello *User*!',
+                    style:
+                        TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    width: 275,
+                    child: Text(
+                      'Find your ideal duo or team to play with! Who knows? It could be the start of your love story!',
+                      style: TextStyle(
+                          fontSize: 15.0, fontWeight: FontWeight.normal),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  const SizedBox(height: 50),
+                  SizedBox(
+                      width: 300,
+                      child: Column(
+                        children: const [
+                          Text(
+                            "About Loner",
+                            style: TextStyle(
+                                fontSize: 25.0, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            "Loner provides a platform for valorant players to able to find"
+                            " their ideal teammate(s) to play with, whether it would be players"
+                            " that have really good statistics in their profile or players that they"
+                            " have similar interests with.",
+                            style: TextStyle(
+                                fontSize: 17.5, fontWeight: FontWeight.normal),
+                            textAlign: TextAlign.center,
+                          ),
+                          SizedBox(height: 25),
+                          Text(
+                            "Here through our match making system, you'll be able to find an online friend"
+                            " that you could banter with or you could possibly find the love of your life"
+                            " should you wish. All this you can do while tapping heads, left, right and center"
+                            " with your friend/soulmate/love interest",
+                            style: TextStyle(
+                                fontSize: 17.5, fontWeight: FontWeight.normal),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      )),
+                  const SizedBox(height: 50),
+                  SizedBox(
+                      width: 300,
+                      child: Column(
+                        children: const [
+                          Text(
+                            "Current Features",
+                            style: TextStyle(
+                                fontSize: 25.0, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            "- Duo Match Making",
+                            style: TextStyle(
+                                fontSize: 17.5, fontWeight: FontWeight.normal),
+                          ),
+                          Text(
+                            "- Valorant Stats",
+                            style: TextStyle(
+                                fontSize: 17.5, fontWeight: FontWeight.normal),
+                          ),
+                          Text(
+                            "- Direct Messaging",
+                            style: TextStyle(
+                                fontSize: 17.5, fontWeight: FontWeight.normal),
+                          ),
+                          Text(
+                            "- Forum Posting",
+                            style: TextStyle(
+                                fontSize: 17.5, fontWeight: FontWeight.normal),
+                          ),
+                        ],
+                      )),
+                  const SizedBox(height: 50),
                 ],
               ),
-            ],
+            ),
           ),
-          ElevatedButton(
-              onPressed: () {
-                startMatching(_matchPreferences);
-              },
-              child: Text(matchButtonText)) //*/
-        ]),
+        ),
       ),
       drawer: const NavBar(),
       bottomNavigationBar: BottomNavigationBar(

@@ -3,22 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projectloner/blocs/profile/profile_bloc.dart';
 import 'package:projectloner/forums/Database/forums_firestore.dart';
-import 'package:projectloner/forums/Database/local_DB.dart';
-import 'package:projectloner/forums/Database/profile_data.dart';
 import 'package:projectloner/forums/screens/post_comment_screen.dart';
 import 'package:projectloner/forums/widgets/forum_widgets.dart';
-import 'forums_data.dart';
 import 'utils.dart';
 import 'write_post.dart';
 import '../widgets/custom_app_bar.dart';
 
 class ForumsPage extends StatefulWidget {
-  final MyProfileData? profileData;
-  final ValueChanged<MyProfileData>? updateProfData;
   const ForumsPage({
     Key? key,
-    this.profileData,
-    this.updateProfData,
   }) : super(key: key);
 
   @override
@@ -27,7 +20,7 @@ class ForumsPage extends StatefulWidget {
 
 class _ForumsPage extends State<ForumsPage> {
   bool _isLoading = false;
-  String userName = '';
+  static String userName = '';
 
   @override
   void initState() {
@@ -50,10 +43,14 @@ class _ForumsPage extends State<ForumsPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
-        if (state is ProfileLoaded) {
-          userName = '${state.user.firstName} ${state.user.lastName}';
+        if (state is ProfileLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         }
-        return Scaffold(
+        else if (state is ProfileLoaded) {
+          userName = '${state.user.firstName} ${state.user.lastName}';
+          return Scaffold(
           appBar: const CustomAppBar(
             title: 'Forums',
             actionButtons: false,
@@ -74,24 +71,25 @@ class _ForumsPage extends State<ForumsPage> {
                         )
                       : Center(
                           child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(
-                              Icons.error,
-                              color: Colors.grey[700],
-                              size: 64,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(14.0),
-                              child: Text(
-                                'There is no posts',
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.grey[700]),
-                                textAlign: TextAlign.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(
+                                Icons.error,
+                                color: Colors.grey[700],
+                                size: 64,
                               ),
-                            ),
-                          ],
-                        )),
+                              Padding(
+                                padding: const EdgeInsets.all(14.0),
+                                child: Text(
+                                  'There is no posts',
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.grey[700]),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                   _isLoading
                       ? Positioned(
                           child: Container(
@@ -108,11 +106,23 @@ class _ForumsPage extends State<ForumsPage> {
             },
           ),
           floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.deepPurple,
             onPressed: _incrementCounter,
             tooltip: 'Increment',
-            child: const Icon(Icons.create),
+            child: const Icon(
+              Icons.create,
+              color: Colors.black,
+            ),
           ), // This trailing comma makes auto-formatting nicer for build methods.
         );
+        }
+        else {
+          const Center(
+            child: Text('Something went wrong...'),
+          );
+        }
+
+        return Container();
       },
     );
   }
@@ -128,15 +138,32 @@ class _ForumsPage extends State<ForumsPage> {
     );
   }
 
-  void _updateLikeCount(DocumentSnapshot data) async {
-    await ForumsStore.updatePostLikeCount(data);
+  void likePost(DocumentSnapshot data) async {
+    if (!await ForumsStore.checkIfPostLiked(data['postID'], userName)) {
+      _incrementPostLikeCount(data);
+    } else {
+      _decrementPostLikeCount(data);
+    }
+  }
+
+  static Future<bool> _checkIfPostLiked(DocumentSnapshot data) async {
+    return await ForumsStore.checkIfPostLiked(
+      data['postID'],
+      userName,
+    );
+  }
+
+  void _incrementPostLikeCount(DocumentSnapshot data) async {
+    await ForumsStore.incrementPostLikeCount(data);
     await ForumsStore.likeToPost(data['postID'], userName);
-    // List<String> newLikeList = await LocalDB.saveLikeList(
-    //     data['postID'], widget.profileData?.myLikeList);
-    // MyProfileData myProfileData = MyProfileData(
-    //   myLikeList: newLikeList,
-    // );
-    // widget.updateProfData!(myProfileData);
+  }
+
+  void _decrementPostLikeCount(DocumentSnapshot data) async {
+    await ForumsStore.decrementPostLikeCount(data);
+    await ForumsStore.unlikeToPost(
+      data['postID'],
+      userName,
+    );
   }
 
   Widget listTile(DocumentSnapshot data) {
@@ -167,7 +194,7 @@ class _ForumsPage extends State<ForumsPage> {
                         Padding(
                           padding: const EdgeInsets.all(2.0),
                           child: Text(
-                            readTimestamp(data['postTimeStamp']),
+                            Utils.readTimestamp(data['postTimeStamp']),
                             style: const TextStyle(
                                 fontSize: 15, color: Colors.indigo),
                           ),
@@ -188,19 +215,33 @@ class _ForumsPage extends State<ForumsPage> {
                   ),
                 ),
               ),
+              data['postImage'] != 'NONE'
+                  ? Utils.cacheNetworkImageWithEvent(
+                      context, data['postImage'], 0, 0)
+                  : Container(),
               //const Divider(height: 5, color: Colors.black,), // black lines going across
               Padding(
                 padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    GestureDetector(
-                      onTap: () => _updateLikeCount(data),
-                      child: LikeButton(data: data),
+                    const SizedBox(
+                      width: 50,
                     ),
-                    GestureDetector(
-                      onTap: () => _moveToComment(data),
-                      child: CommentButton(data: data),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () => likePost(data),
+                        child: LikeButton(
+                          data: data,
+                          isPostLiked: _checkIfPostLiked(data),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () => _moveToComment(data),
+                        child: CommentButton(data: data),
+                      ),
                     ),
                   ],
                 ),

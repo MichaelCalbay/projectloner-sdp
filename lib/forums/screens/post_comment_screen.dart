@@ -77,7 +77,7 @@ class _PostCommentPageState extends State<PostCommentPage> {
                                               padding:
                                                   const EdgeInsets.all(2.0),
                                               child: Text(
-                                                readTimestamp(widget
+                                                Utils.readTimestamp(widget
                                                     .data['postTimeStamp']),
                                                 style: const TextStyle(
                                                     fontSize: 15,
@@ -95,29 +95,19 @@ class _PostCommentPageState extends State<PostCommentPage> {
                                         style: const TextStyle(fontSize: 15),
                                       ),
                                     ),
-                                    const Divider(
-                                      height: 5,
-                                      color: Colors.grey,
-                                    ), // black lines going across
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 5.0, bottom: 5.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          LikeButton(data: widget.data),
-                                          CommentButton(data: widget.data),
-                                        ],
-                                      ),
-                                    ),
+                                    widget.data['postImage'] != 'NONE'
+                                        ? Utils.cacheNetworkImageWithEvent(
+                                            context,
+                                            widget.data['postImage'],
+                                            0,
+                                            0)
+                                        : Container(),
                                   ],
                                 ),
                               ),
                             ),
                             snapshot.data!.docs.isNotEmpty
-                                ? ListView(
-                                    shrinkWrap: true,
+                                ? Column(
                                     children: snapshot.data!.docs.map(
                                       (document) {
                                         return CommentList(data: document);

@@ -6,6 +6,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectloner/login/check_login.dart';
 import 'package:projectloner/login/forgot_password.dart';
 import 'package:projectloner/login/widgets/login_widget.dart';
+import 'package:projectloner/theme/icon_button.dart';
+import 'package:projectloner/views/nav_bar.dart';
 import 'package:projectloner/widgets/custom_app_bar.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -85,8 +87,18 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ThemeMaterialButton(
+                      key: Key("toggleSwitchTheme")
+                    ),
+                  ],
+                ),
                 Icon(
                   Icons.gamepad_rounded,
+                  key: Key("gamepadIcon"),
                   color: Colors.deepPurple,
                   size: 100,
                 ),
@@ -182,6 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     GestureDetector(
+                      key: Key("registerNow"),
                       onTap: () {
                         Navigator.pop(context);
                         Navigator.pushNamed(context, '/registration');

@@ -12,7 +12,7 @@ class CustomEmailField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LonerThemeProvider themeProvider = LonerThemeProvider();
+    final themeProvider = LonerThemeProvider();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: Container(
