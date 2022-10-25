@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:projectloner/forums/forums_view.dart';
 
 class LikeButton extends StatelessWidget {
   final DocumentSnapshot data;
@@ -16,37 +15,43 @@ class LikeButton extends StatelessWidget {
     return FutureBuilder<bool>(
       future: isPostLiked,
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-        return Row(
-          children: [
-            snapshot.data!
-                ? const Icon(
-                    Icons.thumb_up,
-                    color: Colors.deepPurple,
-                  )
-                : const Icon(
-                    Icons.thumb_up,
-                  ),
-            snapshot.data!
-                ? Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      'Unlike(${data['postLikeCounter']})',
-                      style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.deepPurple),
+        if (snapshot.data != null) {
+          return Row(
+            children: [
+              snapshot.data!
+                  ? const Icon(
+                      Icons.thumb_up,
+                      color: Colors.deepPurple,
+                    )
+                  : const Icon(
+                      Icons.thumb_up,
                     ),
-                  )
-                : Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      'Like(${data['postLikeCounter']})',
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                  )
-          ],
-        );
+              snapshot.data!
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Text(
+                        'Unlike(${data['postLikeCounter']})',
+                        style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.deepPurple),
+                      ),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Text(
+                        'Like(${data['postLikeCounter']})',
+                        style: const TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    )
+            ],
+          );
+        } else {
+          return const Center(
+            child: Text('Something went wrong...'),
+          );
+        }
       },
     );
   }
