@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projectloner/repositories/database/database_repo.dart';
+import 'package:provider/provider.dart';
 
 import '../blocs/auth/auth_bloc.dart';
 import '../blocs/chat/chat_bloc.dart';
 import '../models/models.dart';
+import '../theme/theme_provider.dart';
 
 class ChatScreen extends StatelessWidget {
   static const String routeName = '/chat';
@@ -112,11 +114,12 @@ class _MessageAppBar extends StatelessWidget with PreferredSizeWidget {
 }
 
 class _MessageInput extends StatelessWidget {
-  const _MessageInput({
+  _MessageInput({
     Key? key,
     required this.userMatch,
   }) : super(key: key);
 
+  final themeProvider = LonerThemeProvider();
   final UserMatch userMatch;
   @override
   Widget build(BuildContext context) {
@@ -151,18 +154,19 @@ class _MessageInput extends StatelessWidget {
           Expanded(
             child: TextField(
               controller: controller,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 filled: true,
-                fillColor: Colors.white,
+                fillColor:
+                    themeProvider.isDarkMode ? Colors.black : Colors.white,
                 hintText: 'Type a message...',
-                contentPadding: EdgeInsets.only(
+                contentPadding: const EdgeInsets.only(
                   left: 20,
                   bottom: 5,
                   top: 5,
                 ),
-                focusedBorder: OutlineInputBorder(
+                focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.white)),
-                enabledBorder: UnderlineInputBorder(
+                enabledBorder: const UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white)),
               ),
             ),
