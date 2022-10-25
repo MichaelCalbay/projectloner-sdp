@@ -15,9 +15,9 @@ class Utils{
         diff.inMinutes > 0 && diff.inHours == 0 ||
         diff.inHours > 0 && diff.inDays == 0) {
       if (diff.inHours > 0) {
-        time = '${diff.inHours}h';
+        time = '${diff.inHours} hours';
       } else if (diff.inMinutes > 0) {
-        time = '${diff.inMinutes}m';
+        time = '${diff.inMinutes} minutes';
       } else if (diff.inSeconds > 0) {
         time = 'now';
       } else if (diff.inMilliseconds > 0) {
@@ -28,11 +28,11 @@ class Utils{
         time = 'now';
       }
     } else if (diff.inDays > 0 && diff.inDays < 7) {
-      time = '${diff.inDays}d';
+      time = '${diff.inDays} days';
     } else if (diff.inDays > 6) {
-      time = '${(diff.inDays / 7).floor()}w';
+      time = '${(diff.inDays / 7).floor()} weeks';
     } else if (diff.inDays > 29) {
-      time = '${(diff.inDays / 30).floor()}m';
+      time = '${(diff.inDays / 30).floor()} months';
     } else if (diff.inDays > 365) {
       time = '${date.month} ${date.day}, ${date.year}';
     }
