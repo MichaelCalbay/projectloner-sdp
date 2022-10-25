@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 
 class Utils{
-  static String readTimestamp(DateTime timestamp) {
+  static String readTimestamp(int timestamp) {
     var now = DateTime.now();
-    // var date = DateTime.fromMillisecondsSinceEpoch(timestamp);
-    var diff = now.difference(timestamp);
+    var date = DateTime.fromMillisecondsSinceEpoch(timestamp);
+    var diff = now.difference(date);
     var time = '';
 
     if (diff.inSeconds <= 0 ||
@@ -34,7 +34,7 @@ class Utils{
     } else if (diff.inDays > 29) {
       time = '${(diff.inDays / 30).floor()} months';
     } else if (diff.inDays > 365) {
-      time = '${timestamp.month} ${timestamp.day}, ${timestamp.year}';
+      time = '${date.month} ${date.day}, ${date.year}';
     }
     return time;
   }
@@ -62,74 +62,5 @@ class Utils{
       ),
     );
   }
-
-    static Future<File?> cropImageFile({required File imageFile}) async {
-        CroppedFile? croppedImage =await ImageCropper().cropImage(
-        sourcePath: imageFile.path,
-        aspectRatioPresets: Platform.isAndroid ? [
-          CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio3x2,
-          CropAspectRatioPreset.original,
-          CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio16x9
-        ] : [
-          CropAspectRatioPreset.original,
-          CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio3x2,
-          CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio5x3,
-          CropAspectRatioPreset.ratio5x4,
-          CropAspectRatioPreset.ratio7x5,
-          CropAspectRatioPreset.ratio16x9
-        ],
-        uiSettings: [
-          AndroidUiSettings(
-              toolbarTitle: 'Cropper',
-              toolbarColor: Colors.blue[800],
-              toolbarWidgetColor: Colors.white,
-              initAspectRatio: CropAspectRatioPreset.original,
-              lockAspectRatio: false),
-          IOSUiSettings(
-            title: 'Cropper',
-          ),
-        ],
-    );
-       if(croppedImage == null){
-         return null;
-       }else{
-         return File(croppedImage.path);
-       }
-  }
-
-
-// Future<void> _cropImage() async {
-//   // final path = postImageFile1!.path;
-//   // File file = File(path);
-//   if (postImageFile1 != null) {
-//     final croppedFile = await ImageCropper().cropImage(
-//       sourcePath: postImageFile1!.path,
-//       compressFormat: ImageCompressFormat.jpg,
-//       compressQuality: 100,
-//       uiSettings: [
-//         AndroidUiSettings(
-//             toolbarTitle: 'Cropper',
-//             toolbarColor: Colors.deepOrange,
-//             toolbarWidgetColor: Colors.white,
-//             initAspectRatio: CropAspectRatioPreset.original,
-//             lockAspectRatio: false),
-//         IOSUiSettings(
-//           title: 'Cropper',
-//         ),
-//       ],
-//     );
-//     if (croppedFile != null) {
-//       setState(() {
-//         postImageFile1 = croppedFile as XFile?;
-//       });
-//     }
-//   }
-// }
-
-
 
 }
