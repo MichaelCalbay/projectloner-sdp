@@ -2,7 +2,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
@@ -45,7 +44,7 @@ class _WritePostState extends State<WritePost> {
               (node) {
                 return GestureDetector(
                   onTap: () {
-                   getImage();
+                    getImage();
                   },
                   child: Container(
                     color:Colors.grey[200],
@@ -65,10 +64,12 @@ class _WritePostState extends State<WritePost> {
         ]);
   }
 
-  Future<void> sentPostInFireBase(String postContent, String postID, String userName) async {
+  Future<void> sentPostInFireBase(
+      String postContent, String postID, String userName) async {
     String? postImage;
-    if(postImageFile1 != null){
-      postImage = await ForumsStore.uploadPostImages(postID: postID, postImageFile: File(postImageFile1!.path));
+    if (postImageFile1 != null) {
+      postImage = await ForumsStore.uploadPostImages(
+          postID: postID, postImageFile: File(postImageFile1!.path));
     }
     setState(() {
       _isLoading = true;
@@ -94,7 +95,7 @@ class _WritePostState extends State<WritePost> {
   @override
   Widget build(BuildContext context) {
     String fID = FirebaseFirestore.instance.collection('Forums').doc().id;
-    
+
     final size = MediaQuery.of(context).size;
     final themeProvider = LonerThemeProvider();
 
@@ -179,8 +180,12 @@ class _WritePostState extends State<WritePost> {
                                     height: 1,
                                     color: Colors.black,
                                   ),
-                                  postImageFile1 != null ? Image.file(File(postImageFile1!.path),fit: BoxFit.fill,) :
-                                  Container(),
+                                  postImageFile1 != null
+                                      ? Image.file(
+                                          File(postImageFile1!.path),
+                                          fit: BoxFit.fill,
+                                        )
+                                      : Container(),
                                   TextFormField(
                                     autofocus: true,
                                     focusNode: writingTextFocus,
@@ -225,18 +230,13 @@ class _WritePostState extends State<WritePost> {
     );
   }
 
-  Future<void>  getImage() async {
-    XFile? imageFileFromGallery = await ImagePicker().pickImage(source: ImageSource.gallery);
+  Future<void> getImage() async {
+    XFile? imageFileFromGallery =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     if (imageFileFromGallery != null) {
       setState(() {
         postImageFile1 = imageFileFromGallery;
       });
     }
   }
-
-
-
-
-
-
 }
