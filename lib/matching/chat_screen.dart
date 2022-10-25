@@ -192,9 +192,8 @@ class _Message extends StatelessWidget {
     AlignmentGeometry alignment =
         isFromCurrentUser ? Alignment.topRight : Alignment.topLeft;
 
-    Color colour = isFromCurrentUser
-        ? Theme.of(context).backgroundColor
-        : Theme.of(context).primaryColor;
+    Color colour =
+        isFromCurrentUser ? Colors.purple.shade300 : Colors.blue.shade300;
 
     TextStyle? textStyle =
         Theme.of(context).textTheme.bodyText1!.copyWith(color: Colors.white);
