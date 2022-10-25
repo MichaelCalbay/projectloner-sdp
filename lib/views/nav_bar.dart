@@ -59,7 +59,9 @@ class _NavBarState extends State<NavBar> {
                       radius: 20,
                       backgroundImage: NetworkImage(
                         //Can be implemented to get current user's image[0]
-                        state.user.imageUrls[0],
+                        state.user.imageUrls.isNotEmpty
+                            ? state.user.imageUrls[0]
+                            : 'https://thumbs.dreamstime.com/b/no-user-profile-picture-hand-drawn-illustration-53840792.jpg',
                       ),
                       backgroundColor: Colors.black87,
                     ),
