@@ -18,7 +18,8 @@ class StartOnboarding extends OnboardingEvent {
         age: 0,
         gender: '',
         imageUrls: [],
-        interests: [],
+        ign: '',
+        valTag: '',
         server: '',
         mainRole: ''),
   });

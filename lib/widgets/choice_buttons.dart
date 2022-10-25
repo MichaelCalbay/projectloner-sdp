@@ -30,7 +30,7 @@ class ChoiceButton extends StatelessWidget {
           color: (themeProvider.isDarkMode) ? Colors.black54 : Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withAlpha(50),
+              color: Colors.grey.withAlpha(100),
               spreadRadius: 4,
               blurRadius: 4,
               offset: const Offset(3, 3),
