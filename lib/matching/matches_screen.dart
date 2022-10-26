@@ -41,7 +41,7 @@ class MatchesScreen extends StatelessWidget {
                     inactiveMatches.isEmpty
                         ? const Padding(
                             padding: EdgeInsets.all(20.0),
-                            child: Text('Non-Existent!'),
+                            child: Text('No one, go to Matchmaking!'),
                           )
                         : InactiveList(inactiveMatches: inactiveMatches),
                     const SizedBox(height: 10),
