@@ -55,7 +55,9 @@ class MatchedNotifScreen extends StatelessWidget {
                     child: CircleAvatar(
                       radius: 45,
                       backgroundImage: NetworkImage(
-                          context.read<AuthBloc>().state.user!.imageUrls[0]),
+                          context.read<AuthBloc>().state.user!.imageUrls.isNotEmpty ? 
+                          context.read<AuthBloc>().state.user!.imageUrls[0] : 
+                          'https://thumbs.dreamstime.com/b/no-user-profile-picture-hand-drawn-illustration-53840792.jpg'),
                     ),
                   ),
                 ),
@@ -73,7 +75,10 @@ class MatchedNotifScreen extends StatelessWidget {
                     ),
                     child: CircleAvatar(
                       radius: 45,
-                      backgroundImage: NetworkImage(state.user.imageUrls[0]),
+                      backgroundImage: NetworkImage(
+                        state.user.imageUrls.isNotEmpty ? 
+                        context.read<AuthBloc>().state.user!.imageUrls[0]! : 
+                        'https://thumbs.dreamstime.com/b/no-user-profile-picture-hand-drawn-illustration-53840792.jpg'),
                     ),
                   ),
                 ),

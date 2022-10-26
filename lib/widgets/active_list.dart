@@ -31,7 +31,9 @@ class ActiveList extends StatelessWidget {
                 SmallUserImage(
                     height: 70,
                     width: 70,
-                    imageUrl: activeMatches[index].matchedUser.imageUrls[0]),
+                    imageUrl: activeMatches[index].matchedUser.imageUrls.isNotEmpty ? 
+                    activeMatches[index].matchedUser.imageUrls[0] :
+                    'https://thumbs.dreamstime.com/b/no-user-profile-picture-hand-drawn-illustration-53840792.jpg'),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

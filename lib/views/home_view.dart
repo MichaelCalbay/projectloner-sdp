@@ -59,7 +59,7 @@ class HomePageState extends State {
                         ),
                         const SizedBox(height: 30),
                         Text(
-                          'Hello ${state.user.firstName}',
+                          'Hello ${state.user.firstName}!',
                           style: const TextStyle(
                               fontSize: 40.0, fontWeight: FontWeight.bold),
                         ),

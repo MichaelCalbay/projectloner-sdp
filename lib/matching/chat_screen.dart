@@ -91,7 +91,9 @@ class _MessageAppBar extends StatelessWidget with PreferredSizeWidget {
             CircleAvatar(
               radius: 20,
               backgroundImage: NetworkImage(
-                userMatch.matchedUser.imageUrls[0],
+                userMatch.matchedUser.imageUrls.isNotEmpty ?
+                userMatch.matchedUser.imageUrls[0] :
+                'https://thumbs.dreamstime.com/b/no-user-profile-picture-hand-drawn-illustration-53840792.jpg',
               ),
             ),
             const SizedBox(width: 5),

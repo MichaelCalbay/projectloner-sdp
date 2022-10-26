@@ -119,7 +119,9 @@ class _WritePostState extends State<WritePost> {
                           writingTextController.text,
                           fID,
                           '${state.user.firstName} ${state.user.lastName}',
-                          state.user.imageUrls[0]);
+                          state.user.imageUrls.isNotEmpty ? 
+                          state.user.imageUrls[0] : 
+                          'https://thumbs.dreamstime.com/b/no-user-profile-picture-hand-drawn-illustration-53840792.jpg');
                     }
                   },
                   child: const Text(
