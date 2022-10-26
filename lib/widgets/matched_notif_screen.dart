@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projectloner/blocs/auth/auth_bloc.dart';
 import 'package:projectloner/matching/chat_screen.dart';
 import 'package:projectloner/widgets/custom_elevated_button.dart';
-
 import '../blocs/match/match_bloc.dart';
 import '../blocs/swipe/swipe_bloc.dart';
 import '../matching/matches_screen.dart';

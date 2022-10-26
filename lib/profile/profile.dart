@@ -102,6 +102,7 @@ class _ProfilePageState extends State<ProfilePage> {
     final rankUrl = html
         .querySelectorAll(
             '#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.site-container.trn-grid.trn-grid--vertical.trn-grid--small > div.trn-grid.container > div.area-main > div.segment-stats.area-main-stats.card.bordered.header-bordered.responsive > div.highlighted.highlighted--giants > div.highlighted__content > div > div.trn-profile-highlighted-content__stats > img')
+
         .map((element) => element.attributes['src'])
         .toList();
 
@@ -115,12 +116,10 @@ class _ProfilePageState extends State<ProfilePage> {
         'https://tracker.gg/valorant/profile/riot/$name%23$tag/overview');
     final response = await http.get(url);
     dom.Document html = dom.Document.html(response.body);
-
     final winPercentage = html
         .querySelectorAll('div:nth-child(3) > div > div.numbers > span.value')
         .map((element) => element.innerHtml)
         .toList();
-
     setState(() {
       winPercentages = winPercentage;
 
@@ -286,3 +285,4 @@ class _ProfilePageState extends State<ProfilePage> {
         ]));
   }
 }
+

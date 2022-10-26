@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:projectloner/widgets/widgets.dart';
-
 import '../matching/chat_screen.dart';
 import '../models/models.dart';
 

@@ -77,7 +77,6 @@ class ForumsStore {
   static Future<String> uploadPostImages(
       {required String postID, required File postImageFile}) async {
     try {
-      //FirebaseStorage storage = FirebaseStorage.instance;
       String fileName = 'images/$postID/postImage';
       Reference reference = FirebaseStorage.instance.ref().child(fileName);
       UploadTask uploadTask = reference.putFile(postImageFile);
