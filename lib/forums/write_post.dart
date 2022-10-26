@@ -2,12 +2,12 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:projectloner/blocs/profile/profile_bloc.dart';
 import 'dart:io';
+import '../theme/theme_provider.dart';
 import 'Database/forums_firestore.dart';
 
 class WritePost extends StatefulWidget {
@@ -43,7 +43,7 @@ class _WritePostState extends State<WritePost> {
               (node) {
                 return GestureDetector(
                   onTap: () {
-                   getImage();
+                    getImage();
                   },
                   child: Container(
                     color: Colors.grey[200],
@@ -63,10 +63,12 @@ class _WritePostState extends State<WritePost> {
         ]);
   }
 
-  Future<void> sentPostInFireBase(String postContent, String postID, String userName) async {
+  Future<void> sentPostInFireBase(
+      String postContent, String postID, String userName, String image) async {
     String? postImage;
-    if(postImageFile1 != null){
-      postImage = await ForumsStore.uploadPostImages(postID: postID, postImageFile: File(postImageFile1!.path));
+    if (postImageFile1 != null) {
+      postImage = await ForumsStore.uploadPostImages(
+          postID: postID, postImageFile: File(postImageFile1!.path));
     }
     setState(() {
       _isLoading = true;
@@ -75,7 +77,7 @@ class _WritePostState extends State<WritePost> {
     FirebaseFirestore.instance.collection('Forums').doc(postID).set({
       'postID': postID,
       'postUserName': userName,
-      'postUserThumbnail': '',
+      'postUserThumbnail': image,
       'postTimeStamp': DateTime.now().millisecondsSinceEpoch,
       'postContent': postContent,
       'postImage': postImage ?? 'NONE',
@@ -92,8 +94,9 @@ class _WritePostState extends State<WritePost> {
   @override
   Widget build(BuildContext context) {
     String fID = FirebaseFirestore.instance.collection('Forums').doc().id;
-    
+
     final size = MediaQuery.of(context).size;
+    final themeProvider = LonerThemeProvider();
 
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
@@ -106,14 +109,21 @@ class _WritePostState extends State<WritePost> {
             appBar: AppBar(
               title: const Text('Writing Post'),
               centerTitle: true,
+              backgroundColor: Colors.deepPurple,
               actions: <Widget>[
                 TextButton(
-                  onPressed: () => sentPostInFireBase(
-                      writingTextController.text,
-                      fID,
-                      '${state.user.firstName} ${state.user.lastName}'),
+                  onPressed: () {
+                    if (writingTextController.text != '' ||
+                        postImageFile1 != null) {
+                      sentPostInFireBase(
+                          writingTextController.text,
+                          fID,
+                          '${state.user.firstName} ${state.user.lastName}',
+                          state.user.imageUrls[0]);
+                    }
+                  },
                   child: const Text(
-                    'post',
+                    'Post',
                     style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
@@ -133,7 +143,9 @@ class _WritePostState extends State<WritePost> {
                       ),
                       Container(
                         child: Card(
-                          color: Colors.white,
+                          color: themeProvider.isDarkMode
+                              ? Colors.grey[800]
+                              : Colors.white,
                           elevation: 4.0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
@@ -155,9 +167,13 @@ class _WritePostState extends State<WritePost> {
                                     children: <Widget>[
                                       Padding(
                                         padding: EdgeInsets.all(8.0),
-                                        child: Icon(
-                                          Icons.book,
-                                          size: 20,
+                                        child: CircleAvatar(
+                                          radius: 20,
+                                          backgroundImage: NetworkImage(state
+                                                  .user.imageUrls.isNotEmpty
+                                              ? state.user.imageUrls[0]
+                                              : 'https://thumbs.dreamstime.com/b/no-user-profile-picture-hand-drawn-illustration-53840792.jpg'),
+                                          backgroundColor: Colors.black87,
                                         ),
                                       ),
                                       Text(
@@ -172,8 +188,12 @@ class _WritePostState extends State<WritePost> {
                                     height: 1,
                                     color: Colors.black,
                                   ),
-                                  postImageFile1 != null ? Image.file(File(postImageFile1!.path),fit: BoxFit.fill,) :
-                                  Container(),
+                                  postImageFile1 != null
+                                      ? Image.file(
+                                          File(postImageFile1!.path),
+                                          fit: BoxFit.fill,
+                                        )
+                                      : Container(),
                                   TextFormField(
                                     autofocus: true,
                                     focusNode: writingTextFocus,
@@ -218,18 +238,13 @@ class _WritePostState extends State<WritePost> {
     );
   }
 
-  Future<void>  getImage() async {
-    XFile? imageFileFromGallery = await ImagePicker().pickImage(source: ImageSource.gallery);
+  Future<void> getImage() async {
+    XFile? imageFileFromGallery =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     if (imageFileFromGallery != null) {
       setState(() {
         postImageFile1 = imageFileFromGallery;
       });
     }
   }
-
-
-
-
-
-
 }

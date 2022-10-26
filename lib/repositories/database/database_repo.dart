@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:projectloner/models/user_matches.dart';
-import 'package:projectloner/models/user_model.dart';
+import 'package:intl/intl.dart';
 import 'package:projectloner/repositories/database/base_database_repo.dart';
 import 'package:projectloner/repositories/storage/storage_repo.dart';
 import 'package:rxdart/rxdart.dart';
+import '../../models/models.dart';
+
 
 class DatabaseRepository extends BaseDatabaseRepository {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
@@ -16,6 +17,43 @@ class DatabaseRepository extends BaseDatabaseRepository {
         .doc(userId)
         .snapshots()
         .map((snap) => LonerUser.fromSnapshot(snap));
+  }
+
+  @override
+  Future<void> addMessage(String chatId, Message message) {
+    return _firebaseFirestore.collection('Chats').doc(chatId).update({
+      'messages': FieldValue.arrayUnion([
+        message.toJson(),
+      ])
+    });
+  }
+
+  @override
+  Stream<Chat> getChat(String chatId) {
+    return _firebaseFirestore
+        .collection('Chats')
+        .doc(chatId)
+        .snapshots()
+        .map((doc) => Chat.fromJson(
+              doc.data() as Map<String, dynamic>,
+              id: doc.id,
+            ));
+  }
+
+  @override
+  Stream<List<Chat>> getChats(String userId) {
+    return _firebaseFirestore
+        .collection('Chats')
+        .where("userIds", arrayContains: userId)
+        .snapshots()
+        .map((snap) {
+      return snap.docs
+          .map((doc) => Chat.fromJson(
+                doc.data(),
+                id: doc.id,
+              ))
+          .toList();
+    });
   }
 
   @override
@@ -75,14 +113,79 @@ class DatabaseRepository extends BaseDatabaseRepository {
 
   @override
   Future<void> updateUserMatches(String userId, String matchId) async {
+    //Create document inside Chats collection for storing messages.
+    String chatId = await _firebaseFirestore.collection('Chats').add({
+      'userIds': [userId, matchId],
+      'messages': [],
+    }).then((value) => value.id);
     //This will update the currently logged in user's matches.
     await _firebaseFirestore.collection('LonerUser').doc(userId).update({
-      'matches': FieldValue.arrayUnion([matchId])
+      'matches': FieldValue.arrayUnion([
+        {
+          'matchId': matchId,
+          'chatId': chatId,
+        }
+      ])
     });
 
     //This will update the other user's match on their end as well.
     await _firebaseFirestore.collection('LonerUser').doc(matchId).update({
-      'matches': FieldValue.arrayUnion([userId])
+      'matches': FieldValue.arrayUnion([
+        {
+          'matchId': userId,
+          'chatId': chatId,
+        }
+      ])
+    });
+  }
+
+  @override
+  Stream<List<UserMatch>> getMatches(LonerUser user) {
+    return Rx.combineLatest3(
+      getUser(user.id!),
+      getChats(user.id!),
+      getUsers(user),
+      (
+        LonerUser user,
+        List<Chat> userChats,
+        List<LonerUser> otherUsers,
+      ) {
+        return otherUsers.where((otherUser) {
+          List<String> matches =
+              user.matches!.map((match) => match['matchId'] as String).toList();
+          return matches.contains(otherUser.id);
+        }).map((matchedUser) {
+          Chat chat = userChats.where((chat) {
+            return chat.userIds.contains(matchedUser.id) &
+                chat.userIds.contains(user.id);
+          }).first;
+
+          return UserMatch(
+              userId: user.id!, matchedUser: matchedUser, chat: chat);
+        }).toList();
+      },
+    );
+  }
+
+  @override
+  Stream<List<LonerUser>> getUsersToMatch(LonerUser user) {
+    return Rx.combineLatest2(getUser(user.id!), getUsers(user), (
+      LonerUser currentUser,
+      List<LonerUser> users,
+    ) {
+      return users.where((user) {
+        if (currentUser.swipedLeft!.contains(user.id)) {
+          return false;
+        } else if (currentUser.swipedRight!.contains(user.id)) {
+          return false;
+        } else if (currentUser.matches!.contains(user.id)) {
+          return false;
+        } else if (currentUser.id == user.id) {
+          return false;
+        } else {
+          return true;
+        }
+      }).toList();
     });
   }
 

@@ -20,12 +20,10 @@ class ActiveList extends StatelessWidget {
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => ChatScreen(
-                    userMatch: activeMatches[index],
-                  ),
-                ),
+              Navigator.pushNamed(
+                context,
+                ChatScreen.routeName,
+                arguments: activeMatches[index],
               );
             },
             child: Row(
@@ -43,16 +41,12 @@ class ActiveList extends StatelessWidget {
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      activeMatches[index]
-                          .chat![0]
-                          .messages[
-                              activeMatches[index].chat![0].messages.length - 1]
-                          .message,
+                      activeMatches[index].chat.messages[0].message,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      activeMatches[index].chat![0].messages[0].timeToString,
+                      activeMatches[index].chat.messages[0].timeToString,
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                   ],

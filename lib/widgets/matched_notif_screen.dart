@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projectloner/blocs/auth/auth_bloc.dart';
+import 'package:projectloner/matching/chat_screen.dart';
 import 'package:projectloner/widgets/custom_elevated_button.dart';
-
+import '../blocs/match/match_bloc.dart';
 import '../blocs/swipe/swipe_bloc.dart';
+import '../matching/matches_screen.dart';
+import '../repositories/database/database_repo.dart';
 import '../theme/theme_provider.dart';
 
 class MatchedNotifScreen extends StatelessWidget {
@@ -83,7 +86,19 @@ class MatchedNotifScreen extends StatelessWidget {
               secondaryGradient: Theme.of(context).colorScheme.secondary,
               textColor:
                   (themeProvider.isDarkMode) ? Colors.white : Colors.white,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => BlocProvider<MatchBloc>(
+                      create: (context) => MatchBloc(
+                        databaseRepository: context.read<DatabaseRepository>(),
+                      )..add(LoadMatches(
+                          user: context.read<AuthBloc>().state.user!)),
+                      child: const MatchesScreen(),
+                    ),
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 10),
             CustomElevatedButton(

@@ -60,9 +60,17 @@ class _PostCommentPageState extends State<PostCommentPage> {
                                   children: [
                                     Row(
                                       children: [
-                                        const Padding(
+                                        Padding(
                                           padding: EdgeInsets.all(8.0),
-                                          child: Icon(Icons.book, size: 34),
+                                          child: CircleAvatar(
+                                            radius: 20,
+                                            backgroundImage: NetworkImage(widget
+                                                    .data.exists
+                                                ? widget
+                                                    .data['postUserThumbnail']
+                                                : 'https://thumbs.dreamstime.com/b/no-user-profile-picture-hand-drawn-illustration-53840792.jpg'),
+                                            backgroundColor: Colors.black87,
+                                          ),
                                         ),
                                         Column(
                                           crossAxisAlignment:
@@ -95,24 +103,13 @@ class _PostCommentPageState extends State<PostCommentPage> {
                                         style: const TextStyle(fontSize: 15),
                                       ),
                                     ),
-                                    widget.data['postImage'] != 'NONE' ? Utils.cacheNetworkImageWithEvent(context, widget.data['postImage'], 0,0)  :
-                                    Container(),
-                                    // const Divider(
-                                    //   height: 5,
-                                    //   color: Colors.grey,
-                                    // ), // black lines going across
-                                    // Padding(
-                                    //   padding: const EdgeInsets.only(
-                                    //       top: 5.0, bottom: 5.0),
-                                    //   child: Row(
-                                    //     mainAxisAlignment:
-                                    //         MainAxisAlignment.spaceEvenly,
-                                    //     children: [
-                                    //       LikeButton(data: widget.data),
-                                    //       CommentButton(data: widget.data),
-                                    //     ],
-                                    //   ),
-                                    // ),
+                                    widget.data['postImage'] != 'NONE'
+                                        ? Utils.cacheNetworkImageWithEvent(
+                                            context,
+                                            widget.data['postImage'],
+                                            0,
+                                            0)
+                                        : Container(),
                                   ],
                                 ),
                               ),

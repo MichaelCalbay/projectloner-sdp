@@ -3,11 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projectloner/blocs/profile/profile_bloc.dart';
 import 'package:projectloner/forums/Database/forums_firestore.dart';
-import 'package:projectloner/forums/Database/local_DB.dart';
-import 'package:projectloner/forums/Database/profile_data.dart';
 import 'package:projectloner/forums/screens/post_comment_screen.dart';
 import 'package:projectloner/forums/widgets/forum_widgets.dart';
-import 'forums_data.dart';
 import 'utils.dart';
 import 'write_post.dart';
 import '../widgets/custom_app_bar.dart';
@@ -46,74 +43,85 @@ class _ForumsPage extends State<ForumsPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
-        if (state is ProfileLoaded) {
+        if (state is ProfileLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state is ProfileLoaded) {
           userName = '${state.user.firstName} ${state.user.lastName}';
-        }
-        return Scaffold(
-          appBar: const CustomAppBar(
-            title: 'Forums',
-            actionButtons: false,
-          ),
-          body: StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance
-                .collection('Forums')
-                .orderBy('postTimeStamp', descending: true)
-                .snapshots(),
-            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (!snapshot.hasData) return const LinearProgressIndicator();
-              return Stack(
-                children: <Widget>[
-                  snapshot.data!.docs.isNotEmpty
-                      ? ListView(
-                          shrinkWrap: true,
-                          children: snapshot.data!.docs.map(listTile).toList(),
-                        )
-                      : Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Icon(
-                                Icons.error,
-                                color: Colors.grey[700],
-                                size: 64,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(14.0),
-                                child: Text(
-                                  'There is no posts',
-                                  style: TextStyle(
-                                      fontSize: 16, color: Colors.grey[700]),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                  _isLoading
-                      ? Positioned(
-                          child: Container(
-                            // ignore: sort_child_properties_last
-                            child: const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                            color: Colors.white.withOpacity(0.8),
-                          ),
-                        )
-                      : Container()
-                ],
-              );
-            },
-          ),
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.deepPurple,
-            onPressed: _incrementCounter,
-            tooltip: 'Increment',
-            child: const Icon(
-              Icons.create,
-              color: Colors.black,
+          return Scaffold(
+            appBar: const CustomAppBar(
+              title: 'Forums',
+              actionButtons: false,
             ),
-          ), // This trailing comma makes auto-formatting nicer for build methods.
-        );
+            body: StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection('Forums')
+                  .orderBy('postTimeStamp', descending: true)
+                  .snapshots(),
+              builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (!snapshot.hasData) return const LinearProgressIndicator();
+                return Stack(
+                  children: <Widget>[
+                    snapshot.data!.docs.isNotEmpty
+                        ? ListView(
+                            shrinkWrap: true,
+                            children:
+                                snapshot.data!.docs.map(listTile).toList(),
+                          )
+                        : Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(
+                                  Icons.error,
+                                  color: Colors.grey[700],
+                                  size: 64,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(14.0),
+                                  child: Text(
+                                    'There is no posts',
+                                    style: TextStyle(
+                                        fontSize: 16, color: Colors.grey[700]),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                    _isLoading
+                        ? Positioned(
+                            child: Container(
+                              // ignore: sort_child_properties_last
+                              child: const Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                              color: Colors.white.withOpacity(0.8),
+                            ),
+                          )
+                        : Container()
+                  ],
+                );
+              },
+            ),
+            floatingActionButton: FloatingActionButton(
+              backgroundColor: Colors.deepPurple,
+              onPressed: _incrementCounter,
+              tooltip: 'Increment',
+              child: const Icon(
+                Icons.create,
+                color: Colors.black,
+              ),
+            ), // This trailing comma makes auto-formatting nicer for build methods.
+          );
+        } else {
+          const Center(
+            child: Text('Something went wrong...'),
+          );
+        }
+
+        return Container();
       },
     );
   }
@@ -171,9 +179,15 @@ class _ForumsPage extends State<ForumsPage> {
                 onTap: () => _moveToComment(data),
                 child: Row(
                   children: <Widget>[
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Icon(Icons.book, size: 34),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircleAvatar(
+                        radius: 20,
+                        backgroundImage: NetworkImage(data.exists
+                            ? data['postUserThumbnail']
+                            : 'https://thumbs.dreamstime.com/b/no-user-profile-picture-hand-drawn-illustration-53840792.jpg'),
+                        backgroundColor: Colors.black87,
+                      ),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

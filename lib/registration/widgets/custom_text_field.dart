@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:projectloner/theme/theme_provider.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -6,19 +7,21 @@ class CustomTextField extends StatelessWidget {
 
   final String hint;
   final bool isPassword;
+  final bool isTextOnly;
   final Function(String)? onChanged;
 
   const CustomTextField({
     Key? key,
     this.confPwdController,
     this.onChanged,
+    required this.isTextOnly,
     required this.hint,
     required this.isPassword,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    LonerThemeProvider themeProvider = LonerThemeProvider();
+    final themeProvider = LonerThemeProvider();
     return Container(
       height: 56,
       padding: const EdgeInsets.only(left: 20.0),
@@ -32,6 +35,10 @@ class CustomTextField extends StatelessWidget {
         obscureText: isPassword,
         enableSuggestions: false,
         autocorrect: false,
+        //Validates and only allows texts.
+        inputFormatters: (isTextOnly)
+            ? [FilteringTextInputFormatter.deny(RegExp('[0-9]'))]
+            : null,
         style: const TextStyle(
           fontSize: 16,
         ),
