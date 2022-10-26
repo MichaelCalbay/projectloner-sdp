@@ -15,9 +15,9 @@ class Utils{
         diff.inMinutes > 0 && diff.inHours == 0 ||
         diff.inHours > 0 && diff.inDays == 0) {
       if (diff.inHours > 0) {
-        time = '${diff.inHours}h';
+        time = '${diff.inHours}hours';
       } else if (diff.inMinutes > 0) {
-        time = '${diff.inMinutes}m';
+        time = '${diff.inMinutes}minutes';
       } else if (diff.inSeconds > 0) {
         time = 'now';
       } else if (diff.inMilliseconds > 0) {
@@ -62,74 +62,5 @@ class Utils{
       ),
     );
   }
-
-    static Future<File?> cropImageFile({required File imageFile}) async {
-        CroppedFile? croppedImage =await ImageCropper().cropImage(
-        sourcePath: imageFile.path,
-        aspectRatioPresets: Platform.isAndroid ? [
-          CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio3x2,
-          CropAspectRatioPreset.original,
-          CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio16x9
-        ] : [
-          CropAspectRatioPreset.original,
-          CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio3x2,
-          CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio5x3,
-          CropAspectRatioPreset.ratio5x4,
-          CropAspectRatioPreset.ratio7x5,
-          CropAspectRatioPreset.ratio16x9
-        ],
-        uiSettings: [
-          AndroidUiSettings(
-              toolbarTitle: 'Cropper',
-              toolbarColor: Colors.blue[800],
-              toolbarWidgetColor: Colors.white,
-              initAspectRatio: CropAspectRatioPreset.original,
-              lockAspectRatio: false),
-          IOSUiSettings(
-            title: 'Cropper',
-          ),
-        ],
-    );
-       if(croppedImage == null){
-         return null;
-       }else{
-         return File(croppedImage.path);
-       }
-  }
-
-
-// Future<void> _cropImage() async {
-//   // final path = postImageFile1!.path;
-//   // File file = File(path);
-//   if (postImageFile1 != null) {
-//     final croppedFile = await ImageCropper().cropImage(
-//       sourcePath: postImageFile1!.path,
-//       compressFormat: ImageCompressFormat.jpg,
-//       compressQuality: 100,
-//       uiSettings: [
-//         AndroidUiSettings(
-//             toolbarTitle: 'Cropper',
-//             toolbarColor: Colors.deepOrange,
-//             toolbarWidgetColor: Colors.white,
-//             initAspectRatio: CropAspectRatioPreset.original,
-//             lockAspectRatio: false),
-//         IOSUiSettings(
-//           title: 'Cropper',
-//         ),
-//       ],
-//     );
-//     if (croppedFile != null) {
-//       setState(() {
-//         postImageFile1 = croppedFile as XFile?;
-//       });
-//     }
-//   }
-// }
-
-
 
 }

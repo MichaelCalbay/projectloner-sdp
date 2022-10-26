@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projectloner/blocs/auth/auth_bloc.dart';
 import 'package:projectloner/matching/chat_screen.dart';
 import 'package:projectloner/widgets/custom_elevated_button.dart';
-
 import '../blocs/match/match_bloc.dart';
 import '../blocs/swipe/swipe_bloc.dart';
 import '../matching/matches_screen.dart';
@@ -56,7 +55,9 @@ class MatchedNotifScreen extends StatelessWidget {
                     child: CircleAvatar(
                       radius: 45,
                       backgroundImage: NetworkImage(
-                          context.read<AuthBloc>().state.user!.imageUrls[0]),
+                          context.read<AuthBloc>().state.user!.imageUrls.isNotEmpty ? 
+                          context.read<AuthBloc>().state.user!.imageUrls[0] : 
+                          'https://thumbs.dreamstime.com/b/no-user-profile-picture-hand-drawn-illustration-53840792.jpg'),
                     ),
                   ),
                 ),
@@ -74,7 +75,10 @@ class MatchedNotifScreen extends StatelessWidget {
                     ),
                     child: CircleAvatar(
                       radius: 45,
-                      backgroundImage: NetworkImage(state.user.imageUrls[0]),
+                      backgroundImage: NetworkImage(
+                        state.user.imageUrls.isNotEmpty ? 
+                        context.read<AuthBloc>().state.user!.imageUrls[0]! : 
+                        'https://thumbs.dreamstime.com/b/no-user-profile-picture-hand-drawn-illustration-53840792.jpg'),
                     ),
                   ),
                 ),

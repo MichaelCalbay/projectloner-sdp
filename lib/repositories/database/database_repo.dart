@@ -4,8 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:projectloner/repositories/database/base_database_repo.dart';
 import 'package:projectloner/repositories/storage/storage_repo.dart';
 import 'package:rxdart/rxdart.dart';
-
 import '../../models/models.dart';
+
 
 class DatabaseRepository extends BaseDatabaseRepository {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
@@ -163,6 +163,45 @@ class DatabaseRepository extends BaseDatabaseRepository {
           return UserMatch(
               userId: user.id!, matchedUser: matchedUser, chat: chat);
         }).toList();
+      },
+    );
+  }
+
+  @override
+  Stream<List<LonerUser>> getUsersToMatch(LonerUser user) {
+    return Rx.combineLatest2(getUser(user.id!), getUsers(user), (
+      LonerUser currentUser,
+      List<LonerUser> users,
+    ) {
+      return users.where((user) {
+        if (currentUser.swipedLeft!.contains(user.id)) {
+          return false;
+        } else if (currentUser.swipedRight!.contains(user.id)) {
+          return false;
+        } else if (currentUser.matches!.contains(user.id)) {
+          return false;
+        } else if (currentUser.id == user.id) {
+          return false;
+        } else {
+          return true;
+        }
+      }).toList();
+    });
+  }
+
+  @override
+  Stream<List<UserMatch>> getMatches(LonerUser user) {
+    return Rx.combineLatest2(
+      getUser(user.id!),
+      getUsers(user),
+      (
+        LonerUser currentUser,
+        List<LonerUser> users,
+      ) {
+        return users
+            .where((user) => currentUser.matches!.contains(user.id))
+            .map((user) => UserMatch(userId: user.id!, matchedUser: user))
+            .toList();
       },
     );
   }

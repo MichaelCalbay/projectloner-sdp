@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'models.dart';
 
@@ -10,9 +12,8 @@ class UserMatch extends Equatable {
   const UserMatch({
     required this.userId,
     required this.matchedUser,
-    required this.chat,
+    this.chat,
   });
-
   UserMatch copyWith({
     String? userId,
     LonerUser? matchedUser,

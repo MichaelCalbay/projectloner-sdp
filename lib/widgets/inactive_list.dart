@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:projectloner/widgets/widgets.dart';
-
 import '../matching/chat_screen.dart';
 import '../models/models.dart';
 
@@ -36,7 +35,9 @@ class InactiveList extends StatelessWidget {
                     SmallUserImage(
                       height: 70,
                       width: 70,
-                      imageUrl: inactiveMatches[index].matchedUser.imageUrls[0],
+                      imageUrl: inactiveMatches[index].matchedUser.imageUrls.isNotEmpty ?
+                       inactiveMatches[index].matchedUser.imageUrls[0] : 
+                       'https://thumbs.dreamstime.com/b/no-user-profile-picture-hand-drawn-illustration-53840792.jpg',
                     ),
                     Text(
                       inactiveMatches[index].matchedUser.firstName,
