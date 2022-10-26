@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projectloner/blocs/profile/profile_bloc.dart';
@@ -66,9 +65,15 @@ class _CommentListState extends State<CommentList> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
+                Padding(
                   padding: EdgeInsets.fromLTRB(6.0, 2.0, 10.0, 2.0),
-                  child: Icon(Icons.book, size: 34),
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundImage: NetworkImage(widget.data.exists
+                        ? widget.data['commentUserThumbnail']
+                        : 'https://thumbs.dreamstime.com/b/no-user-profile-picture-hand-drawn-illustration-53840792.jpg'),
+                    backgroundColor: Colors.black87,
+                  ),
                 ),
                 Flexible(
                   child: Column(

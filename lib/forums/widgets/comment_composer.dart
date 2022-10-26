@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projectloner/blocs/profile/profile_bloc.dart';
 import 'package:projectloner/forums/Database/forums_firestore.dart';
 
 class CommentComposer extends StatelessWidget {
@@ -13,44 +15,64 @@ class CommentComposer extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return IconTheme(
-      data: IconThemeData(color: Theme.of(context).colorScheme.secondary),
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Row(
-          children: [
-            Flexible(
-              child: TextField(
-                controller: _msgController,
-                onSubmitted: _handleSubmitted,
-                decoration: const InputDecoration.collapsed(
-                    hintText: 'Write a comment...'),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 2.0),
-              child: IconButton(
-                onPressed: (() {
-                  _handleSubmitted(_msgController.text);
-                }),
-                icon: const Icon(
-                  Icons.send,
-                  color: Colors.deepPurple,
+  Widget build(BuildContext context) => BlocBuilder<ProfileBloc, ProfileState>(
+        builder: (context, state) {
+          if (state is ProfileLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is ProfileLoaded) {
+            return IconTheme(
+              data:
+                  IconThemeData(color: Theme.of(context).colorScheme.secondary),
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: TextField(
+                        controller: _msgController,
+                        onSubmitted: (_) => _handleSubmitted,
+                        decoration: const InputDecoration.collapsed(
+                            hintText: 'Write a comment...'),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 2.0),
+                      child: IconButton(
+                        onPressed: (() {
+                          _handleSubmitted(
+                              _msgController.text, state.user.imageUrls[0]);
+                        }),
+                        icon: const Icon(
+                          Icons.send,
+                          color: Colors.deepPurple,
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
+            );
+          } else {
+            const Center(
+              child: Text('Something went wrong...'),
+            );
+          }
 
-  Future _handleSubmitted(String text) async {
+          return Container();
+        },
+      );
+
+  Future _handleSubmitted(String text, String image) async {
     if (text != '') {
       try {
         await ForumsStore.commentToPost(
-            data['postID'], _msgController.text, userName);
+          data['postID'],
+          _msgController.text,
+          userName,
+          image,
+        );
         await ForumsStore.updatePostCommentCount(data);
       } catch (e) {}
     }

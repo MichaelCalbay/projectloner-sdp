@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
-import 'package:image_picker/image_picker.dart';
 
 class ForumsStore {
-  static Future commentToPost(
-      String postID, String commentContent, String userName) async {
+  static Future commentToPost(String postID, String commentContent,
+      String userName, String userImage) async {
     String commentID = FirebaseFirestore.instance
         .collection('Forums')
         .doc(postID)
@@ -26,6 +25,7 @@ class ForumsStore {
         'commentTimeStamp': DateTime.now().millisecondsSinceEpoch,
         'commentContent': commentContent,
         'commentLikeCount': 0,
+        'commentUserThumbnail': userImage,
       },
     );
   }

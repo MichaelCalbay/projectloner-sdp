@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:projectloner/blocs/onboarding/onboarding_bloc.dart';
 import 'package:projectloner/cubit/signup/signup_cubit.dart';
 import 'package:projectloner/registration/widgets/registration_widgets.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
@@ -36,6 +35,7 @@ class EmailScreen extends StatelessWidget {
                     const SizedBox(height: 5),
                     CustomTextField(
                       isPassword: false,
+                      isTextOnly: false,
                       hint: 'Enter your email...',
                       onChanged: (value) {
                         context.read<SignupCubit>().emailChanged(value);
