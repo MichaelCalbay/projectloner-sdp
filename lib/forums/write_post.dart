@@ -64,7 +64,7 @@ class _WritePostState extends State<WritePost> {
   }
 
   Future<void> sentPostInFireBase(
-      String postContent, String postID, String userName) async {
+      String postContent, String postID, String userName, String image) async {
     String? postImage;
     if (postImageFile1 != null) {
       postImage = await ForumsStore.uploadPostImages(
@@ -77,7 +77,7 @@ class _WritePostState extends State<WritePost> {
     FirebaseFirestore.instance.collection('Forums').doc(postID).set({
       'postID': postID,
       'postUserName': userName,
-      'postUserThumbnail': '',
+      'postUserThumbnail': image,
       'postTimeStamp': DateTime.now().millisecondsSinceEpoch,
       'postContent': postContent,
       'postImage': postImage ?? 'NONE',
@@ -115,8 +115,11 @@ class _WritePostState extends State<WritePost> {
                   onPressed: () {
                     if (writingTextController.text != '' ||
                         postImageFile1 != null) {
-                      sentPostInFireBase(writingTextController.text, fID,
-                          '${state.user.firstName} ${state.user.lastName}');
+                      sentPostInFireBase(
+                          writingTextController.text,
+                          fID,
+                          '${state.user.firstName} ${state.user.lastName}',
+                          state.user.imageUrls[0]);
                     }
                   },
                   child: const Text(
@@ -164,9 +167,13 @@ class _WritePostState extends State<WritePost> {
                                     children: <Widget>[
                                       Padding(
                                         padding: EdgeInsets.all(8.0),
-                                        child: Icon(
-                                          Icons.book,
-                                          size: 20,
+                                        child: CircleAvatar(
+                                          radius: 20,
+                                          backgroundImage: NetworkImage(state
+                                                  .user.imageUrls.isNotEmpty
+                                              ? state.user.imageUrls[0]
+                                              : 'https://thumbs.dreamstime.com/b/no-user-profile-picture-hand-drawn-illustration-53840792.jpg'),
+                                          backgroundColor: Colors.black87,
                                         ),
                                       ),
                                       Text(
