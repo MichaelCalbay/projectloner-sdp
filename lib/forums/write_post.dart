@@ -27,7 +27,6 @@ class _WritePostState extends State<WritePost> {
   XFile? postImageFile1;
 
   KeyboardActionsConfig buildConfig(BuildContext context) {
-    
     return KeyboardActionsConfig(
         keyboardActionsPlatform: KeyboardActionsPlatform.ALL,
         keyboardBarColor: Colors.grey[200],
@@ -47,7 +46,7 @@ class _WritePostState extends State<WritePost> {
                     getImage();
                   },
                   child: Container(
-                    color:Colors.grey[200],
+                    color: Colors.grey[200],
                     padding: const EdgeInsets.all(8.0),
                     child: const Text(
                       "Image",
@@ -65,7 +64,7 @@ class _WritePostState extends State<WritePost> {
   }
 
   Future<void> sentPostInFireBase(
-      String postContent, String postID, String userName) async {
+      String postContent, String postID, String userName, String image) async {
     String? postImage;
     if (postImageFile1 != null) {
       postImage = await ForumsStore.uploadPostImages(
@@ -78,7 +77,7 @@ class _WritePostState extends State<WritePost> {
     FirebaseFirestore.instance.collection('Forums').doc(postID).set({
       'postID': postID,
       'postUserName': userName,
-      'postUserThumbnail': '',
+      'postUserThumbnail': image,
       'postTimeStamp': DateTime.now().millisecondsSinceEpoch,
       'postContent': postContent,
       'postImage': postImage ?? 'NONE',
@@ -113,18 +112,28 @@ class _WritePostState extends State<WritePost> {
               backgroundColor: Colors.deepPurple,
               actions: <Widget>[
                 TextButton(
-                  onPressed: () { 
-                    if (writingTextController.text != '' || postImageFile1 != null) {
-                    sentPostInFireBase(writingTextController.text,
-                      fID,
-                      '${state.user.firstName} ${state.user.lastName}');
+                  onPressed: () {
+                    if (writingTextController.text != '' ||
+                        postImageFile1 != null) {
+                      sentPostInFireBase(
+                        writingTextController.text,
+                        fID,
+                        '${state.user.firstName} ${state.user.lastName}',
+                        (state.user.imageUrls.isEmpty)
+                            ? ((state.user.gender == 'Male')
+                                ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZxub6hsCPpJFn6jmQvDl5CDJLroGdg-yLXJV1KcCHMjKpuwd8E6zJ7X6U3TUEjlS59ig&usqp=CAU'
+                                : ((state.user.gender == 'Female')
+                                    ? 'https://us.123rf.com/450wm/apoev/apoev1902/apoev190200082/125259956-person-gray-photo-placeholder-woman-in-shirt-on-white-background.jpg?ver=6'
+                                    : 'https://dthezntil550i.cloudfront.net/3w/latest/3w1802281317020600001818004/1280_960/45b9e268-7f83-4d2a-98cb-8843e805359b.png'))
+                            : state.user.imageUrls[0],
+                      );
                     }
                   },
                   child: const Text(
-                    'post',
+                    'Post',
                     style: TextStyle(
                         fontSize: 20,
-                        color:Colors.white,
+                        color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
                 )
@@ -141,7 +150,9 @@ class _WritePostState extends State<WritePost> {
                       ),
                       Container(
                         child: Card(
-                          color: themeProvider.isDarkMode ? Colors.grey[800] : Colors.white,
+                          color: themeProvider.isDarkMode
+                              ? Colors.grey[800]
+                              : Colors.white,
                           elevation: 4.0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
@@ -163,9 +174,19 @@ class _WritePostState extends State<WritePost> {
                                     children: <Widget>[
                                       Padding(
                                         padding: EdgeInsets.all(8.0),
-                                        child: Icon(
-                                          Icons.book,
-                                          size: 20,
+                                        child: CircleAvatar(
+                                          radius: 20,
+                                          backgroundImage: NetworkImage(
+                                            (state.user.imageUrls.isEmpty)
+                                                ? ((state.user.gender == 'Male')
+                                                    ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZxub6hsCPpJFn6jmQvDl5CDJLroGdg-yLXJV1KcCHMjKpuwd8E6zJ7X6U3TUEjlS59ig&usqp=CAU'
+                                                    : ((state.user.gender ==
+                                                            'Female')
+                                                        ? 'https://us.123rf.com/450wm/apoev/apoev1902/apoev190200082/125259956-person-gray-photo-placeholder-woman-in-shirt-on-white-background.jpg?ver=6'
+                                                        : 'https://dthezntil550i.cloudfront.net/3w/latest/3w1802281317020600001818004/1280_960/45b9e268-7f83-4d2a-98cb-8843e805359b.png'))
+                                                : state.user.imageUrls[0],
+                                          ),
+                                          backgroundColor: Colors.black87,
                                         ),
                                       ),
                                       Text(

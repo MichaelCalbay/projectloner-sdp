@@ -65,9 +65,15 @@ class _CommentListState extends State<CommentList> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
+                Padding(
                   padding: EdgeInsets.fromLTRB(6.0, 2.0, 10.0, 2.0),
-                  child: Icon(Icons.book, size: 34),
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundImage: NetworkImage(widget.data.exists
+                        ? widget.data['commentUserThumbnail']
+                        : 'https://thumbs.dreamstime.com/b/no-user-profile-picture-hand-drawn-illustration-53840792.jpg'),
+                    backgroundColor: Colors.black87,
+                  ),
                 ),
                 Flexible(
                   child: Column(
