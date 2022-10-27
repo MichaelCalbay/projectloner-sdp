@@ -16,7 +16,7 @@ class CustomDropdown extends StatelessWidget {
         value: items,
         child: Text(
           items,
-          style: const TextStyle(fontSize: 16),
+          style: const TextStyle(fontSize: 16, color: Colors.black),
         ),
       );
 
@@ -29,7 +29,7 @@ class CustomDropdown extends StatelessWidget {
       height: 60,
       padding: const EdgeInsets.only(left: 20.0),
       decoration: BoxDecoration(
-        color: (themeProvider.isDarkMode) ? Colors.black : Colors.grey[200],
+        color: Colors.grey.shade200,
         border: Border.all(color: Colors.white),
         borderRadius: BorderRadius.circular(12),
       ),
@@ -44,6 +44,9 @@ class CustomDropdown extends StatelessWidget {
         decoration: const InputDecoration(
           labelText: 'Server',
           border: InputBorder.none,
+          labelStyle: TextStyle(
+            color: Colors.black,
+          ),
         ),
       ),
     );

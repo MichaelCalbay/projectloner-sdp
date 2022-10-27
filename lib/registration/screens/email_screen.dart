@@ -40,6 +40,7 @@ class EmailScreen extends StatelessWidget {
                         context.read<SignupCubit>().emailChanged(value);
                         debugPrint(state.email);
                       },
+                      isTextOnly: false,
                     ),
                     const SizedBox(height: 10),
                     const CustomTextHeader(
