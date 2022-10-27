@@ -60,9 +60,17 @@ class _PostCommentPageState extends State<PostCommentPage> {
                                   children: [
                                     Row(
                                       children: [
-                                        const Padding(
+                                        Padding(
                                           padding: EdgeInsets.all(8.0),
-                                          child: Icon(Icons.book, size: 34),
+                                          child: CircleAvatar(
+                                            radius: 20,
+                                            backgroundImage: NetworkImage(widget
+                                                    .data.exists
+                                                ? widget
+                                                    .data['postUserThumbnail']
+                                                : 'https://thumbs.dreamstime.com/b/no-user-profile-picture-hand-drawn-illustration-53840792.jpg'),
+                                            backgroundColor: Colors.black87,
+                                          ),
                                         ),
                                         Column(
                                           crossAxisAlignment:
