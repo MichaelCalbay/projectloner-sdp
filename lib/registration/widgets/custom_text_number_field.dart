@@ -23,7 +23,7 @@ class CustomTextNumberField extends StatelessWidget {
       height: 56,
       padding: const EdgeInsets.only(left: 20.0),
       decoration: BoxDecoration(
-        color: (themeProvider.isDarkMode) ? Colors.black : Colors.grey[200],
+        color: Colors.grey.shade200,
         border: Border.all(color: Colors.white),
         borderRadius: BorderRadius.circular(12),
       ),
@@ -34,11 +34,18 @@ class CustomTextNumberField extends StatelessWidget {
         autocorrect: false,
         keyboardType: TextInputType.number,
         style: const TextStyle(
+          color: Colors.black,
           fontSize: 16,
         ),
         decoration: InputDecoration(
           border: InputBorder.none,
           labelText: hint,
+          labelStyle: TextStyle(
+            color: Colors.black,
+          ),
+          fillColor:
+              (themeProvider.isDarkMode) ? Colors.black : Colors.grey[200],
+          filled: false,
         ),
         onChanged: onChanged,
       ),

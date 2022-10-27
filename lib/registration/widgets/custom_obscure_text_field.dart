@@ -27,7 +27,7 @@ class _CustomObsTextFieldState extends State<CustomObsTextField> {
       height: 56,
       padding: const EdgeInsets.only(left: 20.0),
       decoration: BoxDecoration(
-        color: (themeProvider.isDarkMode) ? Colors.black : Colors.grey[200],
+        color: Colors.grey.shade200,
         border: Border.all(color: Colors.white),
         borderRadius: BorderRadius.circular(12),
       ),
@@ -37,11 +37,18 @@ class _CustomObsTextFieldState extends State<CustomObsTextField> {
         enableSuggestions: false,
         autocorrect: false,
         style: const TextStyle(
+          color: Colors.black,
           fontSize: 16,
         ),
         decoration: InputDecoration(
           border: InputBorder.none,
           labelText: widget.hint,
+          labelStyle: TextStyle(
+            color: Colors.black,
+          ),
+          fillColor:
+              (themeProvider.isDarkMode) ? Colors.black : Colors.grey[200],
+          filled: false,
           suffixIcon: IconButton(
             onPressed: () => setState(
               (() => widget.isPassword = !widget.isPassword),
