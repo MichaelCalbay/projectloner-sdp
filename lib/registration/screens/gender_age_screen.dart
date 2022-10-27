@@ -45,6 +45,7 @@ class GenderAgeScreen extends StatelessWidget {
                                 ),
                               );
                         },
+                        isTextOnly: false,
                       ),
                       const SizedBox(height: 10),
                       const CustomTextHeader(
@@ -61,6 +62,7 @@ class GenderAgeScreen extends StatelessWidget {
                                 ),
                               );
                         },
+                        isTextOnly: false,
                       ),
                       const SizedBox(height: 10),
                       const CustomTextHeader(
